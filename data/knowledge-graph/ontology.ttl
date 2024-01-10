@@ -1,0 +1,332 @@
+@prefix : <http://viewsari.github.io/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix viewsari: <http://viewsari.github.io/ontology#> .
+@base <http://viewsari.github.io/ontology#> .
+
+<http://viewsari.github.io/ontology#> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://viewsari.github.io/ontology#appearsIn
+viewsari:appearsIn rdf:type owl:ObjectProperty ;
+                   rdfs:domain viewsari:Page ;
+                   rdfs:range viewsari:Edition .
+
+
+###  http://viewsari.github.io/ontology#appearsOn
+viewsari:appearsOn rdf:type owl:ObjectProperty ;
+                   rdfs:domain viewsari:Paragraph ;
+                   rdfs:range viewsari:Page .
+
+
+###  http://viewsari.github.io/ontology#consistsOf
+viewsari:consistsOf rdf:type owl:ObjectProperty ;
+                    owl:inverseOf viewsari:volumeOf ;
+                    rdfs:domain viewsari:Book ;
+                    rdfs:range viewsari:Volume .
+
+
+###  http://viewsari.github.io/ontology#cooccursInParagraph
+viewsari:cooccursInParagraph rdf:type owl:ObjectProperty ;
+                             rdfs:domain rdf:Statement ;
+                             rdfs:range viewsari:Paragraph .
+
+
+###  http://viewsari.github.io/ontology#creator
+viewsari:creator rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ owl:intersectionOf ( viewsari:Resource
+                                                    [ rdf:type owl:Class ;
+                                                      owl:complementOf viewsari:Person
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+                 rdfs:range viewsari:Person .
+
+
+###  http://viewsari.github.io/ontology#editionOf
+viewsari:editionOf rdf:type owl:ObjectProperty ;
+                   rdfs:domain viewsari:Edition ;
+                   rdfs:range viewsari:Book ,
+                              viewsari:Volume .
+
+
+###  http://viewsari.github.io/ontology#editionType
+viewsari:editionType rdf:type owl:ObjectProperty ;
+                     rdfs:domain viewsari:Edition ;
+                     rdfs:range viewsari:EditionType .
+
+
+###  http://viewsari.github.io/ontology#mentionedIn
+viewsari:mentionedIn rdf:type owl:ObjectProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( viewsari:Artwork
+                                                 viewsari:Event
+                                                 viewsari:Place
+                                               )
+                                 ] ;
+                     rdfs:range viewsari:Paragraph .
+
+
+###  http://viewsari.github.io/ontology#translator
+viewsari:translator rdf:type owl:ObjectProperty ;
+                    rdfs:domain viewsari:Book ;
+                    rdfs:range viewsari:Person .
+
+
+###  http://viewsari.github.io/ontology#volumeOf
+viewsari:volumeOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain viewsari:Volume ;
+                  rdfs:range viewsari:Book .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#object
+rdf:object rdf:type owl:ObjectProperty ;
+           rdfs:domain rdf:Statement ;
+           rdfs:range viewsari:Resource .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate
+rdf:predicate rdf:type owl:ObjectProperty ;
+              rdfs:domain rdf:Statement .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#subject
+rdf:subject rdf:type owl:ObjectProperty ;
+            rdfs:domain rdf:Statement .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+rdf:type rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://viewsari.github.io/ontology#PMIScore
+viewsari:PMIScore rdf:type owl:DatatypeProperty ;
+                  rdfs:domain rdf:Statement .
+
+
+###  http://viewsari.github.io/ontology#asNumber
+viewsari:asNumber rdf:type owl:DatatypeProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( viewsari:Page
+                                              viewsari:Paragraph
+                                            )
+                              ] .
+
+
+###  http://viewsari.github.io/ontology#centralityScore
+viewsari:centralityScore rdf:type owl:DatatypeProperty ;
+                         rdfs:domain viewsari:Person .
+
+
+###  http://viewsari.github.io/ontology#date
+viewsari:date rdf:type owl:DatatypeProperty ;
+              rdfs:domain viewsari:Book ,
+                          viewsari:Edition ,
+                          viewsari:Volume .
+
+
+###  http://viewsari.github.io/ontology#language
+viewsari:language rdf:type owl:DatatypeProperty ;
+                  rdfs:domain viewsari:Book ,
+                              viewsari:Edition ,
+                              viewsari:Volume .
+
+
+###  http://viewsari.github.io/ontology#textSnippet
+viewsari:textSnippet rdf:type owl:DatatypeProperty ;
+                     rdfs:domain rdf:Statement .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://viewsari.github.io/ontology#Artwork
+viewsari:Artwork rdf:type owl:Class ;
+                 rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Book
+viewsari:Book rdf:type owl:Class ;
+              rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Edition
+viewsari:Edition rdf:type owl:Class ;
+                 rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#EditionType
+viewsari:EditionType rdf:type owl:Class ;
+                     rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Event
+viewsari:Event rdf:type owl:Class ;
+               rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Page
+viewsari:Page rdf:type owl:Class ;
+              rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Paragraph
+viewsari:Paragraph rdf:type owl:Class ;
+                   rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Person
+viewsari:Person rdf:type owl:Class ;
+                rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Place
+viewsari:Place rdf:type owl:Class ;
+               rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Resource
+viewsari:Resource rdf:type owl:Class .
+
+
+###  http://viewsari.github.io/ontology#Volume
+viewsari:Volume rdf:type owl:Class ;
+                rdfs:subClassOf viewsari:Resource .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Property
+rdf:Property rdf:type owl:Class .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
+rdf:Statement rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://viewsari.github.io/ontology#HTML_edition
+viewsari:HTML_edition rdf:type owl:NamedIndividual ,
+                               viewsari:EditionType .
+
+
+###  http://viewsari.github.io/ontology#cooccursWith
+viewsari:cooccursWith rdf:type owl:NamedIndividual .
+
+
+###  http://viewsari.github.io/ontology#de_vere
+viewsari:de_vere rdf:type owl:NamedIndividual ,
+                          viewsari:Person ;
+                 rdfs:label "Gaston C. du Vere" .
+
+
+###  http://viewsari.github.io/ontology#edition1
+viewsari:edition1 rdf:type owl:NamedIndividual ,
+                           viewsari:Edition ;
+                  viewsari:editionOf viewsari:volume1 ;
+                  viewsari:editionType viewsari:web_edition ;
+                  viewsari:date "2008-05-05T09:00:00"^^xsd:dateTime ;
+                  rdfs:seeAlso "https://www.gutenberg.org/cache/epub/25326/pg25326-images.html" .
+
+
+###  http://viewsari.github.io/ontology#edition2
+viewsari:edition2 rdf:type owl:NamedIndividual ,
+                           viewsari:Edition .
+
+
+###  http://viewsari.github.io/ontology#foster
+viewsari:foster rdf:type owl:NamedIndividual ,
+                         viewsari:Person ;
+                rdfs:label "Jonathan Foster"@en .
+
+
+###  http://viewsari.github.io/ontology#giotto
+viewsari:giotto rdf:type owl:NamedIndividual ,
+                         viewsari:Person ;
+                viewsari:centralityScore 0.014204831973437396 ;
+                rdfs:label "Giotto" .
+
+
+###  http://viewsari.github.io/ontology#page1
+viewsari:page1 rdf:type owl:NamedIndividual ,
+                        viewsari:Page ;
+               viewsari:appearsIn viewsari:volume1 .
+
+
+###  http://viewsari.github.io/ontology#par1
+viewsari:par1 rdf:type owl:NamedIndividual ,
+                       viewsari:Paragraph ;
+              viewsari:appearsOn viewsari:page1 .
+
+
+###  http://viewsari.github.io/ontology#plain_text
+viewsari:plain_text rdf:type owl:NamedIndividual ,
+                             viewsari:EditionType ;
+                    rdfs:label "Plain Text edition"@en .
+
+
+###  http://viewsari.github.io/ontology#statement1
+viewsari:statement1 rdf:type owl:NamedIndividual ,
+                             rdf:Statement ;
+                    viewsari:cooccursInParagraph viewsari:par1 ;
+                    rdf:object viewsari:giotto ;
+                    rdf:predicate viewsari:cooccursWith ;
+                    rdf:subject viewsari:vasari ;
+                    viewsari:PMIScore 9.256564335 ;
+                    viewsari:textSnippet "Giorgio Vasari and Giotto shared a coffee in the Louvre."@en .
+
+
+###  http://viewsari.github.io/ontology#vasari
+viewsari:vasari rdf:type owl:NamedIndividual ,
+                         viewsari:Person ;
+                rdfs:label "Giorgio Vasari" .
+
+
+###  http://viewsari.github.io/ontology#vite1
+viewsari:vite1 rdf:type owl:NamedIndividual ,
+                        viewsari:Book ;
+               viewsari:creator viewsari:vasari ;
+               viewsari:translator viewsari:de_vere ;
+               viewsari:language "en" ;
+               rdfs:label "Lives of the Most Eminent Painters Sculptors and Architects"@en .
+
+
+###  http://viewsari.github.io/ontology#vite2
+viewsari:vite2 rdf:type owl:NamedIndividual ,
+                        viewsari:Book ;
+               viewsari:creator viewsari:vasari ;
+               viewsari:translator viewsari:foster ;
+               viewsari:language "en" ;
+               rdfs:label "Lives of the Most Excellent Painters, Sculptors, and Architects"@en .
+
+
+###  http://viewsari.github.io/ontology#volume1
+viewsari:volume1 rdf:type owl:NamedIndividual ,
+                          viewsari:Volume ;
+                 viewsari:creator viewsari:vasari ;
+                 viewsari:translator viewsari:de_vere ;
+                 viewsari:volumeOf viewsari:vite1 ;
+                 rdfs:label "Lives of the Most Eminent Painters Sculptors and Architects, Vol. 01"@en .
+
+
+###  http://viewsari.github.io/ontology#web_edition
+viewsari:web_edition rdf:type owl:NamedIndividual ,
+                              viewsari:EditionType ;
+                     rdfs:label "Web edition" .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

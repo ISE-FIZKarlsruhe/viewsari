@@ -1,0 +1,36 @@
+
+Degree Centrality Ranks: 
+1: Pisano, Giovanni score: 3
+2: Tafi, Andrea score: 3
+3: Cimabue, Giovanni score: 2
+4: Buffalmacco, Buonamico score: 2
+5: Gaddi, Gaddo score: 2
+6: Agostino (of Siena) score: 2
+7: Agnolo (of Siena) score: 2
+8: Gaddi, Agnolo score: 2
+9: Pisano, Andrea score: 2
+10: Orcagna, Andrea di Cione score: 1
+
+Betweenness Centrality Ranks: 
+1: Pisano, Giovanni score: 0.007246376811594203
+2: Tafi, Andrea score: 0.007246376811594203
+3: Buffalmacco, Buonamico score: 0.0036231884057971015
+4: Gaddi, Agnolo score: 0.0036231884057971015
+5: Pisano, Andrea score: 0.0036231884057971015
+6: Orcagna, Andrea di Cione score: 0.0
+7: Gaddi, Taddeo score: 0.0
+8: Capanna, Puccio score: 0.0
+9: Giotto score: 0.0
+10: Pisano, Niccola score: 0.0
+
+Eigenvector Centrality Ranks: 
+1: Pisano, Giovanni score: 0.4324866296135828
+2: Tafi, Andrea score: 0.4324866296135828
+3: Cimabue, Giovanni score: 0.36961936964221
+4: Gaddi, Gaddo score: 0.36961936964221
+5: Agostino (of Siena) score: 0.36961936964220987
+6: Agnolo (of Siena) score: 0.36961936964220987
+7: Pisano, Niccola score: 0.19929465128645468
+8: Como, Guido da score: 0.19929465128645468
+9: Buffalmacco, Buonamico score: 1.0718902049472229e-05
+10: Gaddi, Agnolo score: 1.0718902049472229e-05

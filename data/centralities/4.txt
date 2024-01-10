@@ -1,0 +1,36 @@
+
+Degree Centrality Ranks: 
+1: Sanzio, Raffaello (Raffaello da Urbino) score: 18
+2: Sarto, Andrea del (Andrea d' Agnolo) score: 11
+3: Buonarroti, Michelagnolo score: 11
+4: Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti) score: 10
+5: Giotto score: 9
+6: Donato (Donatello) score: 9
+7: Vinci, Leonardo da score: 9
+8: Urbino, Bramante da score: 9
+9: Credi, Lorenzo di score: 7
+10: Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve) score: 6
+
+Betweenness Centrality Ranks: 
+1: Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti) score: 0.20013498988932246
+2: Buonarroti, Michelagnolo score: 0.19124201936999513
+3: Sanzio, Raffaello (Raffaello da Urbino) score: 0.15633205551792492
+4: Pisano, Andrea score: 0.09693391734907637
+5: Giotto score: 0.08201612391290548
+6: Donato (Donatello) score: 0.07819365297940807
+7: Sogliani, Giovanni Antonio score: 0.07509680695740494
+8: Sarto, Andrea del (Andrea d' Agnolo) score: 0.07242275382629598
+9: Vaga, Perino del (Perino Buonaccorsi, or de' Ceri) score: 0.0666539706722529
+10: San Marco, Fra Bartolommeo di (Baccio della Porta) score: 0.06373389195708754
+
+Eigenvector Centrality Ranks: 
+1: Sanzio, Raffaello (Raffaello da Urbino) score: 0.4803344703051638
+2: Buonarroti, Michelagnolo score: 0.3781859683810842
+3: Urbino, Bramante da score: 0.319168336888345
+4: Vinci, Leonardo da score: 0.24700604317178554
+5: Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve) score: 0.23032734717515857
+6: Romano, Giulio (Giulio Pippi de' Giannuzzi) score: 0.193983714336917
+7: Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori) score: 0.1860428675184411
+8: San Gallo, Giuliano da score: 0.1825146304758504
+9: Credi, Lorenzo di score: 0.18127198273452744
+10: Dï¿½rer, Albrecht score: 0.14442824900871074
