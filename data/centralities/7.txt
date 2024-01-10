@@ -1,0 +1,36 @@
+
+Degree Centrality Ranks: 
+1: Sanzio, Raffaello (Raffaello da Urbino) score: 30
+2: Buonarroti, Michelagnolo score: 27
+3: Sarto, Andrea del (Andrea d' Agnolo) score: 15
+4: Bandinelli, Baccio (Baccio de' Brandini) score: 14
+5: Vaga, Perino del (Perino Buonaccorsi, or de' Ceri) score: 14
+6: Ghirlandajo, Ridolfo score: 13
+7: Vinci, Leonardo da score: 11
+8: Tribolo (Niccolï¿½) score: 10
+9: Donato (Donatello) score: 10
+10: Salviati, Francesco (Francesco de' Rossi) score: 10
+
+Betweenness Centrality Ranks: 
+1: Buonarroti, Michelagnolo score: 0.2191426787367536
+2: Sanzio, Raffaello (Raffaello da Urbino) score: 0.15092847632131404
+3: Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti) score: 0.11197665525315639
+4: Verrocchio, Andrea score: 0.08489803788172948
+5: Pisano, Andrea score: 0.07442550037064492
+6: Vaga, Perino del (Perino Buonaccorsi, or de' Ceri) score: 0.07157425722171827
+7: Agnolo, Baccio d' (Baccio Baglioni) score: 0.06332157986868106
+8: Giotto score: 0.061279960464541636
+9: Vinci, Leonardo da score: 0.06032334866173487
+10: Donato (Donatello) score: 0.058920634338877904
+
+Eigenvector Centrality Ranks: 
+1: Buonarroti, Michelagnolo score: 0.4229177136713616
+2: Sanzio, Raffaello (Raffaello da Urbino) score: 0.3869012602769066
+3: Ghirlandajo, Ridolfo score: 0.21838439050748262
+4: Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve) score: 0.1979591095164033
+5: Urbino, Bramante da score: 0.18659949061267728
+6: San Gallo, Giuliano da score: 0.1738298389434072
+7: San Gallo, Antonio da (the younger) score: 0.1564209904040222
+8: Sarto, Andrea del (Andrea d' Agnolo) score: 0.15376680299977513
+9: San Gallo, Aristotile (Bastiano) da score: 0.1480878834050981
+10: Vasari, Giorgio score: 0.13962046429288055
