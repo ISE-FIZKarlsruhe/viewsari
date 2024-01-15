@@ -1,0 +1,6 @@
+{
+    "http://purl.org/cerif/frapo/":"frapo:",
+    "http://xmlns.com/foaf/0.1/":"foaf:",
+    "https://ISE-FIZKarlsruhe.github.io/vasari_network/":"vasari_network:",
+    "http://viewsari.github.io/ontology#":"viewsari:"
+}
