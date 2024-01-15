@@ -1,0 +1,15 @@
+version: "3"
+services:
+  shmarql:
+    image: ghcr.io/epoz/shmarql:latest
+    ports:
+      - "9000:8000"
+    environment:
+      - PREFIXES_FILEPATH=/data/prefixes.json
+      - SERVICE_DESCRIPTION_TITLE=Viewsari
+      - DEBUG=1
+      - SCHPIEL_PATH=/data/www
+      - DATA_LOAD_PATHS=/data/
+      - DOMAIN=127.0.0.1:9000
+    volumes:
+      - "./data/:/data/"
