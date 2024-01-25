@@ -46,7 +46,7 @@ def main():
                     name_paragraph_dict[names[idx]] = 1
                 for name2 in names:
                     if names[idx] != name2:
-                        cooccurence_list.append((names[idx], name2, int(file_num), int(paragraph), int(page)))
+                        cooccurence_list.append((names[idx], name2, file_num, paragraph, page))
 
 
         probability_dict = dict()
