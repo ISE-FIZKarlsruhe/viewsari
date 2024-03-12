@@ -144,6 +144,12 @@ viewsari:language rdf:type owl:DatatypeProperty ;
                               viewsari:Volume .
 
 
+###  http://viewsari.github.io/ontology#pageRange
+viewsari:pageRange rdf:type owl:DatatypeProperty ;
+                   rdfs:domain viewsari:Biography ;
+                   rdfs:range xsd:integer .
+
+
 ###  http://viewsari.github.io/ontology#textSnippet
 viewsari:textSnippet rdf:type owl:DatatypeProperty ;
                      rdfs:domain rdf:Statement .
@@ -156,6 +162,11 @@ viewsari:textSnippet rdf:type owl:DatatypeProperty ;
 ###  http://viewsari.github.io/ontology#Artwork
 viewsari:Artwork rdf:type owl:Class ;
                  rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#Biography
+viewsari:Biography rdf:type owl:Class ;
+                   rdfs:subClassOf viewsari:Resource .
 
 
 ###  http://viewsari.github.io/ontology#Book
@@ -176,6 +187,10 @@ viewsari:EditionType rdf:type owl:Class ;
 ###  http://viewsari.github.io/ontology#Event
 viewsari:Event rdf:type owl:Class ;
                rdfs:subClassOf viewsari:Resource .
+
+
+###  http://viewsari.github.io/ontology#IntegerInterval
+viewsari:IntegerInterval rdf:type owl:Class .
 
 
 ###  http://viewsari.github.io/ontology#Page
@@ -213,6 +228,14 @@ rdf:Property rdf:type owl:Class .
 
 ###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
 rdf:Statement rdf:type owl:Class .
+
+
+###  http://www.w3.org/2002/07/owl#DataRange
+owl:DataRange rdf:type owl:Class .
+
+
+###  http://www.w3.org/2002/07/owl#Datatype
+owl:Datatype rdf:type owl:Class .
 
 
 #################################################################
@@ -259,6 +282,11 @@ viewsari:giotto rdf:type owl:NamedIndividual ,
                          viewsari:Person ;
                 viewsari:centralityScore 0.014204831973437396 ;
                 rdfs:label "Giotto" .
+
+
+###  http://viewsari.github.io/ontology#giotto_biography
+viewsari:giotto_biography rdf:type owl:NamedIndividual ,
+                                   viewsari:Biography .
 
 
 ###  http://viewsari.github.io/ontology#page1
