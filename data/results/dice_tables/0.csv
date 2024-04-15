@@ -1,0 +1,27 @@
+artist1,artist2,dice_coefficient,pages,paragraphs,volume
+Agnolo (of Siena),Agostino (of Siena),0.75,"[98, 99, 100]","['225', '226', '227']","['0', '0', '0']"
+"Memmi, Lippo","Memmi, Simone (Simone Martini, or Sanese)",0.6,"[173, 174, 172]","['337', '339', '334']","['0', '0', '0']"
+"Bologhini, Bartolommeo","Laurati, Pietro (Pietro Lorenzetti)",0.5,[120],['260'],['0']
+Margaritone,"Tedesco, Jacopo (Lapo)",0.4,[65],['181'],['0']
+"Tafi, Andrea","Como, Guido da",0.4,[48],['155'],['0']
+"Gaddi, Agnolo","Gaddi, Giovanni",0.3333333333333333,[217],['406'],['0']
+"Pisano, Nino","Pisano, Andrea",0.3333333333333333,[131],['278'],['0']
+"Pisano, Giovanni","Pisano, Niccola",0.2857142857142857,"[36, 37]","['126', '127']","['0', '0']"
+"Tafi, Andrea","Gaddi, Gaddo",0.2857142857142857,[56],['167'],['0']
+"Pisano, Andrea","Pisano, Tommaso",0.2857142857142857,[130],['275'],['0']
+"Buffalmacco, Buonamico","Giovanni, Bruno di",0.26666666666666666,"[148, 145]","['298', '293']","['0', '0']"
+"Cimabue, Giovanni","Tafi, Andrea",0.26666666666666666,"[56, 50]","['167', '158']","['0', '0']"
+Giotto,"Cimabue, Giovanni",0.22727272727272727,"[8, 94, 72, 9, 50]","['81', '218', '189', '88', '158']","['0', '0', '0', '0', '0']"
+"Pisano, Giovanni",Agostino (of Siena),0.18181818181818182,[98],['225'],['0']
+"Gaddi, Taddeo","Gaddi, Agnolo",0.16666666666666666,[218],['408'],['0']
+"Pisano, Giovanni",Agnolo (of Siena),0.15384615384615385,[98],['225'],['0']
+"Cimabue, Giovanni","Gaddi, Gaddo",0.14285714285714285,[56],['167'],['0']
+"Buffalmacco, Buonamico","Orcagna, Andrea di Cione",0.11764705882352941,[191],['371'],['0']
+Giotto,"Tafi, Andrea",0.10810810810810811,"[51, 50]","['162', '158']","['0', '0']"
+Stefano,Giotto,0.10526315789473684,"[111, 113]","['246', '251']","['0', '0']"
+Giotto,"Pisano, Andrea",0.10526315789473684,"[126, 124]","['267', '266']","['0', '0']"
+Giotto,"Gaddi, Taddeo",0.1,"[186, 185]","['364', '361']","['0', '0']"
+Giotto,"Capanna, Puccio",0.058823529411764705,[91],['212'],['0']
+Giotto,"Laurati, Pietro (Pietro Lorenzetti)",0.05714285714285714,[117],['257'],['0']
+Giotto,"Cavallini, Pietro",0.05555555555555555,[162],['315'],['0']
+Giotto,"Gaddi, Agnolo",0.05263157894736842,[222],['412'],['0']
