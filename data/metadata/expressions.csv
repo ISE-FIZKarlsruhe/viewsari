@@ -1,0 +1,24 @@
+has title,has publication year,realization of,based on,type,volume count,ID,creator,has part,has embodiment,has volume identifier
+"Le vite de' più eccellenti pittori, scultori e architettori",1555,LOTA_w,,Edition,3,LOTA_e_1555,,[],[],
+"Le vite de' più eccellenti pittori, scultori e architettori",1568,LOTA_w,,Edition,3,LOTA_e_1568,,[],[],
+"Lives of the Most Eminent Painters, Sculptors and Architects",1912-1915,LOTA_w,LOTA_e_1568,Translation,10,LOTA_t_en_1912,Gaston C. Du Vere,"[LOTA_t_en_v1_1912,
+LOTA_t_en_v2_1912,
+LOTA_t_en_v3_1912,
+LOTA_t_en_v4_1913,
+LOTA_t_en_v5_1913,
+LOTA_t_en_v6_1913,
+LOTA_t_en_v7_1914,
+LOTA_t_en_v8_1914,
+LOTA_t_en_v9_1915,
+LOTA_t_en_v10_1915
+]",[LOTA_m_en_1912],
+Volume I,1912,,,Volume,,LOTA_t_en_v1_1912,,[],[LOTA_m_en_v1_1912],1
+Volume II,1912,,,Volume,,LOTA_t_en_v2_1912,,[],[LOTA_m_en_v2_1912],2
+Volume IV,1913,,,Volume,,LOTA_t_en_v4_1913,,[],[LOTA_m_en_v4_1913],4
+Volume III,1912,,,Volume,,LOTA_t_en_v3_1912,,[],[LOTA_m_en_v3_1912],3
+Volume VI,1913,,,Volume,,LOTA_t_en_v6_1913,,[],[LOTA_m_en_v6_1913],6
+Volume VII,1914,,,Volume,,LOTA_t_en_v7_1914,,[],[LOTA_m_en_v7_1914],7
+Volume VIII,1914,,,Volume,,LOTA_t_en_v8_1914,,[],[LOTA_m_en_v8_1914],8
+Volume IX,1915,,,Volume,,LOTA_t_en_v9_1915,,[],[LOTA_m_en_v9_1915],9
+Volume V,1913,,,Volume,,LOTA_t_en_v5_1913,,[],[LOTA_m_en_v5_1913],5
+Volume X,1915,,,,,LOTA_t_en_v10_1915,,[],[LOTA_m_en_v10_1915],10
