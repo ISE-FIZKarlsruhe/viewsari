@@ -14,6 +14,8 @@ while True:
         break
     except OverflowError:
         maxInt = int(maxInt / 10)
+
+print("Start, loading model!")
 model = LingMessCoref(device='cuda:0')
 
 
@@ -24,6 +26,7 @@ def main():
             names_data = list(names_data)
             file_num = re.match(r".*?(\d+).*?", file_name).group(1)
 
+        print(f"Working on {file_num}.")
         with open("../../data/volumes_updated/" + file_num + ".csv", "r") as f:
             print(f"Working on volume {file_num}.")
             text_data = csv.DictReader(f)
