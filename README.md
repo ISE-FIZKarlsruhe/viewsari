@@ -8,7 +8,7 @@ To achieve this, this project subsumises different parts:
 
 1. Information extraction (IE) (named entitiy extraction, motif and genre extraction, relation extraction), entity linking, etc.
     1. Large Language Models (LLMs) for IE
-2. [Ontology engineering](#ontology-engineering) with state-of-the-art methodologies like eXtreme Design (XD) [1]
+2. Ontology engineering with state-of-the-art methodologies like eXtreme Design (XD) [1]
     - Case study of best practices applied to DH ontology Design
     - Reuse and proposition of Ontology Design Patterns (ODPs) [1]
 3. Modeling social networks in KGs - layered perspectives
@@ -25,7 +25,7 @@ For entity extraction, [the previous project team](https://github.com/ISE-FIZKar
 recognition and entity linking
 They extracted the following entities: persons, organizations, places, and miscellaneous (all following the CoNLL 2003 dataset, partially linked
 to Wikidata), as well as artwork references, motifs, terms, and dates. 
-[In another project step.](https://github.com/ISE-FIZKarlsruhe/vasari_network), they modeled relationships between artists through co-reference resolution and statistical association from the cooccurrence of names in
+[In another project step](https://github.com/ISE-FIZKarlsruhe/vasari_network), they modeled relationships between artists through co-reference resolution and statistical association from the cooccurrence of names in
 paragraphs to create the social network.
 
 In Viewsari, we plan to extend this example set of entities through further extraction steps.
@@ -53,7 +53,7 @@ cooccurrence.
 ## Formalization
 In the formalization step, we construct a first foundational ontology for Viewsari. This ontology includes the following classes:
 ![odp1.png](img/classes.png)
-For a better view, please open the file in the [directory](img/)
+For a better view, please open the file in the [directory](https://github.com/ISE-FIZKarlsruhe/viewsari/tree/main/img)
 
 An exemplary view of how cooccurrences are connected to the work level:
 ![odp1.png](img/cooc_in_context.png)
