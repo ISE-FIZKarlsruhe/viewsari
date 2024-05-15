@@ -1,3 +1,4 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Buffalmacco, Buonamico","Giovanni, Bruno di",0.2857142857142857,145,293
-"Buffalmacco, Buonamico","Giovanni, Bruno di",0.2857142857142857,148,298
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Buffalmacco, Buonamico","Tafi, Andrea",0.1111111111111111,135,178,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Buffalmacco, Buonamico","Giovanni, Bruno di",0.21052631578947367,145,188,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Buffalmacco, Buonamico","Giovanni, Bruno di",0.21052631578947367,147,192,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

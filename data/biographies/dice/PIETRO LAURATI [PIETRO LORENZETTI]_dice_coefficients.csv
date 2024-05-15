@@ -1,3 +1,3 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Laurati, Pietro (Pietro Lorenzetti)",Giotto,0.6666666666666666,117,257
-"Laurati, Pietro (Pietro Lorenzetti)","Bologhini, Bartolommeo",0.5,120,260
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Laurati, Pietro (Pietro Lorenzetti)",Giotto,0.4,117,157,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Laurati, Pietro (Pietro Lorenzetti)","Bologhini, Bartolommeo",0.4,120,161,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

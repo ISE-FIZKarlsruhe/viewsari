@@ -1,6 +1,8 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-Agnolo (of Siena),"Pisano, Giovanni",0.3333333333333333,98,225
-Agnolo (of Siena),Agostino (of Siena),0.75,98,225
-Agnolo (of Siena),Agostino (of Siena),0.75,99,226
-Agnolo (of Siena),Agostino (of Siena),0.75,100,227
-"Pisano, Giovanni",Agostino (of Siena),0.5,98,225
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+Agnolo (of Siena),"Pisano, Giovanni",0.5,97,129,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Agnolo (of Siena),Agostino (of Siena),0.8,97,129,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Agnolo (of Siena),Agostino (of Siena),0.8,99,131,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Agnolo (of Siena),Giotto,0.6666666666666666,99,131,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Pisano, Giovanni",Agostino (of Siena),0.8,97,129,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Pisano, Giovanni",Agostino (of Siena),0.8,98,130,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Agostino (of Siena),Giotto,0.5,99,131,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

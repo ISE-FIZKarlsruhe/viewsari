@@ -1,3 +1,4 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Cimabue, Giovanni",Giotto,0.4444444444444444,8,81
-"Cimabue, Giovanni",Giotto,0.4444444444444444,9,88
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Cimabue, Giovanni",Giotto,0.46153846153846156,8,8,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Cimabue, Giovanni",Giotto,0.46153846153846156,8,12,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Cimabue, Giovanni",Giotto,0.46153846153846156,8,13,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

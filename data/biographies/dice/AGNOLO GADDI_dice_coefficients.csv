@@ -1,4 +1,3 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Gaddi, Agnolo","Gaddi, Giovanni",0.3333333333333333,217,406
-"Gaddi, Agnolo","Gaddi, Taddeo",0.3333333333333333,218,408
-"Gaddi, Agnolo",Giotto,0.3333333333333333,222,412
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Gaddi, Agnolo","Gaddi, Giovanni",0.2857142857142857,217,279,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Gaddi, Agnolo","Gaddi, Taddeo",0.2857142857142857,217,280,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

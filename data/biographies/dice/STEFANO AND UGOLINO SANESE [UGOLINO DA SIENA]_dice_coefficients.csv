@@ -1,3 +1,6 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-Stefano,Giotto,0.5714285714285714,111,246
-Stefano,Giotto,0.5714285714285714,113,251
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+Giotto,Stefano,0.8,109,147,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,Stefano,0.8,110,148,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,Stefano,0.8,111,149,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,Stefano,0.8,112,153,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Sanese, Ugolino (Ugolino da Siena)",0.3333333333333333,113,154,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

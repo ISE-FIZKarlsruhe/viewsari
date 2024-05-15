@@ -1,5 +1,5 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-Giotto,"Gaddi, Taddeo",0.4444444444444444,185,361
-Giotto,"Gaddi, Taddeo",0.4444444444444444,186,364
-Giotto,"Gaddi, Giovanni|Milano, Giovanni da",0.4,185,361
-"Gaddi, Taddeo","Gaddi, Giovanni|Milano, Giovanni da",0.25,185,361
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Gaddi, Gaddo",Giotto,0.6666666666666666,177,229,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Gaddi, Taddeo",0.14285714285714285,185,246,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Gaddi, Taddeo","Memmi, Simone (Simone Martini, or Sanese)",0.15384615384615385,183,243,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Gaddi, Taddeo","Gaddi, Giovanni|Milano, Giovanni da",0.15384615384615385,185,245,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

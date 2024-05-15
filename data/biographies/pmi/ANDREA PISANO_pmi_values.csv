@@ -1,4 +1,3 @@
-Artist 1,Artist 2,PMI,Page,Paragraph,Shared_count
-"Pisano, Andrea",Giotto,0.2630344058337938,124,266,1
-"Pisano, Andrea",Giotto,0.2630344058337938,126,267,1
-"Pisano, Andrea","Pisano, Nino",0.2630344058337938,131,278,1
+artist1,artist2,shared_count,pmi_score,page,paragraph,activity,start,end
+"Pisano, Andrea","Gaddi, Taddeo",1,0.22239242133644802,129,172,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51
+"Pisano, Andrea","Pisano, Tommaso",1,0.22239242133644802,130,174,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51

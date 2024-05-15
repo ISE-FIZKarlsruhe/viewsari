@@ -1,0 +1,7 @@
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+Giotto,"Gaddi, Taddeo",1.0,23,12,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22
+Giotto,"Casentino, Jacopo di",0.2857142857142857,23,12,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22
+"Gaddi, Taddeo","Casentino, Jacopo di",0.2857142857142857,23,12,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22
+"Casentino, Jacopo di","Aretino, Spinello",0.2857142857142857,25,15,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22
+"Casentino, Jacopo di","Daddi, Bernardo",0.2857142857142857,25,15,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22
+"Aretino, Spinello","Daddi, Bernardo",1.0,25,15,dice_activity_biography-level_2024-05-15,2024-05-15T12:25:22,2024-05-15T12:25:22

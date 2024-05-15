@@ -1,4 +1,4 @@
-Artist 1,Artist 2,PMI,Page,Paragraph,Shared_count
-"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",0.19264507794239583,172,334,1
-"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",0.19264507794239583,173,337,1
-"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",0.19264507794239583,174,339,1
+artist1,artist2,shared_count,pmi_score,page,paragraph,activity,start,end
+"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",1,0.09953567355091437,172,220,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51
+"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",1,0.09953567355091437,173,223,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51
+"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",1,0.09953567355091437,174,224,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51

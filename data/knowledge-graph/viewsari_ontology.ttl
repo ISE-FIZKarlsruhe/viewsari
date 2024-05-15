@@ -1,0 +1,1191 @@
+@prefix : <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://purl.org/vocab/frbr/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix basic: <http://prismstandard.org/namespaces/basic/2.0/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix skos: <http://www.w3.org/2008/05/skos#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix pattern: <http://www.essepuntato.it/2008/12/pattern#> .
+@prefix ontology: <http://viewsari.github.io/ontology#> .
+@base <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/> .
+
+<http://viewsari.github.io/ontology#> rdf:type owl:Ontology ;
+                                       rdfs:label "Viewsari Ontology" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
+ns:term_status rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2008/05/skos#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/oa#hasSource
+oa:hasSource rdf:type owl:AnnotationProperty ;
+             rdfs:comment "The resource that the ResourceSelection, or its subclass SpecificResource, is refined from, or more specific than. Please note that the domain ( oa:ResourceSelection ) is not used directly in the Web Annotation model." ;
+             rdfs:isDefinedBy oa: ;
+             rdfs:label "hasSource" ;
+             rdfs:domain oa:ResourceSelection .
+
+
+###  http://www.w3.org/ns/oa#hasTarget
+oa:hasTarget rdf:type owl:AnnotationProperty ;
+             rdfs:comment "The relationship between an Annotation and its Target." ;
+             rdfs:isDefinedBy oa: ;
+             rdfs:label "hasTarget" ;
+             rdfs:domain oa:Annotation .
+
+
+###  http://www.w3.org/ns/prov#category
+prov:category rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#component
+prov:component rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#constraints
+prov:constraints rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#definition
+prov:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#dm
+prov:dm rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#editorialNote
+prov:editorialNote rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#inverse
+prov:inverse rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#n
+prov:n rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#qualifiedForm
+prov:qualifiedForm rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/ns/prov#sharesDefinitionWith
+prov:sharesDefinitionWith rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYearMonth
+xsd:gYearMonth rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://prismstandard.org/namespaces/basic/2.0/bookEdition
+basic:bookEdition rdf:type owl:ObjectProperty .
+
+
+###  http://prismstandard.org/namespaces/basic/2.0/hasTranslation
+basic:hasTranslation rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/dc/terms/creator
+terms:creator rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:comment """An entity primarily responsible for making the resource.
+
+Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."""@en ;
+              rdfs:label "has creator"@en .
+
+
+###  http://purl.org/dc/terms/hasPart
+terms:hasPart rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/dc/terms/isPartOf
+terms:isPartOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+terms:publisher rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:comment """An entity responsible for making the resource available.
+
+Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity."""@en ;
+                rdfs:label "has publisher"@en .
+
+
+###  http://purl.org/spar/fabio/hasManifestation
+fabio:hasManifestation rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf core:relatedEndeavour ;
+                       owl:inverseOf fabio:isManifestationOf ;
+                       rdfs:domain core:Work ;
+                       rdfs:range core:Manifestation ;
+                       rdfs:comment "A property linking a particular work to its manifestations.  This property is additional to the relationships between FRBR endeavours present in the classical FRBR data model."@en ;
+                       rdfs:label "has manifestation"@en .
+
+
+###  http://purl.org/spar/fabio/isManifestationOf
+fabio:isManifestationOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#creator
+core:creator rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#embodiment
+core:embodiment rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf core:relatedEndeavour ;
+                owl:inverseOf core:embodimentOf ;
+                rdfs:domain core:Expression ;
+                rdfs:range core:Manifestation ;
+                rdfs:comment "An expression embodied in a manifestation."@en ,
+                             "As defined by FRBR (http://www.ifla.org/VII/s13/frbr/frbr1.htm; http://purl.org/vocab/frbr/core#embodiment), a property representing a manifestation that embodies an expression."@en ;
+                rdfs:label "has embodiment"@en .
+
+
+###  http://purl.org/vocab/frbr/core#embodimentOf
+core:embodimentOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#exemplar
+core:exemplar rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#part
+core:part rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf core:relatedEndeavour ;
+          owl:inverseOf core:partOf ;
+          rdf:type owl:TransitiveProperty ;
+          rdfs:comment "A part of an endeavour."@en ,
+                       "Meaning = has part.  As defined by FRBR (http://www.ifla.org/VII/s13/frbr/frbr1.htm; http://purl.org/vocab/frbr/core#part),  a property indicating that one entity includes another entity."@en ;
+          rdfs:label "has part"@en ;
+          skos:note "Unlike the FRBR version in RDF http://vocab.org/frbr/core.html the present version defines partonomy relationships transitive."@en .
+
+
+###  http://purl.org/vocab/frbr/core#partOf
+core:partOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#realization
+core:realization rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf core:relatedEndeavour ;
+                 owl:inverseOf core:realizationOf ;
+                 rdfs:domain core:Work ;
+                 rdfs:range core:Expression ;
+                 rdfs:comment "A work realized through an expression."@en ,
+                              "As defined by FRBR (http://www.ifla.org/VII/s13/frbr/frbr1.htm; http://purl.org/vocab/frbr/core#realization), a property representing an expression that is an intellectual or artistic realization of a work."@en ;
+                 rdfs:label "has realization"@en .
+
+
+###  http://purl.org/vocab/frbr/core#realizationOf
+core:realizationOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/vocab/frbr/core#relatedEndeavour
+core:relatedEndeavour rdf:type owl:ObjectProperty .
+
+
+###  http://viewsari.github.io/ontology#basedOn
+ontology:basedOn rdf:type owl:ObjectProperty ;
+                 rdfs:domain ontology:Translation ;
+                 rdfs:range ontology:Edition .
+
+
+###  http://viewsari.github.io/ontology#concernsResource
+ontology:concernsResource rdf:type owl:ObjectProperty ;
+                          rdfs:domain ontology:ResourceInText ;
+                          rdfs:range ontology:ContentResource .
+
+
+###  http://viewsari.github.io/ontology#hasOccupation
+ontology:hasOccupation rdf:type owl:ObjectProperty ;
+                       rdfs:domain ontology:Person ;
+                       rdfs:range ontology:Occupation .
+
+
+###  http://viewsari.github.io/ontology#hasScope
+ontology:hasScope rdf:type owl:ObjectProperty ;
+                  rdfs:range ontology:CooccurrenceScope .
+
+
+###  http://viewsari.github.io/ontology#inParagraph
+ontology:inParagraph rdf:type owl:ObjectProperty ;
+                     rdfs:domain ontology:Cooccurrence ;
+                     rdfs:range <http://purl.org/spar/doco/Paragraph> .
+
+
+###  http://viewsari.github.io/ontology#involvedResource
+ontology:involvedResource rdf:type owl:ObjectProperty ;
+                          rdfs:domain ontology:Cooccurrence ;
+                          rdfs:range ontology:ContentResource .
+
+
+###  http://viewsari.github.io/ontology#isAbout
+ontology:isAbout rdf:type owl:ObjectProperty ;
+                 rdfs:domain ontology:Biography ;
+                 rdfs:range ontology:Person .
+
+
+###  http://viewsari.github.io/ontology#metionedIn
+ontology:metionedIn rdf:type owl:ObjectProperty ;
+                    rdfs:domain ontology:ContentResource ;
+                    rdfs:range <http://purl.org/spar/doco/Paragraph> .
+
+
+###  http://viewsari.github.io/ontology#provider
+ontology:provider rdf:type owl:ObjectProperty ;
+                  rdfs:domain fabio:DigitalManifestation ;
+                  rdfs:range ontology:Provider .
+
+
+###  http://www.essepuntato.it/2008/12/pattern#contains
+pattern:contains rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf terms:hasPart ;
+                 owl:inverseOf pattern:isContainedBy ;
+                 rdfs:domain pattern:Structured ;
+                 rdfs:comment "A structured element contains another generic element."@en ;
+                 rdfs:label "contains"@en .
+
+
+###  http://www.essepuntato.it/2008/12/pattern#isContainedBy
+pattern:isContainedBy rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf terms:isPartOf ;
+                      rdfs:comment "An element that is contained by another structured element."@en ;
+                      rdfs:label "is contained by"@en .
+
+
+###  http://www.w3.org/ns/oa#hasSelector
+oa:hasSelector rdf:type owl:ObjectProperty ;
+               rdfs:domain oa:ResourceSelection ;
+               rdfs:range oa:Selector ;
+               rdfs:comment "The object of the relationship is a Selector that describes the segment or region of interest within the source resource.  Please note that the domain ( oa:ResourceSelection ) is not used directly in the Web Annotation model." ;
+               rdfs:isDefinedBy oa: ;
+               rdfs:label "hasSelector" .
+
+
+###  http://www.w3.org/ns/prov#generated
+prov:generated rdf:type owl:ObjectProperty ;
+               owl:inverseOf prov:wasGeneratedBy .
+
+
+###  http://www.w3.org/ns/prov#influenced
+prov:influenced rdf:type owl:ObjectProperty ;
+                owl:inverseOf prov:wasInfluencedBy .
+
+
+###  http://www.w3.org/ns/prov#used
+prov:used rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf prov:wasInfluencedBy ;
+          rdfs:domain prov:Activity ;
+          rdfs:range prov:Entity ;
+          rdfs:comment "A prov:Entity that was used by this prov:Activity. For example, :baking prov:used :spoon, :egg, :oven ."@en ;
+          rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+          rdfs:label "used" ;
+          prov:category "starting-point" ;
+          prov:component "entities-activities" ;
+          prov:inverse "wasUsedBy" ;
+          prov:qualifiedForm prov:Usage ,
+                             prov:qualifiedUsage .
+
+
+###  http://www.w3.org/ns/prov#wasAssociatedWith
+prov:wasAssociatedWith rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf prov:wasInfluencedBy ;
+                       rdfs:domain prov:Activity ;
+                       rdfs:range prov:Agent ;
+                       rdfs:comment "An prov:Agent that had some (unspecified) responsibility for the occurrence of this prov:Activity."@en ;
+                       rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                       rdfs:label "wasAssociatedWith" ;
+                       prov:category "starting-point" ;
+                       prov:component "agents-responsibility" ;
+                       prov:inverse "wasAssociateFor" ;
+                       prov:qualifiedForm prov:Association ,
+                                          prov:qualifiedAssociation .
+
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf prov:wasInfluencedBy ;
+                    rdfs:domain prov:Entity ;
+                    rdfs:range prov:Activity ;
+                    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                    rdfs:label "wasGeneratedBy" ;
+                    prov:category "starting-point" ;
+                    prov:component "entities-activities" ;
+                    prov:inverse "generated" ;
+                    prov:qualifiedForm prov:Generation ,
+                                       prov:qualifiedGeneration .
+
+
+###  http://www.w3.org/ns/prov#wasInfluencedBy
+prov:wasInfluencedBy rdf:type owl:ObjectProperty ;
+                     rdfs:domain _:genid1 ;
+                     rdfs:range _:genid6 ;
+                     rdfs:comment "Because prov:wasInfluencedBy is a broad relation, its more specific subproperties (e.g. prov:wasInformedBy, prov:actedOnBehalfOf, prov:wasEndedBy, etc.) should be used when applicable."@en ,
+                                  "This property has multiple RDFS domains to suit multiple OWL Profiles. See <a href=\"#owl-profile\">PROV-O OWL Profile</a>." ;
+                     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                     rdfs:label "wasInfluencedBy" ;
+                     prov:category "qualified" ;
+                     prov:component "agents-responsibility" ;
+                     prov:editorialNote """The sub-properties of prov:wasInfluencedBy can be elaborated in more detail using the Qualification Pattern. For example, the binary relation :baking prov:used :spoon can be qualified by asserting :baking prov:qualifiedUsage [ a prov:Usage; prov:entity :spoon; prov:atLocation :kitchen ] .
+
+Subproperties of prov:wasInfluencedBy may also be asserted directly without being qualified.
+
+prov:wasInfluencedBy should not be used without also using one of its subproperties. 
+"""@en ;
+                     prov:inverse "influenced" ;
+                     prov:qualifiedForm prov:Influence ,
+                                        prov:qualifiedInfluence ;
+                     prov:sharesDefinitionWith prov:Influence .
+
+_:genid1 rdf:type owl:Class ;
+          owl:unionOf ( prov:Activity
+                        prov:Agent
+                        prov:Entity
+                      ) .
+
+_:genid6 rdf:type owl:Class ;
+          owl:unionOf ( prov:Activity
+                        prov:Agent
+                        prov:Entity
+                      ) .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource prov:wasInfluencedBy ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget _:genid6 ;
+   prov:definition "influencer: an identifier (o1) for an ancestor entity, activity, or agent that the former depends on;" ;
+   prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-influence"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource prov:wasInfluencedBy ;
+   owl:annotatedProperty rdfs:domain ;
+   owl:annotatedTarget _:genid1 ;
+   prov:definition "influencee: an identifier (o2) for an entity, activity, or agent; " ;
+   prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-influence"
+ ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://prismstandard.org/namespaces/basic/2.0/endingPage
+basic:endingPage rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain core:Endeavour ;
+                 rdfs:comment "Identifies the last page of an entity such as a journal article."@en ;
+                 rdfs:label "has ending page"@en .
+
+
+###  http://prismstandard.org/namespaces/basic/2.0/pageRange
+basic:pageRange rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain core:Endeavour ;
+                rdfs:comment "Identifies the page range of an entity such as a journal article."@en ;
+                rdfs:label "has page range"@en .
+
+
+###  http://prismstandard.org/namespaces/basic/2.0/publicationDate
+basic:publicationDate rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf terms:issued ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain core:Endeavour ;
+                      rdfs:range [ rdf:type rdfs:Datatype ;
+                                   owl:unionOf ( xsd:date
+                                                 xsd:gYear
+                                                 xsd:gYearMonth
+                                               )
+                                 ] ;
+                      dc:description """The date on which a document or entity is published.
+The date can be expressed in three different formats:
+- yyyy-mm-dd (i.e., xsd:date)
+- yyyy-mm (i.e., xsd:gYearMonth)
+- yyyy (i.e., xsd:gYear)"""@en ;
+                      rdfs:comment "The date on which a resource is published or disclosed."@en ;
+                      rdfs:label "has publication date"@en .
+
+
+###  http://prismstandard.org/namespaces/basic/2.0/startingPage
+basic:startingPage rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain core:Endeavour ;
+                   rdfs:comment "Identifies the first page of an entity such as a journal article."@en ;
+                   rdfs:label "has starting page"@en .
+
+
+###  http://prismstandard.org/namespaces/basic/2.0/volume
+basic:volume rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain core:Endeavour ;
+             rdfs:comment "An identifier for a particular volume of a resource, such as a journal or a multi-volume book."@en ;
+             rdfs:label "has volume identifier"@en .
+
+
+###  http://purl.org/dc/terms/identifier
+terms:identifier rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/dc/terms/issued
+terms:issued rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/dc/terms/title
+terms:title rdf:type owl:DatatypeProperty ;
+            rdfs:comment "A name given to a resource.  Typically, the title will be the name by which the resource is formally known."@en ;
+            rdfs:label "has title"@en .
+
+
+###  http://purl.org/spar/fabio/hasPublicationYear
+fabio:hasPublicationYear rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf terms:issued ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:range xsd:gYear ;
+                         rdfs:comment "The year in which a resource is published."@en ;
+                         rdfs:label "has publication year"@en .
+
+
+###  http://purl.org/spar/fabio/hasTranslatedTitle
+fabio:hasTranslatedTitle rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf terms:title ;
+                         rdfs:comment "A version of the title of an entity translated into another language, which may be specified using the object property dcterms:language."@en ;
+                         rdfs:label "has translated title"@en .
+
+
+###  http://purl.org/spar/fabio/hasURL
+fabio:hasURL rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf terms:identifier ;
+             rdfs:domain core:Endeavour ;
+             rdfs:range xsd:anyURI ;
+             rdfs:comment "An identifier, in form of an HTTP Universal Resource Locator (URL), for a particular resource on the World Wide Web."@en ;
+             rdfs:label "has URL"@en .
+
+
+###  http://purl.org/spar/fabio/hasVolumeCount
+fabio:hasVolumeCount rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain core:Endeavour ;
+                     rdfs:range xsd:nonNegativeInteger ;
+                     rdfs:comment "The count of the number of volumes a work includes."@en ;
+                     rdfs:label "has volume count"@en .
+
+
+###  http://viewsari.github.io/ontology#hasDiceCoefficient
+ontology:hasDiceCoefficient rdf:type owl:DatatypeProperty ;
+                            rdfs:domain ontology:Cooccurrence ;
+                            rdfs:range xsd:float .
+
+
+###  http://viewsari.github.io/ontology#hasPMIScore
+ontology:hasPMIScore rdf:type owl:DatatypeProperty ;
+                     rdfs:range xsd:float .
+
+
+###  http://viewsari.github.io/ontology#hasPageRange
+ontology:hasPageRange rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf basic:pageRange ;
+                      rdfs:domain ontology:Biography ;
+                      rdfs:range xsd:string .
+
+
+###  http://viewsari.github.io/ontology#lengthInCharacters
+ontology:lengthInCharacters rdf:type owl:DatatypeProperty ;
+                            rdfs:domain <http://purl.org/spar/doco/Paragraph> ;
+                            rdfs:range xsd:positiveInteger .
+
+
+###  http://www.w3.org/ns/oa#bodyValue
+oa:bodyValue rdf:type owl:DatatypeProperty ;
+             rdfs:domain oa:Annotation ;
+             rdfs:range xsd:string ;
+             rdfs:comment """The object of the predicate is a plain text string to be used as the content of the body of the Annotation.  The value MUST be an  xsd:string  and that data type MUST NOT be expressed in the serialization. Note that language MUST NOT be associated with the value either as a language tag, as that is only available for  rdf:langString .
+  """ ;
+             rdfs:isDefinedBy oa: ;
+             rdfs:label "bodyValue" .
+
+
+###  http://www.w3.org/ns/oa#end
+oa:end rdf:type owl:DatatypeProperty ;
+       rdfs:range xsd:nonNegativeInteger ;
+       rdfs:comment "The end property is used to convey the 0-based index of the end position of a range of content." ;
+       rdfs:isDefinedBy oa: ;
+       rdfs:label "end" .
+
+
+###  http://www.w3.org/ns/oa#start
+oa:start rdf:type owl:DatatypeProperty ;
+         rdfs:range xsd:nonNegativeInteger ;
+         rdfs:comment "The start position in a 0-based index at which a range of content is selected from the data in the source resource." ;
+         rdfs:isDefinedBy oa: ;
+         rdfs:label "start" .
+
+
+###  http://www.w3.org/ns/prov#endedAtTime
+prov:endedAtTime rdf:type owl:DatatypeProperty ;
+                 rdfs:domain prov:Activity ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "The time at which an activity ended. See also prov:startedAtTime."@en ;
+                 rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                 rdfs:label "endedAtTime" ;
+                 prov:category "starting-point" ;
+                 prov:component "entities-activities" ;
+                 prov:editorialNote "It is the intent that the property chain holds: (prov:qualifiedEnd o prov:atTime) rdfs:subPropertyOf prov:endedAtTime."@en ;
+                 prov:qualifiedForm prov:End ,
+                                    prov:atTime .
+
+
+###  http://www.w3.org/ns/prov#startedAtTime
+prov:startedAtTime rdf:type owl:DatatypeProperty ;
+                   rdfs:domain prov:Activity ;
+                   rdfs:range xsd:dateTime ;
+                   rdfs:comment "The time at which an activity started. See also prov:endedAtTime."@en ;
+                   rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                   rdfs:label "startedAtTime" ;
+                   prov:category "starting-point" ;
+                   prov:component "entities-activities" ;
+                   prov:editorialNote "It is the intent that the property chain holds: (prov:qualifiedStart o prov:atTime) rdfs:subPropertyOf prov:startedAtTime."@en ;
+                   prov:qualifiedForm prov:Start ,
+                                      prov:atTime .
+
+
+###  http://xmlns.com/foaf/0.1/name
+foaf:name rdf:type owl:DatatypeProperty ;
+          rdfs:domain owl:Thing ;
+          rdfs:comment "A name for some thing." ;
+          rdfs:isDefinedBy foaf: ;
+          rdfs:label "name" ;
+          ns:term_status "testing" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/spar/deo/Biography
+<http://purl.org/spar/deo/Biography> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://purl.org/spar/deo/DiscourseElement> ;
+                                     rdfs:comment "Information describing a person and his or her life history and contributions."@en ;
+                                     rdfs:label "biography"@en .
+
+
+###  http://purl.org/spar/deo/DiscourseElement
+<http://purl.org/spar/deo/DiscourseElement> rdf:type owl:Class ;
+                                            rdfs:subClassOf owl:Thing ;
+                                            rdfs:comment "An element of a document that carries out a rhetorical function."@en ;
+                                            rdfs:label "discourse element"@en .
+
+
+###  http://purl.org/spar/doco/Paragraph
+<http://purl.org/spar/doco/Paragraph> rdf:type owl:Class ;
+                                      rdfs:comment "A self-contained unit of discourse that deals with a particular point or idea. Paragraphs contains one or more sentences. The start of a paragraph is indicated by beginning on a new line, which may be indented or separated by a small vertical space by the preceding paragraph. "@en ;
+                                      rdfs:label "paragraph"@en .
+
+
+###  http://purl.org/spar/doco/TextChunk
+<http://purl.org/spar/doco/TextChunk> rdf:type owl:Class ;
+                                      rdfs:subClassOf pattern:Inline ;
+                                      rdfs:comment "A piece of text defined by a start point and an end point."@en ;
+                                      rdfs:label "text chunk"@en .
+
+
+###  http://purl.org/spar/fabio/Book
+fabio:Book rdf:type owl:Class ;
+           rdfs:subClassOf fabio:Expression ;
+           rdfs:comment "A non-serial document that is complete in one volume or a designated finite number of volumes.  A book published by a publisher is usually  identified by an International Standard Book Number (ISBN), and may be manifested as a physical printed publication on paper bound in a hard or soft cover, or in electronic format as an 'e-book'."@en ;
+           rdfs:label "book"@en .
+
+
+###  http://purl.org/spar/fabio/BookSeries
+fabio:BookSeries rdf:type owl:Class ;
+                 rdfs:subClassOf fabio:Series ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty core:part ;
+                                   owl:someValuesFrom fabio:Book
+                                 ] ;
+                 owl:disjointWith fabio:BookSet ;
+                 rdfs:comment "A sequence of books having certain characteristics in common that are formally identified together as a group - for instance, the books in the Law, Governance and Technology Series published by Springer."@en ;
+                 rdfs:label "book series"@en .
+
+
+###  http://purl.org/spar/fabio/BookSet
+fabio:BookSet rdf:type owl:Class .
+
+
+###  http://purl.org/spar/fabio/DigitalManifestation
+fabio:DigitalManifestation rdf:type owl:Class ;
+                           rdfs:subClassOf fabio:Manifestation ;
+                           rdfs:comment "A manifestation that represents data in binary form, encoding the data as a series of 0s and 1s."@en ;
+                           rdfs:label "digital manifestation"@en .
+
+
+###  http://purl.org/spar/fabio/Expression
+fabio:Expression rdf:type owl:Class ;
+                 rdfs:subClassOf core:Expression ,
+                                 [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                          owl:onProperty core:part ;
+                                                          owl:allValuesFrom core:Expression
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty core:partOf ;
+                                                          owl:allValuesFrom core:Expression
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty core:embodiment ;
+                                   owl:allValuesFrom fabio:Manifestation
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty core:realizationOf ;
+                                   owl:allValuesFrom fabio:Work
+                                 ] ;
+                 dc:description "A fabio:Expression can only have part or be part of another fabio:Expression.  Moreover, it can be a representation only of a fabio:Work, and  it can be embodied only in fabio:Manifestation(s)."@en ;
+                 rdfs:comment "A subclass of FRBR expression, restricted to expressions of fabio:Works.  For your latest research paper, the preprint submitted to the publisher, and the final published version to which the publisher assigned a unique digital object identifier, are both expressions of the same work.  "@en ;
+                 rdfs:label "expression"@en .
+
+
+###  http://purl.org/spar/fabio/ExpressionCollection
+fabio:ExpressionCollection rdf:type owl:Class ;
+                           rdfs:subClassOf fabio:Expression ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty core:part ;
+                                             owl:someValuesFrom fabio:Expression
+                                           ] ;
+                           rdfs:comment "A collection of expressions, for example a periodical or a book series."@en ;
+                           rdfs:label "expression collection"@en .
+
+
+###  http://purl.org/spar/fabio/Manifestation
+fabio:Manifestation rdf:type owl:Class ;
+                    rdfs:subClassOf core:Manifestation ,
+                                    [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:part ;
+                                                             owl:allValuesFrom core:Manifestation
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:partOf ;
+                                                             owl:allValuesFrom core:Manifestation
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty core:embodimentOf ;
+                                      owl:allValuesFrom fabio:Expression
+                                    ] ;
+                    dc:description "A fabio:Manifestation can only have part or be part of another fabio:Manifestation.  Moreover, it can be an embodiment only of a fabio:Expression and it can be exemplified only by fabio:Item(s)."@en ;
+                    rdfs:comment """A subclass of FRBR manifestation, restricted to manifestations of fabio:Expressions. fabio:Manifestation specifically applies to electronic (digital) as well as to physical manifestations of expressions.  
+
+Examples of different manifestations of a single 'version of record' expression of a scholarly work include an article in a print journal or the on-line version of that article as a web page."""@en ;
+                    rdfs:label "manifestation"@en .
+
+
+###  http://purl.org/spar/fabio/Page
+fabio:Page rdf:type owl:Class .
+
+
+###  http://purl.org/spar/fabio/Series
+fabio:Series rdf:type owl:Class ;
+             rdfs:subClassOf fabio:ExpressionCollection ;
+             rdfs:comment "A sequence of expressions having certain characteristics in common that are formally identified together as a group."@en ;
+             rdfs:label "series"@en .
+
+
+###  http://purl.org/spar/fabio/WebManifestation
+fabio:WebManifestation rdf:type owl:Class ;
+                       rdfs:subClassOf fabio:DigitalManifestation ;
+                       rdfs:comment "A digital manifestation on the Web, such as a wiki, a web site, a web page or a blog."@en ;
+                       rdfs:label "web manifestation"@en .
+
+
+###  http://purl.org/spar/fabio/WebPage
+fabio:WebPage rdf:type owl:Class ;
+              rdfs:subClassOf fabio:Page ,
+                              fabio:WebManifestation ;
+              rdfs:comment "A Web manifestation usually identified by a Uniform Resource Identifier (URI), and made accessible to a user by means of the Hypertext Transport Protocol (HTTP) in a Web browser window. Several interlinked web pages hosted together on a Web server and accessed through a single domain name or IP address constitute a web site."@en ;
+              rdfs:label "web page"@en .
+
+
+###  http://purl.org/spar/fabio/Work
+fabio:Work rdf:type owl:Class ;
+           rdfs:subClassOf core:Work ,
+                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                    owl:onProperty core:part ;
+                                                    owl:allValuesFrom core:Work
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty core:partOf ;
+                                                    owl:allValuesFrom core:Work
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty core:realization ;
+                             owl:allValuesFrom fabio:Expression
+                           ] ;
+           dc:description "A fabio:Work can only have part or be part of another fabio:Work. Moreover, it can be realized only by fabio:Expression(s)."@en ;
+           rdfs:comment "A subclass of FRBR work, restricted to works that are published or potentially publishable, and that contain or are referred to by bibliographic references, or entities used to define bibliographic references. FaBiO works, and their expressions and manifestations, are primarily textual publications such as books, magazines, newspapers and journals, and items of their content.  However, they also include datasets, computer algorithms, experimental protocols, formal specifications and vocabularies, legal records, governmental papers, technical and commercial reports and similar publications, and also bibliographies, reference lists, library catalogues and similar collections. For this reason, fabio:Work is not an equivalent class to frbr:ScholarlyWork.  An example of a fabio:Work is your latest research paper."@en ;
+           rdfs:label "work"@en .
+
+
+###  http://purl.org/vocab/frbr/core#Endeavour
+core:Endeavour rdf:type owl:Class .
+
+
+###  http://purl.org/vocab/frbr/core#Expression
+core:Expression rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( core:Endeavour
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:embodiment ;
+                                                             owl:someValuesFrom core:Manifestation
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:realizationOf ;
+                                                             owl:someValuesFrom core:Work
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ,
+                                    [ owl:intersectionOf ( core:Endeavour
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:part ;
+                                                             owl:allValuesFrom core:Expression
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty core:partOf ;
+                                                             owl:allValuesFrom core:Expression
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                owl:disjointWith core:Manifestation ,
+                                 core:Work ;
+                rdfs:comment """The intellectual or artistic realization of a work in the form of alpha-numeric, musical, or choreographic notation, sound, image, object, movement, etc., or any combination of such forms.
+
+An expression is the specific intellectual or artistic form that a work takes each time it is \"realized.\" Expression encompasses, for example, the specific words, sentences, paragraphs, etc. that result from the realization of a work in the form of a text, or the particular sounds, phrasing, etc. resulting from the realization of a musical work."""@en ;
+                rdfs:label "expression"@en .
+
+
+###  http://purl.org/vocab/frbr/core#Manifestation
+core:Manifestation rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( core:Endeavour
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty core:part ;
+                                                                owl:allValuesFrom core:Manifestation
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty core:partOf ;
+                                                                owl:allValuesFrom core:Manifestation
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   owl:disjointWith core:Work ;
+                   rdfs:comment """The physical embodiment of an expression of a work.
+
+The entity defined as manifestation encompasses a wide range of materials and formats. As an entity, manifestation represents all the physical objects that bear the same characteristics, in respect to both intellectual content and physical form. """@en ;
+                   rdfs:label "manifestation"@en .
+
+
+###  http://purl.org/vocab/frbr/core#Work
+core:Work rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( core:Endeavour
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty core:realization ;
+                                                       owl:someValuesFrom core:Expression
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ,
+                              [ owl:intersectionOf ( core:Endeavour
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty core:part ;
+                                                       owl:allValuesFrom core:Work
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty core:partOf ;
+                                                       owl:allValuesFrom core:Work
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:comment """A distinct intellectual or artistic creation.
+
+A work is an abstract entity; there is no single material object one can point to as the work. We recognize the work through individual realizations or expressions of the work, but the work itself exists only in the commonality of content between and among the various expressions of the work. When we speak of Homer's Iliad as a work, our point of reference is not a particular recitation or text of the work, but the intellectual creation that lies behind all the various expressions of the work. """@en ;
+          rdfs:label "work"@en .
+
+
+###  http://viewsari.github.io/ontology#Artwork
+ontology:Artwork rdf:type owl:Class ;
+                 rdfs:subClassOf ontology:ContentResource ;
+                 rdfs:comment "The Artwork class represents creative works of art, encompassing various mediums such as paintings, sculptures, and digital creations. It stores metadata such as title, artist, creation date, and style."@en ;
+                 rdfs:label "artwork" .
+
+
+###  http://viewsari.github.io/ontology#Biography
+ontology:Biography rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.org/spar/deo/Biography> ,
+                                   fabio:DigitalManifestation ;
+                   rdfs:comment "The Biography class encapsulates chapters within Vasari's seminal work that focus on the lives and works of Renaissance artists. It is about a person and has a title, a page range, a starting and end page."@en .
+
+
+###  http://viewsari.github.io/ontology#ContentResource
+ontology:ContentResource rdf:type owl:Class ;
+                         rdfs:comment "The ContentResource class summarizes classes representing various types of extracted content and defines super-properties like labels and establishes the connection to the original sources from where said content was extracted."@en ;
+                         rdfs:label "content resource" .
+
+
+###  http://viewsari.github.io/ontology#Cooccurrence
+ontology:Cooccurrence rdf:type owl:Class ;
+                      rdfs:subClassOf oa:Annotation ,
+                                      prov:Entity ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty ontology:involvedResource ;
+                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                        owl:onClass ontology:ContentResource
+                                      ] ;
+                      rdfs:comment "The Cooccurrence class represents a connection between a minimum of two content resources, such as persons (artists), artworks, or other entities. It encapsulates information about the provenance, context, frequency (score), and scope of the co-occurrence."@en ;
+                      rdfs:label "cooccurrence"@en .
+
+
+###  http://viewsari.github.io/ontology#CooccurrenceScope
+ontology:CooccurrenceScope rdf:type owl:Class ;
+                           rdfs:comment "The Cooccurrence scope class specifies from which perspective on the work the cooccurrences have been extracted. Were entire volumes considered? Were they extracted within single biographies?"@en ;
+                           rdfs:label "cooccurrence scope" .
+
+
+###  http://viewsari.github.io/ontology#DiceCalculation
+ontology:DiceCalculation rdf:type owl:Class ;
+                         rdfs:subClassOf prov:Activity ;
+                         owl:disjointWith ontology:PMICalculation ;
+                         rdfs:comment "The DiceCalculation is a specific type of activity performed to extract co-occurrences, based on the dice coefficient."@en ;
+                         rdfs:label "dice calculation"@en .
+
+
+###  http://viewsari.github.io/ontology#Edition
+ontology:Edition rdf:type owl:Class ;
+                 rdfs:subClassOf fabio:BookSeries ;
+                 rdfs:comment """The Edition class in the realm of Viewsari represents a specific version or iteration of a literary work. Separate editions are characterized by differences in content and the publication year.
+An edition is composed of several subsequent volumes."""@en .
+
+
+###  http://viewsari.github.io/ontology#HistoricalEvent
+ontology:HistoricalEvent rdf:type owl:Class ;
+                         rdfs:subClassOf ontology:ContentResource ;
+                         rdfs:comment "The HistoricalEvent class encapsulates data related to past occurrences, including details, if available, such as a normed label, a date, the location, and references to norm data about this event."@en ;
+                         rdfs:label "historical event" .
+
+
+###  http://viewsari.github.io/ontology#Location
+ontology:Location rdf:type owl:Class ;
+                  rdfs:subClassOf ontology:ContentResource ;
+                  rdfs:comment "The Location class models physical or abstract locations, storing information such as name, latitude, and longitude, as well as references to norm data about this event."@en ;
+                  rdfs:label "location" .
+
+
+###  http://viewsari.github.io/ontology#Occupation
+ontology:Occupation rdf:type owl:Class ;
+                    rdfs:comment "The Occupation class defines three types of occupations, as introducted by Vasari in his work: Artist, sculptor and architect. Each of these types is mentioned for the corresponding artist in their  biography title and was extracted manually from it."@en ;
+                    rdfs:label "occupation"@en .
+
+
+###  http://viewsari.github.io/ontology#OriginalWork
+ontology:OriginalWork rdf:type owl:Class ;
+                      rdfs:subClassOf fabio:Work ;
+                      rdfs:comment "The OriginalWork in the Viewsari ontology describes the higher-level idea of a (literary) work."@en .
+
+
+###  http://viewsari.github.io/ontology#PMICalculation
+ontology:PMICalculation rdf:type owl:Class ;
+                        rdfs:subClassOf prov:Activity ;
+                        rdfs:comment "The PMICalculation is a specific type of activity performed to extract co-occurrences, based on the pointwise mututal information of two entities in paragraphs."@en ;
+                        rdfs:label "pmi calculation" .
+
+
+###  http://viewsari.github.io/ontology#Page
+ontology:Page rdf:type owl:Class ;
+              rdfs:subClassOf <http://purl.org/spar/deo/DiscourseElement> ;
+              rdfs:comment "The Page class represents a single page within a document. It encapsulates attributes such as page number and consists of paragraphs."@en .
+
+
+###  http://viewsari.github.io/ontology#Person
+ontology:Person rdf:type owl:Class ;
+                rdfs:subClassOf ontology:ContentResource ,
+                                foaf:Person ;
+                rdfs:comment "In the domain of Viewsari, the person class represents individuals with attributes such as name or birthdate and deathdate, as well as references to norm data about this event."@en ;
+                rdfs:label "person" .
+
+
+###  http://viewsari.github.io/ontology#Provider
+ontology:Provider rdf:type owl:Class ;
+                  rdfs:subClassOf foaf:Organization .
+
+
+###  http://viewsari.github.io/ontology#ResourceInText
+ontology:ResourceInText rdf:type owl:Class ;
+                        rdfs:subClassOf oa:Annotation ;
+                        rdfs:comment "The ResourceInText class establishes a linkage between a content resource, such as an artwork or a person, and a specific paragraph within the associated work"@en ;
+                        rdfs:label "resource in text" .
+
+
+###  http://viewsari.github.io/ontology#Translation
+ontology:Translation rdf:type owl:Class ;
+                     rdfs:subClassOf fabio:BookSeries ;
+                     rdfs:comment """The Translation class represents the transformation of a literary work from one language to another. In Viewsari, a translation is always based on a specific edition of the original literary work.
+A translation is composed of several subsequent volumes."""@en .
+
+
+###  http://viewsari.github.io/ontology#Volume
+ontology:Volume rdf:type owl:Class ;
+                rdfs:subClassOf fabio:Book ;
+                rdfs:comment "The Volume class represents a single book within a larger collection/series, specifically focusing on translations or editions of a particular work."@en .
+
+
+###  http://www.essepuntato.it/2008/12/pattern#Inline
+pattern:Inline rdf:type owl:Class .
+
+
+###  http://www.essepuntato.it/2008/12/pattern#Structured
+pattern:Structured rdf:type owl:Class .
+
+
+###  http://www.w3.org/2000/10/swap/pim/contact#Person
+<http://www.w3.org/2000/10/swap/pim/contact#Person> rdf:type owl:Class ;
+                                                    owl:equivalentClass foaf:Person .
+
+
+###  http://www.w3.org/ns/oa#Annotation
+oa:Annotation rdf:type owl:Class ;
+              rdfs:comment "The class for Web Annotations." ;
+              rdfs:isDefinedBy oa: ;
+              rdfs:label "Annotation" .
+
+
+###  http://www.w3.org/ns/oa#ResourceSelection
+oa:ResourceSelection rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/oa#Selector
+oa:Selector rdf:type owl:Class ;
+            rdfs:comment "A resource which describes the segment of interest in a representation of a Source resource, indicated with oa:hasSelector from the Specific Resource. This class is not used directly in the Annotation model, only its subclasses." ;
+            rdfs:isDefinedBy oa: ;
+            rdfs:label "Selector" .
+
+
+###  http://www.w3.org/ns/oa#TextPositionSelector
+oa:TextPositionSelector rdf:type owl:Class ;
+                        rdfs:subClassOf oa:Selector ;
+                        rdfs:comment "The TextPositionSelector describes a range of text by recording the start and end positions of the selection in the stream. Position 0 would be immediately before the first character, position 1 would be immediately before the second character, and so on." ;
+                        rdfs:isDefinedBy oa: ;
+                        rdfs:label "TextPositionSelector" .
+
+
+###  http://www.w3.org/ns/prov#Activity
+prov:Activity rdf:type owl:Class ;
+              owl:disjointWith prov:Entity ;
+              rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+              rdfs:label "Activity" ;
+              prov:category "starting-point" ;
+              prov:component "entities-activities" ;
+              prov:constraints "http://www.w3.org/TR/2013/REC-prov-constraints-20130430/#prov-dm-constraints-fig"^^xsd:anyURI ;
+              prov:definition "An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities." ;
+              prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Activity"^^xsd:anyURI ;
+              prov:n "http://www.w3.org/TR/2013/REC-prov-n-20130430/#expression-Activity"^^xsd:anyURI .
+
+
+###  http://www.w3.org/ns/prov#Agent
+prov:Agent rdf:type owl:Class ;
+           owl:disjointWith prov:InstantaneousEvent ;
+           rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+           rdfs:label "Agent" ;
+           prov:category "starting-point" ;
+           prov:component "agents-responsibility" ;
+           prov:definition "An agent is something that bears some form of responsibility for an activity taking place, for the existence of an entity, or for another agent's activity. "@en ;
+           prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent"^^xsd:anyURI ;
+           prov:n "http://www.w3.org/TR/2013/REC-prov-n-20130430/#expression-Agent"^^xsd:anyURI .
+
+
+###  http://www.w3.org/ns/prov#Entity
+prov:Entity rdf:type owl:Class ;
+            owl:disjointWith prov:InstantaneousEvent ;
+            rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+            rdfs:label "Entity" ;
+            prov:category "starting-point" ;
+            prov:component "entities-activities" ;
+            prov:constraints "http://www.w3.org/TR/2013/REC-prov-constraints-20130430/#prov-dm-constraints-fig"^^xsd:anyURI ;
+            prov:definition "An entity is a physical, digital, conceptual, or other kind of thing with some fixed aspects; entities may be real or imaginary. "@en ;
+            prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-entity"^^xsd:anyURI ;
+            prov:n "http://www.w3.org/TR/2013/REC-prov-n-20130430/#expression-Entity"^^xsd:anyURI .
+
+
+###  http://www.w3.org/ns/prov#InstantaneousEvent
+prov:InstantaneousEvent rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#SoftwareAgent
+prov:SoftwareAgent rdf:type owl:Class ;
+                   rdfs:subClassOf prov:Agent ;
+                   rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+                   rdfs:label "SoftwareAgent" ;
+                   prov:category "expanded" ;
+                   prov:component "agents-responsibility" ;
+                   prov:definition "A software agent is running software."@en ;
+                   prov:dm "http://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent"^^xsd:anyURI ;
+                   prov:n "http://www.w3.org/TR/2013/REC-prov-n-20130430/#expression-types"^^xsd:anyURI .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+foaf:Agent rdf:type owl:Class .
+
+
+###  http://xmlns.com/foaf/0.1/Organization
+foaf:Organization rdf:type owl:Class ;
+                  rdfs:subClassOf foaf:Agent ;
+                  owl:disjointWith foaf:Person ;
+                  rdfs:comment "An organization." ;
+                  rdfs:isDefinedBy foaf: ;
+                  rdfs:label "Organization" ;
+                  ns:term_status "stable" .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://viewsari.github.io/ontology#architect
+ontology:architect rdf:type owl:NamedIndividual ,
+                            ontology:Occupation .
+
+
+###  http://viewsari.github.io/ontology#biography_scope
+ontology:biography_scope rdf:type owl:NamedIndividual ,
+                                  ontology:CooccurrenceScope .
+
+
+###  http://viewsari.github.io/ontology#dice_script
+ontology:dice_script rdf:type owl:NamedIndividual ,
+                              prov:SoftwareAgent .
+
+
+###  http://viewsari.github.io/ontology#entire_work_scope
+ontology:entire_work_scope rdf:type owl:NamedIndividual ,
+                                    ontology:CooccurrenceScope .
+
+
+###  http://viewsari.github.io/ontology#painter
+ontology:painter rdf:type owl:NamedIndividual ,
+                          ontology:Occupation .
+
+
+###  http://viewsari.github.io/ontology#pmi_script
+ontology:pmi_script rdf:type owl:NamedIndividual ,
+                             prov:SoftwareAgent .
+
+
+###  http://viewsari.github.io/ontology#sculptor
+ontology:sculptor rdf:type owl:NamedIndividual ,
+                           ontology:Occupation .
+
+
+###  http://viewsari.github.io/ontology#volume_scope
+ontology:volume_scope rdf:type owl:NamedIndividual ,
+                               ontology:CooccurrenceScope .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:cooccurrence rdf:type swrl:Variable .
+
+:activity rdf:type swrl:Variable .
+
+:par rdf:type swrl:Variable .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "CooccurrenceInParagraph" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate ontology:Cooccurrence ;
+                           swrl:argument1 :cooccurrence
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate prov:wasGeneratedBy ;
+                                      swrl:argument1 :cooccurrence ;
+                                      swrl:argument2 :activity
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                 swrl:propertyPredicate prov:used ;
+                                                 swrl:argument1 :activity ;
+                                                 swrl:argument2 :par
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate ontology:inParagraph ;
+                           swrl:argument1 :cooccurrence ;
+                           swrl:argument2 :par
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

@@ -1,8 +1,11 @@
 import csv
+from pathlib import Path
+
 from fastcoref import LingMessCoref
 import glob
 import sys
 import re
+import pandas as pd
 
 maxInt = sys.maxsize
 
@@ -20,35 +23,28 @@ model = LingMessCoref(device='cuda:0')
 
 
 def main():
-    for file_name in glob.glob("../../results/indices_parsed/*.csv"):
-        with open(file_name, "r") as f:
+    for file_name in glob.glob("../../data/volumes_updated/*.csv"):
+        print(f"Working on {file_name}.")
+        file_num = re.match(r".*?(\d+).*?", file_name).group(1)
+        text_data = pd.read_csv(file_name)
+        output = []
+
+        with open(f"../../data/indices_parsed/{file_num}.csv", "r") as f:
             names_data = csv.DictReader(f)
             names_data = list(names_data)
-            file_num = re.match(r".*?(\d+).*?", file_name).group(1)
 
-        print(f"Working on {file_num}.")
-        with open("../../data/volumes_updated/" + file_num + ".csv", "r") as f:
-            print(f"Working on volume {file_num}.")
-            text_data = csv.DictReader(f)
-            text_data = list(text_data)
+        for index, row in text_data.iterrows():
+            page_num = row['page']
+            paragraph_num = row['paragraph_id']
+            page_text = row['text']
+            if pd.isna(page_text):
+                page_text = ""
 
-        page_numbers = [int(num) for row in text_data for num in row["pages"].split(" ")]
-        max_page = max(page_numbers)
-        output = []
-        for pagenumber in range(1, max_page + 1):
-            page_text = ""
-            paragraph_numbers = []
-            paragraph_len = []
-            names_on_page = [name for name in names_data if str(pagenumber) in name["pages"].split(" ")]
-            for row in text_data:
-                if str(pagenumber) == row["pages"].split(" ")[0]:
-                    page_text = page_text + row["text"]
-                    paragraph_numbers.append(row["paragraph_id"])
-                    paragraph_len.append(len(row["text"]))
+            names_on_page = [name for name in names_data if str(page_num) in name["pages"].split(" ")]
+
             preds = model.predict(texts=[page_text])
             if len(preds) > 0:
                 characters = preds[0].get_clusters(as_strings=False)
-                print(page_text, clusters, characters)
                 clusters = preds[0].get_clusters()
                 for surfaces, char_pos in zip(clusters, characters):
                     references = [surface.lower() for surface in surfaces]
@@ -80,16 +76,11 @@ def main():
                         text_length = 0
                         name_id = "|".join(name_id)
                         for i in range(len(surfaces)):
-                            curr_paragraph = paragraph_numbers[0]
-                            for p in range(len(paragraph_len)):
-                                text_length += paragraph_len[p]
-                                if text_length >= char_pos[i][0]:
-                                    break
-                                else:
-                                    curr_paragraph = paragraph_numbers[p]
-                            output.append([pagenumber, name_id, char_pos[i], surfaces[i], curr_paragraph])
+                            curr_paragraph = paragraph_num
+                            print(f"Current paragraph: {curr_paragraph}.")
+                            output.append([page_num, name_id, char_pos[i], surfaces[i], curr_paragraph])
 
-        with open(f"../results/references/{file_name}_v1.csv", "w", encoding="utf-8") as file:
+        with open(f"../../data/references/{Path(file_name).stem}_v1.csv", "w", encoding="utf-8") as file:
             writer = csv.writer(file, delimiter=",")
             writer.writerow(["page", "index_name", "position", "reference", "paragraph"])
             writer.writerows(output)

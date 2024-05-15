@@ -3,6 +3,8 @@ import math
 import glob
 import sys
 import re
+from datetime import date, datetime
+
 
 maxInt = sys.maxsize
 
@@ -18,9 +20,11 @@ while True:
 
 
 def main():
+    start_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     paragraph_num = 0
     name_paragraph_dict = dict()
     cooccurence_list = list()
+    pmi_activity = "pmi_activity_" + str(date.today())
 
     for file_name in sorted(glob.glob("../../data/references/*.csv")):
         with open(file_name, "r", encoding="utf-8") as f:
@@ -28,11 +32,8 @@ def main():
             data = list(data)
             file_num = re.match(r".*?(\d+).*?", file_name).group(1)
 
-        print(file_num)
         paragraphs_set = set([row["paragraph"] for row in data])
-        print(len(paragraphs_set))
         paragraph_num = paragraph_num + len(paragraphs_set)
-        print(paragraph_num)
         for paragraph in paragraphs_set:
             paragraph_data = [row for row in data if row["paragraph"] == paragraph]
             page_set = set(int(row["page"]) for row in paragraph_data)
@@ -85,27 +86,31 @@ def main():
                 if pmi_yx > 0:
                     output.append(
                         {
-                            "x": name1,
-                            "p_x": p_x,
-                            "y": name2,
-                            "p_y": p_y,
-                            "p_yx": p_yx,
-                            "pmi_yx": pmi_yx,
+                            "artist1": name1,
+                            "probability_of_artist1": p_x,
+                            "artist2": name2,
+                            "probability_of_artist2": p_y,
+                            "shared_probability": p_yx,
+                            "pmi_score": pmi_yx,
                             "pages": info["pages"],
                             "paragraphs": info["paragraphs"],
-                            "volume": info["volume"]
+                            "volume": info["volume"],
+                            "pmi_activity": pmi_activity,
                         }
                     )
 
-        sorted_output = sorted(output, key=lambda item: float(item["pmi_yx"]), reverse=True)
+        sorted_output = sorted(output, key=lambda item: float(item["pmi_score"]), reverse=True)
         computed_pairs = set()
         new_output = []
+        end_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         for x in sorted_output:
-            if (x["y"], x["x"]) in computed_pairs:
+            if (x["artist1"], x["artist2"]) in computed_pairs:
                 continue
             else:
+                x["start"] = start_time
+                x["end"] = end_time
                 new_output.append(x)
-                computed_pairs.add((x["x"], x["y"]))
+                computed_pairs.add((x["artist1"], x["artist2"]))
         if len(new_output) > 0:
             with open("../../data/results/pmi_tables/" + file_num + ".csv", "w", encoding="utf-8") as out_f:
                 csv_writer = csv.DictWriter(out_f, new_output[0].keys())

@@ -1,6 +1,5 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Tafi, Andrea","Como, Guido da",0.5,48,155
-"Tafi, Andrea","Cimabue, Giovanni",0.5,50,158
-"Tafi, Andrea",Giotto,0.8,50,158
-"Tafi, Andrea",Giotto,0.8,51,162
-"Cimabue, Giovanni",Giotto,0.6666666666666666,50,158
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Cimabue, Giovanni","Tafi, Andrea",0.2857142857142857,47,70,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Cimabue, Giovanni",Giotto,0.5,50,74,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Tafi, Andrea",Apollonio,0.3333333333333333,49,73,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Tafi, Andrea",Giotto,0.2857142857142857,51,78,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
