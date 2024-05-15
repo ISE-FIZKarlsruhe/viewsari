@@ -1,4 +1,6 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-Giotto,"Cimabue, Giovanni",0.2222222222222222,72,189
-Giotto,"Cimabue, Giovanni",0.2222222222222222,94,218
-Giotto,"Capanna, Puccio",0.11764705882352941,91,212
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+Giotto,"Cimabue, Giovanni",0.24,71,95,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Cimabue, Giovanni",0.24,74,97,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Cimabue, Giovanni",0.24,94,125,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.08695652173913043,87,111,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+Giotto,"Capanna, Puccio",0.08695652173913043,90,118,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

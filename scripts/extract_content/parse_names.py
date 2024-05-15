@@ -9,8 +9,6 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import glob
 
-
-
 def main():
   for file_name in glob.glob("../data/indices_raw/*.json"):
     names_data=list()

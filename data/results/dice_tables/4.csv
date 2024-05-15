@@ -1,209 +1,254 @@
-artist1,artist2,dice_coefficient,pages,paragraphs,volume
-"Galassi, Galasso (Galasso Ferrarese)",Cristofano,1.0,[104],['112'],['1']
-"Galassi, Galasso (Galasso Ferrarese)",Simone,1.0,[104],['112'],['1']
-Cristofano,Simone,1.0,[104],['112'],['1']
-"Ghiberti, Bonaccorso",Polycletus,1.0,[160],['181'],['1']
-Baviera,"Bolognese, Marc' Antonio (Marc' Antonio Raimondi, or de' Franci)",1.0,[233],['321'],['3']
-"Ammanati, Bartolommeo","Bandinelli, Baccio (Baccio de' Brandini)",1.0,[274],['378'],['3']
-"Zevio, Aldigieri (Altichiero) da","Verona, Sebeto da",1.0,[55],['60'],['3']
-"Zevio, Aldigieri (Altichiero) da","Avanzi, Jacopo (Jacopo Davanzo)",1.0,[55],['60'],['3']
-"Verona, Sebeto da","Avanzi, Jacopo (Jacopo Davanzo)",1.0,[55],['60'],['3']
-"Conti, Domenico","Salviati, Francesco (Francesco de' Rossi)",1.0,[119],['177'],['4']
-"Marchissi, Antonio di Giorgio","Maini (Marini), Michele",1.0,[4],['2'],['4']
-"Romano, Paolo","Mino, Maestro (Mino del Regno, or del Reame)",0.8,"[92, 91]","['133', '131']","['2', '2']"
-"Dossi, Battista","Dossi, Dosso",0.8,"[140, 141]","['206', '208']","['4', '4']"
-Agnolo (of Siena),Agostino (of Siena),0.75,"[98, 99, 100]","['225', '226', '227']","['0', '0', '0']"
-"Mainardi, Bastiano (Bastiano da San Gimignano)","Ghirlandajo, David",0.6666666666666666,[231],['339'],['2']
-"Pollaiuolo, Piero","Pollaiuolo, Antonio",0.6666666666666666,"[240, 243]","['354', '359']","['2', '2']"
-"Dossi, Battista","Bernazzano, Cesare",0.6666666666666666,[141],['208'],['4']
-"Cotignola, Francesco da (Francesco de' Zaganelli","Ravenna, Rondinello da (Niccolï¿½ Rondinello)",0.6666666666666666,[265],['370'],['4']
-"Nola, Giovanni da","Santa Croce, Girolamo",0.6666666666666666,[138],['201'],['4']
-"Memmi, Lippo","Memmi, Simone (Simone Martini, or Sanese)",0.6,"[173, 174, 172]","['337', '339', '334']","['0', '0', '0']"
-"Bellini, Jacopo","Bellini, Gentile",0.5714285714285714,"[174, 175]","['252', '254']","['2', '2']"
-"Castagno, Andrea dal (Andrea degli Impiccati)","Viniziano, Domenico (Domenico da Venezia)",0.5714285714285714,"[101, 103, 102, 104]","['144', '147', '145', '149']","['2', '2', '2', '2']"
-"Montelupo, Baccio da","Montelupo, Raffaello da",0.5714285714285714,"[45, 43]","['58', '53']","['4', '4']"
-"Bologhini, Bartolommeo","Laurati, Pietro (Pietro Lorenzetti)",0.5,[120],['260'],['0']
-"Daddi, Bernardo","Casentino, Jacopo di",0.5,[25],['25'],['1']
-"Filarete, Antonio","Ciuffagni, Bernardo",0.5,[7],['11'],['2']
-"Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)","Feltro, Morto da",0.5,[229],['323'],['4']
-"Claudio, Maestro","Marcilla, Guglielmo da (Guillaume de Marcillac)",0.5,"[255, 254]","['353', '351']","['3', '3']"
-"Caravaggio, Polidoro da (Polidoro Caldara)",Maturino,0.5,"[176, 182]","['249', '258']","['4', '4']"
-"Dossi, Dosso","Bernazzano, Cesare",0.5,[141],['208'],['4']
-"Pistoia, Il (Leonardo)","Modena, Pellegrino da (Pellegrino degli Aretusi, or de' Munari)",0.5,[80],['110'],['4']
-"Vecelli, Tiziano (Tiziano da Cadore)","Licinio, Giovanni Antonio (Cuticello, or Pordenone)",0.4444444444444444,"[153, 152]","['226', '223']","['4', '4']"
-"Bellini, Giovanni","Bellini, Gentile",0.42857142857142855,"[174, 182, 179]","['252', '263', '259']","['2', '2', '2']"
-Margaritone,"Tedesco, Jacopo (Lapo)",0.4,[65],['181'],['0']
-"Tafi, Andrea","Como, Guido da",0.4,[48],['155'],['0']
-Simone (brother of Donatello),"Filarete, Antonio",0.4,[4],['6'],['2']
-"Baldovinetti, Alesso",Graffione,0.4,[70],['100'],['2']
-"Fabriano, Gentile da","Pisanello, Vittore or Antonio",0.4,[113],['161'],['2']
-"Caporali, Benedetto (Giovan Battista)","Signorelli, Luca (Luca da Cortona)",0.4,[76],['91'],['3']
-"Francia, Francesco",Fivizzano,0.4,[29],['28'],['3']
-"Licinio, Giovanni Antonio (Cuticello, or Pordenone)","Amalteo, Pomponio",0.4,[155],['229'],['4']
-"Dossi, Dosso","Nola, Giovanni da",0.4,[139],['203'],['4']
-"Fiesole, Andrea da (Andrea Ferrucci)","Marchissi, Antonio di Giorgio",0.4,[4],['2'],['4']
-"Fiesole, Andrea da (Andrea Ferrucci)","Maini (Marini), Michele",0.4,[4],['2'],['4']
-"Gaddi, Agnolo","Gaddi, Giovanni",0.3333333333333333,[217],['406'],['0']
-"Maiano, Giuliano da","Donzello, Polito del",0.3333333333333333,[14],['20'],['2']
-"Squarcione, Jacopo","Mantegna, Andrea",0.3333333333333333,[280],['418'],['2']
-"Bellini, Gentile","Vivarino, Luigi",0.3333333333333333,[179],['259'],['2']
-"Francesca, Piero della (Piero Borghese, or Piero dal Borgo a San Sepolcro)","Angelo, Lorentino d'",0.3333333333333333,"[23, 22]","['35', '31']","['2', '2']"
-"San Gallo, Giuliano da","San Gallo, Antonio da (the elder)",0.3333333333333333,"[202, 198, 199]","['273', '262', '264']","['3', '3', '3']"
-"Licinio, Giovanni Antonio (Cuticello, or Pordenone)","Vaga, Perino del (Perino Buonaccorsi, or de' Ceri)",0.3333333333333333,[153],['226'],['4']
-Franciabigio (Francia),"Pontormo, Jacopo da (Jacopo Carrucci)",0.3333333333333333,"[104, 221]","['149', '312']","['4', '4']"
-"Cosini, Silvio (Silvio da Fiesole)","Fiesole, Andrea da (Andrea Ferrucci)",0.3333333333333333,[8],['9'],['4']
-"Pisano, Giovanni","Pisano, Niccola",0.2857142857142857,"[36, 37]","['126', '127']","['0', '0']"
-"Tafi, Andrea","Gaddi, Gaddo",0.2857142857142857,[56],['167'],['0']
-"Pisano, Nino","Pisano, Andrea",0.2857142857142857,[131],['278'],['0']
-"Maiano, Giuliano da","Maiano, Benedetto da",0.2857142857142857,"[14, 13]","['20', '18']","['2', '2']"
-"Ghirlandajo, Domenico","Mainardi, Bastiano (Bastiano da San Gimignano)",0.2857142857142857,"[233, 231]","['342', '339']","['2', '2']"
-"Romano, Paolo","Lotti, Lorenzetto (Lorenzo)",0.2857142857142857,[57],['72'],['4']
-"Gozzoli, Benozzo","Forlï¿½, Melozzo da",0.2857142857142857,[124],['181'],['2']
-"Viniziano, Domenico (Domenico da Venezia)","Messina, Antonello da",0.2857142857142857,[63],['88'],['2']
-"Vecelli, Tiziano (Tiziano da Cadore)","Vaga, Perino del (Perino Buonaccorsi, or de' Ceri)",0.2857142857142857,[153],['226'],['4']
-"Cosimo, Andrea di (Andrea di Cosimo Feltrini)","Francesco, Mariotto di",0.2857142857142857,[232],['328'],['4']
-"Cosimo, Andrea di (Andrea di Cosimo Feltrini)",Tribolo (Niccolï¿½),0.2857142857142857,[233],['330'],['4']
-"Albertinelli, Mariotto",Visino,0.2857142857142857,[171],['225'],['3']
-"Sogliani, Giovanni Antonio","Vaga, Perino del (Perino Buonaccorsi, or de' Ceri)",0.2857142857142857,[162],['237'],['4']
-"Buffalmacco, Buonamico","Giovanni, Bruno di",0.26666666666666666,"[148, 145]","['298', '293']","['0', '0']"
-"Cimabue, Giovanni","Tafi, Andrea",0.26666666666666666,"[56, 50]","['167', '158']","['0', '0']"
-"Pisano, Andrea","Pisano, Tommaso",0.25,[130],['275'],['0']
-"Quercia, Jacopo della (Jacopo della Fonte)",Matteo (of Lucca),0.25,[97],['105'],['1']
-"Ghiberti, Bartoluccio","Pollaiuolo, Antonio",0.25,[237],['346'],['2']
-"Maiano, Benedetto da","Cronaca, Il (Simone del Pollaiuolo)",0.25,"[260, 267]","['385', '372']","['2', '3']"
-"Botticelli, Sandro (Sandro di Botticello, or Alessandro Filipepi)",Biagio (pupil of Botticelli),0.25,[252],['372'],['2']
-"Botticelli, Sandro (Sandro di Botticello, or Alessandro Filipepi)",Apelles,0.25,[254],['376'],['2']
-"Pecori, Domenico","Marcilla, Guglielmo da (Guillaume de Marcillac)",0.25,[257],['358'],['3']
-"Cosimo, Andrea di (Andrea di Cosimo Feltrini)","Feltro, Morto da",0.25,[228],['319'],['4']
-"San Marco, Fra Bartolommeo di (Baccio della Porta)","Sogliani, Giovanni Antonio",0.25,[160],['233'],['4']
-"Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.25,[237],['328'],['3']
-"Credi, Lorenzo di","Lunetti, Tommaso di Stefano",0.25,[52],['68'],['4']
-"Credi, Lorenzo di","Credi, Maestro",0.25,[49],['61'],['4']
-"San Gimignano, Vincenzio da (Vincenzio Tamagni)","Urbino, Timoteo da (Timoteo della Vite)",0.25,[11],['12'],['4']
-"Verrocchio, Andrea","Vinci, Leonardo da",0.23529411764705882,"[271, 90, 92, 50]","['402', '107', '109', '63']","['2', '3', '3', '4']"
-Giotto,"Cimabue, Giovanni",0.22727272727272727,"[8, 94, 72, 9, 50]","['81', '218', '189', '88', '158']","['0', '0', '0', '0', '0']"
-"Sarto, Andrea del (Andrea d' Agnolo)",Franciabigio (Francia),0.22727272727272727,"[87, 220, 89, 104, 221]","['118', '309', '122', '149', '312']","['4', '4', '4', '4', '4']"
-"Robbia, Luca della","Robbia, Agostino della",0.2222222222222222,[125],['135'],['1']
-"Aretino, Spinello","Daddi, Bernardo",0.2222222222222222,[25],['25'],['1']
-"Rosselli, Cosimo","Cosimo, Andrea di (Andrea di Cosimo Feltrini)",0.2222222222222222,[189],['281'],['2']
-"Albertinelli, Mariotto","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.2222222222222222,[166],['215'],['3']
-"Ghirlandajo, Ridolfo","Credi, Lorenzo di",0.2222222222222222,[280],['383'],['3']
-"Ghirlandajo, Domenico","Botticelli, Sandro (Sandro di Botticello, or Alessandro Filipepi)",0.21052631578947367,"[248, 222]","['366', '327']","['2', '2']"
-"Brunelleschi, Filippo (Filippo di Ser Brunellesco)",Donato (Donatello),0.2,"[204, 241, 201, 203, 200, 243]","['231', '269', '228', '230', '227', '270']","['1', '1', '1', '1', '1', '1']"
-"Donzello, Polito del","Maiano, Benedetto da",0.2,[14],['20'],['2']
-"Maiano, Benedetto da","Tasso, Domenico del",0.2,[262],['388'],['2']
-"Bellini, Giovanni","Vivarino, Luigi",0.2,[179],['259'],['2']
-"Bellini, Giovanni","Carpaccio (Scarpaccia), Vittore",0.2,[58],['67'],['3']
-"Vecelli, Tiziano (Tiziano da Cadore)","Lombardi, Alfonso",0.2,[134],['196'],['4']
-"Cosimo, Piero di","Barile, Gian (of Florence)",0.2,[86],['117'],['4']
-Torrigiano,"Credi, Lorenzo di",0.2,[186],['240'],['3']
-"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.19607843137254902,"[86, 201, 217, 215, 214]","['91', '228', '242', '241', '240']","['1', '1', '1', '1', '1']"
-"Pisano, Giovanni",Agostino (of Siena),0.18181818181818182,[98],['225'],['0']
-"Aretino, Spinello","Casentino, Jacopo di",0.18181818181818182,[25],['25'],['1']
-"Bellini, Jacopo","Bellini, Giovanni",0.18181818181818182,[174],['252'],['2']
-Franciabigio (Francia),"Francesco, Mariotto di",0.18181818181818182,[232],['328'],['4']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Bartoluccio",0.17391304347826086,"[144, 145]","['157', '159']","['1', '1']"
-"Rosselli, Cosimo","Cosimo, Piero di",0.16666666666666666,[126],['159'],['3']
-"Peruzzi, Baldassarre (Baldassarre da Siena)","Tozzo, Antonio del (Antonio del Rozzo)",0.16666666666666666,[73],['101'],['4']
-"Peruzzi, Baldassarre (Baldassarre da Siena)",Vitruvius,0.16666666666666666,[71],['96'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.16129032258064516,"[237, 77, 78, 108, 79]","['328', '104', '105', '157', '108']","['3', '4', '4', '4', '4']"
-"Pisano, Giovanni",Agnolo (of Siena),0.15384615384615385,[98],['225'],['0']
-"Gaddi, Taddeo","Gaddi, Agnolo",0.15384615384615385,[218],['408'],['0']
-"Viniziano, Antonio","Bellini, Giovanni",0.15384615384615385,[176],['256'],['2']
-"Ghirlandajo, Domenico","Ghirlandajo, David",0.15384615384615385,[231],['339'],['2']
-"Vasari, Lazzaro (the elder)","Francesca, Piero della (Piero Borghese, or Piero dal Borgo a San Sepolcro)",0.15384615384615385,[52],['76'],['2']
-"Verrocchio, Andrea",Orsino,0.15384615384615385,[276],['413'],['2']
-"Mazzuoli, Francesco (Parmigiano)","Trento, Antonio da (Antonio Fantuzzi)",0.15384615384615385,[250],['349'],['4']
-"Buonarroti, Michelagnolo","San Gallo, Giuliano da",0.14814814814814814,"[145, 201]","['189', '271']","['3', '3']"
-"Buonarroti, Michelagnolo","Sanzio, Raffaello (Raffaello da Urbino)",0.14492753623188406,"[242, 223, 201, 245, 244]","['337', '303', '271', '339', '338']","['3', '3', '3', '3', '3']"
-"Cimabue, Giovanni","Gaddi, Gaddo",0.14285714285714285,[56],['167'],['0']
-"Robbia, Luca della","Spinelli, Parri",0.14285714285714285,[175],['200'],['1']
-"Bellini, Giovanni","Vecelli, Tiziano (Tiziano da Cadore)",0.14285714285714285,[183],['265'],['2']
-"Contucci, Andrea (Andrea Sansovino)","Montelupo, Raffaello da",0.14285714285714285,[43],['53'],['4']
-"Buonarroti, Michelagnolo","Urbino, Bramante da",0.13793103448275862,"[223, 145]","['303', '189']","['3', '3']"
-"Vinci, Leonardo da","Credi, Lorenzo di",0.13793103448275862,"[50, 49]","['63', '61']","['4', '4']"
-Donato (Donatello),"Banco, Nanni d' Antonio di",0.13333333333333333,"[114, 115]","['121', '122']","['1', '1']"
-"Buonarroti, Michelagnolo","Indaco, Jacopo dell'",0.13333333333333333,[66],['80'],['3']
-"Ghirlandajo, Domenico",Gherardo (of Florence),0.13333333333333333,[213],['316'],['2']
-"Urbino, Bramante da","San Gallo, Giuliano da",0.13333333333333333,"[145, 200]","['189', '268']","['3', '3']"
-"San Gallo, Giuliano da","Giamberti, Francesco",0.13333333333333333,[191],['246'],['3']
-"Contucci, Andrea (Andrea Sansovino)","Montelupo, Baccio da",0.13333333333333333,[43],['53'],['4']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",Donato (Donatello),0.1276595744680851,"[147, 201, 270]","['162', '228', '401']","['1', '1', '2']"
-"Uccello, Paolo",Masaccio,0.125,[184],['209'],['1']
-"Buonarroti, Michelagnolo",Torrigiano,0.125,[186],['240'],['3']
-"Buonarroti, Michelagnolo","Montelupo, Raffaello da",0.125,[44],['55'],['4']
-"Cosimo, Andrea di (Andrea di Cosimo Feltrini)",Franciabigio (Francia),0.125,[232],['328'],['4']
-"Buffalmacco, Buonamico","Orcagna, Andrea di Cione",0.11764705882352941,[191],['371'],['0']
-"Buonarroti, Michelagnolo","Signorelli, Luca (Luca da Cortona)",0.11764705882352941,[74],['87'],['3']
-"Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)","Luigi, Andrea (L' Ingegno)",0.11764705882352941,[47],['51'],['3']
-"Urbino, Bramante da","Dï¿½rer, Albrecht",0.11764705882352941,[232],['319'],['3']
-"Urbino, Bramante da",Ventura,0.11764705882352941,[148],['193'],['3']
-"Buonarroti, Michelagnolo","Vinci, Leonardo da",0.11428571428571428,"[104, 242]","['133', '337']","['3', '3']"
-"Sanzio, Raffaello (Raffaello da Urbino)","Urbino, Bramante da",0.1111111111111111,"[223, 237, 232, 143]","['303', '328', '319', '186']","['3', '3', '3', '3']"
-"Urbino, Bramante da","Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)",0.1111111111111111,[237],['328'],['3']
-"Urbino, Bramante da","Claudio, Maestro",0.1111111111111111,[254],['351'],['3']
-"Sarto, Andrea del (Andrea d' Agnolo)","Pontormo, Jacopo da (Jacopo Carrucci)",0.1111111111111111,"[104, 221]","['149', '312']","['4', '4']"
-Giotto,"Tafi, Andrea",0.10810810810810811,"[51, 50]","['162', '158']","['0', '0']"
-Donato (Donatello),"Uccello, Paolo",0.10810810810810811,"[140, 139]","['154', '152']","['1', '1']"
-Stefano,Giotto,0.10526315789473684,"[111, 113]","['246', '251']","['0', '0']"
-"Verrocchio, Andrea","Credi, Lorenzo di",0.10526315789473684,[50],['63'],['4']
-Giotto,"Pisano, Andrea",0.10256410256410256,"[126, 124]","['267', '266']","['0', '0']"
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Panicale, Masolino da",0.1,[171],['194'],['1']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Vittorio",0.1,[162],['185'],['1']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Bonaccorso",0.1,[160],['181'],['1']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",Polycletus,0.1,[160],['181'],['1']
-"Buonarroti, Michelagnolo","Credi, Lorenzo di",0.1,[186],['240'],['3']
-Giotto,"Gaddi, Taddeo",0.0975609756097561,"[186, 185]","['364', '361']","['0', '0']"
-"Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)","Pinturicchio, Bernardino",0.09523809523809523,[46],['50'],['3']
-"Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)","Lippi, Filippo (Filippino)",0.09090909090909091,[44],['47'],['3']
-"Urbino, Bramante da","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.09090909090909091,[237],['328'],['3']
-"Urbino, Bramante da","Marcilla, Guglielmo da (Guillaume de Marcillac)",0.09090909090909091,[254],['351'],['3']
-"Vinci, Leonardo da",Salai,0.08695652173913043,[99],['124'],['3']
-"Vinci, Leonardo da","Credi, Maestro",0.08695652173913043,[49],['61'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.08333333333333333,"[242, 45, 211]","['337', '48', '282']","['3', '3', '3']"
-"Pisano, Andrea","Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.08,[154],['174'],['1']
-"Vinci, Leonardo da","Lippi, Filippo (Filippino)",0.07142857142857142,[100],['127'],['3']
-"Buonarroti, Michelagnolo","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.06896551724137931,[242],['337'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Modena, Pellegrino da (Pellegrino degli Aretusi, or de' Munari)",0.06779661016949153,"[80, 80]","['110', '111']","['4', '4']"
-Donato (Donatello),Simone (brother of Donatello),0.06666666666666667,[251],['278'],['1']
-Donato (Donatello),"Padova, Vellano da",0.06666666666666667,[74],['108'],['2']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Verrocchio, Andrea",0.06451612903225806,[270],['401'],['2']
-"Vinci, Leonardo da","Cosimo, Piero di",0.06451612903225806,[127],['161'],['3']
-"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Buonarroti, Michelagnolo",0.0625,[159],['179'],['1']
-Giotto,"Capanna, Puccio",0.058823529411764705,[91],['212'],['0']
-Giotto,"Laurati, Pietro (Pietro Lorenzetti)",0.05714285714285714,[117],['257'],['0']
-Donato (Donatello),Michelozzo Michelozzi,0.05714285714285714,[260],['292'],['1']
-"Sarto, Andrea del (Andrea d' Agnolo)","Barile, Gian (of Florence)",0.05714285714285714,[86],['117'],['4']
-"Sarto, Andrea del (Andrea d' Agnolo)","Conti, Domenico",0.05714285714285714,[119],['177'],['4']
-"Sarto, Andrea del (Andrea d' Agnolo)","Salviati, Francesco (Francesco de' Rossi)",0.05714285714285714,[119],['177'],['4']
-"Sarto, Andrea del (Andrea d' Agnolo)","Agnolo, Baccio d' (Baccio Baglioni)",0.05714285714285714,[91],['125'],['4']
-Giotto,"Cavallini, Pietro",0.05555555555555555,[162],['315'],['0']
-"Robbia, Luca della",Donato (Donatello),0.05555555555555555,[121],['128'],['1']
-"Vinci, Leonardo da","San Gallo, Giuliano da",0.05555555555555555,[196],['258'],['3']
-"Sarto, Andrea del (Andrea d' Agnolo)","Ghirlandajo, Ridolfo",0.05555555555555555,[281],['384'],['3']
-"Sarto, Andrea del (Andrea d' Agnolo)","Sansovino, Jacopo (Jacopo Tatti)",0.05555555555555555,[98],['139'],['4']
-"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Maiano, Giuliano da",0.05405405405405406,[12],['16'],['2']
-Giotto,"Gaddi, Agnolo",0.05263157894736842,[222],['412'],['0']
-"Vinci, Leonardo da","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.05263157894736842,[242],['337'],['3']
-"Vinci, Leonardo da","Sanzio, Raffaello (Raffaello da Urbino)",0.05128205128205128,"[242, 212]","['337', '285']","['3', '3']"
-"Sarto, Andrea del (Andrea d' Agnolo)","Sogliani, Giovanni Antonio",0.05128205128205128,[164],['239'],['4']
-Donato (Donatello),"Verrocchio, Andrea",0.05,[270],['401'],['2']
-"Romano, Giulio (Giulio Pippi de' Giannuzzi)","Sarto, Andrea del (Andrea d' Agnolo)",0.05,[108],['157'],['4']
-"Cosimo, Piero di","Sarto, Andrea del (Andrea d' Agnolo)",0.046511627906976744,[86],['117'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)",Baviera,0.03508771929824561,[233],['321'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Bolognese, Marc' Antonio (Marc' Antonio Raimondi, or de' Franci)",0.03508771929824561,[233],['321'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Dï¿½rer, Albrecht",0.03508771929824561,[232],['319'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Barile, Gian (Giovan)",0.03508771929824561,[238],['330'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)",Fivizzano,0.03508771929824561,[29],['28'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Pistoia, Il (Leonardo)",0.03508771929824561,[80],['110'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)",0.034482758620689655,[237],['328'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Bagnacavallo, Bartolommeo da (Bartolommeo Ramenghi)",0.034482758620689655,[208],['291'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.03389830508474576,[215],['292'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","San Gimignano, Vincenzio da (Vincenzio Tamagni)",0.03389830508474576,[12],['13'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Francia, Francesco",0.03333333333333333,[29],['28'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Lotti, Lorenzetto (Lorenzo)",0.03333333333333333,[56],['71'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Urbino, Timoteo da (Timoteo della Vite)",0.03278688524590164,[15],['17'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Mazzuoli, Francesco (Parmigiano)",0.029411764705882353,[247],['343'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","Rosso, Il (Giovan Battista de' Rossi)",0.028985507246376812,[194],['271'],['4']
-"Sanzio, Raffaello (Raffaello da Urbino)","San Gallo, Giuliano da",0.02857142857142857,[201],['271'],['3']
-"Sanzio, Raffaello (Raffaello da Urbino)","Sarto, Andrea del (Andrea d' Agnolo)",0.022222222222222223,[108],['157'],['4']
+artist1,artist2,dice_coefficient,pages,paragraphs,volume,dice_acitivty,start,end
+Duccio,Moccio,1.0,[10],['7.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Lorenzo, Neri di","Montepulciano, Marco da",1.0,[72],['58.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Cristofano,Simone,1.0,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Cristofano,"Galassi, Galasso (Galasso Ferrarese)",1.0,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Simone,"Galassi, Galasso (Galasso Ferrarese)",1.0,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Camicia, Chimenti","Linaiuolo, Berto",1.0,[92],['104.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ammanati, Bartolommeo","Bandinelli, Baccio (Baccio de' Brandini)",1.0,[274],['378.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bolognese, Biagio (Biagio Pupini)","Cotignola, Girolamo da (Girolamo Marchesi)",1.0,[211],['298.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Agostino (of Siena),Agnolo (of Siena),0.8,"[97, 99]","['129.0', '131.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Tedesco, Jacopo (Lapo)",Buono,0.6666666666666666,[14],['17.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Colle, Simone da (Simone de' Bronzi)","Valdambrina, Francesco di",0.6666666666666666,[200],['180.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Polycletus,"Ghiberti, Bonaccorso",0.6666666666666666,[160],['143.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Cristofano,"Avanzi, Jacopo (Jacopo Davanzo)",0.6666666666666666,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Avanzi, Jacopo (Jacopo Davanzo)",Simone,0.6666666666666666,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Avanzi, Jacopo (Jacopo Davanzo)","Galassi, Galasso (Galasso Ferrarese)",0.6666666666666666,[104],['82.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Avanzi, Jacopo (Jacopo Davanzo)","Verona, Sebeto da",0.6666666666666666,[55],['61.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cellini, Baccio","Camicia, Chimenti",0.6666666666666666,[92],['104.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cellini, Baccio","Linaiuolo, Berto",0.6666666666666666,[92],['104.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Settignano, Desiderio da","Fiesole, Mino da (Mino di Giovanni,",0.6666666666666666,"[154, 155]","['168.0', '170.0']","['2', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Zevio, Aldigieri (Altichiero) da","Verona, Sebeto da",0.6666666666666666,[55],['61.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Dossi, Dosso","Dossi, Battista",0.6666666666666666,"[141, 140]","['207.0', '205.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bicci, Lorenzo di","Lorenzo, Neri di",0.5,[72],['58.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bicci, Lorenzo di","Montepulciano, Marco da",0.5,[72],['58.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Avanzi, Jacopo (Jacopo Davanzo)","Zevio, Aldigieri (Altichiero) da",0.5,[55],['61.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Messina, Antonello da","Eyck, Jan van (Johann of Bruges)",0.5,[62],['68.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Nola, Giovanni da","Santa Croce, Girolamo",0.5,[137],['200.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Licinio, Giovanni Antonio (Cuticello, or Pordenone)","Amalteo, Pomponio",0.5,[154],['228.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Castagno, Andrea dal (Andrea degli Impiccati)","Viniziano, Domenico (Domenico da Venezia)",0.4444444444444444,"[101, 101, 104, 103]","['112.0', '113.0', '117.0', '116.0']","['2', '2', '2', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Maturino,"Caravaggio, Polidoro da (Polidoro Caldara)",0.4444444444444444,"[182, 176]","['257.0', '248.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Memmi, Simone (Simone Martini, or Sanese)","Memmi, Lippo",0.4,"[172, 173, 174]","['220.0', '223.0', '224.0']","['0', '0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bologhini, Bartolommeo","Laurati, Pietro (Pietro Lorenzetti)",0.4,[120],['161.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Bartoluccio","Colle, Simone da (Simone de' Bronzi)",0.4,[146],['123.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Filarete, Antonio","Partigiani, Pagno di Lapo",0.4,[270],['249.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Filarete, Antonio","Ciuffagni, Bernardo",0.4,[7],['7.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Romano, Paolo","Mino, Maestro (Mino del Regno, or del Reame)",0.4,[91],['101.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Marcilla, Guglielmo da (Guillaume de Marcillac)","Claudio, Maestro",0.4,"[255, 254]","['354.0', '352.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)","Feltro, Morto da",0.4,[229],['323.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Licinio, Giovanni Antonio (Cuticello, or Pordenone)","Vaga, Perino del (Perino Buonaccorsi, or de' Ceri)",0.4,[153],['226.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Fiesole, Andrea da (Andrea Ferrucci)","Marchissi, Antonio di Giorgio",0.4,[4],['2.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Mantegna, Andrea","Squarcione, Jacopo",0.36363636363636365,"[280, 280]","['329.0', '328.0']","['2', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Orcagna, Jacopo di Cione","Orcagna, Andrea di Cione",0.3333333333333333,[194],['257.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Orcagna, Andrea di Cione","Orcagna, Bernardo di Cione",0.3333333333333333,[190],['250.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cavallini, Pietro","Angelico, Fra (Fra Giovanni da Fiesole)",0.3333333333333333,[162],['204.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Margaritone,"Tedesco, Jacopo (Lapo)",0.3333333333333333,[65],['90.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Giuliano da","Maiano, Benedetto da",0.3333333333333333,"[13, 14, 14]","['12.0', '13.0', '14.0']","['2', '2', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ferrarese, Ercole (Ercole da Ferrara)","Bolognese, Guido",0.3333333333333333,[170],['186.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vasari, Lazzaro (the elder)","Vasari, Giorgio (son of Lazzaro Vasari, the elder)",0.3333333333333333,[54],['61.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Romano, Paolo","Lotti, Lorenzetto (Lorenzo)",0.3333333333333333,[56],['71.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Gaddi, Agnolo","Gaddi, Giovanni",0.2857142857142857,[217],['279.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bellini, Gentile","Vivarino, Luigi",0.2857142857142857,[178],['195.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pollaiuolo, Antonio","Pollaiuolo, Piero",0.2857142857142857,[240],['273.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Giovanni",Agostino (of Siena),0.26666666666666666,"[98, 97]","['130.0', '129.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Tafi, Andrea",Apollonio,0.25,[49],['73.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Casentino, Jacopo di","Daddi, Bernardo",0.25,[25],['15.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Michelozzo Michelozzi,"Partigiani, Pagno di Lapo",0.25,[270],['249.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Giuliano da","Donzello, Polito del",0.25,[14],['14.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Viniziano, Domenico (Domenico da Venezia)","Messina, Antonello da",0.25,[63],['69.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bellini, Gentile","Squarcione, Jacopo",0.25,[280],['329.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cosimo, Andrea di (Andrea di Cosimo Feltrini)",Tribolo (Niccolï¿½),0.25,[232],['329.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Albertinelli, Mariotto",Visino,0.25,[170],['225.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vecelli, Tiziano (Tiziano da Cadore)","Lombardi, Alfonso",0.25,[133],['195.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Niccola",Fuccio,0.2222222222222222,[30],['37.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.2222222222222222,"[200, 201, 213, 214, 201, 216, 234, 204]","['180.0', '181.0', '192.0', '193.0', '182.0', '194.0', '211.0', '184.0']","['1', '1', '1', '1', '1', '1', '1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Bartoluccio","Pollaiuolo, Antonio",0.2222222222222222,[237],['268.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.2222222222222222,[165],['215.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Romano, Giulio (Giulio Pippi de' Giannuzzi)","Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)",0.2222222222222222,[237],['329.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Francia, Francesco",Fivizzano,0.2222222222222222,[29],['29.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"San Gimignano, Vincenzio da (Vincenzio Tamagni)","Urbino, Timoteo da (Timoteo della Vite)",0.2222222222222222,[11],['11.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Cimabue, Giovanni",0.21875,"[50, 8, 8, 74, 94, 8, 72]","['74.0', '12.0', '8.0', '97.0', '125.0', '13.0', '95.0']","['0', '0', '0', '0', '0', '0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Niccola","Pisano, Giovanni",0.2,"[35, 36]","['45.0', '46.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Viniziano, Antonio","Starnina, Gherardo",0.2,[43],['34.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Casentino, Jacopo di","Aretino, Spinello",0.2,"[29, 25]","['19.0', '15.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Botticelli, Sandro (Sandro di Botticello, or Alessandro Filipepi)",Biagio (pupil of Botticelli),0.2,[251],['288.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ferrarese, Ercole (Ercole da Ferrara)","Costa, Lorenzo",0.2,[168],['182.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cosimo, Andrea di (Andrea di Cosimo Feltrini)","Feltro, Morto da",0.2,[228],['320.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pecori, Domenico","Marcilla, Guglielmo da (Guillaume de Marcillac)",0.2,[257],['358.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Albertinelli, Mariotto","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.2,[165],['215.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sogliani, Giovanni Antonio","Lunetti, Tommaso di Stefano",0.2,[51],['67.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Montelupo, Raffaello da","Montelupo, Baccio da",0.2,[43],['53.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)",Franciabigio (Francia),0.19672131147540983,"[91, 86, 220, 221, 88, 219]","['126.0', '117.0', '310.0', '311.0', '121.0', '308.0']","['4', '4', '4', '4', '4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"San Gallo, Giuliano da","San Gallo, Antonio da (the elder)",0.1935483870967742,"[198, 199, 201]","['263.0', '267.0', '273.0']","['3', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buffalmacco, Buonamico","Giovanni, Bruno di",0.19047619047619047,"[147, 145]","['192.0', '188.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bellini, Giovanni","Bellini, Gentile",0.19047619047619047,"[178, 181]","['195.0', '199.0']","['2', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)",Donato (Donatello),0.1891891891891892,"[200, 240, 201, 201, 200, 203, 204]","['180.0', '220.0', '181.0', '182.0', '179.0', '183.0', '184.0']","['1', '1', '1', '1', '1', '1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",Donato (Donatello),0.18181818181818182,"[200, 201, 201, 146, 204, 269]","['180.0', '181.0', '182.0', '123.0', '184.0', '312.0']","['1', '1', '1', '1', '1', '2']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Robbia, Luca della","Robbia, Agostino della",0.18181818181818182,[125],['101.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Michelozzo Michelozzi,"Filarete, Antonio",0.18181818181818182,[270],['249.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pollaiuolo, Antonio","Cronaca, Il (Simone del Pollaiuolo)",0.18181818181818182,[265],['370.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Correggio, Antonio da","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.18181818181818182,[120],['151.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sogliani, Giovanni Antonio","Vaga, Perino del (Perino Buonaccorsi, or de' Ceri)",0.18181818181818182,[162],['236.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Francesca, Piero della (Piero Borghese, or Piero dal Borgo a San Sepolcro)","Angelo, Lorentino d'",0.16666666666666666,[22],['24.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Benedetto da","Tasso, Domenico del",0.16666666666666666,[261],['301.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Benedetto da","Donzello, Polito del",0.16666666666666666,[14],['14.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.16666666666666666,"[247, 237, 78, 77, 108, 78]","['342.0', '329.0', '107.0', '103.0', '156.0', '106.0']","['3', '3', '4', '4', '4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Credi, Lorenzo di","Credi, Maestro",0.16666666666666666,[49],['60.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cimabue, Giovanni","Tafi, Andrea",0.16,"[56, 47]","['79.0', '70.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Montelupo, Raffaello da",0.16,"[44, 43]","['55.0', '54.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,Stefano,0.1568627450980392,"[112, 110, 111, 109]","['153.0', '148.0', '149.0', '147.0']","['0', '0', '0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Andrea","Pisano, Nino",0.15384615384615385,[130],['175.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Andrea","Pisano, Tommaso",0.15384615384615385,[130],['174.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Benedetto da","Cellini, Baccio",0.15384615384615385,[264],['306.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo","Cosimo, Andrea di (Andrea di Cosimo Feltrini)",0.15384615384615385,[189],['216.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo","Albertinelli, Mariotto",0.15384615384615385,[165],['215.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cosimo, Piero di","Barile, Gian (of Florence)",0.15384615384615385,[85],['116.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Giovanni",Agnolo (of Siena),0.14285714285714285,[97],['129.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Aretino, Spinello","Daddi, Bernardo",0.14285714285714285,[25],['15.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Torrigiano,"Credi, Lorenzo di",0.14285714285714285,[186],['241.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Ridolfo","Credi, Lorenzo di",0.14285714285714285,[280],['383.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","San Gallo, Giuliano da",0.13333333333333333,"[145, 201, 201]","['189.0', '271.0', '272.0']","['3', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Verrocchio, Andrea","Vinci, Leonardo da",0.13333333333333333,"[271, 90, 92]","['315.0', '107.0', '111.0']","['2', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Francesca, Piero della (Piero Borghese, or Piero dal Borgo a San Sepolcro)","Vasari, Lazzaro (the elder)",0.13333333333333333,[51],['58.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Castagno, Andrea dal (Andrea degli Impiccati)",Pesello,0.13333333333333333,[117],['130.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Domenico","Ghirlandajo, David",0.13333333333333333,[230],['262.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Domenico","Mainardi, Bastiano (Bastiano da San Gimignano)",0.13333333333333333,[232],['265.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Mantegna, Andrea","Bellini, Gentile",0.13333333333333333,[280],['329.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Franciabigio (Francia),"Pontormo, Jacopo da (Jacopo Carrucci)",0.13333333333333333,[221],['311.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Peruzzi, Baldassarre (Baldassarre da Siena)","Siena, Michelagnolo da",0.13333333333333333,[136],['199.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Peruzzi, Baldassarre (Baldassarre da Siena)",Vitruvius,0.13333333333333333,[70],['95.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Peruzzi, Baldassarre (Baldassarre da Siena)","San Gallo, Antonio da (the younger)",0.13333333333333333,[72],['100.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bellini, Giovanni","Vivarino, Luigi",0.125,[178],['195.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Bellini, Giovanni","Ravenna, Rondinello da (Niccolï¿½ Rondinello)",0.125,[264],['369.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Maiano, Benedetto da","Cronaca, Il (Simone del Pollaiuolo)",0.125,[266],['372.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Colle, Simone da (Simone de' Bronzi)",0.11764705882352941,"[200, 146]","['180.0', '123.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Bonaccorso",0.11764705882352941,"[160, 160]","['143.0', '144.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Sanzio, Raffaello (Raffaello da Urbino)",0.11764705882352941,"[242, 244, 243, 223, 201]","['337.0', '339.0', '338.0', '304.0', '272.0']","['3', '3', '3', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Verrocchio, Andrea",Orsino,0.11764705882352941,[275],['324.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Domenico",Gherardo (of Florence),0.11764705882352941,[213],['243.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Domenico","Ghirlandajo, Ridolfo",0.11764705882352941,[280],['383.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.11627906976744186,"[44, 242, 211, 211, 210]","['48.0', '337.0', '283.0', '284.0', '282.0']","['3', '3', '3', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Bartoluccio",0.11428571428571428,"[144, 146]","['119.0', '123.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Colle, Simone da (Simone de' Bronzi)",0.1111111111111111,"[200, 146]","['180.0', '123.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Banco, Nanni d' Antonio di",0.1111111111111111,"[113, 114]","['89.0', '90.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Robbia, Luca della","Spinelli, Parri",0.1111111111111111,[174],['157.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo","Cosimo, Piero di",0.1111111111111111,[125],['159.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Uccello, Paolo",Masaccio,0.10526315789473684,[184],['163.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo",Franciabigio (Francia),0.10526315789473684,[88],['121.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cosimo, Andrea di (Andrea di Cosimo Feltrini)",Franciabigio (Francia),0.1,[232],['328.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","Credi, Lorenzo di",0.1,"[49, 50]","['61.0', '63.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.0975609756097561,"[242, 43]","['337.0', '47.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Spinelli, Parri","Aretino, Spinello",0.09523809523809523,[178],['162.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Montelupo, Raffaello da","Contucci, Andrea (Andrea Sansovino)",0.09523809523809523,[43],['53.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Montelupo, Baccio da","Contucci, Andrea (Andrea Sansovino)",0.09523809523809523,[43],['53.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Urbino, Bramante da",0.09302325581395349,"[145, 223]","['189.0', '304.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cimabue, Giovanni",Margaritone,0.09090909090909091,[63],['89.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Andrea","Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.09090909090909091,"[147, 154]","['124.0', '136.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Gaddi, Taddeo","Gaddi, Agnolo",0.09090909090909091,[217],['280.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Verrocchio, Andrea","Castelfranco, Giorgione da",0.09090909090909091,[112],['144.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Urbino, Bramante da",0.09090909090909091,"[232, 143, 223, 237]","['320.0', '186.0', '304.0', '329.0']","['3', '3', '3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)","Santi, Giovanni de'",0.09090909090909091,[210],['282.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)","Luigi, Andrea (L' Ingegno)",0.09090909090909091,[47],['52.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Gaddi, Taddeo","Casentino, Jacopo di",0.08695652173913043,[23],['12.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Uccello, Paolo",0.08695652173913043,"[138, 139]","['114.0', '116.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.08695652173913043,[244],['339.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Indaco, Jacopo dell'",0.08695652173913043,[66],['81.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo",Torrigiano,0.08695652173913043,[186],['241.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Cosini, Silvio (Silvio da Fiesole)",0.08695652173913043,[6],['6.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Lapo, Arnolfo di (Arnolfo Lapi)","Brunelleschi, Filippo (Filippo di Ser Brunellesco)",0.0851063829787234,"[25, 22]","['31.0', '27.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Orcagna, Andrea di Cione","Buffalmacco, Buonamico",0.08333333333333333,[190],['251.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"San Gallo, Giuliano da","Urbino, Bramante da",0.08333333333333333,"[202, 145]","['274.0', '189.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Dï¿½rer, Albrecht",0.08333333333333333,[232],['320.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da",Ventura,0.08333333333333333,[147],['193.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Vinci, Leonardo da",0.08163265306122448,"[242, 104]","['337.0', '134.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Lippi, Filippo (Filippino)",0.08,[43],['47.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Cronaca, Il (Simone del Pollaiuolo)",0.08,[270],['376.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Domenico","Credi, Lorenzo di",0.08,[280],['383.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Claudio, Maestro",0.08,[254],['352.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)",0.08,[237],['329.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Pontormo, Jacopo da (Jacopo Carrucci)",0.08,"[221, 104]","['311.0', '148.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Gaddi, Gaddo",0.07692307692307693,"[177, 57]","['229.0', '83.0']","['0', '0']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buffalmacco, Buonamico","Tafi, Andrea",0.07692307692307693,[136],['178.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Signorelli, Luca (Luca da Cortona)",0.07692307692307693,[74],['87.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Lippi, Filippo (Filippino)","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.07692307692307693,[43],['47.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Verrocchio, Andrea","Credi, Lorenzo di",0.07407407407407407,[49],['62.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Memmi, Simone (Simone Martini, or Sanese)","Gaddi, Taddeo",0.07142857142857142,[185],['243.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pisano, Andrea","Gaddi, Taddeo",0.07142857142857142,[128],['172.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Pinturicchio, Bernardino","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.06896551724137931,[45],['50.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Aretino, Spinello",0.06779661016949153,"[35, 82]","['26.0', '65.0']","['1', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da",Salai,0.06666666666666667,[99],['126.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Romano, Giulio (Giulio Pippi de' Giannuzzi)",0.06666666666666667,[237],['329.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Gaddi, Taddeo",0.06451612903225806,"[185, 23]","['246.0', '12.0']","['0', '1']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Buonarroti, Michelagnolo","Credi, Lorenzo di",0.06451612903225806,[186],['241.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Marcilla, Guglielmo da (Guillaume de Marcillac)",0.06451612903225806,[254],['352.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Valdambrina, Francesco di",0.06060606060606061,[200],['180.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",Polycletus,0.06060606060606061,[160],['143.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Ghiberti, Vittorio",0.06060606060606061,[162],['147.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Panicale, Masolino da",0.058823529411764705,[171],['152.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Lippi, Filippo (Filippino)","Vinci, Leonardo da",0.058823529411764705,[99],['127.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","San Marco, Fra Bartolommeo di (Baccio della Porta)",0.058823529411764705,"[244, 215]","['339.0', '293.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Lotti, Lorenzetto (Lorenzo)",0.058823529411764705,"[56, 56]","['71.0', '70.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Valdambrina, Francesco di",0.05714285714285714,[200],['180.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),Simone (brother of Donatello),0.05714285714285714,[251],['230.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","Castelfranco, Giorgione da",0.05714285714285714,[109],['139.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Urbino, Timoteo da (Timoteo della Vite)",0.056338028169014086,"[14, 15]","['16.0', '17.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),Pesello,0.05555555555555555,[117],['130.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Ghiberti, Bartoluccio",0.05405405405405406,[146],['123.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Padova, Vellano da",0.05405405405405406,[73],['83.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Veronese, Stefano (Stefano da Zevio)",0.05405405405405406,[52],['57.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","Pinturicchio, Bernardino",0.05405405405405406,[211],['285.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Urbino, Bramante da","Contucci, Andrea (Andrea Sansovino)",0.05128205128205128,[26],['30.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Valdambrina, Francesco di",0.04878048780487805,[200],['180.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),Michelozzo Michelozzi,0.04878048780487805,[259],['241.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","Cosimo, Piero di",0.04878048780487805,[127],['162.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Colle, Simone da (Simone de' Bronzi)",0.047619047619047616,[200],['180.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Robbia, Luca della",0.045454545454545456,[120],['93.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Cronaca, Il (Simone del Pollaiuolo)",0.044444444444444446,[266],['372.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Sanese, Ugolino (Ugolino da Siena)",0.0425531914893617,[113],['154.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Capanna, Puccio",0.0425531914893617,[90],['118.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)",Masaccio,0.0425531914893617,[190],['171.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Maiano, Giuliano da",0.0425531914893617,[12],['10.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Castagno, Andrea dal (Andrea degli Impiccati)",0.0425531914893617,[117],['130.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Vinci, Leonardo da",0.0425531914893617,"[242, 211]","['337.0', '285.0']","['3', '3']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,Agnolo (of Siena),0.041666666666666664,[99],['131.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Verrocchio, Andrea",0.041666666666666664,[269],['312.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,Agostino (of Siena),0.04081632653061224,[99],['131.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Salviati, Francesco (Francesco de' Rossi)",0.04081632653061224,[118],['176.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Conti, Domenico",0.04081632653061224,[119],['177.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Barile, Gian (of Florence)",0.04081632653061224,[85],['116.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Laurati, Pietro (Pietro Lorenzetti)",0.04,[117],['157.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Verrocchio, Andrea",0.04,[269],['312.0'],['2'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","Perugino, Pietro (Pietro Vannucci, or Pietro da Castel della Pieve)",0.04,[242],['337.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Sansovino, Jacopo (Jacopo Tatti)",0.04,[92],['127.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Cavallini, Pietro",0.0392156862745098,[161],['203.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Brunelleschi, Filippo (Filippo di Ser Brunellesco)","Maiano, Benedetto da",0.0392156862745098,[266],['372.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghirlandajo, Ridolfo","Sarto, Andrea del (Andrea d' Agnolo)",0.0392156862745098,[281],['384.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)","Buonarroti, Michelagnolo",0.038461538461538464,[159],['140.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Tafi, Andrea",0.03773584905660377,[51],['78.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Casentino, Jacopo di",0.03773584905660377,[23],['12.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Donato (Donatello),"Buonarroti, Michelagnolo",0.037037037037037035,[255],['239.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Rosselli, Cosimo","Sarto, Andrea del (Andrea d' Agnolo)",0.037037037037037035,[88],['121.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Vinci, Leonardo da","San Gallo, Giuliano da",0.037037037037037035,[195],['258.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Romano, Giulio (Giulio Pippi de' Giannuzzi)","Sarto, Andrea del (Andrea d' Agnolo)",0.03636363636363636,[108],['156.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Robbia, Luca della",0.03571428571428571,[120],['93.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Sarto, Andrea del (Andrea d' Agnolo)",0.035398230088495575,"[108, 117]","['156.0', '175.0']","['4', '4']",dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sarto, Andrea del (Andrea d' Agnolo)","Sogliani, Giovanni Antonio",0.03508771929824561,[164],['238.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Pisano, Andrea",0.034482758620689655,[126],['166.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Cosimo, Piero di","Sarto, Andrea del (Andrea d' Agnolo)",0.03333333333333333,[85],['116.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Bolognese, Marc' Antonio (Marc' Antonio Raimondi, or de' Franci)",0.030303030303030304,[232],['321.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Dï¿½rer, Albrecht",0.030303030303030304,[232],['320.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Barile, Gian (Giovan)",0.030303030303030304,[237],['330.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Santi, Giovanni de'",0.030303030303030304,[210],['282.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Udine, Giovanni da (Giovanni Nanni, or de' Ricamatori)",0.029850746268656716,[237],['329.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Bagnacavallo, Bartolommeo da (Bartolommeo Ramenghi)",0.029850746268656716,[208],['290.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Romano, Paolo","Sanzio, Raffaello (Raffaello da Urbino)",0.029411764705882353,[56],['71.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Ghirlandajo, Ridolfo",0.029411764705882353,[216],['295.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","San Gimignano, Vincenzio da (Vincenzio Tamagni)",0.029411764705882353,[11],['12.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Modena, Pellegrino da (Pellegrino degli Aretusi, or de' Munari)",0.028985507246376812,[80],['111.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Francia, Francesco",0.0273972602739726,[28],['28.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Pinturicchio, Bernardino",0.0273972602739726,[211],['285.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,"Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",0.02564102564102564,[88],['111.0'],['0'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+Giotto,Donato (Donatello),0.025,[120],['93.0'],['1'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Mazzuoli, Francesco (Parmigiano)",0.024390243902439025,[247],['343.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","Rosso, Il (Giovan Battista de' Rossi)",0.023809523809523808,[194],['270.0'],['4'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02
+"Sanzio, Raffaello (Raffaello da Urbino)","San Gallo, Giuliano da",0.022222222222222223,[201],['272.0'],['3'],dice_activity_2024-05-15,2024-05-15T11:56:01,2024-05-15T11:56:02

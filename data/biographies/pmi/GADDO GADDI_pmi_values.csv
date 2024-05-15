@@ -1,2 +1,2 @@
-Artist 1,Artist 2,PMI,Page,Paragraph,Shared_count
-"Cimabue, Giovanni","Tafi, Andrea",1.584962500721156,56,167,1
+artist1,artist2,shared_count,pmi_score,page,paragraph,activity,start,end
+"Gaddi, Gaddo",Giotto,1,0.48542682717024166,57,83,pmi_activity_biography-level_2024-05-15,2024-05-15T11:58:51,2024-05-15T11:58:51

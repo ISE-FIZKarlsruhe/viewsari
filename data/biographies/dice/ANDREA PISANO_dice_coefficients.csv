@@ -1,5 +1,5 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Pisano, Andrea",Giotto,0.5714285714285714,124,266
-"Pisano, Andrea",Giotto,0.5714285714285714,126,267
-"Pisano, Andrea","Pisano, Tommaso",0.2857142857142857,130,275
-"Pisano, Andrea","Pisano, Nino",0.3333333333333333,131,278
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Pisano, Andrea",Giotto,0.2,126,166,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Pisano, Andrea","Gaddi, Taddeo",0.2,128,172,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Pisano, Andrea","Pisano, Tommaso",0.2,130,174,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Pisano, Andrea","Pisano, Nino",0.2,130,175,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48

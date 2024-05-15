@@ -3,6 +3,7 @@ import math
 import glob
 import sys
 import re
+import datetime
 
 maxInt = sys.maxsize
 
@@ -18,9 +19,12 @@ while True:
 
 
 def main():
+    start_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     paragraph_num = 0
     name_paragraph_dict = dict()
     cooccurence_list = list()
+    dice_activity = "dice_activity_" + str(datetime.date.today())
+
 
     for file_name in sorted(glob.glob("../../data/references/*.csv")):
         with open(file_name, "r", encoding="utf-8") as f:
@@ -28,11 +32,9 @@ def main():
             data = list(data)
             file_num = re.match(r".*?(\d+).*?", file_name).group(1)
 
-        print(file_num)
+
         paragraphs_set = set([row["paragraph"] for row in data])
-        print(len(paragraphs_set))
         paragraph_num = paragraph_num + len(paragraphs_set)
-        print(paragraph_num)
         for paragraph in paragraphs_set:
             paragraph_data = [row for row in data if row["paragraph"] == paragraph]
             page_set = set(int(row["page"]) for row in paragraph_data)
@@ -77,16 +79,20 @@ def main():
                     "dice_coefficient": dice,
                     "pages": info["pages"],
                     "paragraphs": info["paragraphs"],
-                    "volume": info["volume"]
+                    "volume": info["volume"],
+                    "dice_acitivty": dice_activity
                 })
 
         sorted_output = sorted(output, key=lambda item: float(item["dice_coefficient"]), reverse=True)
         computed_pairs = set()
         new_output = []
+        end_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         for x in sorted_output:
             if (x["artist2"], x["artist1"]) in computed_pairs:
                 continue
             else:
+                x["start"] = start_time
+                x["end"] = end_time
                 new_output.append(x)
                 computed_pairs.add((x["artist1"], x["artist2"]))
         if len(new_output) > 0:

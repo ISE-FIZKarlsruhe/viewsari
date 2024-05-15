@@ -1,2 +1,4 @@
-Artist 1,Artist 2,Dice Coefficient,Page,Paragraph
-"Orcagna, Andrea di Cione","Buffalmacco, Buonamico",0.4,191,371
+artist1,artist2,dice_coefficient,page,paragraph,activity,start,end
+"Orcagna, Andrea di Cione","Orcagna, Bernardo di Cione",0.3333333333333333,190,250,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Orcagna, Andrea di Cione","Buffalmacco, Buonamico",0.3333333333333333,190,251,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
+"Orcagna, Andrea di Cione","Orcagna, Jacopo di Cione",0.3333333333333333,194,257,dice_activity_biography-level_2024-05-15,2024-05-15T11:58:48,2024-05-15T11:58:48
