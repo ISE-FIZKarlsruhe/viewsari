@@ -1,28 +1,25 @@
-@prefix : <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/> .
+@prefix : <https://ise-fizkarlsruhe.github.io/viewsari/#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix po: <http://www.essepuntato.it/2008/12/pattern#> .
+@prefix deo: <http://purl.org/spar/deo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix core: <http://purl.org/vocab/frbr/core#> .
+@prefix doco: <http://purl.org/spar/doco/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
-@prefix basic: <http://prismstandard.org/namespaces/basic/2.0/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix fabio: <http://purl.org/spar/fabio/> .
-@prefix skos: <http://www.w3.org/2008/05/skos#> .
-@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
-@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
-@prefix terms: <http://purl.org/dc/terms/> .
-@prefix pattern: <http://www.essepuntato.it/2008/12/pattern#> .
-@prefix ontology: <http://viewsari.github.io/ontology#> .
-@base <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/> .
+@prefix prism: <http://prismstandard.org/namespaces/basic/2.0/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://ise-fizkarlsruhe.github.io/viewsari/#> .
 
-<http://viewsari.github.io/ontology#> rdf:type owl:Ontology ;
-                                       rdfs:label "Viewsari Ontology" .
+<https://ise-fizkarlsruhe.github.io/viewsari/#> rdf:type owl:Ontology ;
+                                                 rdfs:label "Viewsari Ontology" .
 
 #################################################################
 #    Annotation properties
@@ -33,15 +30,26 @@ dc:description rdf:type owl:AnnotationProperty .
 
 
 ###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
-swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
-ns:term_status rdf:type owl:AnnotationProperty .
+<http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#example
+skos:example rdf:type owl:AnnotationProperty ;
+             rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+             rdfs:label "example"@en ;
+             skos:definition "An example of the use of a concept."@en .
 
 
 ###  http://www.w3.org/2008/05/skos#note
-skos:note rdf:type owl:AnnotationProperty .
+<http://www.w3.org/2008/05/skos#note> rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/ns/oa#hasSource
@@ -121,37 +129,37 @@ xsd:gYearMonth rdf:type rdfs:Datatype .
 #################################################################
 
 ###  http://prismstandard.org/namespaces/basic/2.0/bookEdition
-basic:bookEdition rdf:type owl:ObjectProperty .
+prism:bookEdition rdf:type owl:ObjectProperty .
 
 
 ###  http://prismstandard.org/namespaces/basic/2.0/hasTranslation
-basic:hasTranslation rdf:type owl:ObjectProperty .
+prism:hasTranslation rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/dc/terms/creator
-terms:creator rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf owl:topObjectProperty ;
-              rdfs:comment """An entity primarily responsible for making the resource.
+dcterms:creator rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:comment """An entity primarily responsible for making the resource.
 
 Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."""@en ;
-              rdfs:label "has creator"@en .
+                rdfs:label "has creator"@en .
 
 
 ###  http://purl.org/dc/terms/hasPart
-terms:hasPart rdf:type owl:ObjectProperty .
+dcterms:hasPart rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/dc/terms/isPartOf
-terms:isPartOf rdf:type owl:ObjectProperty .
+dcterms:isPartOf rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/dc/terms/publisher
-terms:publisher rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf owl:topObjectProperty ;
-                rdfs:comment """An entity responsible for making the resource available.
+dcterms:publisher rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:comment """An entity responsible for making the resource available.
 
 Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity."""@en ;
-                rdfs:label "has publisher"@en .
+                  rdfs:label "has publisher"@en .
 
 
 ###  http://purl.org/spar/fabio/hasManifestation
@@ -199,7 +207,7 @@ core:part rdf:type owl:ObjectProperty ;
           rdfs:comment "A part of an endeavour."@en ,
                        "Meaning = has part.  As defined by FRBR (http://www.ifla.org/VII/s13/frbr/frbr1.htm; http://purl.org/vocab/frbr/core#part),  a property indicating that one entity includes another entity."@en ;
           rdfs:label "has part"@en ;
-          skos:note "Unlike the FRBR version in RDF http://vocab.org/frbr/core.html the present version defines partonomy relationships transitive."@en .
+          <http://www.w3.org/2008/05/skos#note> "Unlike the FRBR version in RDF http://vocab.org/frbr/core.html the present version defines partonomy relationships transitive."@en .
 
 
 ###  http://purl.org/vocab/frbr/core#partOf
@@ -225,73 +233,20 @@ core:realizationOf rdf:type owl:ObjectProperty .
 core:relatedEndeavour rdf:type owl:ObjectProperty .
 
 
-###  http://viewsari.github.io/ontology#basedOn
-ontology:basedOn rdf:type owl:ObjectProperty ;
-                 rdfs:domain ontology:Translation ;
-                 rdfs:range ontology:Edition .
-
-
-###  http://viewsari.github.io/ontology#concernsResource
-ontology:concernsResource rdf:type owl:ObjectProperty ;
-                          rdfs:domain ontology:ResourceInText ;
-                          rdfs:range ontology:ContentResource .
-
-
-###  http://viewsari.github.io/ontology#hasOccupation
-ontology:hasOccupation rdf:type owl:ObjectProperty ;
-                       rdfs:domain ontology:Person ;
-                       rdfs:range ontology:Occupation .
-
-
-###  http://viewsari.github.io/ontology#hasScope
-ontology:hasScope rdf:type owl:ObjectProperty ;
-                  rdfs:range ontology:CooccurrenceScope .
-
-
-###  http://viewsari.github.io/ontology#inParagraph
-ontology:inParagraph rdf:type owl:ObjectProperty ;
-                     rdfs:domain ontology:Cooccurrence ;
-                     rdfs:range <http://purl.org/spar/doco/Paragraph> .
-
-
-###  http://viewsari.github.io/ontology#involvedResource
-ontology:involvedResource rdf:type owl:ObjectProperty ;
-                          rdfs:domain ontology:Cooccurrence ;
-                          rdfs:range ontology:ContentResource .
-
-
-###  http://viewsari.github.io/ontology#isAbout
-ontology:isAbout rdf:type owl:ObjectProperty ;
-                 rdfs:domain ontology:Biography ;
-                 rdfs:range ontology:Person .
-
-
-###  http://viewsari.github.io/ontology#metionedIn
-ontology:metionedIn rdf:type owl:ObjectProperty ;
-                    rdfs:domain ontology:ContentResource ;
-                    rdfs:range <http://purl.org/spar/doco/Paragraph> .
-
-
-###  http://viewsari.github.io/ontology#provider
-ontology:provider rdf:type owl:ObjectProperty ;
-                  rdfs:domain fabio:DigitalManifestation ;
-                  rdfs:range ontology:Provider .
-
-
 ###  http://www.essepuntato.it/2008/12/pattern#contains
-pattern:contains rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf terms:hasPart ;
-                 owl:inverseOf pattern:isContainedBy ;
-                 rdfs:domain pattern:Structured ;
-                 rdfs:comment "A structured element contains another generic element."@en ;
-                 rdfs:label "contains"@en .
+po:contains rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf dcterms:hasPart ;
+            owl:inverseOf po:isContainedBy ;
+            rdfs:domain po:Structured ;
+            rdfs:comment "A structured element contains another generic element."@en ;
+            rdfs:label "contains"@en .
 
 
 ###  http://www.essepuntato.it/2008/12/pattern#isContainedBy
-pattern:isContainedBy rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf terms:isPartOf ;
-                      rdfs:comment "An element that is contained by another structured element."@en ;
-                      rdfs:label "is contained by"@en .
+po:isContainedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf dcterms:isPartOf ;
+                 rdfs:comment "An element that is contained by another structured element."@en ;
+                 rdfs:label "is contained by"@en .
 
 
 ###  http://www.w3.org/ns/oa#hasSelector
@@ -407,12 +362,67 @@ _:genid6 rdf:type owl:Class ;
  ] .
 
 
+###  https://ise-fizkarlsruhe.github.io/viewsari/#basedOn
+:basedOn rdf:type owl:ObjectProperty ;
+         rdfs:domain :Translation ;
+         rdfs:range :Edition ;
+         rdfs:comment "the property describes the relationship between a translation and an edition; translations are based on editions"@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#concernsResource
+:concernsResource rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ResourceInText ;
+                  rdfs:range :ContentResource .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#hasOccupation
+:hasOccupation rdf:type owl:ObjectProperty ;
+               rdfs:domain :Person ;
+               rdfs:range :Occupation .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#hasScope
+:hasScope rdf:type owl:ObjectProperty ;
+          rdfs:range :CooccurrenceScope .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#inParagraph
+:inParagraph rdf:type owl:ObjectProperty ;
+             rdfs:domain :Cooccurrence ;
+             rdfs:range doco:Paragraph .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#involvedResource
+:involvedResource rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Cooccurrence ;
+                  rdfs:range :ContentResource .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#isAbout
+:isAbout rdf:type owl:ObjectProperty ;
+         rdfs:domain :Biography ;
+         rdfs:range :Person .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#metionedIn
+:metionedIn rdf:type owl:ObjectProperty ;
+            rdfs:domain :ContentResource ;
+            rdfs:range doco:Paragraph .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#provider
+:provider rdf:type owl:ObjectProperty ;
+          rdfs:domain fabio:DigitalManifestation ;
+          rdfs:range :Provider ;
+          rdfs:comment "the provider property connects a digital manifestation to its online provider"@en .
+
+
 #################################################################
 #    Data properties
 #################################################################
 
 ###  http://prismstandard.org/namespaces/basic/2.0/endingPage
-basic:endingPage rdf:type owl:DatatypeProperty ;
+prism:endingPage rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf owl:topDataProperty ;
                  rdf:type owl:FunctionalProperty ;
                  rdfs:domain core:Endeavour ;
@@ -421,7 +431,7 @@ basic:endingPage rdf:type owl:DatatypeProperty ;
 
 
 ###  http://prismstandard.org/namespaces/basic/2.0/pageRange
-basic:pageRange rdf:type owl:DatatypeProperty ;
+prism:pageRange rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
                 rdf:type owl:FunctionalProperty ;
                 rdfs:domain core:Endeavour ;
@@ -430,8 +440,8 @@ basic:pageRange rdf:type owl:DatatypeProperty ;
 
 
 ###  http://prismstandard.org/namespaces/basic/2.0/publicationDate
-basic:publicationDate rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf terms:issued ;
+prism:publicationDate rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf dcterms:issued ;
                       rdf:type owl:FunctionalProperty ;
                       rdfs:domain core:Endeavour ;
                       rdfs:range [ rdf:type rdfs:Datatype ;
@@ -450,7 +460,7 @@ The date can be expressed in three different formats:
 
 
 ###  http://prismstandard.org/namespaces/basic/2.0/startingPage
-basic:startingPage rdf:type owl:DatatypeProperty ;
+prism:startingPage rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdf:type owl:FunctionalProperty ;
                    rdfs:domain core:Endeavour ;
@@ -459,7 +469,7 @@ basic:startingPage rdf:type owl:DatatypeProperty ;
 
 
 ###  http://prismstandard.org/namespaces/basic/2.0/volume
-basic:volume rdf:type owl:DatatypeProperty ,
+prism:volume rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
              rdfs:domain core:Endeavour ;
              rdfs:comment "An identifier for a particular volume of a resource, such as a journal or a multi-volume book."@en ;
@@ -467,22 +477,22 @@ basic:volume rdf:type owl:DatatypeProperty ,
 
 
 ###  http://purl.org/dc/terms/identifier
-terms:identifier rdf:type owl:DatatypeProperty .
+dcterms:identifier rdf:type owl:DatatypeProperty .
 
 
 ###  http://purl.org/dc/terms/issued
-terms:issued rdf:type owl:DatatypeProperty .
+dcterms:issued rdf:type owl:DatatypeProperty .
 
 
 ###  http://purl.org/dc/terms/title
-terms:title rdf:type owl:DatatypeProperty ;
-            rdfs:comment "A name given to a resource.  Typically, the title will be the name by which the resource is formally known."@en ;
-            rdfs:label "has title"@en .
+dcterms:title rdf:type owl:DatatypeProperty ;
+              rdfs:comment "A name given to a resource.  Typically, the title will be the name by which the resource is formally known."@en ;
+              rdfs:label "has title"@en .
 
 
 ###  http://purl.org/spar/fabio/hasPublicationYear
 fabio:hasPublicationYear rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf terms:issued ;
+                         rdfs:subPropertyOf dcterms:issued ;
                          rdf:type owl:FunctionalProperty ;
                          rdfs:range xsd:gYear ;
                          rdfs:comment "The year in which a resource is published."@en ;
@@ -491,14 +501,14 @@ fabio:hasPublicationYear rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/spar/fabio/hasTranslatedTitle
 fabio:hasTranslatedTitle rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf terms:title ;
+                         rdfs:subPropertyOf dcterms:title ;
                          rdfs:comment "A version of the title of an entity translated into another language, which may be specified using the object property dcterms:language."@en ;
                          rdfs:label "has translated title"@en .
 
 
 ###  http://purl.org/spar/fabio/hasURL
 fabio:hasURL rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf terms:identifier ;
+             rdfs:subPropertyOf dcterms:identifier ;
              rdfs:domain core:Endeavour ;
              rdfs:range xsd:anyURI ;
              rdfs:comment "An identifier, in form of an HTTP Universal Resource Locator (URL), for a particular resource on the World Wide Web."@en ;
@@ -513,30 +523,6 @@ fabio:hasVolumeCount rdf:type owl:DatatypeProperty ;
                      rdfs:range xsd:nonNegativeInteger ;
                      rdfs:comment "The count of the number of volumes a work includes."@en ;
                      rdfs:label "has volume count"@en .
-
-
-###  http://viewsari.github.io/ontology#hasDiceCoefficient
-ontology:hasDiceCoefficient rdf:type owl:DatatypeProperty ;
-                            rdfs:domain ontology:Cooccurrence ;
-                            rdfs:range xsd:float .
-
-
-###  http://viewsari.github.io/ontology#hasPMIScore
-ontology:hasPMIScore rdf:type owl:DatatypeProperty ;
-                     rdfs:range xsd:float .
-
-
-###  http://viewsari.github.io/ontology#hasPageRange
-ontology:hasPageRange rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf basic:pageRange ;
-                      rdfs:domain ontology:Biography ;
-                      rdfs:range xsd:string .
-
-
-###  http://viewsari.github.io/ontology#lengthInCharacters
-ontology:lengthInCharacters rdf:type owl:DatatypeProperty ;
-                            rdfs:domain <http://purl.org/spar/doco/Paragraph> ;
-                            rdfs:range xsd:positiveInteger .
 
 
 ###  http://www.w3.org/ns/oa#bodyValue
@@ -599,7 +585,31 @@ foaf:name rdf:type owl:DatatypeProperty ;
           rdfs:comment "A name for some thing." ;
           rdfs:isDefinedBy foaf: ;
           rdfs:label "name" ;
-          ns:term_status "testing" .
+          <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#hasDiceCoefficient
+:hasDiceCoefficient rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Cooccurrence ;
+                    rdfs:range xsd:float .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPMIScore
+:hasPMIScore rdf:type owl:DatatypeProperty ;
+             rdfs:range xsd:float .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPageRange
+:hasPageRange rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf prism:pageRange ;
+              rdfs:domain :Biography ;
+              rdfs:range xsd:string .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#lengthInCharacters
+:lengthInCharacters rdf:type owl:DatatypeProperty ;
+                    rdfs:domain doco:Paragraph ;
+                    rdfs:range xsd:positiveInteger .
 
 
 #################################################################
@@ -607,30 +617,30 @@ foaf:name rdf:type owl:DatatypeProperty ;
 #################################################################
 
 ###  http://purl.org/spar/deo/Biography
-<http://purl.org/spar/deo/Biography> rdf:type owl:Class ;
-                                     rdfs:subClassOf <http://purl.org/spar/deo/DiscourseElement> ;
-                                     rdfs:comment "Information describing a person and his or her life history and contributions."@en ;
-                                     rdfs:label "biography"@en .
+deo:Biography rdf:type owl:Class ;
+              rdfs:subClassOf deo:DiscourseElement ;
+              rdfs:comment "Information describing a person and his or her life history and contributions."@en ;
+              rdfs:label "biography"@en .
 
 
 ###  http://purl.org/spar/deo/DiscourseElement
-<http://purl.org/spar/deo/DiscourseElement> rdf:type owl:Class ;
-                                            rdfs:subClassOf owl:Thing ;
-                                            rdfs:comment "An element of a document that carries out a rhetorical function."@en ;
-                                            rdfs:label "discourse element"@en .
+deo:DiscourseElement rdf:type owl:Class ;
+                     rdfs:subClassOf owl:Thing ;
+                     rdfs:comment "An element of a document that carries out a rhetorical function."@en ;
+                     rdfs:label "discourse element"@en .
 
 
 ###  http://purl.org/spar/doco/Paragraph
-<http://purl.org/spar/doco/Paragraph> rdf:type owl:Class ;
-                                      rdfs:comment "A self-contained unit of discourse that deals with a particular point or idea. Paragraphs contains one or more sentences. The start of a paragraph is indicated by beginning on a new line, which may be indented or separated by a small vertical space by the preceding paragraph. "@en ;
-                                      rdfs:label "paragraph"@en .
+doco:Paragraph rdf:type owl:Class ;
+               rdfs:comment "A self-contained unit of discourse that deals with a particular point or idea. Paragraphs contains one or more sentences. The start of a paragraph is indicated by beginning on a new line, which may be indented or separated by a small vertical space by the preceding paragraph. "@en ;
+               rdfs:label "paragraph"@en .
 
 
 ###  http://purl.org/spar/doco/TextChunk
-<http://purl.org/spar/doco/TextChunk> rdf:type owl:Class ;
-                                      rdfs:subClassOf pattern:Inline ;
-                                      rdfs:comment "A piece of text defined by a start point and an end point."@en ;
-                                      rdfs:label "text chunk"@en .
+doco:TextChunk rdf:type owl:Class ;
+               rdfs:subClassOf po:Inline ;
+               rdfs:comment "A piece of text defined by a start point and an end point."@en ;
+               rdfs:label "text chunk"@en .
 
 
 ###  http://purl.org/spar/fabio/Book
@@ -862,138 +872,12 @@ A work is an abstract entity; there is no single material object one can point t
           rdfs:label "work"@en .
 
 
-###  http://viewsari.github.io/ontology#Artwork
-ontology:Artwork rdf:type owl:Class ;
-                 rdfs:subClassOf ontology:ContentResource ;
-                 rdfs:comment "The Artwork class represents creative works of art, encompassing various mediums such as paintings, sculptures, and digital creations. It stores metadata such as title, artist, creation date, and style."@en ;
-                 rdfs:label "artwork" .
-
-
-###  http://viewsari.github.io/ontology#Biography
-ontology:Biography rdf:type owl:Class ;
-                   rdfs:subClassOf <http://purl.org/spar/deo/Biography> ,
-                                   fabio:DigitalManifestation ;
-                   rdfs:comment "The Biography class encapsulates chapters within Vasari's seminal work that focus on the lives and works of Renaissance artists. It is about a person and has a title, a page range, a starting and end page."@en .
-
-
-###  http://viewsari.github.io/ontology#ContentResource
-ontology:ContentResource rdf:type owl:Class ;
-                         rdfs:comment "The ContentResource class summarizes classes representing various types of extracted content and defines super-properties like labels and establishes the connection to the original sources from where said content was extracted."@en ;
-                         rdfs:label "content resource" .
-
-
-###  http://viewsari.github.io/ontology#Cooccurrence
-ontology:Cooccurrence rdf:type owl:Class ;
-                      rdfs:subClassOf oa:Annotation ,
-                                      prov:Entity ,
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty ontology:involvedResource ;
-                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                                        owl:onClass ontology:ContentResource
-                                      ] ;
-                      rdfs:comment "The Cooccurrence class represents a connection between a minimum of two content resources, such as persons (artists), artworks, or other entities. It encapsulates information about the provenance, context, frequency (score), and scope of the co-occurrence."@en ;
-                      rdfs:label "cooccurrence"@en .
-
-
-###  http://viewsari.github.io/ontology#CooccurrenceScope
-ontology:CooccurrenceScope rdf:type owl:Class ;
-                           rdfs:comment "The Cooccurrence scope class specifies from which perspective on the work the cooccurrences have been extracted. Were entire volumes considered? Were they extracted within single biographies?"@en ;
-                           rdfs:label "cooccurrence scope" .
-
-
-###  http://viewsari.github.io/ontology#DiceCalculation
-ontology:DiceCalculation rdf:type owl:Class ;
-                         rdfs:subClassOf prov:Activity ;
-                         owl:disjointWith ontology:PMICalculation ;
-                         rdfs:comment "The DiceCalculation is a specific type of activity performed to extract co-occurrences, based on the dice coefficient."@en ;
-                         rdfs:label "dice calculation"@en .
-
-
-###  http://viewsari.github.io/ontology#Edition
-ontology:Edition rdf:type owl:Class ;
-                 rdfs:subClassOf fabio:BookSeries ;
-                 rdfs:comment """The Edition class in the realm of Viewsari represents a specific version or iteration of a literary work. Separate editions are characterized by differences in content and the publication year.
-An edition is composed of several subsequent volumes."""@en .
-
-
-###  http://viewsari.github.io/ontology#HistoricalEvent
-ontology:HistoricalEvent rdf:type owl:Class ;
-                         rdfs:subClassOf ontology:ContentResource ;
-                         rdfs:comment "The HistoricalEvent class encapsulates data related to past occurrences, including details, if available, such as a normed label, a date, the location, and references to norm data about this event."@en ;
-                         rdfs:label "historical event" .
-
-
-###  http://viewsari.github.io/ontology#Location
-ontology:Location rdf:type owl:Class ;
-                  rdfs:subClassOf ontology:ContentResource ;
-                  rdfs:comment "The Location class models physical or abstract locations, storing information such as name, latitude, and longitude, as well as references to norm data about this event."@en ;
-                  rdfs:label "location" .
-
-
-###  http://viewsari.github.io/ontology#Occupation
-ontology:Occupation rdf:type owl:Class ;
-                    rdfs:comment "The Occupation class defines three types of occupations, as introducted by Vasari in his work: Artist, sculptor and architect. Each of these types is mentioned for the corresponding artist in their  biography title and was extracted manually from it."@en ;
-                    rdfs:label "occupation"@en .
-
-
-###  http://viewsari.github.io/ontology#OriginalWork
-ontology:OriginalWork rdf:type owl:Class ;
-                      rdfs:subClassOf fabio:Work ;
-                      rdfs:comment "The OriginalWork in the Viewsari ontology describes the higher-level idea of a (literary) work."@en .
-
-
-###  http://viewsari.github.io/ontology#PMICalculation
-ontology:PMICalculation rdf:type owl:Class ;
-                        rdfs:subClassOf prov:Activity ;
-                        rdfs:comment "The PMICalculation is a specific type of activity performed to extract co-occurrences, based on the pointwise mututal information of two entities in paragraphs."@en ;
-                        rdfs:label "pmi calculation" .
-
-
-###  http://viewsari.github.io/ontology#Page
-ontology:Page rdf:type owl:Class ;
-              rdfs:subClassOf <http://purl.org/spar/deo/DiscourseElement> ;
-              rdfs:comment "The Page class represents a single page within a document. It encapsulates attributes such as page number and consists of paragraphs."@en .
-
-
-###  http://viewsari.github.io/ontology#Person
-ontology:Person rdf:type owl:Class ;
-                rdfs:subClassOf ontology:ContentResource ,
-                                foaf:Person ;
-                rdfs:comment "In the domain of Viewsari, the person class represents individuals with attributes such as name or birthdate and deathdate, as well as references to norm data about this event."@en ;
-                rdfs:label "person" .
-
-
-###  http://viewsari.github.io/ontology#Provider
-ontology:Provider rdf:type owl:Class ;
-                  rdfs:subClassOf foaf:Organization .
-
-
-###  http://viewsari.github.io/ontology#ResourceInText
-ontology:ResourceInText rdf:type owl:Class ;
-                        rdfs:subClassOf oa:Annotation ;
-                        rdfs:comment "The ResourceInText class establishes a linkage between a content resource, such as an artwork or a person, and a specific paragraph within the associated work"@en ;
-                        rdfs:label "resource in text" .
-
-
-###  http://viewsari.github.io/ontology#Translation
-ontology:Translation rdf:type owl:Class ;
-                     rdfs:subClassOf fabio:BookSeries ;
-                     rdfs:comment """The Translation class represents the transformation of a literary work from one language to another. In Viewsari, a translation is always based on a specific edition of the original literary work.
-A translation is composed of several subsequent volumes."""@en .
-
-
-###  http://viewsari.github.io/ontology#Volume
-ontology:Volume rdf:type owl:Class ;
-                rdfs:subClassOf fabio:Book ;
-                rdfs:comment "The Volume class represents a single book within a larger collection/series, specifically focusing on translations or editions of a particular work."@en .
-
-
 ###  http://www.essepuntato.it/2008/12/pattern#Inline
-pattern:Inline rdf:type owl:Class .
+po:Inline rdf:type owl:Class .
 
 
 ###  http://www.essepuntato.it/2008/12/pattern#Structured
-pattern:Structured rdf:type owl:Class .
+po:Structured rdf:type owl:Class .
 
 
 ###  http://www.w3.org/2000/10/swap/pim/contact#Person
@@ -1092,100 +976,226 @@ foaf:Organization rdf:type owl:Class ;
                   rdfs:comment "An organization." ;
                   rdfs:isDefinedBy foaf: ;
                   rdfs:label "Organization" ;
-                  ns:term_status "stable" .
+                  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
 
 
 ###  http://xmlns.com/foaf/0.1/Person
 foaf:Person rdf:type owl:Class .
 
 
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Artwork
+:Artwork rdf:type owl:Class ;
+         rdfs:subClassOf :ContentResource ;
+         rdfs:comment "The Artwork class represents creative works of art, encompassing various mediums such as paintings, sculptures, and digital creations. It stores metadata such as title, artist, creation date, and style."@en ;
+         rdfs:label "artwork" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Biography
+:Biography rdf:type owl:Class ;
+           rdfs:subClassOf deo:Biography ,
+                           fabio:DigitalManifestation ;
+           rdfs:comment "The Biography class encapsulates chapters within Vasari's seminal work that focus on the lives and works of Renaissance artists. It is about a person and has a title, a page range, a starting and end page."@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#ContentResource
+:ContentResource rdf:type owl:Class ;
+                 rdfs:comment "The ContentResource class summarizes classes representing various types of extracted content and defines super-properties like labels and establishes the connection to the original sources from where said content was extracted."@en ;
+                 rdfs:label "content resource" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Cooccurrence
+:Cooccurrence rdf:type owl:Class ;
+              rdfs:subClassOf oa:Annotation ,
+                              prov:Entity ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :involvedResource ;
+                                owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                owl:onClass :ContentResource
+                              ] ;
+              rdfs:comment "The Cooccurrence class represents a connection between a minimum of two content resources, such as persons (artists), artworks, or other entities. It encapsulates information about the provenance, context, frequency (score), and scope of the co-occurrence."@en ;
+              rdfs:label "cooccurrence"@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#CooccurrenceScope
+:CooccurrenceScope rdf:type owl:Class ;
+                   rdfs:comment "The Cooccurrence scope class specifies from which perspective on the work the cooccurrences have been extracted. Were entire volumes considered? Were they extracted within single biographies?"@en ;
+                   rdfs:label "cooccurrence scope" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#DiceCalculation
+:DiceCalculation rdf:type owl:Class ;
+                 rdfs:subClassOf prov:Activity ;
+                 owl:disjointWith :PMICalculation ;
+                 rdfs:comment "The DiceCalculation is a specific type of activity performed to extract co-occurrences, based on the dice coefficient."@en ;
+                 rdfs:label "dice calculation"@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Edition
+:Edition rdf:type owl:Class ;
+         rdfs:subClassOf fabio:BookSeries ;
+         rdfs:comment """The Edition class in the realm of Viewsari represents a specific version or iteration of a literary work. Separate editions are characterized by differences in content and the publication year.
+An edition is composed of several subsequent volumes."""@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#HistoricalEvent
+:HistoricalEvent rdf:type owl:Class ;
+                 rdfs:subClassOf :ContentResource ;
+                 rdfs:comment "The HistoricalEvent class encapsulates data related to past occurrences, including details, if available, such as a normed label, a date, the location, and references to norm data about this event."@en ;
+                 rdfs:label "historical event" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Location
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf :ContentResource ;
+          rdfs:comment "The Location class models physical or abstract locations, storing information such as name, latitude, and longitude, as well as references to norm data about this event."@en ;
+          rdfs:label "location" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Occupation
+:Occupation rdf:type owl:Class ;
+            rdfs:comment "The Occupation class defines three types of occupations, as introducted by Vasari in his work: Artist, sculptor and architect. Each of these types is mentioned for the corresponding artist in their  biography title and was extracted manually from it."@en ;
+            rdfs:label "occupation"@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#OriginalWork
+:OriginalWork rdf:type owl:Class ;
+              rdfs:subClassOf fabio:Work ;
+              rdfs:comment "The OriginalWork in the Viewsari ontology describes the higher-level idea of a (literary) work."@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#PMICalculation
+:PMICalculation rdf:type owl:Class ;
+                rdfs:subClassOf prov:Activity ;
+                rdfs:comment "The PMICalculation is a specific type of activity performed to extract co-occurrences, based on the pointwise mututal information of two entities in paragraphs."@en ;
+                rdfs:label "pmi calculation" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Page
+:Page rdf:type owl:Class ;
+      rdfs:subClassOf deo:DiscourseElement ;
+      rdfs:comment "The Page class represents a single page within a document. It encapsulates attributes such as page number and consists of paragraphs."@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf foaf:Person ,
+                        :ContentResource ;
+        rdfs:comment "In the domain of Viewsari, the person class represents individuals with attributes such as name or birthdate and deathdate, as well as references to norm data about this event."@en ;
+        rdfs:label "person" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Provider
+:Provider rdf:type owl:Class ;
+          rdfs:subClassOf foaf:Organization .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#ResourceInText
+:ResourceInText rdf:type owl:Class ;
+                rdfs:subClassOf oa:Annotation ;
+                rdfs:comment "The ResourceInText class establishes a linkage between a content resource, such as an artwork or a person, and a specific paragraph within the associated work"@en ;
+                rdfs:label "resource in text" .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Translation
+:Translation rdf:type owl:Class ;
+             rdfs:subClassOf fabio:BookSeries ;
+             rdfs:comment """The Translation class represents the transformation of a literary work from one language to another. In Viewsari, a translation is always based on a specific edition of the original literary work.
+A translation is composed of several subsequent volumes."""@en .
+
+
+###  https://ise-fizkarlsruhe.github.io/viewsari/#Volume
+:Volume rdf:type owl:Class ;
+        rdfs:subClassOf fabio:Book ;
+        rdfs:comment "The Volume class represents a single book within a larger collection/series, specifically focusing on translations or editions of a particular work."@en .
+
+
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://viewsari.github.io/ontology#architect
-ontology:architect rdf:type owl:NamedIndividual ,
-                            ontology:Occupation .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#architect
+:architect rdf:type owl:NamedIndividual ,
+                    :Occupation .
 
 
-###  http://viewsari.github.io/ontology#biography_scope
-ontology:biography_scope rdf:type owl:NamedIndividual ,
-                                  ontology:CooccurrenceScope .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#biography_scope
+:biography_scope rdf:type owl:NamedIndividual ,
+                          :CooccurrenceScope .
 
 
-###  http://viewsari.github.io/ontology#dice_script
-ontology:dice_script rdf:type owl:NamedIndividual ,
-                              prov:SoftwareAgent .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#dice_script
+:dice_script rdf:type owl:NamedIndividual ,
+                      prov:SoftwareAgent .
 
 
-###  http://viewsari.github.io/ontology#entire_work_scope
-ontology:entire_work_scope rdf:type owl:NamedIndividual ,
-                                    ontology:CooccurrenceScope .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#entire_work_scope
+:entire_work_scope rdf:type owl:NamedIndividual ,
+                            :CooccurrenceScope .
 
 
-###  http://viewsari.github.io/ontology#painter
-ontology:painter rdf:type owl:NamedIndividual ,
-                          ontology:Occupation .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#painter
+:painter rdf:type owl:NamedIndividual ,
+                  :Occupation .
 
 
-###  http://viewsari.github.io/ontology#pmi_script
-ontology:pmi_script rdf:type owl:NamedIndividual ,
-                             prov:SoftwareAgent .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#pmi_script
+:pmi_script rdf:type owl:NamedIndividual ,
+                     prov:SoftwareAgent .
 
 
-###  http://viewsari.github.io/ontology#sculptor
-ontology:sculptor rdf:type owl:NamedIndividual ,
-                           ontology:Occupation .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#sculptor
+:sculptor rdf:type owl:NamedIndividual ,
+                   :Occupation .
 
 
-###  http://viewsari.github.io/ontology#volume_scope
-ontology:volume_scope rdf:type owl:NamedIndividual ,
-                               ontology:CooccurrenceScope .
+###  https://ise-fizkarlsruhe.github.io/viewsari/#volume_scope
+:volume_scope rdf:type owl:NamedIndividual ,
+                       :CooccurrenceScope .
 
 
 #################################################################
 #    Rules
 #################################################################
 
-:cooccurrence rdf:type swrl:Variable .
+<http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/cooccurrence> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:activity rdf:type swrl:Variable .
+<http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/activity> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:par rdf:type swrl:Variable .
+<http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/par> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
    rdfs:comment "" ;
    rdfs:label "CooccurrenceInParagraph" ;
-   rdf:type swrl:Imp ;
-   swrl:body [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:ClassAtom ;
-                           swrl:classPredicate ontology:Cooccurrence ;
-                           swrl:argument1 :cooccurrence
-                         ] ;
-               rdf:rest [ rdf:type swrl:AtomList ;
-                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
-                                      swrl:propertyPredicate prov:wasGeneratedBy ;
-                                      swrl:argument1 :cooccurrence ;
-                                      swrl:argument2 :activity
-                                    ] ;
-                          rdf:rest [ rdf:type swrl:AtomList ;
-                                     rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
-                                                 swrl:propertyPredicate prov:used ;
-                                                 swrl:argument1 :activity ;
-                                                 swrl:argument2 :par
-                                               ] ;
-                                     rdf:rest rdf:nil
-                                   ]
-                        ]
-             ] ;
-   swrl:head [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
-                           swrl:propertyPredicate ontology:inParagraph ;
-                           swrl:argument1 :cooccurrence ;
-                           swrl:argument2 :par
-                         ] ;
-               rdf:rest rdf:nil
-             ]
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Cooccurrence ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/cooccurrence>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:used ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/activity> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/par>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:wasGeneratedBy ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/cooccurrence> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/activity>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :inParagraph ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/cooccurrence> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/sro/ontologies/2024/4/untitled-ontology-3/par>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
  ] .
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
