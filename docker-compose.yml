@@ -14,3 +14,4 @@ services:
     volumes:
       - "./data/:/data/"
       - "./data/templates/:/src/templates/"
+      - "./data/static/:/src/static/"
