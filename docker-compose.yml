@@ -1,7 +1,7 @@
 version: "3"
 services:
   shmarql:
-    image: ghcr.io/epoz/shmarql:latest
+    image: ghcr.io/epoz/shmarql:v0.31
     ports:
       - "9000:8000"
     environment:
@@ -10,6 +10,7 @@ services:
       - DEBUG=1
       - SCHPIEL_PATH=/data/www
       - DATA_LOAD_PATHS=/data/
-      - DOMAIN=127.0.0.1:9000
+      - DOMAIN=localhost:9000
     volumes:
       - "./data/:/data/"
+      - "./data/templates/:/src/templates/"

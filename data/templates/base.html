@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block head %}
+    <title>{% block title %}shmarql{% endblock %}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    {% endblock %}
+    <script src="/static/bootstrap.min.js"></script>
+    {% block head_last %}{% endblock %}
+    <style>
+    .selektor {color: #d0720f; text-decoration: none; margin: 0; padding: 0;}
+    .snippet {margin: 0; padding: 0;}
+    </style>
+  </head>
+
+  <body>
+    <header class="p-3" style="border-bottom: 2px solid #ccc; background-color: #eee;">
+      <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <h1>The Viewsari Knowledge Graph</h1>
+        </div>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+  </body>  
+</html>
+
