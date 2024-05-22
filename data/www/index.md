@@ -1,4 +1,4 @@
-# View-sari: New Perspectives on Historical Network Analysis in Giorgio Vasari’s The Lives Using Knowledge Graphs
+# View-sariNew Perspectives on Historical Network Analysis in Giorgio Vasari’s The Lives Using Knowledge Graphs
 
 ## Introduction
 

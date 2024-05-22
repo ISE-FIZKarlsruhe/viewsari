@@ -1,0 +1,72 @@
+/* styles.css */
+
+/* Set the font family for the entire page */
+@media screen and (max-width: 76.234375em) {
+    .md-nav--primary, .md-nav--primary .md-nav {
+        background-color: #d0720f;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
+}
+
+@media screen and (max-width: 76.234375em) {
+    .md-nav--primary .md-nav__title[for=__drawer] {
+        background-color: #d0720f;
+        color: var(--md-primary-bg-color);
+        font-weight: 700;
+    }
+}
+
+.md-nav__link .md-ellipsis {
+    position: relative;
+    color: #d0720f;
+}
+
+.md-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.md-header {
+    background-color: #d0720f;
+    box-shadow: 0 0 .2rem #0000, 0 .2rem .4rem #0000;
+    color: var(--md-primary-bg-color);
+    display: block;
+    left: 0;
+    position: sticky;
+    right: 0;
+    top: 0;
+    z-index: 4;
+}
+
+/* Style headings */
+h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+h2 {
+    color: #666;
+    font-size: 20px;
+}
+
+/* Add some padding to paragraphs */
+p {
+    padding: 10px;
+}
+
+/* Style links */
+a {
+    color: #d0720f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
