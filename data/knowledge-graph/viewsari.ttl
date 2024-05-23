@@ -1,4 +1,4 @@
-@prefix : <https://ise-fizkarlsruhe.github.io/viewsari/#> .
+@prefix : <https://viewsari.ise.fiz-karlsruhe.de/ontology/#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix po: <http://www.essepuntato.it/2008/12/pattern#> .
@@ -16,10 +16,10 @@
 @prefix fabio: <http://purl.org/spar/fabio/> .
 @prefix prism: <http://prismstandard.org/namespaces/basic/2.0/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <https://ise-fizkarlsruhe.github.io/viewsari/#> .
+@base <https://viewsari.ise.fiz-karlsruhe.de/ontology/#> .
 
-<https://ise-fizkarlsruhe.github.io/viewsari/#> rdf:type owl:Ontology ;
-                                                 rdfs:label "Viewsari Ontology" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> rdf:type owl:Ontology ;
+                                                    rdfs:label "Viewsari Ontology" .
 
 #################################################################
 #    Annotation properties
@@ -376,33 +376,33 @@ _:genid6 rdf:type owl:Class ;
  ] .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#basedOn
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#basedOn
 :basedOn rdf:type owl:ObjectProperty ;
          rdfs:domain :Translation ;
          rdfs:range :Edition ;
          rdfs:comment "the property describes the relationship between a translation and an edition; translations are based on editions"@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#concernsResource
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#concernsResource
 :concernsResource rdf:type owl:ObjectProperty ;
                   rdfs:domain :ResourceInText ;
                   rdfs:range :ContentResource .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasEndPage
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasEndPage
 :hasEndPage rdf:type owl:ObjectProperty ;
             rdfs:domain :Paragraph ;
             rdfs:range :PageWebRepresentation ;
             rdfs:comment "The last page a paragraph appears on." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasOccupation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasOccupation
 :hasOccupation rdf:type owl:ObjectProperty ;
                rdfs:domain :Person ;
                rdfs:range :Occupation .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPage
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasPage
 :hasPage rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf dcterms:hasPart ;
          owl:inverseOf :isPartOfBiography ;
@@ -410,7 +410,7 @@ _:genid6 rdf:type owl:Class ;
          rdfs:range :Page .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasParagraph
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasParagraph
 :hasParagraph rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf dcterms:hasPart ;
               owl:inverseOf :isPartOfPage ;
@@ -418,58 +418,58 @@ _:genid6 rdf:type owl:Class ;
               rdfs:range :Paragraph .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasScope
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasScope
 :hasScope rdf:type owl:ObjectProperty ;
           rdfs:range :CooccurrenceScope .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasStartPage
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasStartPage
 :hasStartPage rdf:type owl:ObjectProperty ;
               rdfs:domain :Paragraph ;
               rdfs:range :PageWebRepresentation ;
               rdfs:comment "The first page a paragraph appears on." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#inParagraph
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#inParagraph
 :inParagraph rdf:type owl:ObjectProperty ;
              rdfs:domain [ rdf:type owl:Class ;
                            owl:unionOf ( :ContentResource
-                                         :Cooccurrence
+                                         <https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence>
                                        )
                          ] ;
              rdfs:range :Paragraph ;
              rdfs:comment "A co-occurrence or content resource appears in specific paragraphs. These are the paragraphs they were extracted from." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#involvedResource
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#involvedResource
 :involvedResource rdf:type owl:ObjectProperty ;
-                  rdfs:domain :Cooccurrence ;
+                  rdfs:domain <https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence> ;
                   rdfs:range :ContentResource ;
                   rdfs:comment "A co-occurrence always involves at least two content resources, for example two artists, two artists and an artwork, etc." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#isAbout
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#isAbout
 :isAbout rdf:type owl:ObjectProperty ;
          rdfs:domain :Biography ;
          rdfs:range :Person ;
          rdfs:comment "A biography is about one specific person." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#isPartOfBiography
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#isPartOfBiography
 :isPartOfBiography rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf dcterms:isPartOf ;
                    rdfs:domain :Page ;
                    rdfs:range :Biography .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#isPartOfPage
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#isPartOfPage
 :isPartOfPage rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf dcterms:isPartOf ;
               rdfs:domain :Paragraph ;
               rdfs:range :Page .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#provider
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#provider
 :provider rdf:type owl:ObjectProperty ;
           rdfs:domain fabio:DigitalManifestation ;
           rdfs:range :Provider ;
@@ -647,44 +647,44 @@ foaf:name rdf:type owl:DatatypeProperty ;
           <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasDiceCoefficient
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasDiceCoefficient
 :hasDiceCoefficient rdf:type owl:DatatypeProperty ;
-                    rdfs:domain :Cooccurrence ;
+                    rdfs:domain <https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence> ;
                     rdfs:range xsd:float .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPMIScore
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasPMIScore
 :hasPMIScore rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Cooccurrence ;
+             rdfs:domain <https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence> ;
              rdfs:range xsd:float .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPageNumber
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasPageNumber
 :hasPageNumber rdf:type owl:DatatypeProperty ;
                rdfs:domain :PageWebRepresentation ;
                rdfs:range xsd:string .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasPageRange
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasPageRange
 :hasPageRange rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf prism:pageRange ;
               rdfs:domain :BiographyWebRepresentation ;
               rdfs:range xsd:string .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasParagraphNumber
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasParagraphNumber
 :hasParagraphNumber rdf:type owl:DatatypeProperty ;
                     rdfs:domain :Paragraph ;
                     rdfs:range xsd:string .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#hasTextValue
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#hasTextValue
 :hasTextValue rdf:type owl:DatatypeProperty ;
               rdfs:domain :Paragraph ;
               rdfs:range xsd:string .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#lengthInCharacters
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#lengthInCharacters
 :lengthInCharacters rdf:type owl:DatatypeProperty ;
                     rdfs:domain :Paragraph ;
                     rdfs:range xsd:positiveInteger .
@@ -1107,14 +1107,14 @@ foaf:Organization rdf:type owl:Class ;
 foaf:Person rdf:type owl:Class .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Artwork
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Artwork
 :Artwork rdf:type owl:Class ;
          rdfs:subClassOf :ContentResource ;
          rdfs:comment "The Artwork class represents creative works of art, encompassing various mediums such as paintings, sculptures, and digital creations. It stores metadata such as title, artist, creation date, and style."@en ;
          rdfs:label "artwork" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Biography
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Biography
 :Biography rdf:type owl:Class ;
            rdfs:subClassOf fabio:Expression ,
                            [ rdf:type owl:Restriction ;
@@ -1125,50 +1125,37 @@ foaf:Person rdf:type owl:Class .
            rdfs:comment "The Biography class encapsulates chapters within Vasari's seminal work that focus on the lives and works of Renaissance artists. It is about a person and has a title, a page range, a starting and end page."@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#BiographyWebRepresentation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#BiographyWebRepresentation
 :BiographyWebRepresentation rdf:type owl:Class ;
                             rdfs:subClassOf fabio:WebPage .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#ContentResource
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#ContentResource
 :ContentResource rdf:type owl:Class ;
                  rdfs:subClassOf prov:Entity ;
                  rdfs:comment "The ContentResource class summarizes classes representing various types of extracted content and defines super-properties like labels and establishes the connection to the original sources from where said content was extracted."@en ;
                  rdfs:label "content resource" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#ContentStucturalComponent
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#ContentStucturalComponent
 :ContentStucturalComponent rdf:type owl:Class ;
                            rdfs:comment "The ContentStructuralComponent class represents the structural elements that make up the content within a larger document. These components serve as the building blocks that organize and define the structure of content, providing a framework for its presentation, navigation, and comprehension." .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Cooccurrence
-:Cooccurrence rdf:type owl:Class ;
-              rdfs:subClassOf oa:Annotation ,
-                              prov:Entity ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :involvedResource ;
-                                owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                                owl:onClass :ContentResource
-                              ] ;
-              rdfs:comment "The Cooccurrence class represents a connection between a minimum of two content resources, such as persons (artists), artworks, or other entities. It encapsulates information about the provenance, context, frequency (score), and scope of the co-occurrence."@en ;
-              rdfs:label "cooccurrence"@en .
-
-
-###  https://ise-fizkarlsruhe.github.io/viewsari/#CooccurrenceScope
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#CooccurrenceScope
 :CooccurrenceScope rdf:type owl:Class ;
                    rdfs:comment "The Cooccurrence scope class specifies from which perspective on the work the cooccurrences have been extracted. Were entire volumes considered? Were they extracted within single biographies?"@en ;
                    rdfs:label "cooccurrence scope" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#CoreferenceResolution
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#CoreferenceResolution
 :CoreferenceResolution rdf:type owl:Class ;
                        rdfs:subClassOf prov:Activity ;
                        rdfs:comment "CoreferenceResolution is an activity that involves the identification and linking of coreferent expressions within a text. Coreferent expressions are different textual elements that refer to the same entity." ;
                        rdfs:label "coreference resolution" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#DiceCalculation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#DiceCalculation
 :DiceCalculation rdf:type owl:Class ;
                  rdfs:subClassOf prov:Activity ;
                  owl:disjointWith :PMICalculation ;
@@ -1176,7 +1163,7 @@ foaf:Person rdf:type owl:Class .
                  rdfs:label "dice calculation"@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Edition
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Edition
 :Edition rdf:type owl:Class ;
          rdfs:subClassOf fabio:BookSeries ,
                          [ rdf:type owl:Restriction ;
@@ -1187,14 +1174,14 @@ foaf:Person rdf:type owl:Class .
 An edition is composed of several subsequent volumes."""@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#HistoricalEvent
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#HistoricalEvent
 :HistoricalEvent rdf:type owl:Class ;
                  rdfs:subClassOf :ContentResource ;
                  rdfs:comment "The HistoricalEvent class encapsulates data related to past occurrences, including details, if available, such as a normed label, a date, the location, and references to norm data about this event."@en ;
                  rdfs:label "historical event" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Location
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Location
 :Location rdf:type owl:Class ;
           rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ,
                           :ContentResource ;
@@ -1202,13 +1189,13 @@ An edition is composed of several subsequent volumes."""@en .
           rdfs:label "location" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Occupation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Occupation
 :Occupation rdf:type owl:Class ;
             rdfs:comment "The Occupation class defines three types of occupations, as introducted by Vasari in his work: Artist, sculptor and architect. Each of these types is mentioned for the corresponding artist in their  biography title and was extracted manually from it."@en ;
             rdfs:label "occupation"@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#OriginalWork
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#OriginalWork
 :OriginalWork rdf:type owl:Class ;
               rdfs:subClassOf fabio:Work ,
                               [ rdf:type owl:Restriction ;
@@ -1222,14 +1209,14 @@ An edition is composed of several subsequent volumes."""@en .
               rdfs:comment "The OriginalWork in the Viewsari ontology describes the higher-level idea of a (literary) work."@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#PMICalculation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#PMICalculation
 :PMICalculation rdf:type owl:Class ;
                 rdfs:subClassOf prov:Activity ;
                 rdfs:comment "The PMICalculation is a specific type of activity performed to extract co-occurrences, based on the pointwise mututal information of two entities in paragraphs."@en ;
                 rdfs:label "pmi calculation" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Page
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Page
 :Page rdf:type owl:Class ;
       rdfs:subClassOf fabio:Expression ,
                       [ rdf:type owl:Restriction ;
@@ -1239,7 +1226,7 @@ An edition is composed of several subsequent volumes."""@en .
       rdfs:comment "The Page class represents a single page within a document. It encapsulates attributes such as page number and consists of paragraphs."@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#PageWebRepresentation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#PageWebRepresentation
 :PageWebRepresentation rdf:type owl:Class ;
                        rdfs:subClassOf fabio:WebPage ,
                                        [ rdf:type owl:Restriction ;
@@ -1248,7 +1235,7 @@ An edition is composed of several subsequent volumes."""@en .
                                        ] .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Paragraph
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Paragraph
 :Paragraph rdf:type owl:Class ;
            rdfs:subClassOf doco:Paragraph ,
                            prov:Entity ,
@@ -1264,7 +1251,7 @@ An edition is composed of several subsequent volumes."""@en .
            rdfs:comment "A paragraph is a structural element in a text."@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Person
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Person
 :Person rdf:type owl:Class ;
         rdfs:subClassOf foaf:Person ,
                         :ContentResource ;
@@ -1272,12 +1259,12 @@ An edition is composed of several subsequent volumes."""@en .
         rdfs:label "person" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Provider
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Provider
 :Provider rdf:type owl:Class ;
           rdfs:subClassOf foaf:Organization .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#ResourceInText
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#ResourceInText
 :ResourceInText rdf:type owl:Class ;
                 rdfs:subClassOf oa:Annotation ,
                                 [ rdf:type owl:Restriction ;
@@ -1289,7 +1276,7 @@ An edition is composed of several subsequent volumes."""@en .
                 rdfs:label "resource in text" .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Translation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Translation
 :Translation rdf:type owl:Class ;
              rdfs:subClassOf fabio:BookSeries ,
                              [ rdf:type owl:Restriction ;
@@ -1300,7 +1287,7 @@ An edition is composed of several subsequent volumes."""@en .
 A translation is composed of several subsequent volumes."""@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#Volume
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#Volume
 :Volume rdf:type owl:Class ;
         rdfs:subClassOf fabio:Book ,
                         [ rdf:type owl:Restriction ;
@@ -1314,7 +1301,7 @@ A translation is composed of several subsequent volumes."""@en .
         rdfs:comment "The Volume class represents a single book within a larger collection/series, specifically focusing on translations or editions of a particular work."@en .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#VolumeWebRepresentation
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#VolumeWebRepresentation
 :VolumeWebRepresentation rdf:type owl:Class ;
                          rdfs:subClassOf fabio:WebSite ,
                                          [ rdf:type owl:Restriction ;
@@ -1323,51 +1310,64 @@ A translation is composed of several subsequent volumes."""@en .
                                          ] .
 
 
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence
+<https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence> rdf:type owl:Class ;
+                                                                rdfs:subClassOf oa:Annotation ,
+                                                                                prov:Entity ,
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty :involvedResource ;
+                                                                                  owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                                  owl:onClass :ContentResource
+                                                                                ] ;
+                                                                rdfs:comment "The Cooccurrence class represents a connection between a minimum of two content resources, such as persons (artists), artworks, or other entities. It encapsulates information about the provenance, context, frequency (score), and scope of the co-occurrence."@en ;
+                                                                rdfs:label "cooccurrence"@en .
+
+
 #################################################################
 #    Individuals
 #################################################################
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#architect
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#architect
 :architect rdf:type owl:NamedIndividual ,
                     :Occupation .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#biography_scope
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#biography_scope
 :biography_scope rdf:type owl:NamedIndividual ,
                           :CooccurrenceScope .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#coreference_script
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#coreference_script
 :coreference_script rdf:type owl:NamedIndividual ,
                              prov:SoftwareAgent .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#dice_script
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#dice_script
 :dice_script rdf:type owl:NamedIndividual ,
                       prov:SoftwareAgent .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#entire_work_scope
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#entire_work_scope
 :entire_work_scope rdf:type owl:NamedIndividual ,
                             :CooccurrenceScope .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#painter
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#painter
 :painter rdf:type owl:NamedIndividual ,
                   :Occupation .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#pmi_script
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#pmi_script
 :pmi_script rdf:type owl:NamedIndividual ,
                      prov:SoftwareAgent .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#sculptor
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#sculptor
 :sculptor rdf:type owl:NamedIndividual ,
                    :Occupation .
 
 
-###  https://ise-fizkarlsruhe.github.io/viewsari/#volume_scope
+###  https://viewsari.ise.fiz-karlsruhe.de/ontology/#volume_scope
 :volume_scope rdf:type owl:NamedIndividual ,
                        :CooccurrenceScope .
 
@@ -1408,17 +1408,17 @@ A translation is composed of several subsequent volumes."""@en .
 #    Rules
 #################################################################
 
-:cr rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#cr> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:corefResolution rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#corefResolution> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#p> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:cooc rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#cooc> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:activity rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#activity> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-:par rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+<https://ise-fizkarlsruhe.github.io/viewsari/#par> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
 [ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
    rdfs:comment "" ;
@@ -1427,19 +1427,19 @@ A translation is composed of several subsequent volumes."""@en .
    <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :ContentResource ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :cr
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cr>
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:used ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :corefResolution ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:wasGeneratedBy ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cr> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#corefResolution>
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:wasGeneratedBy ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :cr ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> :corefResolution
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:used ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#corefResolution> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#p>
                                                                            ] ;
                                                                  rdf:rest rdf:nil
                                                                ]
@@ -1448,8 +1448,8 @@ A translation is composed of several subsequent volumes."""@en .
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :inParagraph ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :cr ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cr> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#p>
                                                      ] ;
                                            rdf:rest rdf:nil
                                          ]
@@ -1461,20 +1461,20 @@ A translation is composed of several subsequent volumes."""@en .
    rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
    <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Cooccurrence ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :cooc
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> <https://viewsari.ise.fiz-karlsruhe.de/ontology//#Cooccurrence> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cooc>
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:used ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :activity ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> :par
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#activity> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#par>
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> prov:wasGeneratedBy ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :cooc ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> :activity
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cooc> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#activity>
                                                                            ] ;
                                                                  rdf:rest rdf:nil
                                                                ]
@@ -1483,8 +1483,8 @@ A translation is composed of several subsequent volumes."""@en .
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :inParagraph ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :cooc ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :par
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <https://ise-fizkarlsruhe.github.io/viewsari/#cooc> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <https://ise-fizkarlsruhe.github.io/viewsari/#par>
                                                      ] ;
                                            rdf:rest rdf:nil
                                          ]
