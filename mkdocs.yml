@@ -1,5 +1,6 @@
 site_name: Viewsari
 theme:
   name: material
+  logo: img/logo.png
 extra_css:
   - stylesheets/extra.css

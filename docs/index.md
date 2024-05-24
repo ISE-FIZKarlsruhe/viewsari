@@ -13,32 +13,15 @@ The information extraction phase is further explained under the [corresponding s
 
 The ontology's development is further explained on [this site](ontological_engineering.md).
 
-The final version can be found under [documentation](documentation.md).
-
 ## Discover Insights through Network Visualizations
 
-In Viewsari, we believe that knowledge is interconnected. Our platform allows you to explore complex relationships within your data using interactive network visualizations. Whether you’re analyzing scientific research, business data, or cultural artifacts, our visualizations reveal hidden patterns, connections, and dependencies.
-### Here, we would need a network visualization of the current KG.
+All the world's a graph and Giorgio Vasari's seminal work is an all-encompassing system of interconnected knowledge.
+In the future, Viewsari will allow you to explore complex relationships within this work using interactive network visualizations, hoping to reveal hidden patterns, connections, and dependencies.
+This shall support you in your research of Vasari's work with a low-level entry point.
 
-## Unleash the Power of SPARQL
-SPARQL (SPARQL Protocol and RDF Query Language) is the heart of semantic data exploration. With our built-in SPARQL endpoint, you can query your knowledge graph directly. Craft custom queries, retrieve specific information, and dive deep into your data. Whether you’re a seasoned semantic web expert or a curious explorer, SPARQL empowers you to extract meaningful insights.
-So, theoretically, we would put the first entrypoint for a SPARQL endpoint here.
-
-```sparql
-# counts all triples in a triple store and returns
-# the total number together with a current timestamp
-
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT (NOW() AS ?date) (xsd:integer(COUNT(*)) AS ?count) WHERE {
-   ?s ?p ?o
-}
-
-```
-More examples, more queries?
-
-
-## Meet SHMARQL: Your Semantic Exploration Companion
+## Unleash the Power of SPARQL with SHMARQL, Your Semantic Exploration Companion
+SPARQL (SPARQL Protocol and RDF Query Language) is the heart of semantic data exploration. 
+With Viewsari's built-in SPARQL endpoint, you can query the knowledge graph directly.
 SHMARQL is our intuitive SPARQL exploration tool. It bridges the gap between technical complexity and user-friendly interaction. Here’s what SHMARQL offers:
 
 - Query Builder: No need to memorize SPARQL syntax! SHMARQL provides a visual query builder. Drag and drop nodes, edges, and filters to construct your queries effortlessly.
@@ -46,4 +29,4 @@ SHMARQL is our intuitive SPARQL exploration tool. It bridges the gap between tec
 - Graph Visualization: Execute your SPARQL queries and visualize the results as interactive graphs. Explore nodes, expand relationships, and navigate through your knowledge graph dynamically.
 - Export and Share: Export query results, graphs, or visualizations in various formats. Collaborate with colleagues or embed insights in your reports.
 
-Add stuff for exploration here.
+For a first exploration, please visit [this site](https://viewsari.ise.fiz-karlsruhe.de/shmarql).
