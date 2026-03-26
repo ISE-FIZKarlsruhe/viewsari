@@ -191,7 +191,7 @@ def main():
         name.pop("alias1")
         name.pop("alias2")
         name.pop("number")
-    with open('../results/indices_parsed/'+file_num+'.csv', 'w', encoding="utf-8") as file:
+    with open('../results/index_of_names/'+file_num+'.csv', 'w', encoding="utf-8") as file:
         csv_writer=csv.DictWriter(file, fieldnames=["id","first_name", "middle_name", "surname", "full_name", "alias", "pages"])
         csv_writer.writeheader()
         csv_writer.writerows(names_data)

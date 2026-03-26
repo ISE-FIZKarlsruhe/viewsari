@@ -3,13 +3,12 @@ import math
 import glob
 import sys
 import re
-from datetime import date, datetime
-
+import datetime
 
 maxInt = sys.maxsize
 
 while True:
-    # decrease the maxInt value by factor 10 
+    # decrease the maxInt value by factor 10
     # as long as the OverflowError occurs.
 
     try:
@@ -20,17 +19,19 @@ while True:
 
 
 def main():
-    start_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    start_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     paragraph_num = 0
     name_paragraph_dict = dict()
     cooccurence_list = list()
-    pmi_activity = "pmi_activity_" + str(date.today())
+    dice_activity = "dice_activity_" + str(datetime.date.today())
 
-    for file_name in sorted(glob.glob("../../data/references/*.csv")):
+
+    for file_name in sorted(glob.glob("../../data/archive/person_references/references/*.csv")):
         with open(file_name, "r", encoding="utf-8") as f:
             data = csv.DictReader(f)
             data = list(data)
             file_num = re.match(r".*?(\d+).*?", file_name).group(1)
+
 
         paragraphs_set = set([row["paragraph"] for row in data])
         paragraph_num = paragraph_num + len(paragraphs_set)
@@ -49,14 +50,9 @@ def main():
                     if names[idx] != name2:
                         cooccurence_list.append((names[idx], name2, file_num, paragraph, page))
 
-
-        probability_dict = dict()
-        for name in name_paragraph_dict.keys():
-            probability_dict[name] = name_paragraph_dict[name] / paragraph_num
-
         output = []
-        for name1 in probability_dict.keys():
-            cooccurence_dict = dict()
+        for name1 in name_paragraph_dict.keys():
+            cooccurence_dict = {}
             for cooccurence in cooccurence_list:
                 if cooccurence[0] == name1:
                     if cooccurence[1] in cooccurence_dict.keys():
@@ -64,47 +60,35 @@ def main():
                         cooccurence_dict[cooccurence[1]]["pages"].append(cooccurence[4])
                         cooccurence_dict[cooccurence[1]]["paragraphs"].append(cooccurence[3])
                         cooccurence_dict[cooccurence[1]]["volume"].append(cooccurence[2])
-                        # cooccurence_dict[cooccurence[1]]["pages"] = cooccurence[4]
-                        # cooccurence_dict[cooccurence[1]]["paragraphs"] = cooccurence[3]
-                        # cooccurence_dict[cooccurence[1]]["volume"] = cooccurence[2]
                     else:
                         cooccurence_dict[cooccurence[1]] = {
                             "count": 1,
                             "pages": [cooccurence[4]],
                             "paragraphs": [cooccurence[3]],
-                            "volume": [cooccurence[2]]
-                            # "pages": cooccurence[4],
-                            # "paragraphs": cooccurence[3],
-                            # "volume": cooccurence[2]
+                            "volume": [cooccurence[2]],
                         }
 
             for name2, info in cooccurence_dict.items():
-                p_x = probability_dict[name1]
-                p_y = probability_dict[name2]
-                p_yx = (info["count"] / paragraph_num) / probability_dict[name1]
-                pmi_yx = math.log(p_yx / p_y, 2)
-                if pmi_yx > 0:
-                    output.append(
-                        {
-                            "artist1": name1,
-                            "probability_of_artist1": p_x,
-                            "artist2": name2,
-                            "probability_of_artist2": p_y,
-                            "shared_probability": p_yx,
-                            "pmi_score": pmi_yx,
-                            "pages": info["pages"],
-                            "paragraphs": info["paragraphs"],
-                            "volume": info["volume"],
-                            "pmi_activity": pmi_activity,
-                        }
-                    )
+                f_x = name_paragraph_dict[name1]
+                f_y = name_paragraph_dict[name2]
+                f_yx = info["count"]
+                dice = (2 * f_yx) / (f_x + f_y)
+                output.append({
+                    "artist1": name1,
+                    "artist2": name2,
+                    "dice_coefficient": dice,
+                    "pages": info["pages"],
+                    "paragraphs": info["paragraphs"],
+                    "volume": info["volume"],
+                    "dice_acitivty": dice_activity
+                })
 
-        sorted_output = sorted(output, key=lambda item: float(item["pmi_score"]), reverse=True)
+        sorted_output = sorted(output, key=lambda item: float(item["dice_coefficient"]), reverse=True)
         computed_pairs = set()
         new_output = []
-        end_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        end_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         for x in sorted_output:
-            if (x["artist1"], x["artist2"]) in computed_pairs:
+            if (x["artist2"], x["artist1"]) in computed_pairs:
                 continue
             else:
                 x["start"] = start_time
@@ -112,7 +96,7 @@ def main():
                 new_output.append(x)
                 computed_pairs.add((x["artist1"], x["artist2"]))
         if len(new_output) > 0:
-            with open("../../data/results/pmi_tables/" + file_num + ".csv", "w", encoding="utf-8") as out_f:
+            with open("../../data/results/dice_tables/" + file_num + ".csv", "w", encoding="utf-8") as out_f:
                 csv_writer = csv.DictWriter(out_f, new_output[0].keys())
                 csv_writer.writeheader()
                 csv_writer.writerows(new_output)

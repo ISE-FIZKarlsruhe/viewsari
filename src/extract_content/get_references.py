@@ -80,7 +80,7 @@ def main():
                             print(f"Current paragraph: {curr_paragraph}.")
                             output.append([page_num, name_id, char_pos[i], surfaces[i], curr_paragraph])
 
-        with open(f"../../data/references/{Path(file_name).stem}_v1.csv", "w", encoding="utf-8") as file:
+        with open(f"../../data/kg_foundation/person_references/references/{Path(file_name).stem}_v1.csv", "w", encoding="utf-8") as file:
             writer = csv.writer(file, delimiter=",")
             writer.writerow(["page", "index_name", "position", "reference", "paragraph"])
             writer.writerows(output)
