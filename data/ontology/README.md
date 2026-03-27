@@ -30,7 +30,7 @@ has been validated iteratively against a set of 39 competency questions
 derived from domain expert interviews with art historians, digital
 humanities researchers, and data engineers.
 
-![](/home/sarah/viewsari/data/ontology/ontology-example.png)
+![Example of the ontology in use](/./ontology-example.png)
 
 ---
 
