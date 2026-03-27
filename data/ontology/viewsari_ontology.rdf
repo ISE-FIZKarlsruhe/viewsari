@@ -76,6 +76,15 @@
     
 
 
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034 -->
+
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
+        <rdfs:label xml:lang="en">involves</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
