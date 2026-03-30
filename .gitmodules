@@ -1,0 +1,3 @@
+[submodule "obliquer"]
+	path = obliquer
+	url = https://github.com/ISE-FIZKarlsruhe/ObliquER
