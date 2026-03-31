@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}About — Viewsari{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.about-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 720px;
+  margin: 0 auto;
+}
+.about-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.about-subtitle {
+  font-size: 14px;
+  color: var(--ts);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.about-section {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.about-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.about-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.about-card-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ts);
+}
+.about-card-text strong { color: var(--tp); }
+.about-card-text a { color: var(--bl); text-decoration: none; }
+.about-card-text a:hover { text-decoration: underline; }
+.about-person {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.about-person-info { flex: 1; }
+.about-person-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--tp);
+  margin-bottom: 2px;
+}
+.about-person-role {
+  font-size: 12px;
+  color: var(--ts);
+  margin-bottom: 6px;
+}
+.about-person-affil {
+  font-size: 12px;
+  color: var(--tt);
+  line-height: 1.6;
+}
+.about-person-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.about-person-link {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bl);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.about-person-link:hover { text-decoration: underline; }
+.about-person-link svg { width: 14px; height: 14px; fill: currentColor; }
+.about-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about-input, .about-textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  padding: 10px 14px;
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--tp);
+  outline: none;
+  transition: border-color .12s;
+}
+.about-input:focus, .about-textarea:focus { border-color: var(--bl); }
+.about-textarea { resize: vertical; min-height: 100px; }
+.about-submit {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  background: var(--or);
+  color: #fff;
+  cursor: pointer;
+  transition: filter .12s;
+  align-self: flex-start;
+}
+.about-submit:hover { filter: brightness(.92); }
+{% endblock %}
+
+{% block topbar_chips %}
+<span class="bio-chip">About</span>
+{% endblock %}
+
+{% block content %}
+<div class="about-layout">
+
+  <div class="about-title">About Viewsari</div>
+  <div class="about-subtitle">
+    Viewsari is a research platform built as part of doctoral research at the
+    Institute for Information Service Engineering (ISE) at FIZ Karlsruhe and the
+    Karlsruhe Institute of Technology (KIT).
+  </div>
+
+  <div class="about-section">Project</div>
+  <div class="about-card">
+    <div class="about-card-text">
+      The project investigates <strong>artwork entity recognition and linking</strong> in
+      Giorgio Vasari's <em>Lives of the Most Eminent Painters, Sculptors, and Architects</em>
+      (1568 edition, De Vere English translation). It combines a formal ontology, an
+      LLM-based extraction pipeline (ObliquER), a manually annotated gold-standard corpus,
+      and a populated knowledge graph to make Vasari's artwork references computationally
+      accessible and explorable.
+    </div>
+  </div>
+
+  <div class="about-section">People</div>
+  <div class="about-card">
+    <div class="about-person">
+      <div class="about-person-info">
+        <div class="about-person-name">Sarah Rebecca Ondraszek, M.Sc.</div>
+        <div class="about-person-role">Author &amp; Developer &middot; PhD Candidate</div>
+        <div class="about-person-affil">
+          Information Service Engineering (ISE)<br>
+          FIZ Karlsruhe &middot; Karlsruhe Institute of Technology (KIT)
+        </div>
+        <div class="about-person-links">
+          <a class="about-person-link" href="mailto:sondraszek@gmail.com">
+            <svg viewBox="0 0 16 16"><path d="M2 4l6 4 6-4v8H2V4zm0-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2z"/></svg>
+            sondraszek@gmail.com
+          </a>
+          <a class="about-person-link" href="https://github.com/sarahondraszek" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-person">
+      <div class="about-person-info">
+        <div class="about-person-name">Prof. Dr. Harald Sack</div>
+        <div class="about-person-role">Thesis Supervisor</div>
+        <div class="about-person-affil">
+          Head of Information Service Engineering (ISE)<br>
+          FIZ Karlsruhe &middot; Karlsruhe Institute of Technology (KIT)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">Affiliations</div>
+  <div class="about-card">
+    <div class="about-card-text">
+      <strong><a href="https://www.fiz-karlsruhe.de/en/forschung/information-service-engineering" target="_blank" rel="noopener">FIZ Karlsruhe &mdash; Leibniz Institute for Information Infrastructure</a></strong><br>
+      Institute for Information Service Engineering (ISE)
+      <br><br>
+      <strong><a href="https://www.kit.edu" target="_blank" rel="noopener">Karlsruhe Institute of Technology (KIT)</a></strong><br>
+      Department of Economics and Management
+    </div>
+  </div>
+
+  <div class="about-section">Contact</div>
+  <div class="about-card">
+    <form class="about-contact-form" action="mailto:sondraszek@gmail.com" method="post" enctype="text/plain">
+      <input class="about-input" type="text" name="name" placeholder="Your name" required>
+      <input class="about-input" type="email" name="email" placeholder="Your email" required>
+      <textarea class="about-textarea" name="message" placeholder="Message" required></textarea>
+      <button class="about-submit" type="submit">Send message</button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

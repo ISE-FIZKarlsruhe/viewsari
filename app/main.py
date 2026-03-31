@@ -16,6 +16,7 @@ from app.routers import sparql as sparql_router
 from app.routers import explore as explore_router
 from app.routers import obliquer as obliquer_router
 from app.routers import kb as kb_router
+from app.routers import about as about_router
 
 load_dotenv()
 
@@ -52,3 +53,4 @@ app.include_router(sparql_router.router)
 app.include_router(explore_router.router)
 app.include_router(obliquer_router.router)
 app.include_router(kb_router.router)
+app.include_router(about_router.router)

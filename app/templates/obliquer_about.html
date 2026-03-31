@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}ObliquER — Viewsari{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.oq-about {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 820px;
+  margin: 0 auto;
+}
+.oq-about-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.oq-about-title em { color: var(--or); font-style: normal; }
+.oq-about-subtitle {
+  font-size: 14px;
+  color: var(--ts);
+  line-height: 1.6;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+.oq-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.oq-section-title::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.oq-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.oq-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.oq-card-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ts);
+}
+.oq-card-text strong { color: var(--tp); }
+.oq-pipeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.oq-step {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+}
+.oq-step-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 6px;
+}
+.oq-step-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tp);
+  margin-bottom: 4px;
+}
+.oq-step-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ts);
+}
+.oq-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.oq-type-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--seam);
+}
+.oq-type-card.explicit { border-left-color: var(--or); }
+.oq-type-card.implicit { border-left-color: var(--bl); }
+.oq-type-card.coref { border-left-color: var(--pu); }
+.oq-type-card.generic { border-left-color: var(--tt); }
+.oq-type-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.oq-type-label.explicit { color: var(--or); }
+.oq-type-label.implicit { color: var(--bl); }
+.oq-type-label.coref { color: var(--pu); }
+.oq-type-label.generic { color: var(--tt); }
+.oq-type-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ts);
+}
+.oq-demo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 100px;
+  background: var(--or);
+  color: #fff;
+  text-decoration: none;
+  transition: all .15s;
+  margin-top: 8px;
+}
+.oq-demo-cta:hover { filter: brightness(.92); }
+{% endblock %}
+
+{% block topbar_chips %}
+<span class="bio-chip">ObliquER</span>
+{% endblock %}
+
+{% block content %}
+<div class="oq-about">
+
+  <div class="oq-about-title"><em>ObliquER</em></div>
+  <div class="oq-about-subtitle">
+    An LLM-based entity recognition and linking pipeline designed for oblique, implicit,
+    and long-tail artwork references in Vasari's <em>Lives of the Most Eminent Painters,
+    Sculptors, and Architects</em>.
+  </div>
+
+  <div class="oq-section-title">What it does</div>
+  <div class="oq-card">
+    <div class="oq-card-text">
+      Vasari rarely names artworks directly. He describes them, alludes to them, refers back
+      to them with pronouns and definite noun phrases. Traditional named entity recognition
+      fails on this kind of text because the entities are <strong>oblique</strong> &mdash;
+      expressed through description, implication, and coreference rather than explicit naming.
+      <br><br>
+      ObliquER tackles this by combining LLM-based extraction with a formal annotation schema
+      that distinguishes four types of artwork mention, each requiring a different recognition
+      strategy. The pipeline produces structured, character-level annotations linked to
+      Wikidata and the Viewsari knowledge graph.
+    </div>
+  </div>
+
+  <div class="oq-section-title">Mention types</div>
+  <div class="oq-type-grid">
+    <div class="oq-type-card explicit">
+      <div class="oq-type-label explicit">Explicit</div>
+      <div class="oq-type-desc">
+        The artwork is named directly by its title, traditional name, or unambiguous identifier.
+        <br><em>"the Maest&agrave;"</em>, <em>"S. Maria del Fiore"</em>
+      </div>
+    </div>
+    <div class="oq-type-card implicit">
+      <div class="oq-type-label implicit">Implicit</div>
+      <div class="oq-type-desc">
+        The artwork is described without being named &mdash; its identity must be inferred
+        from context, location, subject matter, or attribution.
+        <br><em>"a large panel for the monks of Vallombrosa"</em>
+      </div>
+    </div>
+    <div class="oq-type-card coref">
+      <div class="oq-type-label coref">Coreferent</div>
+      <div class="oq-type-desc">
+        An anaphoric or cataphoric reference that points back to an earlier mention &mdash;
+        pronouns, demonstratives, definite descriptions.
+        <br><em>"that work"</em>, <em>"it"</em>, <em>"which"</em>
+      </div>
+    </div>
+    <div class="oq-type-card generic">
+      <div class="oq-type-label generic">Generic</div>
+      <div class="oq-type-desc">
+        A non-specific reference to artworks in general, not identifiable as a particular
+        entity.
+        <br><em>"works that were passing good"</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="oq-section-title">Pipeline stages</div>
+  <div class="oq-pipeline">
+    <div class="oq-step">
+      <div class="oq-step-num">Stage 1</div>
+      <div class="oq-step-title">Dynamic chunking</div>
+      <div class="oq-step-desc">
+        Paragraphs are segmented into context-aware chunks that preserve
+        coreference chains and discourse structure.
+      </div>
+    </div>
+    <div class="oq-step">
+      <div class="oq-step-num">Stage 2</div>
+      <div class="oq-step-title">Mention extraction</div>
+      <div class="oq-step-desc">
+        Zero-shot and few-shot LLM prompting with task definitions grounded
+        in the Viewsari ontology to extract typed mentions.
+      </div>
+    </div>
+    <div class="oq-step">
+      <div class="oq-step-num">Stage 3</div>
+      <div class="oq-step-title">Entity linking</div>
+      <div class="oq-step-desc">
+        Extracted mentions are linked to Wikidata entities or flagged as
+        out-of-knowledge-base (OOKB) for novel entities.
+      </div>
+    </div>
+    <div class="oq-step">
+      <div class="oq-step-num">Stage 4</div>
+      <div class="oq-step-title">Coreference clustering</div>
+      <div class="oq-step-desc">
+        Coreferent mentions are resolved into chains and linked to their
+        antecedent entity mentions.
+      </div>
+    </div>
+  </div>
+
+  <div class="oq-section-title">Technical details</div>
+  <div class="oq-card">
+    <div class="oq-card-text">
+      <strong>Grounding:</strong> Prompt engineering uses formal task definitions from the
+      Viewsari ontology, ensuring consistent annotation across the corpus.
+      <br><br>
+      <strong>OOKB handling:</strong> Artworks not found in Wikidata receive Viewsari-internal
+      IRIs and are flagged for future knowledge base expansion.
+      <br><br>
+      <strong>Provenance:</strong> Every extraction and linking step is recorded as a
+      PROV-O activity in the knowledge graph, enabling full traceability from annotation
+      to source paragraph to bibliographic context.
+      <br><br>
+      <strong>Evaluation:</strong> The pipeline is evaluated against a manually annotated
+      gold-standard corpus covering 16 biographies across 6 volumes.
+    </div>
+  </div>
+
+  <div class="oq-section-title">Try it</div>
+  <a class="oq-demo-cta" href="/obliquer/demo">
+    Open interactive demo &rarr;
+  </a>
+
+</div>
+{% endblock %}
