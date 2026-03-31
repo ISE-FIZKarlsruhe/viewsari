@@ -1,0 +1,836 @@
+<h2 id="crossreference" class="list">Cross-reference for [Ontology Name] classes, object properties and data properties <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by [Ontology Name].
+<div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
+ <h3 id="classes-headline" class="list">Classes</h3>
+ <ul class="hlist">
+  <li><a href="#0001012" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012">artwork</a></li>
+  <li><a href="#0001008" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008">biography</a></li>
+  <li><a href="#0001010" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010">biography web representation</a></li>
+  <li><a href="#0001025" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025">cooccurrence</a></li>
+  <li><a href="#0001024" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024">cooccurrence analysis</a></li>
+  <li><a href="#0001018" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018">coreferent</a></li>
+  <li><a href="#0001000" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000">edition</a></li>
+  <li><a href="#0001023" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023">entity linking</a></li>
+  <li><a href="#0001020" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020">explicit artwork mention</a></li>
+  <li><a href="#0001017" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017">explicit mention</a></li>
+  <li><a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a></li>
+  <li><a href="#0001019" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019">generic mention</a></li>
+  <li><a href="#0001021" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021">implicit artwork mention</a></li>
+  <li><a href="#0001016" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016">implicit mention</a></li>
+  <li><a href="#0001015" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015">location</a></li>
+  <li><a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a></li>
+  <li><a href="#0001022" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022">named entity recognition</a></li>
+  <li><a href="#0001014" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014">organization</a></li>
+  <li><a href="#0001009" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009">page</a></li>
+  <li><a href="#0001011" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011">page web representation</a></li>
+  <li><a href="#0001013" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013">person</a></li>
+  <li><a href="#0001001" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001">translation</a></li>
+  <li><a href="#0001006" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006">volume</a></li>
+  <li><a href="#0001007" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007">volume web representation</a></li>
+ </ul>
+ <div class="entity" id="0001012">
+  <h3>artwork<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012</p>
+  <div class="comment">
+   <span class="markdown">A creative work — painting, sculpture, fresco, architectural project, or decorative object — mentioned or described in the Vasari corpus. Artwork individuals are the body values of viewsari:explicit_mention and viewsari:implicit_mention instances. Where a Wikidata entity exists for the artwork, owl:sameAs links the Viewsari individual to the corresponding QID. Where no Wikidata entity exists (the out-of-knowledge-base case), the individual receives a Viewsari-internal IRI and is marked as such; it remains referenceable and queryable within the knowledge graph. Artwork individuals produced by ObliquER carry prov:wasGeneratedBy pointing to the viewsari:entity_linking activity that resolved them.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001008">
+  <h3>biography<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008</p>
+  <div class="comment">
+   <span class="markdown">The life and works account of a single artist or craftsman as written by Vasari. Each biography is treated as a distinct fabio:Expression that is part of a volume expression, spans a contiguous range of printed pages, and contains a set of paragraphs. In Viewsari, biographies are the primary unit of discourse for coreference resolution: ObliquER does not draw coreference arcs across biography boundaries. Page ranges are derived from the printed page numbers of the Du Vere edition; the start page of a biography is the first #Page_N anchor in the Gutenberg HTML at which that biography's text begins.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Expression" target="_blank" title="http://purl.org/spar/fabio/Expression">expression</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001010">
+  <h3>biography web representation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010</p>
+  <div class="comment">
+   <span class="markdown">The web-accessible manifestation of a single artist biography within a volume HTML file on Project Gutenberg. Because the Gutenberg edition hosts all biographies of a volume in one HTML file, the biography web representation is identified by the URL of the volume file combined with the #Page_N anchor of the biography's first page (e.g., https://…/25326-h.htm#Page_69 for Giotto's biography in Volume 1). As a subclass of fabio:WebPage, instances of this class carry an rdfs:seeAlso link to that anchor URL. The class serves as the range of frbr:isPartOf links from viewsari:page_web_representation instances.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/WebPage" target="_blank" title="http://purl.org/spar/fabio/WebPage">web page</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001025">
+  <h3>cooccurrence<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001024">
+  <h3>cooccurrence analysis<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024</p>
+  <div class="comment">
+   <span class="markdown">A prov:Activity subclass representing a single run of the co-occurrence extraction pipeline, which identifies pairwise entity co-occurrences within paragraphs of the Vasari corpus. Each activity instance carries prov:wasAssociatedWith pointing to the executing Python script, prov:used pointing to the paragraphs it consumed, and prov:wasGeneratedBy on the resulting viewsari:cooccurrence individuals. In the Viewsari knowledge graph, one instance of this class — viewsari:cooccurrence_extraction_run_1 — covers the full ten-volume co-occurrence extraction.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001018">
+  <h3>coreferent<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018</p>
+  <div class="comment">
+   <span class="markdown">A mention that refers back to an entity already introduced earlier in the same biography, realised as a pronoun, demonstrative, definite noun phrase, or descriptive repetition (e.g., "it", "the work", "the said panel", "the same altarpiece"). Coreferent mentions do not introduce new entities; they extend existing coreference clusters established by prior explicit or implicit mentions within the same biography. Coreference is bounded by biography: arcs are never drawn across biography boundaries. Identity across biographies is established at the knowledge graph level via shared owl:sameAs links to external identifiers, not through coreferential annotation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/oa#Annotation" target="_blank" title="http://www.w3.org/ns/oa#Annotation">Annotation</a> <sup class="type-c" title="class">c</sup>, <a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#0001035" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035">refers to</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001000">
+  <h3>edition<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000</p>
+  <div class="comment">
+   <span class="markdown">A published version of a work, representing a distinct textual state produced by an editorial process. In Viewsari, the primary instance is the 1568 Giunti edition of Le Vite. As a subclass of fabio:Expression, an edition is an abstract intellectual entity independent of any physical or digital carrier; physical or digital realizations are represented as fabio:Manifestation individuals linked via frbr:hasEmbodiment. Editions may differ from one another in textual content, organization, and completeness; the 1568 edition of The Lives differs substantially from the 1550 edition (Torrentiniana) and is the basis for the Du Vere translation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Expression" target="_blank" title="http://purl.org/spar/fabio/Expression">expression</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#0001030" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030">is based on</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    has members
+   </dt>
+   <dd>
+    <a href="#0001028" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028">le_vite_1568</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001023">
+  <h3>entity linking<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023</p>
+  <div class="comment">
+   <span class="markdown">A prov:Activity subclass representing a single run of the entity linking pipeline, in which recognized mention clusters are matched against a Wikidata candidate set to produce owl:sameAs assertions or out-of-knowledge-base designations. Each activity instance carries prov:wasAssociatedWith pointing to the LLM used as the linking decision-maker, prov:used pointing to the candidate index and the annotations it consumed, and prov:wasGeneratedBy on the resulting viewsari:artwork individuals. The prompt template version and the Wikidata dump date used for candidate generation should be recorded as additional data properties on each activity instance to ensure reproducibility.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001020">
+  <h3>explicit artwork mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020</p>
+  <div class="comment">
+   <span class="markdown">An explicit mention whose body resolves to a viewsari:artwork individual. The surface form is a canonical title or recognized traditional identifier for an artwork (e.g., "The Last Judgment", "La Gioconda"). Explicit artwork mentions are the starting point for entity linking: the surface form is compared against Wikidata labels to generate candidates for the viewsari:entity_linking activity.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001017" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017">explicit mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001017">
+  <h3>explicit mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017</p>
+  <div class="comment">
+   <span class="markdown">A mention in which the entity is identified through a canonical surface form — a proper name, an established title, or a recognized traditional identifier (e.g., "La Gioconda", "The Battle of Marciano", "Michelagnolo Buonarroti"). Explicit mentions are the most straightforward case for entity linking because the surface form is directly comparable to knowledge base labels.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/oa#Annotation" target="_blank" title="http://www.w3.org/ns/oa#Annotation">Annotation</a> <sup class="type-c" title="class">c</sup>, <a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#0001020" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020">explicit artwork mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001033">
+  <h3>extracted content<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033</p>
+  <div class="comment">
+   <span class="markdown">The common superclass for all content-layer individuals produced by computational extraction from the Vasari corpus. By extending prov:Entity, every instance of this class inherits the provenance vocabulary (prov:wasGeneratedBy, prov:wasDerivedFrom) and can be linked to the extraction activity that produced it. Specific entity types — viewsari:person, viewsari:artwork, viewsari:location, viewsari:organization, viewsari:cooccurrence — are subclasses of this class. The class supports uniform provenance queries across all entity types without requiring UNION clauses for each subclass separately. Use this class as a filter in SPARQL when querying for any extracted entity regardless of type.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#0001012" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012">artwork</a> <sup class="type-c" title="class">c</sup>, <a href="#0001025" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025">cooccurrence</a> <sup class="type-c" title="class">c</sup>, <a href="#0001015" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015">location</a> <sup class="type-c" title="class">c</sup>, <a href="#0001014" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014">organization</a> <sup class="type-c" title="class">c</sup>, <a href="#0001013" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013">person</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#0001032" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032">in paragraph</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001019">
+  <h3>generic mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019</p>
+  <div class="comment">
+   <span class="markdown">A mention that refers to an entity type in general rather than to a specific individual. Generic mentions arise when Vasari speaks of artistic practice as a craft process (e.g., "works of painting" in the sense of the art of painting) rather than to a specific artwork. Generic mention instances are retained in the knowledge graph to support studies of Vasari's rhetorical register and the distinction between referential and predicative language in art-historical prose, but they are excluded from ObliquER precision and recall computation and do not generate viewsari:artwork individuals.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/oa#Annotation" target="_blank" title="http://www.w3.org/ns/oa#Annotation">Annotation</a> <sup class="type-c" title="class">c</sup>, <a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001021">
+  <h3>implicit artwork mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021</p>
+  <div class="comment">
+   <span class="markdown">An implicit mention whose referent is a specific, recoverable viewsari:artwork individual described through a descriptive passage rather than a canonical title. This is the primary target of the ObliquER extraction pipeline, as implicit artwork mentions constitute the majority of artwork references in Vasari and are the hardest to link to external knowledge bases. Entity linking for implicit artwork mentions relies on contextual signals (artist identity, location, iconographic subject, medium) rather than surface-form similarity.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001016" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016">implicit mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001016">
+  <h3>implicit mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016</p>
+  <div class="comment">
+   <span class="markdown">A mention in which a specific, recoverable entity is described but not named through a canonical surface form. The entity must be uniquely identifiable from contextual evidence (commission, location, medium, iconographic subject) even without a formal title. This is the paradigmatic mention type for artworks in Vasari, where descriptive circumlocutions such as "a panel he executed for the high altar of S. Croce" constitute the primary referential mode. The principal distinguishing criterion is recoverability: the mention must refer to a unique concrete entity that can in principle be identified on the basis of the passage.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/oa#Annotation" target="_blank" title="http://www.w3.org/ns/oa#Annotation">Annotation</a> <sup class="type-c" title="class">c</sup>, <a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#0001021" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021">implicit artwork mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001015">
+  <h3>location<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001026">
+  <h3>mention<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026</p>
+  <div class="comment">
+   <span class="markdown">A surface-form reference to an entity in the Vasari corpus, extracted by the ObliquER pipeline or by the NER and coreference resolution step over the Index of Names. Every mention is typed simultaneously as oa:Annotation (carrying oa:hasTarget, oa:hasBodyValue, oa:hasSource) and as prov:Entity (carrying prov:wasGeneratedBy, prov:wasDerivedFrom), reflecting its dual role as a scholarly annotation anchored in the source text and as the output of a documented computational process. The four disjoint subclasses — viewsari:explicit_mention, viewsari:implicit_mention, viewsari:coreferent, and viewsari:generic_mention — classify the referential mode of the mention. Subclasses for artwork mentions (viewsari:explicit_artwork_mention, viewsari:implicit_artwork_mention) further specialize the entity type.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/oa#Annotation" target="_blank" title="http://www.w3.org/ns/oa#Annotation">Annotation</a> <sup class="type-c" title="class">c</sup>, <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#0001018" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018">coreferent</a> <sup class="type-c" title="class">c</sup>, <a href="#0001017" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017">explicit mention</a> <sup class="type-c" title="class">c</sup>, <a href="#0001019" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019">generic mention</a> <sup class="type-c" title="class">c</sup>, <a href="#0001016" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016">implicit mention</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#0001035" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035">refers to</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001022">
+  <h3>named entity recognition<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022</p>
+  <div class="comment">
+   <span class="markdown">A prov:Activity subclass representing a single run of the named entity recognition and coreference resolution pipeline. In the first population stage, instances of this class correspond to runs of the Index-of-Names-based NER pipeline that produced viewsari:mention individuals from the paragraphs of the Du Vere translation. In the ObliquER stage, instances correspond to LLM inference runs that produced viewsari:explicit_mention, viewsari:implicit_mention, viewsari:coreferent, and viewsari:generic_mention individuals. Each activity instance carries prov:wasAssociatedWith pointing to the executing prov:SoftwareAgent (a Python script or an LLM identifier), prov:used pointing to the consumed paragraphs and index resources, and prov:startedAtTime / prov:endedAtTime timestamps where available.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001014">
+  <h3>organization<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001009">
+  <h3>page<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009</p>
+  <div class="comment">
+   <span class="markdown">A single numbered printed page within a biography, corresponding to one #Page_N anchor in the Gutenberg HTML file and to one printed page in the 1912 Medici Society edition. Page individuals serve as the range of the viewsari:hasStartPage and viewsari:hasEndPage properties — more precisely, their corresponding web representation instances do — and as the structural unit that links paragraphs to their position within the document hierarchy. A page belongs to exactly one biography expression via frbr:isPartOf.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Expression" target="_blank" title="http://purl.org/spar/fabio/Expression">expression</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001011">
+  <h3>page web representation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011</p>
+  <div class="comment">
+   <span class="markdown">The web-accessible manifestation of a single printed page within the Gutenberg HTML edition. Each instance corresponds to one #Page_N anchor in the volume HTML file. Instances of this class are the range of both viewsari:hasStartPage and viewsari:hasEndPage, meaning that paragraph instances link directly to dereferenceable page-level resources, enabling a researcher to navigate from a knowledge graph triple to the exact passage in the source text by following the rdfs:seeAlso URL. Instances are grouped under their containing viewsari:biography_web_representation via frbr:isPartOf.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/WebPage" target="_blank" title="http://purl.org/spar/fabio/WebPage">web page</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#0001005" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005">has end page</a> <sup class="type-op" title="object property">op</sup>, <a href="#0001004" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004">has start page</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001013">
+  <h3>person<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013</p>
+  <div class="comment">
+   <span class="markdown">A historical individual mentioned in the Vasari corpus — primarily artists, architects, sculptors, and patrons, but also popes, rulers, and other figures named in the biographies. Person individuals are derived from the Index of Names in each volume of the Du Vere translation, augmented by coreference resolution over the paragraph texts. Each person individual is globally unique across all ten volumes: the same canonical index name yields the same person IRI regardless of which volume the mention appears in. Where a Wikidata entry exists, owl:sameAs links to the QID. Person individuals carry prov:wasGeneratedBy pointing to the viewsari:coreference_reconciliation activity that resolved them.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001001">
+  <h3>translation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001</p>
+  <div class="comment">
+   <span class="markdown">A rendering of a work into a language other than that of the source edition, treated as a distinct fabio:Expression rather than a mere derivative. In Viewsari, the primary instance is the 1912 English translation by Gaston C. du Vere, published by Macmillan and the Medici Society in ten volumes. All volumes, biographies, pages, and paragraphs in the Viewsari knowledge graph are derived from this translation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Expression" target="_blank" title="http://purl.org/spar/fabio/Expression">expression</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#0001030" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030">is based on</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    has members
+   </dt>
+   <dd>
+    <a href="#0001029" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029">The Lives of the Most Eminent Painters Sculptors and Architects</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001006">
+  <h3>volume<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006</p>
+  <div class="comment">
+   <span class="markdown">A physically or digitally bounded division of an edition or translation, corresponding to a single book in a multi-volume set. As a subclass of fabio:Book, a volume is an expression-level entity: it represents the intellectual content of one numbered volume independent of its digital or print carrier. In Viewsari, the ten volumes of the Du Vere translation are the primary instances of this class. Each volume contains a subset of artist biographies and is embodied by a corresponding viewsari:volume_web_representation on Project Gutenberg.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Book" target="_blank" title="http://purl.org/spar/fabio/Book">book</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001007">
+  <h3>volume web representation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007</p>
+  <div class="comment">
+   <span class="markdown">The web-accessible digital manifestation of a single volume of The Lives, hosted as a single HTML file on Project Gutenberg. As a subclass of fabio:WebSite, this class represents the entire Gutenberg HTML file for one volume (e.g., https://www.gutenberg.org/files/25326/25326-h/25326-h.htm for Volume 1). The file contains all biographies of that volume and embeds printed page markers as HTML anchors in the form #Page_N, which are the targets of viewsari:hasStartPage and viewsari:hasEndPage links from paragraph individuals. rdfs:seeAlso on instances of this class points to the Gutenberg HTML URL.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/WebSite" target="_blank" title="http://purl.org/spar/fabio/WebSite">web site</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
+ <h3 id="properties" class="list">Object Properties</h3>
+ <ul class="hlist">
+  <li><a href="#0001005" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005">has end page</a></li>
+  <li><a href="#0001004" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004">has start page</a></li>
+  <li><a href="#0001032" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032">in paragraph</a></li>
+  <li><a href="#0001034" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034">involves</a></li>
+  <li><a href="#0001030" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030">is based on</a></li>
+  <li><a href="#0001036" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036">is basis of</a></li>
+  <li><a href="#0001035" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035">refers to</a></li>
+ </ul>
+ <div class="entity" id="0001005">
+  <h3>has end page<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005</p>
+  <div class="comment">
+   <span class="markdown">Links a doco:Paragraph to the viewsari:page_web_representation instance that corresponds to the last printed page on which the paragraph ends. For paragraphs confined to a single page this property and viewsari:hasStartPage resolve to the same individual. Across all ten volumes of the Du Vere translation, 48.2% of paragraphs span more than one printed page, making this property necessary to faithfully represent the physical extent of each passage.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://purl.org/spar/doco/Paragraph" target="_blank" title="http://purl.org/spar/doco/Paragraph">paragraph</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#0001011" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011">page web representation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001004">
+  <h3>has start page<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004</p>
+  <div class="comment">
+   <span class="markdown">Links a doco:Paragraph to the viewsari:page_web_representation instance that corresponds to the first printed page on which the paragraph begins. For paragraphs confined to a single page this property and viewsari:hasEndPage resolve to the same individual. The range is intentionally set to the manifestation level (page web representation) rather than the expression level (page), because physical page extent is a property of the embodied digital text, not of the abstract intellectual content.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://purl.org/spar/doco/Paragraph" target="_blank" title="http://purl.org/spar/doco/Paragraph">paragraph</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#0001011" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011">page web representation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001032">
+  <h3>in paragraph<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032</p>
+  <div class="comment">
+   <span class="markdown">Anchors a viewsari:extracted_content individual — most commonly a viewsari:cooccurrence — to the doco:Paragraph in which the co-occurring surface forms appear. This property provides the primary provenance link between the content layer and the structural layer and is the key predicate for source-text queries such as "retrieve all co-occurrences attested in paragraph X". The subproperty relationship to dct:relation is intentional: the paragraph is the relational context, not a part-of relationship.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://purl.org/dc/terms/relation" target="_blank" title="http://purl.org/dc/terms/relation">relation</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#0001033" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">extracted content</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://purl.org/spar/doco/Paragraph" target="_blank" title="http://purl.org/spar/doco/Paragraph">paragraph</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001034">
+  <h3>involves<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://purl.org/dc/terms/relation" target="_blank" title="http://purl.org/dc/terms/relation">relation</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001030">
+  <h3>is based on<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030</p>
+  <div class="comment">
+   <span class="markdown">Records the derivation relationship between a viewsari:translation and the viewsari:edition from which it was made. This property is a subproperty of frbr:relatedEndeavour and specialises it for the specific case of a translation deriving from an edition of the same work. In the Viewsari knowledge graph, the Du Vere English translation (the_lives_1568) is based on the 1568 Giunti Italian edition (le_vite_1568).</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://purl.org/vocab/frbr/core#relatedEndeavour" target="_blank" title="http://purl.org/vocab/frbr/core#relatedEndeavour">related Endeavour</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#0001001" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001">translation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#0001000" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000">edition</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#0001036" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036">is basis of</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001036">
+  <h3>is basis of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://purl.org/vocab/frbr/core#relatedEndeavour" target="_blank" title="http://purl.org/vocab/frbr/core#relatedEndeavour">related Endeavour</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#0001030" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030">is based on</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001035">
+  <h3>refers to<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035</p>
+  <div class="comment">
+   <span class="markdown">Links a coreferent mention to the antecedent mention (explicit or implicit) to which it co-refers within the same biography. The antecedent must lie within the current biography; cross-biography coreference is not represented.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://purl.org/dc/terms/relation" target="_blank" title="http://purl.org/dc/terms/relation">relation</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#0001018" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018">coreferent</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#0001026" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">mention</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="dataproperties">
+ <h3 id="dataproperties-headline" class="list">Data Properties</h3>
+ <ul class="hlist">
+  <li><a href="#0001003" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003">has length in characters</a></li>
+  <li><a href="#0001002" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002">has text</a></li>
+ </ul>
+ <div class="entity" id="0001003">
+  <h3>has length in characters<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003</p>
+  <div class="comment">
+   <span class="markdown">Records the character length of the merged plain-text content of a doco:Paragraph as a non-negative integer. The value is computed after page-fragment merging and normalization and reflects the length of the string stored in viewsari:hasText. This property supports corpus-statistical queries (e.g., identifying paragraphs likely to contain multiple entity mentions by length threshold) and provides a fast validation check: the oa:end offset of any viewsari:position_selector contained within a paragraph must not exceed this value.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://purl.org/spar/doco/Paragraph" target="_blank" title="http://purl.org/spar/doco/Paragraph">paragraph</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#int" target="_blank" title="http://www.w3.org/2001/XMLSchema#int">int</a>
+    </dd>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#integer" target="_blank" title="http://www.w3.org/2001/XMLSchema#integer">integer</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="0001002">
+  <h3>has text<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002</p>
+  <div class="comment">
+   <span class="markdown">Stores the full normalized plain-text content of a doco:Paragraph as a string literal. The text is stored after normalization (removal of HTML markup artefacts and restoration of paragraph boundaries split across source pages).</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2002/07/owl#topDataProperty" target="_blank" title="http://www.w3.org/2002/07/owl#topDataProperty">top Data Property</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://purl.org/spar/doco/Paragraph" target="_blank" title="http://purl.org/spar/doco/Paragraph">paragraph</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="namedindividuals">
+ <h3 id="namedindividuals" class="list">Named Individuals</h3>
+ <ul class="hlist">
+  <li><a href="#0001037" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037">giorgio_vasari</a></li>
+  <li><a href="#0001027" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027">le_vite</a></li>
+  <li><a href="#0001028" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028">le_vite_1568</a></li>
+  <li><a href="#0001029" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029">The Lives of the Most Eminent Painters Sculptors and Architects</a></li>
+  <li><a href="#0001031" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031">the_lives_gutenberg-version</a></li>
+ </ul>
+ <div class="entity" id="0001037">
+  <h3>giorgio_vasari<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037</p>
+ </div>
+ <div class="entity" id="0001027">
+  <h3>le_vite<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027</p>
+  <div class="comment">
+   <span class="markdown">The abstract intellectual work Le Vite de' più eccellenti pittori, scultori, e architettori by Giorgio Vasari. This individual represents the work in the FRBR sense — the abstract conception independent of any specific edition, translation, or physical carrier. The Wikidata item Q1645493 is the external authority record for this work.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/Work" target="_blank" title="http://purl.org/spar/fabio/Work">work</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/creator" target="_blank" title="http://purl.org/dc/terms/creator">creator</a> <sup class="type-op" title="object property">op</sup> <a href="#0001037" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037">giorgio_vasari</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://purl.org/vocab/frbr/core#realization" target="_blank" title="http://purl.org/vocab/frbr/core#realization">realization</a> <sup class="type-op" title="object property">op</sup> <a href="#0001028" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028">le_vite_1568</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dd>
+    <a href="http://purl.org/vocab/frbr/core#realization" target="_blank" title="http://purl.org/vocab/frbr/core#realization">realization</a> <sup class="type-op" title="object property">op</sup> <a href="#0001029" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029">The Lives of the Most Eminent Painters Sculptors and Architects</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001028">
+  <h3>le_vite_1568<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028</p>
+  <div class="comment">
+   <span class="markdown">The 1568 Giunti (Giuntina) edition of Le Vite, published in Florence by the Giunti press. This is the canonical edition of The Lives, substantially expanded and revised relative to the first 1550 Torrentiniana edition, and is the source text on which the Du Vere English translation (viewsari:the_lives_1568) is based. All volume, biography, page, and paragraph instances in the Viewsari knowledge graph ultimately trace their editorial provenance to this edition.</span>
+  </div>
+  <dl>
+   <dt>
+    Date:
+   </dt>
+   <dd>
+    1568
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="#0001000" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000">edition</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001029">
+  <h3>The Lives of the Most Eminent Painters Sculptors and Architects<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029</p>
+  <div class="comment">
+   <span class="markdown">The 1912 English translation of Le Vite by Gaston C. du Vere, published in ten volumes by Macmillan and the Medici Society (London, 1912–1914). This is the primary source text for all extraction and annotation in the Viewsari project. The translation follows the 1568 Giunti edition closely and is the version digitised by Project Gutenberg (EBook series starting at #25326). It is the parent of all ten viewsari:volume individuals in the knowledge graph.</span>
+  </div>
+  <dl>
+   <dt>
+    Date:
+   </dt>
+   <dd>
+    1912-1915
+   </dd>
+  </dl>
+  <dl>
+   <dt>
+    Authors:
+   </dt>
+   <dd>
+    Gaston C. du Vere
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="#0001001" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001">translation</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://purl.org/vocab/frbr/core#embodiment" target="_blank" title="http://purl.org/vocab/frbr/core#embodiment">embodiment</a> <sup class="type-op" title="object property">op</sup> <a href="#0001031" title="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031">the_lives_gutenberg-version</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="0001031">
+  <h3>the_lives_gutenberg-version<sup class="type-ni" title="named individual">ni</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031</p>
+  <div class="comment">
+   <span class="markdown">The Project Gutenberg web publication of the Du Vere translation, comprising ten separate HTML files (one per volume). This individual represents the collection as a whole; each volume web representation links to it via frbr:isPartOf. The HTML files embed printed page markers as #Page_N anchors, which are the targets of all rdfs:seeAlso links on page and biography web representation instances. The Gutenberg release was produced from images provided by the Internet Archive / Canadian Libraries and encoded in ISO-8859-1.</span>
+  </div>
+  <dl>
+   <dt>
+    Contributors:
+   </dt>
+   <dd>
+    Project Gutenberg
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    belongs to
+   </dt>
+   <dd>
+    <a href="http://purl.org/spar/fabio/ManifestationCollection" target="_blank" title="http://purl.org/spar/fabio/ManifestationCollection">manifestation collection</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has facts
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2008/05/skos#note" target="_blank" title="http://www.w3.org/2008/05/skos#note">note</a> <sup class="type-ap" title="annotation property">ap</sup> <span class="literal">"text/html"</span>
+   </dd>
+  </dl>
+ </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+<sup class="type-dp" title="Data Properties">dp</sup>: Data Properties <br/>
+<sup class="type-ni" title="Named Individuals">ni</sup>: Named Individuals <br/>
+</div>
+</div>

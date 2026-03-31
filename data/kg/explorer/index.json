@@ -1,0 +1,198 @@
+[
+  {
+    "file": "person_giotto.json",
+    "label": "Giotto",
+    "mode": "person",
+    "nodes": 41,
+    "edges": 42
+  },
+  {
+    "file": "person_cimabue.json",
+    "label": "Cimabue",
+    "mode": "person",
+    "nodes": 7,
+    "edges": 6
+  },
+  {
+    "file": "person_michelagnolo.json",
+    "label": "Michelagnolo",
+    "mode": "person",
+    "nodes": 135,
+    "edges": 172
+  },
+  {
+    "file": "person_brunelleschi.json",
+    "label": "Brunelleschi",
+    "mode": "person",
+    "nodes": 27,
+    "edges": 30
+  },
+  {
+    "file": "person_donatello.json",
+    "label": "Donatello",
+    "mode": "person",
+    "nodes": 46,
+    "edges": 50
+  },
+  {
+    "file": "person_ghirlandajo.json",
+    "label": "Ghirlandajo",
+    "mode": "person",
+    "nodes": 4,
+    "edges": 4
+  },
+  {
+    "file": "person_perugino.json",
+    "label": "Perugino",
+    "mode": "person",
+    "nodes": 20,
+    "edges": 24
+  },
+  {
+    "file": "person_mantegna.json",
+    "label": "Mantegna",
+    "mode": "person",
+    "nodes": 9,
+    "edges": 8
+  },
+  {
+    "file": "person_pontormo.json",
+    "label": "Pontormo",
+    "mode": "person",
+    "nodes": 29,
+    "edges": 32
+  },
+  {
+    "file": "person_bandinelli.json",
+    "label": "Bandinelli",
+    "mode": "person",
+    "nodes": 52,
+    "edges": 64
+  },
+  {
+    "file": "person_sansovino.json",
+    "label": "Sansovino",
+    "mode": "person",
+    "nodes": 21,
+    "edges": 22
+  },
+  {
+    "file": "person_signorelli.json",
+    "label": "Signorelli",
+    "mode": "person",
+    "nodes": 5,
+    "edges": 4
+  },
+  {
+    "file": "artwork_s_croce.json",
+    "label": "S. Croce",
+    "mode": "artwork",
+    "nodes": 100,
+    "edges": 99
+  },
+  {
+    "file": "artwork_sistine.json",
+    "label": "Sistine",
+    "mode": "artwork",
+    "nodes": 28,
+    "edges": 35
+  },
+  {
+    "file": "artwork_s_maria_novella.json",
+    "label": "S. Maria Novella",
+    "mode": "artwork",
+    "nodes": 86,
+    "edges": 81
+  },
+  {
+    "file": "artwork_madonna.json",
+    "label": "Madonna",
+    "mode": "artwork",
+    "nodes": 149,
+    "edges": 145
+  },
+  {
+    "file": "artwork_crucifix.json",
+    "label": "Crucifix",
+    "mode": "artwork",
+    "nodes": 153,
+    "edges": 147
+  },
+  {
+    "file": "artwork_chapel.json",
+    "label": "Chapel",
+    "mode": "artwork",
+    "nodes": 102,
+    "edges": 107
+  },
+  {
+    "file": "artwork_last_supper.json",
+    "label": "Last Supper",
+    "mode": "artwork",
+    "nodes": 56,
+    "edges": 54
+  },
+  {
+    "file": "artwork_annunciation.json",
+    "label": "Annunciation",
+    "mode": "artwork",
+    "nodes": 142,
+    "edges": 135
+  },
+  {
+    "file": "artwork_tomb.json",
+    "label": "tomb",
+    "mode": "artwork",
+    "nodes": 99,
+    "edges": 98
+  },
+  {
+    "file": "artwork_fresco.json",
+    "label": "fresco",
+    "mode": "artwork",
+    "nodes": 150,
+    "edges": 151
+  },
+  {
+    "file": "artwork_baptistery.json",
+    "label": "Baptistery",
+    "mode": "artwork",
+    "nodes": 13,
+    "edges": 13
+  },
+  {
+    "file": "artwork_s_pietro.json",
+    "label": "S. Pietro",
+    "mode": "artwork",
+    "nodes": 91,
+    "edges": 90
+  },
+  {
+    "file": "bio_giotto.json",
+    "label": "Bio: Giotto",
+    "mode": "biography",
+    "nodes": 105,
+    "edges": 104
+  },
+  {
+    "file": "bio_botticelli.json",
+    "label": "Bio: Botticelli",
+    "mode": "biography",
+    "nodes": 62,
+    "edges": 61
+  },
+  {
+    "file": "bio_ghirlandajo.json",
+    "label": "Bio: Ghirlandajo",
+    "mode": "biography",
+    "nodes": 131,
+    "edges": 130
+  },
+  {
+    "file": "bio_brunelleschi.json",
+    "label": "Bio: Brunelleschi",
+    "mode": "biography",
+    "nodes": 106,
+    "edges": 105
+  }
+]

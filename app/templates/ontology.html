@@ -1,0 +1,1950 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Ontology{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.layout-onto {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 960px;
+  margin: 0 auto;
+}
+.onto-header { margin-bottom: 36px; }
+.onto-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.onto-subtitle {
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.6;
+}
+.onto-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.onto-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--pill-or);
+  color: var(--or);
+  border: 1px solid rgba(240,90,26,.2);
+  white-space: nowrap;
+}
+.onto-tag.blue {
+  background: var(--pill-bl);
+  color: var(--bl);
+  border-color: rgba(27,110,243,.2);
+}
+.onto-tag.purple {
+  background: var(--pill-pu);
+  color: var(--pu);
+  border-color: rgba(124,58,237,.2);
+}
+.onto-section { margin-bottom: 36px; }
+.onto-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.onto-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--seam);
+}
+.onto-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--tp);
+}
+.onto-text a {
+  color: var(--bl);
+  text-decoration: none;
+}
+.onto-text a:hover { text-decoration: underline; }
+a.onto-ref { color: var(--bl); text-decoration: none; }
+a.onto-ref:hover { text-decoration: underline; }
+a.onto-ref code { color: inherit; }
+.onto-table-wrap {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+.onto-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.onto-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tt);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--seam);
+  white-space: nowrap;
+}
+.onto-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--seam);
+  color: var(--tp);
+  vertical-align: top;
+}
+.onto-table tr:last-child td { border-bottom: none; }
+.onto-table tbody tr:hover { background: var(--bg3); }
+.onto-table code {
+  font-size: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.onto-tree {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  color: var(--tp);
+  margin-top: 10px;
+}
+.onto-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.onto-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.onto-card-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ts);
+}
+.onto-cq {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+}
+.onto-cq-q {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.onto-cq-a {
+  font-size: 12px;
+  color: var(--ts);
+  line-height: 1.6;
+}
+.onto-cq-a code {
+  font-size: 11px;
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.onto-chain {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-left: 3px solid var(--or);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  overflow-x: auto;
+  color: var(--tp);
+  margin-top: 10px;
+}
+.onto-layer-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+.layer-biblio { background: #F5F3FF; color: #6D28D9; }
+.layer-struct { background: #FFF7ED; color: #B45309; }
+.layer-content { background: #FDF2F8; color: #BE185D; }
+.onto-sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 8px;
+}
+/* CQ catalog */
+.cq-cluster { margin-bottom: 16px; }
+.cq-cluster-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  transition: background .12s;
+  user-select: none;
+}
+.cq-cluster-head:hover { background: var(--bg3); }
+.cq-cluster-head .cq-arrow {
+  font-size: 10px;
+  color: var(--tt);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.cq-cluster.open .cq-cluster-head .cq-arrow { transform: rotate(90deg); }
+.cq-cluster-head .cq-cluster-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tp);
+  flex: 1;
+}
+.cq-cluster-head .cq-count {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--tt);
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  padding: 1px 7px;
+  border-radius: 100px;
+}
+.cq-cluster-body {
+  display: none;
+  padding: 8px 0 0;
+}
+.cq-cluster.open .cq-cluster-body { display: block; }
+.cq-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 8px;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--seam);
+  align-items: baseline;
+  font-size: 13px;
+}
+.cq-row:last-child { border-bottom: none; }
+.cq-id { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; font-weight: 600; color: var(--or); white-space: nowrap; }
+.cq-q { color: var(--tp); line-height: 1.6; }
+.cq-persona {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--tt);
+  white-space: nowrap;
+  padding: 2px 7px;
+  border-radius: 100px;
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  align-self: center;
+}
+/* CQ live examples */
+.cq-example {
+  margin: 8px 0 4px;
+  border: 1px solid rgba(240,90,26,.2);
+  border-left: 3px solid var(--or);
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(135deg, #FFF8F5, #fff);
+  overflow: hidden;
+}
+.cq-example-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--or);
+}
+.cq-example-head:hover { background: rgba(240,90,26,.04); }
+.cq-example-head .cq-arrow { font-size: 9px; color: var(--or); transition: transform .2s; }
+.cq-example.open .cq-example-head .cq-arrow { transform: rotate(90deg); }
+.cq-example-body { display: none; padding: 0 14px 12px; font-size: 12px; line-height: 1.7; color: var(--tp); }
+.cq-example.open .cq-example-body { display: block; }
+.cq-ex-label { font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); margin-bottom: 4px; margin-top: 10px; }
+.cq-ex-label:first-child { margin-top: 0; }
+.cq-ex-value { font-size: 12px; color: var(--tp); }
+.cq-ex-value code { font-size: 11px; background: var(--bg3); border: 1px solid var(--seam); padding: 1px 5px; border-radius: 4px; }
+.cq-ex-value em { font-style: italic; color: var(--ts); }
+.cq-ex-quote {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ts);
+  border-left: 2px solid var(--seam);
+  padding: 4px 10px;
+  margin: 6px 0;
+  line-height: 1.6;
+}
+.cq-ex-graph {
+  height: 180px;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  margin-top: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.cq-ex-graph svg { width: 100%; height: 100%; }
+.cq-ex-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 100px;
+  margin-right: 4px;
+}
+.cq-ex-tag.explicit { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); }
+.cq-ex-tag.implicit { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
+.cq-ex-tag.coref { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+.cq-ex-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+.cq-ex-tag.wd { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+.cq-ex-link { font-size: 11px; color: var(--bl); text-decoration: none; }
+.cq-ex-link:hover { text-decoration: underline; }
+.cq-sparql-wrap { margin-top: 10px; }
+.cq-sparql-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--or);
+  background: transparent;
+  color: var(--or);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+}
+.cq-sparql-btn:hover { background: var(--pill-or); }
+.cq-sparql-btn.running { opacity: .6; pointer-events: none; }
+.cq-sparql-btn.done { border-color: #16a34a; color: #16a34a; }
+.cq-sparql-code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10.5px;
+  line-height: 1.5;
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  border-radius: 6px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  color: var(--ts);
+  margin-top: 6px;
+  white-space: pre-wrap;
+  display: none;
+}
+.cq-sparql-code.visible { display: block; }
+.cq-sparql-result {
+  margin-top: 6px;
+  overflow-x: auto;
+  display: none;
+}
+.cq-sparql-result.visible { display: block; }
+.cq-sparql-result table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.cq-sparql-result th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tt);
+  padding: 5px 8px;
+  border-bottom: 2px solid var(--seam);
+  white-space: nowrap;
+}
+.cq-sparql-result td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--seam);
+  color: var(--tp);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cq-sparql-result tr:hover td { background: var(--bg3); }
+.cq-sparql-status {
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.cq-sparql-status.ok { color: #16a34a; }
+.cq-sparql-status.err { color: #dc2626; }
+.cq-sparql-toggle {
+  font-size: 10px;
+  color: var(--ts);
+  cursor: pointer;
+  margin-left: 8px;
+  text-decoration: underline;
+}
+.cq-phase-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-right: 4px;
+}
+.cq-phase-badge.phase-i { background: var(--pill-or); color: var(--or); }
+.cq-phase-badge.phase-ii { background: var(--pill-bl); color: var(--bl); }
+.cq-summary-grid {
+  display: grid;
+  grid-template-columns: auto 1fr repeat(3,auto);
+  gap: 4px 14px;
+  font-size: 12px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+}
+.cq-summary-grid .sh { font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); padding-bottom: 4px; border-bottom: 1px solid var(--seam); }
+.cq-summary-grid .sc { padding: 3px 0; border-bottom: 1px solid var(--seam); color: var(--tp); }
+.cq-summary-grid .sc:last-child { border-bottom: none; }
+.cq-summary-grid .sn { color: var(--ts); text-align: right; }
+/* ── Ontology graph ── */
+.onto-graph-wrap {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 520px;
+  margin-top: 10px;
+}
+.onto-graph-wrap svg { width: 100%; height: 100%; cursor: grab; }
+.onto-graph-wrap svg.dragging { cursor: grabbing; }
+.og-node { cursor: pointer; }
+.og-node:hover .og-body { filter: brightness(.96); }
+.og-node.selected .og-body { stroke-width: 2.5; }
+.og-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; pointer-events: none; }
+.og-sub { font-family: 'Inter', sans-serif; font-size: 8.5px; pointer-events: none; fill-opacity: .7; }
+.og-edge { fill: none; stroke: var(--edge, #D1D5DB); stroke-width: 1; }
+.og-edge-label { font-family: 'Inter', sans-serif; font-size: 7.5px; fill: var(--tt); pointer-events: none; }
+.og-arrow { fill: none; stroke: #9CA3AF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.onto-graph-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+.ogl-item { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--ts); font-weight: 500; }
+.ogl-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.onto-graph-info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 220px;
+  background: white;
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  font-size: 12px;
+  z-index: 10;
+  display: none;
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+}
+.onto-graph-controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+.og-btn {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--seam);
+  background: rgba(255,255,255,.9);
+  color: var(--ts);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .12s;
+  backdrop-filter: blur(8px);
+}
+.og-btn:hover { background: var(--bg2); color: var(--tp); }
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">Ontology</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-onto">
+
+  <div class="onto-header">
+    <div class="onto-title">Viewsari Ontology</div>
+    <div class="onto-subtitle">
+      Formal vocabulary for the Viewsari Knowledge Graph &mdash; a provenance-aware knowledge graph
+      built from Giorgio Vasari's <em>Le Vite de' piu eccellenti pittori, scultori, e architettori</em> (1568).
+    </div>
+    <div class="onto-meta">
+      <span class="onto-tag">OWL / RDF-XML</span>
+      <span class="onto-tag blue">CC BY 4.0</span>
+      <span class="onto-tag purple">viewsari namespace</span>
+      <a href="/ontology/docs" class="onto-tag" style="text-decoration:none;cursor:pointer;background:var(--pill-bl);color:var(--bl);border-color:rgba(27,110,243,.2)">Ontology Documentation &rarr;</a>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Overview</div>
+    <p class="onto-text">
+      The ontology's central design claim is that knowledge extracted from interpretive historical texts
+      is not merely <em>discovered</em> but <em>constructed</em> &mdash; and that the knowledge graph must therefore
+      model the construction process itself, not only its output. Every extracted entity and every mention
+      annotation is traceable, via typed PROV-O activities, to the paragraph it came from, the software
+      that produced it, and the prompt template or index resource that guided extraction.
+    </p>
+    <br>
+    <p class="onto-text">
+      The ontology is developed within the eXtreme Design (XD) methodology and has been validated
+      iteratively against a set of 39 competency questions derived from domain expert interviews
+      with art historians, digital humanities researchers, and data engineers.
+    </p>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Ontology Graph</div>
+    <p class="onto-text" style="margin-bottom:12px">
+      Interactive visualization of the Viewsari ontology class hierarchy and relationships.
+      Drag nodes to rearrange, scroll to zoom, click a node for details.
+    </p>
+    <div class="onto-graph-wrap" id="onto-graph">
+      <svg id="og-svg">
+        <defs>
+          <marker id="og-arrow" viewBox="0 0 10 10" refX="28" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M1 2L8 5L1 8" class="og-arrow"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="onto-graph-controls">
+        <button class="og-btn" onclick="ogFit()">Fit</button>
+        <button class="og-btn" onclick="ogToggleLabels()">Labels</button>
+      </div>
+      <div class="onto-graph-legend">
+        <div class="ogl-item"><div class="ogl-dot" style="background:#7C3AED"></div>Bibliographic</div>
+        <div class="ogl-item"><div class="ogl-dot" style="background:#B45309"></div>Structural</div>
+        <div class="ogl-item"><div class="ogl-dot" style="background:#BE185D"></div>Content / Entity</div>
+        <div class="ogl-item"><div class="ogl-dot" style="background:#0F766E"></div>Annotation</div>
+        <div class="ogl-item"><div class="ogl-dot" style="background:#1D4ED8"></div>Provenance</div>
+        <div class="ogl-item"><div class="ogl-dot" style="background:#6B7280"></div>Imported</div>
+      </div>
+      <div class="onto-graph-info" id="og-info"></div>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Three-layer Architecture</div>
+
+    <div class="onto-card">
+      <div><span class="onto-layer-badge layer-biblio">Bibliographic Layer</span></div>
+      <div class="onto-card-text" style="margin-bottom:12px">
+        Models the intellectual and digital structure of <em>The Lives</em> following the FRBR framework
+        as implemented in FaBiO.
+      </div>
+      <div class="onto-tree">fabio:Work
+  &rarr; <a class="onto-ref" href="/ontology/docs/#0001027">viewsari:le_vite</a>  <span style="color:var(--tt)">(Vasari's abstract work)</span>
+    &rarr; <a class="onto-ref" href="/ontology/docs/#0001000">viewsari:edition</a>  <span style="color:var(--tt)">(1568 Giunti edition)</span>
+      &rarr; <a class="onto-ref" href="/ontology/docs/#0001001">viewsari:translation</a>  <span style="color:var(--tt)">(1912 Du Vere English translation)</span>
+        &rarr; <a class="onto-ref" href="/ontology/docs/#0001006">viewsari:volume</a>  <span style="color:var(--tt)">(one of ten volumes)</span>
+          &rarr; <a class="onto-ref" href="/ontology/docs/#0001008">viewsari:biography</a>  <span style="color:var(--tt)">(one artist's life)</span>
+            &rarr; <a class="onto-ref" href="/ontology/docs/#0001009">viewsari:page</a>  <span style="color:var(--tt)">(a single printed page)</span></div>
+      <div class="onto-table-wrap" style="margin-top:14px">
+        <table class="onto-table">
+          <thead><tr><th>Expression class</th><th>Manifestation class</th><th>Superclass</th></tr></thead>
+          <tbody>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001006"><code>viewsari:volume</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001007"><code>viewsari:volume_web_representation</code></a></td><td><code>fabio:WebSite</code></td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001008"><code>viewsari:biography</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001010"><code>viewsari:biography_web_representation</code></a></td><td><code>fabio:WebPage</code></td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001009"><code>viewsari:page</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001011"><code>viewsari:page_web_representation</code></a></td><td><code>fabio:WebPage</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="onto-card">
+      <div><span class="onto-layer-badge layer-struct">Structural Layer</span></div>
+      <div class="onto-card-text">
+        Models the document hierarchy below the page level, using DoCO vocabulary for paragraph-level
+        content and the W3C Web Annotation Ontology for anchoring mentions to exact character positions.
+      </div>
+      <ul style="margin-top:10px;padding-left:20px;font-size:13px;color:var(--ts);line-height:1.7">
+        <li><code>doco:Paragraph</code> &mdash; carries <a class="onto-ref" href="/ontology/docs/#0001002"><code>viewsari:hasText</code></a>, <a class="onto-ref" href="/ontology/docs/#0001003"><code>viewsari:hasLengthInCharacters</code></a>, <a class="onto-ref" href="/ontology/docs/#0001004"><code>viewsari:hasStartPage</code></a>, and <a class="onto-ref" href="/ontology/docs/#0001005"><code>viewsari:hasEndPage</code></a></li>
+        <li><code>doco:TextChunk</code> &mdash; a surface-form span within a paragraph, linked via <code>oa:hasSelector</code></li>
+        <li><code>doco:TextPositionSelector</code> &mdash; character-level <code>oa:start</code> / <code>oa:end</code> offsets</li>
+      </ul>
+    </div>
+
+    <div class="onto-card">
+      <div><span class="onto-layer-badge layer-content">Content Layer</span></div>
+      <div class="onto-card-text" style="margin-bottom:10px">
+        Models the extracted entities and their mention evidence.
+      </div>
+
+      <div class="onto-sub-label">Extracted Entities</div>
+      <div class="onto-table-wrap">
+        <table class="onto-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001013"><code>viewsari:person</code></a></td><td>Historical individual from the Index of Names</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001012"><code>viewsari:artwork</code></a></td><td>Creative work mentioned in the text</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001015"><code>viewsari:location</code></a></td><td>Geographical place</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001014"><code>viewsari:organization</code></a></td><td>Guild, order, academy, or other institution</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a></td><td>Pairwise joint appearance of two entities in one paragraph</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="onto-sub-label" style="margin-top:16px">Mention Taxonomy</div>
+      <div class="onto-tree"><a class="onto-ref" href="/ontology/docs/#0001026">viewsari:mention</a>
+  &#9500;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001017">viewsari:explicit_mention</a>
+  &#9474;     &#9492;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001020">viewsari:explicit_artwork_mention</a>
+  &#9500;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001016">viewsari:implicit_mention</a>
+  &#9474;     &#9492;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001021">viewsari:implicit_artwork_mention</a>
+  &#9500;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001018">viewsari:coreferent</a>
+  &#9492;&#9472;&#9472; <a class="onto-ref" href="/ontology/docs/#0001019">viewsari:generic_mention</a></div>
+
+      <div class="onto-sub-label" style="margin-top:16px">Extraction Activities</div>
+      <div class="onto-table-wrap">
+        <table class="onto-table">
+          <thead><tr><th>Class</th><th>Pipeline stage</th></tr></thead>
+          <tbody>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001022"><code>viewsari:named_entity_recognition</code></a></td><td>NER and coreference resolution over the Index of Names and paragraphs</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001024"><code>viewsari:cooccurrence_analysis</code></a></td><td>Pairwise co-occurrence extraction</td></tr>
+            <tr><td><a class="onto-ref" href="/ontology/docs/#0001023"><code>viewsari:entity_linking</code></a></td><td>LLM-guided candidate ranking and Wikidata linking</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Viewsari-defined Properties</div>
+
+    <div class="onto-sub-label">Object Properties</div>
+    <div class="onto-table-wrap">
+      <table class="onto-table">
+        <thead><tr><th>Property</th><th>Domain</th><th>Range</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001004"><code>viewsari:hasStartPage</code></a></td><td><code>doco:Paragraph</code></td><td><a class="onto-ref" href="/ontology/docs/#0001011"><code>viewsari:page_web_representation</code></a></td><td>First printed page of a paragraph</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001005"><code>viewsari:hasEndPage</code></a></td><td><code>doco:Paragraph</code></td><td><a class="onto-ref" href="/ontology/docs/#0001011"><code>viewsari:page_web_representation</code></a></td><td>Last printed page of a paragraph</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001030"><code>viewsari:isBasedOn</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001001"><code>viewsari:translation</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001000"><code>viewsari:edition</code></a></td><td>Derivation of a translation from its source edition</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001032"><code>viewsari:inParagraph</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001033"><code>viewsari:extracted_content</code></a></td><td><code>doco:Paragraph</code></td><td>Anchors a co-occurrence to its source paragraph</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001034"><code>viewsari:involves</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001033"><code>viewsari:extracted_content</code></a></td><td>Links a co-occurrence to a participating entity (min. cardinality 2)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="onto-sub-label" style="margin-top:20px">Datatype Properties</div>
+    <div class="onto-table-wrap">
+      <table class="onto-table">
+        <thead><tr><th>Property</th><th>Domain</th><th>Range</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001002"><code>viewsari:hasText</code></a></td><td><code>doco:Paragraph</code></td><td><code>xsd:string</code></td><td>Full normalized paragraph text</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001003"><code>viewsari:hasLengthInCharacters</code></a></td><td><code>doco:Paragraph</code></td><td><code>xsd:nonNegativeInteger</code></td><td>Character count of the merged paragraph</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Imported Vocabularies</div>
+    <div class="onto-table-wrap">
+      <table class="onto-table">
+        <thead><tr><th>Prefix</th><th>Namespace</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><code>fabio</code></td><td><code>http://purl.org/spar/fabio/</code></td><td>FRBR-aligned bibliographic types</td></tr>
+          <tr><td><code>doco</code></td><td><code>http://purl.org/spar/doco/</code></td><td>Document component types</td></tr>
+          <tr><td><code>prov</code></td><td><code>http://www.w3.org/ns/prov#</code></td><td>Extraction provenance</td></tr>
+          <tr><td><code>oa</code></td><td><code>http://www.w3.org/ns/oa#</code></td><td>Web Annotation (mentions, selectors)</td></tr>
+          <tr><td><code>frbr</code></td><td><code>http://purl.org/vocab/frbr/core#</code></td><td>Part-of and embodiment relations</td></tr>
+          <tr><td><code>dct</code></td><td><code>http://purl.org/dc/terms/</code></td><td>Relation subproperties</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Fixed Individuals</div>
+    <p class="onto-text" style="margin-bottom:12px">
+      The ontology defines four named individuals that serve as the stable bibliographic root nodes
+      of the knowledge graph.
+    </p>
+    <div class="onto-table-wrap">
+      <table class="onto-table">
+        <thead><tr><th>Individual</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001027"><code>viewsari:le_vite</code></a></td><td><code>fabio:Work</code></td><td>The abstract intellectual work by Vasari (<a href="https://www.wikidata.org/wiki/Q1645493" target="_blank" style="color:var(--bl)">wd:Q1645493</a>)</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001028"><code>viewsari:le_vite_1568</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001000"><code>viewsari:edition</code></a></td><td>The 1568 Giunti edition</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001029"><code>viewsari:the_lives_1568</code></a></td><td><a class="onto-ref" href="/ontology/docs/#0001001"><code>viewsari:translation</code></a></td><td>The 1912 Du Vere English translation</td></tr>
+          <tr><td><a class="onto-ref" href="/ontology/docs/#0001031"><code>viewsari:the_lives_gutenberg_version</code></a></td><td><code>fabio:ManifestationCollection</code></td><td>The Project Gutenberg web publication of the Du Vere translation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Provenance Chain</div>
+    <p class="onto-text" style="margin-bottom:12px">
+      The full provenance chain from a raw paragraph to a canonical entity can be traversed
+      in SPARQL in at most two <code>prov:wasGeneratedBy</code> hops:
+    </p>
+    <div class="onto-chain">doco:Paragraph
+  &larr;  prov:used  &larr;  <a class="onto-ref" href="/ontology/docs/#0001022">viewsari:named_entity_recognition</a>  <span style="color:var(--tt)">(activity)</span>
+  &rarr;  prov:wasGeneratedBy  &rarr;  <a class="onto-ref" href="/ontology/docs/#0001026">viewsari:mention</a>  <span style="color:var(--tt)">(annotation)</span>
+       &darr; prov:used <span style="color:var(--tt)">(by coref activity)</span>
+       <a class="onto-ref" href="/ontology/docs/#0001024">viewsari:cooccurrence_analysis</a> / <a class="onto-ref" href="/ontology/docs/#0001022">named_entity_recognition</a>
+       &rarr;  prov:wasGeneratedBy  &rarr;  <a class="onto-ref" href="/ontology/docs/#0001013">viewsari:person</a> / <a class="onto-ref" href="/ontology/docs/#0001012">artwork</a> / <a class="onto-ref" href="/ontology/docs/#0001025">cooccurrence</a></div>
+    <p class="onto-text" style="margin-top:12px">
+      Every triple in the knowledge graph is traceable to a documented computational activity
+      and ultimately to a specific paragraph in a specific volume of the Du Vere edition.
+    </p>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Competency Question Catalog</div>
+    <p class="onto-text" style="margin-bottom:6px">
+      The ontology was designed and validated against a catalog of competency questions (CQs)
+      derived from user stories across two requirements engineering phases, elicited from four personas.
+    </p>
+    <p class="onto-text" style="margin-bottom:14px">
+      <span class="cq-phase-badge phase-i">Phase I</span> 29 ontology-focused CQs from 32 user stories
+      &nbsp;&nbsp;
+      <span class="cq-phase-badge phase-ii">Phase II</span> 41 extended CQs covering extraction provenance, bibliographic depth, and epistemic modeling
+    </p>
+
+    <!-- Personas -->
+    <div class="onto-table-wrap" style="margin-bottom:18px">
+      <table class="onto-table">
+        <thead><tr><th>Persona</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Elena Rossi</strong></td><td>Art historian researcher</td></tr>
+          <tr><td><strong>Nazeera Marfi</strong></td><td>Professor of digital art history</td></tr>
+          <tr><td><strong>Aaron Warner</strong></td><td>Computer scientist / knowledge engineer</td></tr>
+          <tr><td><strong>John Saffron</strong></td><td>Art history student</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Phase I -->
+    <div class="onto-sub-label" style="margin-bottom:10px"><span class="cq-phase-badge phase-i">Phase I</span> Competency Questions</div>
+
+    <div class="cq-cluster open" id="cq-c1">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 1 &mdash; Artists and Co-occurrences</span>
+        <span class="cq-count">8</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQI.1</span><span class="cq-q">Who co-occurred with whom in <em>The Lives</em>?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.2</span><span class="cq-q">Did artist X co-occur with artist Y?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.3</span><span class="cq-q">Which artists are mentioned together in the same passage?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.4</span><span class="cq-q">Where in the text did artists X and Y co-occur? (In which paragraph, biography, volume?)</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.5</span><span class="cq-q">How frequently do two given artists co-occur across the entire corpus?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.6</span><span class="cq-q">Which artists have the highest co-occurrence frequency with artist X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.7</span><span class="cq-q">What is the pointwise mutual information (PMI) score for the co-occurrence of artists X and Y?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.8</span><span class="cq-q">What is the network centrality of artist X in the co-occurrence network?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example from Viewsari annotations</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Co-occurrence</div>
+            <div class="cq-ex-value">Cimabue, Giovanni and Giotto &mdash; Volume 1, Paragraph 13</div>
+            <div class="cq-ex-quote">&ldquo;But to return to Cimabue: Giotto, truly, obscured his fame not otherwise than as a great light does the splendour of one much less&hellip; yet Giotto, his pupil, moved by laudable ambition and assisted by Heaven and by nature&hellip;&rdquo;</div>
+            <div class="cq-ex-label">KG Triple</div>
+            <div class="cq-ex-value">
+              <code>viewsari:cooccurrence_cim-gio_1</code>
+              <a class="onto-ref" href="/ontology/docs/#0001034"><code>viewsari:involves</code></a>
+              <code>viewsari:cimabue-giovanni</code>, <code>viewsari:giotto</code>
+            </div>
+            <div class="cq-ex-label">Source</div>
+            <div class="cq-ex-value"><a class="cq-ex-link" href="/biography/cimabue/13">View in annotation viewer &rarr;</a></div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq1')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq1">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/&gt;
+
+# CQI.1-4: Who co-occurred with Giotto, and where?
+SELECT ?cooc_label ?person1 ?person2
+WHERE {
+  ?cooc a viewsari:0001025 .
+  ?cooc rdfs:label ?cooc_label .
+  ?cooc viewsari:involves ?p1, ?p2 .
+  ?p1 rdfs:label ?person1 .
+  ?p2 rdfs:label ?person2 .
+  FILTER(CONTAINS(?person1, "Giotto") || CONTAINS(?person2, "Giotto"))
+  FILTER(STR(?p1) &lt; STR(?p2))
+}
+ORDER BY ?cooc_label
+LIMIT 10</div>
+              <div class="cq-sparql-result" data-qid="cq1"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-cooc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c2">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 2 &mdash; Persons and Attributes</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQI.9</span><span class="cq-q">What are the birth and death dates of person X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.10</span><span class="cq-q">Which persons mentioned in <em>The Lives</em> are identified as artists?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.11</span><span class="cq-q">Which persons mentioned in <em>The Lives</em> are not artists (e.g., patrons, clergy, scholars)?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.12</span><span class="cq-q">In which biography (biographies) does person X appear?</span><span class="cq-persona">John Saffron</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.13</span><span class="cq-q">Is person X linked to an external authority record (e.g., Wikidata)?</span><span class="cq-persona">Aaron Warner</span></div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c3">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 3 &mdash; Artworks, Locations, and Entities</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQI.14</span><span class="cq-q">Which artworks are mentioned in the biography of artist X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.15</span><span class="cq-q">Which locations are associated with artist X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.16</span><span class="cq-q">Which artworks were created in location L?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.17</span><span class="cq-q">Can students explore artist collaborations on a geographical map?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.18</span><span class="cq-q">Where is location X located on a map?</span><span class="cq-persona">John Saffron</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; Artworks in Giotto's biography (Para. 96)</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Paragraph 96 contains 36 artwork mentions across all types</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+              <span class="cq-ex-tag explicit">3 explicit</span>
+              <span class="cq-ex-tag implicit">17 implicit</span>
+              <span class="cq-ex-tag coref">12 coreferent</span>
+              <span class="cq-ex-tag" style="background:var(--bg3);color:var(--ts);border:1px solid var(--seam)">4 generic</span>
+            </div>
+            <div class="cq-ex-label">Explicit artwork with Wikidata link</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag explicit">explicit</span>
+              <span class="cq-ex-tag wd">Q799026</span>
+              &ldquo;the Badia of Florence&rdquo; &rarr; <a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q799026" target="_blank">wd:Q799026</a>
+            </div>
+            <div class="cq-ex-label">Implicit artwork with Wikidata link</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag implicit">implicit</span>
+              <span class="cq-ex-tag wd">Q117842108</span>
+              &ldquo;a Madonna receiving the Annunciation&rdquo; &rarr; <a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q117842108" target="_blank">wd:Q117842108</a>
+            </div>
+            <div class="cq-ex-label">Implicit artwork &mdash; Out-of-Knowledge-Base</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag implicit">implicit</span>
+              <span class="cq-ex-tag ookb">OOKB</span>
+              &ldquo;the chapel of the high-altar in the Badia of Florence&rdquo; &mdash; <em>no Wikidata match</em>
+            </div>
+            <div class="cq-ex-label">Coreferent chain</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag coref">coref</span>
+              &ldquo;wherein&rdquo; (m_0006) &rarr; refers_to &rarr; &ldquo;the chapel of the high-altar&rdquo; (m_0004)
+            </div>
+            <div class="cq-ex-label">Source</div>
+            <div class="cq-ex-value"><a class="cq-ex-link" href="/biography/giotto/96">View paragraph 96 in annotation viewer &rarr;</a></div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq3')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq3">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+
+# CQI.14: Which artworks are mentioned in Giotto's biography?
+SELECT ?artwork ?label ?wikidata
+WHERE {
+  ?artwork a viewsari:0001012 .
+  ?artwork rdfs:label ?label .
+  OPTIONAL { ?artwork owl:sameAs ?wikidata . }
+  FILTER(STRSTARTS(STR(?artwork), "https://viewsari.ise.fiz-karlsruhe.de/kb/giotto_"))
+}
+ORDER BY ?label
+LIMIT 15</div>
+              <div class="cq-sparql-result" data-qid="cq3"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-mentions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c4">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 4 &mdash; Bibliographic and Provenance</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQI.19</span><span class="cq-q">Which paragraph and page in <em>The Lives</em> is the source of co-occurrence C?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.20</span><span class="cq-q">Which volume of <em>The Lives</em> contains the biography of artist X?</span><span class="cq-persona">John Saffron</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.21</span><span class="cq-q">What edition or translation of <em>The Lives</em> was used for extracting a given co-occurrence?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.22</span><span class="cq-q">What is the original text snippet associated with co-occurrence C?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.23</span><span class="cq-q">What licence is provided by the Viewsari dataset and where can the original source text be found?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; Bibliographic chain for a co-occurrence</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Tracing co-occurrence to source</div>
+            <div class="cq-ex-value">
+              <code>viewsari:cooccurrence_cim-gio_1</code><br>
+              &rarr; <a class="onto-ref" href="/ontology/docs/#0001032"><code>viewsari:inParagraph</code></a> &rarr; <code>viewsari:the_lives_1568_volume-1_paragraph-13</code><br>
+              &rarr; <code>dct:isPartOf</code> &rarr; <code>viewsari:the_lives_1568_volume-1_cimabue-bio_page_7</code><br>
+              &rarr; <code>frbr:isPartOf</code> &rarr; <code>viewsari:the_lives_1568_volume-1_cimabue-bio</code><br>
+              &rarr; <code>frbr:isPartOf</code> &rarr; <code>viewsari:the_lives_1568_volume-1</code><br>
+              &rarr; <code>frbr:isPartOf</code> &rarr; <a class="onto-ref" href="/ontology/docs/#0001029"><code>viewsari:the_lives_1568</code></a> (Du Vere translation)<br>
+              &rarr; <a class="onto-ref" href="/ontology/docs/#0001030"><code>viewsari:isBasedOn</code></a> &rarr; <a class="onto-ref" href="/ontology/docs/#0001028"><code>viewsari:le_vite_1568</code></a> (Giunti edition)
+            </div>
+            <div class="cq-ex-label">Original text snippet</div>
+            <div class="cq-ex-quote">&ldquo;But to return to Cimabue: Giotto, truly, obscured his fame not otherwise than as a great light does the splendour of one much less&hellip;&rdquo;</div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq4')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq4">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/&gt;
+PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
+PREFIX doco: &lt;http://purl.org/spar/doco/&gt;
+
+# CQI.19-21: Trace bibliographic chain from paragraph to edition
+SELECT ?para ?para_label ?bio ?bio_label ?vol ?vol_label
+WHERE {
+  ?para a doco:Paragraph .
+  ?para rdfs:label ?para_label .
+  FILTER(CONTAINS(?para_label, "Vol. 1, Paragraph 13"))
+  ?para frbr:isPartOf ?bio .
+  ?bio a viewsari:0001008 .
+  ?bio rdfs:label ?bio_label .
+  ?bio frbr:isPartOf ?vol .
+  ?vol a viewsari:0001006 .
+  ?vol rdfs:label ?vol_label .
+}</div>
+              <div class="cq-sparql-result" data-qid="cq4"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-biblio"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c5">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 5 &mdash; Search and Data Reuse</span>
+        <span class="cq-count">6</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQI.24</span><span class="cq-q">How can I execute semantic searches over the knowledge graph?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.25</span><span class="cq-q">How can I reuse the Viewsari data in my own project, and in what form can it be shared?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.26</span><span class="cq-q">Is there a SPARQL endpoint or an RDF dump available?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.27</span><span class="cq-q">Which external resources (ontologies, authority data) were used in constructing the knowledge graph?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.28</span><span class="cq-q">Which authority data (e.g., Wikidata, Iconclass) is connected to the resources?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQI.29</span><span class="cq-q">How can my students reuse data in the project course, and can the visualizations be modified and customized?</span><span class="cq-persona">Nazeera Marfi</span></div>
+      </div>
+    </div>
+
+    <!-- Phase II -->
+    <div class="onto-sub-label" style="margin-top:24px;margin-bottom:10px"><span class="cq-phase-badge phase-ii">Phase II</span> Extended Competency Questions</div>
+
+    <div class="cq-cluster" id="cq-c6">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 1 &mdash; Artists, Collaborations, and Relationships</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.1</span><span class="cq-q">What is the difference between a statistical co-occurrence and an explicitly typed relationship between two artists in the knowledge graph?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.2</span><span class="cq-q">How can I distinguish between different types of artist associations (statistical co-occurrence vs. explicit relationships) in order to build accurate computational models?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.3</span><span class="cq-q">Which artists have both a statistical co-occurrence and an explicit typed relationship with artist X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.4</span><span class="cq-q">What is the Dice coefficient for the co-occurrence of artists X and Y, and how does it compare to the PMI score?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.5</span><span class="cq-q">How do I explore relationships between Renaissance artists, artworks, historical events, or locations so that I can identify patterns and trends for research or in a course?</span><span class="cq-persona">Nazeera Marfi</span></div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c7">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 2 &mdash; Artworks</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.6</span><span class="cq-q">Which artworks are explicitly named in the biography of artist X, and which are described only implicitly?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.7</span><span class="cq-q">What is the surface form by which artwork A is referred to in paragraph P, and is it an explicit, implicit, or coreferential mention?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.8</span><span class="cq-q">Which artworks in the knowledge graph are classified as out-of-knowledge-base (OOKB) entities &mdash; i.e., have no match in Wikidata?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.9</span><span class="cq-q">Which artworks co-occur with a specific artist in a particular volume, and what are the source paragraphs?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.10</span><span class="cq-q">Can I explore how artworks reflect collaborative effects, such as shared locations or artistic styles?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; Explicit vs. implicit artwork mentions in S. Croce</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Same church, different mention types (Giotto bio, Para. 96)</div>
+            <div class="cq-ex-value" style="margin-bottom:6px">
+              <span class="cq-ex-tag explicit">explicit</span>
+              &ldquo;S. Croce&rdquo; (m_0012) &rarr; <a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q123258826" target="_blank">wd:Q123258826</a>
+            </div>
+            <div class="cq-ex-value" style="margin-bottom:6px">
+              <span class="cq-ex-tag coref">coref</span>
+              &ldquo;the said church&rdquo; (m_0021) &rarr; refers_to m_0012
+            </div>
+            <div class="cq-ex-value" style="margin-bottom:6px">
+              <span class="cq-ex-tag coref">coref</span>
+              &ldquo;Church of S. Croce&rdquo; (m_0025) &rarr; refers_to m_0012
+            </div>
+            <div class="cq-ex-label">OOKB artworks inside S. Croce</div>
+            <div class="cq-ex-value" style="margin-bottom:4px">
+              <span class="cq-ex-tag ookb">OOKB</span>
+              &ldquo;the first of the three, which is that of Messer Ridolfo de' Bardi&hellip; life of S. Francis&rdquo;
+            </div>
+            <div class="cq-ex-value" style="margin-bottom:4px">
+              <span class="cq-ex-tag ookb">OOKB</span>
+              &ldquo;the next, which is that of the family of Peruzzi&hellip; two stories from the life of S. John the Baptist&rdquo;
+            </div>
+            <div class="cq-ex-label">Cross-biography reference</div>
+            <div class="cq-ex-value">
+              The same entity <code>wd:Q1479873</code> (Church of S. Cecilia) appears in
+              Giotto's, Cimabue's, <em>and</em> Cavallini's biographies &mdash; linked via shared Wikidata QID.
+            </div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq5')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq5">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+
+# CQII.6-8: Explicit vs. implicit, OOKB artworks
+SELECT ?artwork ?label ?type
+WHERE {
+  ?artwork a viewsari:0001012 .
+  ?artwork rdfs:label ?label .
+  FILTER(CONTAINS(LCASE(?label), "croce"))
+  OPTIONAL { ?artwork owl:sameAs ?wd . }
+  BIND(IF(BOUND(?wd), "Wikidata-linked", "OOKB") AS ?type)
+}
+ORDER BY ?label
+LIMIT 15</div>
+              <div class="cq-sparql-result" data-qid="cq5"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-artwork"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c8">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 3 &mdash; Locations</span>
+        <span class="cq-count">4</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.11</span><span class="cq-q">Which locations are mentioned in co-occurrences involving artist X?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.12</span><span class="cq-q">Which artists were active in location L according to <em>The Lives</em>?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.13</span><span class="cq-q">Is location L linked to an external authority record (e.g., Wikidata, GeoNames)?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.14</span><span class="cq-q">Can students explore artist collaborations on a geographical map, filtered by location?</span><span class="cq-persona">Nazeera Marfi</span></div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c9">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 4 &mdash; Historical Events</span>
+        <span class="cq-count">4</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.15</span><span class="cq-q">Which historical events are associated with artist X in the knowledge graph?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.16</span><span class="cq-q">Which artworks were commissioned or destroyed as part of a specific historical event E?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.17</span><span class="cq-q">How can I identify cross-disciplinary connections between Renaissance art and other historical or cultural phenomena using the knowledge graph?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.18</span><span class="cq-q">Can information about historical events be enriched from external sources such as Wikidata, and if so, which properties are aligned?</span><span class="cq-persona">Aaron Warner</span></div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c10">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 5 &mdash; Evidence and Bibliographic Information</span>
+        <span class="cq-count">6</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.19</span><span class="cq-q">How can I distinguish between work-level, expression-level, and manifestation-level bibliographic metadata in order to properly cite and attribute sources?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.20</span><span class="cq-q">Which edition and translation of <em>The Lives</em> is the source of a given extracted entity or co-occurrence?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.21</span><span class="cq-q">What is the direct web URL to the paragraph in the Project Gutenberg edition from which entity E or co-occurrence C was extracted?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.22</span><span class="cq-q">Is the extracted information derived from Du Vere's 1912 English translation, the 1568 Italian edition, or another version?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.23</span><span class="cq-q">How does the choice of translation (Du Vere's English vs. the original Italian) affect the entities and co-occurrences that appear in the knowledge graph?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.24</span><span class="cq-q">For co-occurrences involving artist X, can I compare the English translation's web manifestation with the Italian edition's web manifestation?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; FRBR bibliographic levels for &ldquo;a Madonna receiving the Annunciation&rdquo;</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">The mention</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag implicit">implicit</span>
+              <span class="cq-ex-tag wd">Q117842108</span>
+              &ldquo;a Madonna receiving the Annunciation&rdquo; (m_0007, Giotto bio, Para. 96)
+            </div>
+            <div class="cq-ex-label">FRBR chain &mdash; from mention to original Work</div>
+            <div class="cq-ex-value" style="font-family:'SF Mono','Fira Code',monospace;font-size:11px;line-height:2.1">
+              <strong style="color:var(--or)">Manifestation</strong> &middot; <code>viewsari:the_lives_gutenberg_version</code> (<a class="onto-ref" href="/ontology/docs/#0001031">fabio:ManifestationCollection</a>)<br>
+              &nbsp;&nbsp;&uarr; frbr:hasEmbodiment<br>
+              <strong style="color:var(--or)">Expression</strong> &middot; <code>viewsari:the_lives_1568</code> (<a class="onto-ref" href="/ontology/docs/#0001029">viewsari:translation</a>) &mdash; Du Vere, 1912 English<br>
+              &nbsp;&nbsp;&uarr; <a class="onto-ref" href="/ontology/docs/#0001030">viewsari:isBasedOn</a><br>
+              <strong style="color:var(--or)">Expression</strong> &middot; <code>viewsari:le_vite_1568</code> (<a class="onto-ref" href="/ontology/docs/#0001028">viewsari:edition</a>) &mdash; Giunti, 1568 Italian<br>
+              &nbsp;&nbsp;&uarr; frbr:realizationOf<br>
+              <strong style="color:var(--or)">Work</strong> &middot; <code>viewsari:le_vite</code> (<a class="onto-ref" href="/ontology/docs/#0001027">fabio:Work</a>) &mdash; <a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q1645493" target="_blank">wd:Q1645493</a>
+            </div>
+            <div class="cq-ex-label">Answer to CQII.22</div>
+            <div class="cq-ex-value">
+              All extracted information in the current Viewsari KG derives from Du Vere's 1912 English translation
+              (<code>viewsari:the_lives_1568</code>), which in turn <a class="onto-ref" href="/ontology/docs/#0001030"><code>viewsari:isBasedOn</code></a>
+              the 1568 Giunti Italian edition. The FRBR distinction lets queries target either level.
+            </div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq6')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq6">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
+
+# CQII.22: Trace the FRBR chain for all volumes
+SELECT ?vol ?vol_label ?edition ?ed_label
+WHERE {
+  ?vol a viewsari:0001006 .
+  ?vol rdfs:label ?vol_label .
+  ?vol frbr:isPartOf ?edition .
+  ?edition rdfs:label ?ed_label .
+}
+ORDER BY ?vol_label
+LIMIT 10</div>
+              <div class="cq-sparql-result" data-qid="cq6"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-frbr"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c11">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 6 &mdash; Linked Data Enrichment</span>
+        <span class="cq-count">4</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.25</span><span class="cq-q">Which entities in the knowledge graph are linked to Wikidata, and what properties are mapped?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.26</span><span class="cq-q">Which entities are classified as OOKB, meaning they have no matching entry in Wikidata or other authority sources?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.27</span><span class="cq-q">Can I perform a federated SPARQL query combining Viewsari data with an external endpoint (e.g., Wikidata)?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.28</span><span class="cq-q">How can I use Viewsari as a research tool for cross-disciplinary research that connects findings from <em>The Lives</em> to broader historical or cultural knowledge?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; Wikidata-linked vs. OOKB entities across the corpus</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Corpus-wide statistics (16 annotated biographies, 2,438 mentions)</div>
+            <div class="onto-table-wrap" style="margin:8px 0">
+              <table class="onto-table" style="font-size:12px">
+                <thead><tr><th>Biography</th><th>Mentions</th><th>Wikidata-linked</th><th>OOKB</th></tr></thead>
+                <tbody>
+                  <tr><td>Michelangelo</td><td>395</td><td>59 (15%)</td><td>57 (14%)</td></tr>
+                  <tr><td>Ghirlandaio</td><td>235</td><td>53 (23%)</td><td>64 (27%)</td></tr>
+                  <tr><td>Giotto</td><td>203</td><td>44 (22%)</td><td>52 (26%)</td></tr>
+                  <tr><td>Botticelli</td><td>110</td><td>41 (37%)</td><td>16 (15%)</td></tr>
+                  <tr><td>Pollaiuolo</td><td>127</td><td>12 (9%)</td><td>52 (41%)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="cq-ex-label">Cross-biography entity: S. Maria Novella (<a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q51175" target="_blank">wd:Q51175</a>)</div>
+            <div class="cq-ex-value">
+              Appears in <strong>6 biographies</strong>: Alberti, Botticelli, Brunelleschi, Cimabue, Ghirlandaio, Lippi &mdash;
+              all linked to the same Wikidata QID via <code>owl:sameAs</code>, enabling federated queries.
+            </div>
+            <div class="cq-ex-label">Cross-biography entity: S. Maria del Fiore (<a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q191739" target="_blank">wd:Q191739</a>)</div>
+            <div class="cq-ex-value">
+              Appears in <strong>5 biographies</strong>: Brunelleschi, Cimabue, Ghirlandaio, Giotto, Verrocchio.
+            </div>
+            <div class="cq-ex-label">OOKB challenge</div>
+            <div class="cq-ex-value">
+              Pollaiuolo's biography has the highest OOKB rate (41%) &mdash; many artworks described in <em>The Lives</em>
+              have no canonical Wikidata entry, receiving Viewsari-internal IRIs instead
+              (e.g., <code style="font-size:10px">viewsari.ise.fiz-karlsruhe.de/kb/1.0#f19bb56f&hellip;</code>).
+            </div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq7')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq7">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+
+# CQII.25-26: Wikidata-linked vs. OOKB entities
+SELECT
+  (COUNT(?wd_art) AS ?wikidata_linked)
+  (COUNT(?all_art) - COUNT(?wd_art) AS ?ookb)
+  (COUNT(?all_art) AS ?total)
+WHERE {
+  ?all_art a viewsari:0001012 .
+  OPTIONAL {
+    ?all_art owl:sameAs ?wd .
+    BIND(?all_art AS ?wd_art)
+  }
+}</div>
+              <div class="cq-sparql-result" data-qid="cq7"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-wd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c12">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 7 &mdash; User Interaction and Exploration</span>
+        <span class="cq-count">5</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.29</span><span class="cq-q">How can I apply FAIR principles to the Viewsari data to bring it into my own project and share it with my students?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.30</span><span class="cq-q">How can I use Viewsari as an interactive visualization platform in my lectures to communicate complex relationships and historical patterns?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.31</span><span class="cq-q">Can I conduct a proof-of-concept project reusing Viewsari as a system, finding its working concept applicable to my own research?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.32</span><span class="cq-q">How can I integrate Viewsari into my teaching curriculum?</span><span class="cq-persona">Nazeera Marfi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.33</span><span class="cq-q">How can I explore relationships between artists, artworks, or locations so that I can identify trends and accumulations of collaborations in a certain city or place?</span><span class="cq-persona">John Saffron</span></div>
+      </div>
+    </div>
+
+    <div class="cq-cluster" id="cq-c13">
+      <div class="cq-cluster-head" onclick="this.parentElement.classList.toggle('open')">
+        <span class="cq-arrow">&#9654;</span>
+        <span class="cq-cluster-title">Cluster 8 &mdash; Extraction Provenance and Epistemic Modeling</span>
+        <span class="cq-count">8</span>
+      </div>
+      <div class="cq-cluster-body">
+        <div class="cq-row"><span class="cq-id">CQII.34</span><span class="cq-q">Which extraction activity (NER run, LLM prompt run) generated entity E, and what software agent was used?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.35</span><span class="cq-q">What was the prompt template used in the extraction run that produced entity E?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.36</span><span class="cq-q">Which entities were extracted by a statistical method (co-occurrence / NER) versus a generative LLM-based method?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.37</span><span class="cq-q">What model version and timestamp are associated with extraction run R?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.38</span><span class="cq-q">How are implicit entity mentions distinguished from explicit ones in the ontology, and can I query them separately?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.39</span><span class="cq-q">For a given extraction result, can I trace back the provenance chain from the entity through the annotation, the paragraph, the page, the volume, and the translation to the original work?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.40</span><span class="cq-q">Does the knowledge graph allow me to assess whether a claimed relationship between two artists is supported by explicit textual evidence, an implicit inference, or purely statistical co-occurrence?</span><span class="cq-persona">Elena Rossi</span></div>
+        <div class="cq-row"><span class="cq-id">CQII.41</span><span class="cq-q">How does the ontology represent the epistemic weight of a co-occurrence derived from PMI compared to an implicit mention inferred by an LLM?</span><span class="cq-persona">Aaron Warner</span></div>
+        <div class="cq-example">
+          <div class="cq-example-head" onclick="this.parentElement.classList.toggle('open')"><span class="cq-arrow">&#9654;</span> Live example &mdash; Full provenance chain for an implicit mention</div>
+          <div class="cq-example-body">
+            <div class="cq-ex-label">Mention</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag implicit">implicit</span>
+              <span class="cq-ex-tag wd">Q3907498</span>
+              &ldquo;the panel on the high-altar of the said chapel&rdquo; (m_0008, Giotto bio, Para. 96)
+            </div>
+            <div class="cq-ex-label">Provenance chain</div>
+            <div class="cq-ex-value" style="font-family:'SF Mono','Fira Code',monospace;font-size:11px;line-height:2">
+              <a class="onto-ref" href="/ontology/docs/#0001022"><code>viewsari:obliquer_run_1</code></a> (prov:Activity &middot; NER)<br>
+              &nbsp;&nbsp;&rarr; prov:used &rarr; <code>doco:Paragraph_96</code><br>
+              &nbsp;&nbsp;&rarr; prov:wasGeneratedBy &rarr; <code>viewsari:m_0008</code> (implicit_artwork_mention)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&rarr; oa:hasTarget &rarr; <code>doco:TextChunk</code> [start:1487, end:1530]<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&rarr; oa:hasBody &rarr; <code>viewsari:entity_0006</code><br>
+              <a class="onto-ref" href="/ontology/docs/#0001023"><code>viewsari:entity_linking_run_1</code></a> (prov:Activity &middot; EL)<br>
+              &nbsp;&nbsp;&rarr; prov:wasGeneratedBy &rarr; <code>viewsari:entity_0006</code><br>
+              &nbsp;&nbsp;&rarr; owl:sameAs &rarr; <a class="cq-ex-link" href="https://www.wikidata.org/wiki/Q3907498" target="_blank">wd:Q3907498</a> (Polittico Baroncelli)
+            </div>
+            <div class="cq-ex-label">Coreferent mentions pointing to this entity</div>
+            <div class="cq-ex-value">
+              <span class="cq-ex-tag coref">coref</span> &ldquo;which&rdquo; (m_0010) &rarr; refers_to m_0008<br>
+              <span class="cq-ex-tag coref">coref</span> &ldquo;the work&rdquo; (m_0011) &rarr; refers_to m_0008
+            </div>
+            <div class="cq-sparql-wrap">
+              <button class="cq-sparql-btn" onclick="cqRun(this, 'cq8')">Run SPARQL to verify</button>
+              <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
+              <div class="cq-sparql-code" data-qid="cq8">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX prov: &lt;http://www.w3.org/ns/prov#&gt;
+PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
+
+# CQII.34-39: Provenance chain — which activities generated entities?
+SELECT ?activity ?activity_label (COUNT(?entity) AS ?generated)
+WHERE {
+  ?activity a prov:Activity .
+  ?activity rdfs:label ?activity_label .
+  ?entity prov:wasGeneratedBy ?activity .
+}
+GROUP BY ?activity ?activity_label
+ORDER BY DESC(?generated)</div>
+              <div class="cq-sparql-result" data-qid="cq8"></div>
+            </div>
+            <div class="cq-ex-graph" id="cq-graph-prov"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="onto-sub-label" style="margin-top:24px">Coverage Summary</div>
+    <div class="cq-summary-grid">
+      <span class="sh">#</span><span class="sh">Cluster</span><span class="sh">Phase I</span><span class="sh">Phase II</span><span class="sh">Total</span>
+      <span class="sc">1</span><span class="sc">Artists, collaborations, and relationships</span><span class="sc sn">8</span><span class="sc sn">5</span><span class="sc sn"><strong>13</strong></span>
+      <span class="sc">2</span><span class="sc">Persons and attributes</span><span class="sc sn">5</span><span class="sc sn">&mdash;</span><span class="sc sn"><strong>5</strong></span>
+      <span class="sc">3</span><span class="sc">Artworks</span><span class="sc sn">3</span><span class="sc sn">5</span><span class="sc sn"><strong>8</strong></span>
+      <span class="sc">4</span><span class="sc">Locations</span><span class="sc sn">4</span><span class="sc sn">4</span><span class="sc sn"><strong>8</strong></span>
+      <span class="sc">5</span><span class="sc">Historical events</span><span class="sc sn">&mdash;</span><span class="sc sn">4</span><span class="sc sn"><strong>4</strong></span>
+      <span class="sc">6</span><span class="sc">Evidence and bibliographic information</span><span class="sc sn">5</span><span class="sc sn">6</span><span class="sc sn"><strong>11</strong></span>
+      <span class="sc">7</span><span class="sc">Linked data enrichment</span><span class="sc sn">3</span><span class="sc sn">4</span><span class="sc sn"><strong>7</strong></span>
+      <span class="sc">8</span><span class="sc">User interaction and exploration</span><span class="sc sn">4</span><span class="sc sn">5</span><span class="sc sn"><strong>9</strong></span>
+      <span class="sc">9</span><span class="sc">Extraction provenance and epistemic modeling</span><span class="sc sn">&mdash;</span><span class="sc sn">8</span><span class="sc sn"><strong>8</strong></span>
+      <span class="sc" style="border-bottom:none"></span><span class="sc" style="border-bottom:none;font-weight:700">Total</span><span class="sc sn" style="border-bottom:none;font-weight:700">29</span><span class="sc sn" style="border-bottom:none;font-weight:700">41</span><span class="sc sn" style="border-bottom:none;font-weight:700">70+</span>
+    </div>
+    <p class="onto-text" style="margin-top:10px;font-size:12px;color:var(--tt)">
+      Some CQs address multiple clusters. Phase II includes additional sub-questions generated via OntoChat from extended user stories.
+    </p>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Design Decisions</div>
+
+    <div class="onto-card">
+      <div class="onto-card-title">Co-occurrence as a first-class entity</div>
+      <div class="onto-card-text">Co-occurrences are modelled as <a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a> instances rather than annotated edges, following the Participation Ontology Design Pattern. This allows provenance metadata, paragraph anchoring, and statistical scores (e.g., PMI) to be attached directly to the co-occurrence node.</div>
+    </div>
+
+    <div class="onto-card">
+      <div class="onto-card-title">Dual OA / PROV typing of mentions</div>
+      <div class="onto-card-text"><a class="onto-ref" href="/ontology/docs/#0001026"><code>viewsari:mention</code></a> is a subclass of both <code>oa:Annotation</code> and <code>prov:Entity</code>. This reflects the dual role of every mention as a scholarly annotation grounded in the source text and as the output of a documented computational process.</div>
+    </div>
+
+    <div class="onto-card">
+      <div class="onto-card-title">Ambiguity preserved, not collapsed</div>
+      <div class="onto-card-text">Where the Index of Names records two plausible identities for the same set of surface forms using a pipe separator, both identities are instantiated as separate entities. This makes interpretive ambiguity a structural feature of the graph rather than a preprocessing artefact.</div>
+    </div>
+
+    <div class="onto-card">
+      <div class="onto-card-title">Biography-bounded coreference</div>
+      <div class="onto-card-text">Coreference arcs are never drawn across biography boundaries. Cross-biography identity is established via shared <code>owl:sameAs</code> links to Wikidata QIDs, not through coreferential annotation.</div>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Citation</div>
+    <div class="onto-card">
+      <div class="onto-card-text" style="font-family:'Georgia',serif;font-style:italic;color:var(--tp)">
+        Ondraszek, S. R. (2026). <em>Modeling Interpretation in the Age of
+        Generative AI: Semantic Technologies for Digital Humanities Research
+        Based on Giorgio Vasari's</em> The Lives. Doctoral dissertation,
+        Karlsruhe Institute of Technology / FIZ Karlsruhe.
+      </div>
+    </div>
+  </div>
+
+  <div class="onto-section">
+    <div class="onto-section-title">Related Resources</div>
+    <ul style="padding-left:20px;font-size:13px;line-height:2;color:var(--ts)">
+      <li><a href="https://github.com/ISE-FIZKarlsruhe/viewsari" target="_blank" style="color:var(--bl);text-decoration:none">Viewsari repository</a></li>
+      <li><a href="https://www.gutenberg.org/ebooks/25326" target="_blank" style="color:var(--bl);text-decoration:none">Project Gutenberg edition</a></li>
+      <li><a href="https://www.wikidata.org/wiki/Q1645493" target="_blank" style="color:var(--bl);text-decoration:none">Wikidata entry for Le Vite</a></li>
+    </ul>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+  // ── Layer colours ─────────────────────────────────────────────────
+  var LC = {
+    biblio:   {s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9"},
+    struct:   {s:"#B45309",f:"#FFFBEB",t:"#92400E"},
+    content:  {s:"#BE185D",f:"#FDF2F8",t:"#9D174D"},
+    annot:    {s:"#0F766E",f:"#F0FDF9",t:"#115E59"},
+    prov:     {s:"#1D4ED8",f:"#EFF6FF",t:"#1E40AF"},
+    imported: {s:"#6B7280",f:"#F3F4F6",t:"#374151"},
+  };
+
+  // ── Ontology nodes ────────────────────────────────────────────────
+  // gx: horizontal grid position (0–1), gy: vertical layer position (0–1)
+  var nodes = [
+    // Bibliographic layer — expression chain left, web representations right
+    {id:"Work",        label:"fabio:Work",             layer:"imported", sub:"Abstract work",                     doc:null,                      gx:0.50, gy:0.04},
+    {id:"edition",     label:"viewsari:edition",       layer:"biblio",   sub:"fabio:Expression",                  doc:"/ontology/docs/#0001000", gx:0.35, gy:0.12},
+    {id:"translation", label:"viewsari:translation",   layer:"biblio",   sub:"fabio:Expression",                  doc:"/ontology/docs/#0001001", gx:0.35, gy:0.20},
+    {id:"volume",      label:"viewsari:volume",        layer:"biblio",   sub:"fabio:Book",                        doc:"/ontology/docs/#0001006", gx:0.25, gy:0.28},
+    {id:"biography",   label:"viewsari:biography",     layer:"biblio",   sub:"fabio:Expression",                  doc:"/ontology/docs/#0001008", gx:0.25, gy:0.36},
+    {id:"page",        label:"viewsari:page",          layer:"biblio",   sub:"fabio:Expression",                  doc:"/ontology/docs/#0001009", gx:0.25, gy:0.44},
+    {id:"vol_web",     label:"viewsari:volume_web_repr",layer:"biblio",  sub:"fabio:WebSite",                     doc:"/ontology/docs/#0001007", gx:0.65, gy:0.28},
+    {id:"bio_web",     label:"viewsari:biography_web_repr",layer:"biblio",sub:"fabio:WebPage",                    doc:"/ontology/docs/#0001010", gx:0.65, gy:0.36},
+    {id:"page_web",    label:"viewsari:page_web_repr", layer:"biblio",   sub:"fabio:WebPage",                     doc:"/ontology/docs/#0001011", gx:0.65, gy:0.44},
+    // Structural layer — left to right: Paragraph → TextChunk → Selector
+    {id:"Paragraph",   label:"doco:Paragraph",         layer:"struct",   sub:"Document component",                doc:null,                      gx:0.25, gy:0.54},
+    {id:"TextChunk",   label:"doco:TextChunk",         layer:"struct",   sub:"Surface-form span",                 doc:null,                      gx:0.50, gy:0.54},
+    {id:"Selector",    label:"oa:TextPositionSelector", layer:"struct",  sub:"start / end offsets",               doc:null,                      gx:0.75, gy:0.54},
+    // Content layer — superclass center, subclasses fanned out
+    {id:"ext_content", label:"viewsari:extracted_content",layer:"content",sub:"prov:Entity",                      doc:"/ontology/docs/#0001033", gx:0.50, gy:0.64},
+    {id:"person",      label:"viewsari:person",        layer:"content",  sub:"Historical individual",             doc:"/ontology/docs/#0001013", gx:0.15, gy:0.72},
+    {id:"artwork",     label:"viewsari:artwork",       layer:"content",  sub:"Creative work",                     doc:"/ontology/docs/#0001012", gx:0.35, gy:0.72},
+    {id:"location",    label:"viewsari:location",      layer:"content",  sub:"Geographical place",                doc:"/ontology/docs/#0001015", gx:0.55, gy:0.72},
+    {id:"organization",label:"viewsari:organization",  layer:"content",  sub:"Institution",                       doc:"/ontology/docs/#0001014", gx:0.75, gy:0.72},
+    {id:"cooccurrence",label:"viewsari:cooccurrence",  layer:"content",  sub:"Pairwise co-appearance",            doc:"/ontology/docs/#0001025", gx:0.92, gy:0.72},
+    // Annotation layer — mention superclass center, subtypes fanned, artwork specializations below
+    {id:"mention",     label:"viewsari:mention",       layer:"annot",    sub:"oa:Annotation + prov:Entity",       doc:"/ontology/docs/#0001026", gx:0.38, gy:0.80},
+    {id:"explicit",    label:"viewsari:explicit_mention",layer:"annot",  sub:"Named reference",                   doc:"/ontology/docs/#0001017", gx:0.15, gy:0.86},
+    {id:"implicit",    label:"viewsari:implicit_mention",layer:"annot",  sub:"Contextual reference",              doc:"/ontology/docs/#0001016", gx:0.35, gy:0.86},
+    {id:"expl_art",    label:"viewsari:explicit_artwork_mention",layer:"annot",sub:"Named artwork",               doc:"/ontology/docs/#0001020", gx:0.15, gy:0.92},
+    {id:"impl_art",    label:"viewsari:implicit_artwork_mention",layer:"annot",sub:"Contextual artwork",          doc:"/ontology/docs/#0001021", gx:0.35, gy:0.92},
+    {id:"coreferent",  label:"viewsari:coreferent",    layer:"annot",    sub:"Coreference",                       doc:"/ontology/docs/#0001018", gx:0.55, gy:0.86},
+    {id:"generic",     label:"viewsari:generic_mention",layer:"annot",   sub:"Generic reference",                 doc:"/ontology/docs/#0001019", gx:0.72, gy:0.86},
+    // Provenance layer — spread across bottom
+    {id:"ner",         label:"viewsari:named_entity_recognition",layer:"prov",sub:"prov:Activity",                doc:"/ontology/docs/#0001022", gx:0.20, gy:0.98},
+    {id:"cooc_analysis",label:"viewsari:cooccurrence_analysis",layer:"prov",sub:"prov:Activity",                  doc:"/ontology/docs/#0001024", gx:0.50, gy:0.98},
+    {id:"el",          label:"viewsari:entity_linking", layer:"prov",    sub:"prov:Activity",                     doc:"/ontology/docs/#0001023", gx:0.80, gy:0.98},
+  ];
+
+  // ── Ontology edges ────────────────────────────────────────────────
+  var edges = [
+    // Bibliographic chain
+    {s:"edition",     t:"Work",        label:"frbr:realizationOf"},
+    {s:"translation", t:"edition",     label:"viewsari:isBasedOn"},
+    {s:"volume",      t:"translation", label:"frbr:isPartOf"},
+    {s:"biography",   t:"volume",      label:"frbr:isPartOf"},
+    {s:"page",        t:"biography",   label:"frbr:isPartOf"},
+    // Web representations
+    {s:"volume",      t:"vol_web",     label:"frbr:hasEmbodiment",  dashed:true},
+    {s:"biography",   t:"bio_web",     label:"frbr:hasEmbodiment",  dashed:true},
+    {s:"page",        t:"page_web",    label:"frbr:hasEmbodiment",  dashed:true},
+    // Structural connections
+    {s:"Paragraph",   t:"page",        label:"dct:isPartOf"},
+    {s:"TextChunk",   t:"Paragraph",   label:"doco:hasTextChunk"},
+    {s:"Selector",    t:"TextChunk",   label:"oa:hasSelector"},
+    {s:"Paragraph",   t:"page_web",    label:"viewsari:hasStartPage",dashed:true},
+    // Mention hierarchy
+    {s:"explicit",    t:"mention",     label:"rdfs:subClassOf"},
+    {s:"implicit",    t:"mention",     label:"rdfs:subClassOf"},
+    {s:"coreferent",  t:"mention",     label:"rdfs:subClassOf"},
+    {s:"generic",     t:"mention",     label:"rdfs:subClassOf"},
+    {s:"expl_art",    t:"explicit",    label:"rdfs:subClassOf"},
+    {s:"impl_art",    t:"implicit",    label:"rdfs:subClassOf"},
+    // Mention ↔ structure
+    {s:"mention",     t:"TextChunk",   label:"oa:hasTarget"},
+    // Entity hierarchy
+    {s:"person",      t:"ext_content", label:"rdfs:subClassOf"},
+    {s:"artwork",     t:"ext_content", label:"rdfs:subClassOf"},
+    {s:"location",    t:"ext_content", label:"rdfs:subClassOf"},
+    {s:"organization",t:"ext_content", label:"rdfs:subClassOf"},
+    {s:"cooccurrence",t:"ext_content", label:"rdfs:subClassOf"},
+    // Mention → entity
+    {s:"mention",     t:"ext_content", label:"oa:hasBody"},
+    // Provenance
+    {s:"ner",         t:"mention",     label:"prov:wasGeneratedBy", dashed:true},
+    {s:"ner",         t:"Paragraph",   label:"prov:used",           dashed:true},
+    {s:"cooc_analysis",t:"cooccurrence",label:"prov:wasGeneratedBy",dashed:true},
+    {s:"el",          t:"ext_content", label:"prov:wasGeneratedBy", dashed:true},
+    // Co-occurrence anchoring
+    {s:"cooccurrence",t:"Paragraph",   label:"viewsari:inParagraph"},
+    {s:"cooccurrence",t:"ext_content", label:"viewsari:involves"},
+    // Coreferent → mention
+    {s:"coreferent",  t:"mention",     label:"viewsari:refersTo",   dashed:true},
+  ];
+
+  // Remap edge source/target from id strings to {s,t} for d3.forceLink
+  edges.forEach(function(e){ e.source = e.s; e.target = e.t; });
+
+  // ── D3 force-directed graph ───────────────────────────────────────
+  var W, H;
+  var svg = d3.select("#og-svg");
+  var container = document.getElementById("onto-graph");
+  W = container.clientWidth;
+  H = container.clientHeight;
+
+  var g = svg.append("g").attr("id","og-viewport");
+  var edgeG = g.append("g");
+  var nodeG = g.append("g");
+  var showLabels = true;
+
+  // Zoom
+  var zoom = d3.zoom().scaleExtent([0.15, 3]).on("zoom", function(ev){
+    g.attr("transform", ev.transform);
+  });
+  svg.call(zoom);
+
+  // Use a taller virtual canvas so layers have room
+  var VH = Math.max(H, 900);
+
+  // Seed positions from grid targets so layout starts clean
+  nodes.forEach(function(d){ d.x = d.gx * W; d.y = d.gy * VH; });
+
+  // Simulation — per-node grid targets
+  var sim = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(edges).id(function(d){return d.id;})
+      .distance(function(d){return d.label==="rdfs:subClassOf"?50:75;})
+      .strength(0.25))
+    .force("charge", d3.forceManyBody().strength(-200))
+    .force("collision", d3.forceCollide(42))
+    .force("x", d3.forceX(function(d){ return d.gx * W; }).strength(0.7))
+    .force("y", d3.forceY(function(d){ return d.gy * VH; }).strength(0.7));
+
+  // Edges
+  var linkSel = edgeG.selectAll("g").data(edges).enter().append("g");
+  var linkPath = linkSel.append("path")
+    .attr("class","og-edge")
+    .attr("marker-end","url(#og-arrow)")
+    .style("stroke-dasharray", function(d){return d.dashed?"5,4":null;});
+  var linkLabel = linkSel.append("text").attr("class","og-edge-label").text(function(d){return d.label;});
+
+  // Nodes
+  var nodeSel = nodeG.selectAll("g").data(nodes).enter().append("g")
+    .attr("class","og-node")
+    .call(d3.drag()
+      .on("start",function(ev,d){if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on("drag",function(ev,d){d.fx=ev.x;d.fy=ev.y;})
+      .on("end",function(ev,d){if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+  nodeSel.each(function(d){
+    var sel = d3.select(this);
+    var col = LC[d.layer] || LC.imported;
+    var rw = Math.max(d.label.length * 6.2 + 18, 100);
+    d._rw = rw;
+    d._rh = 40;
+
+    sel.append("rect").attr("class","og-body")
+      .attr("x",-rw/2).attr("y",-20).attr("width",rw).attr("height",40)
+      .attr("rx",6).attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.5);
+
+    // Top strip
+    sel.append("rect").attr("x",-rw/2).attr("y",-20).attr("width",rw).attr("height",13)
+      .attr("rx",6).attr("fill",col.s).attr("fill-opacity",.12);
+    sel.append("rect").attr("x",-rw/2).attr("y",-10).attr("width",rw).attr("height",3)
+      .attr("fill",col.s).attr("fill-opacity",.12);
+
+    sel.append("text").attr("class","og-label").attr("y",-2).attr("text-anchor","middle").attr("fill",col.t)
+      .text(d.label.length>30?d.label.substring(0,28)+"\u2026":d.label);
+    sel.append("text").attr("class","og-sub").attr("y",12).attr("text-anchor","middle").attr("fill",col.t)
+      .text(d.sub);
+  });
+
+  nodeSel.on("click", function(ev, d){
+    ev.stopPropagation();
+    nodeSel.classed("selected", function(n){return n.id===d.id;});
+    var col = LC[d.layer]||LC.imported;
+    var info = document.getElementById("og-info");
+    var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+d.layer.toUpperCase()+"</div>";
+    h += "<div style='font-size:12px;font-weight:600;color:var(--tp);margin-bottom:4px;word-break:break-all'>"+d.label+"</div>";
+    if(d.sub) h += "<div style='font-size:11px;color:var(--ts);margin-bottom:8px'>"+d.sub+"</div>";
+    // Show connections
+    var conns = edges.filter(function(e){
+      var sid = typeof e.source==="object"?e.source.id:e.source;
+      var tid = typeof e.target==="object"?e.target.id:e.target;
+      return sid===d.id||tid===d.id;
+    });
+    if(conns.length){
+      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Relations ("+conns.length+")</div>";
+      conns.forEach(function(e){
+        var src = typeof e.source==="object"?e.source.label:e.source;
+        var tgt = typeof e.target==="object"?e.target.label:e.target;
+        h += "<div style='font-size:10px;color:var(--ts);line-height:1.6'>"+src+" <span style='color:var(--tt)'>\u2192</span> "+tgt+"<br><span style='font-size:9px;color:var(--tt)'>"+e.label+"</span></div>";
+      });
+    }
+    if(d.doc) h += "<a href='"+d.doc+"' style='font-size:11px;color:#1B6EF3;text-decoration:none;margin-top:8px;display:inline-block'>\u2197 WIDOCO docs</a>";
+    info.innerHTML = h;
+    info.style.display = "block";
+
+    // Highlight connected edges
+    linkPath.style("stroke", function(e){
+      var sid = typeof e.source==="object"?e.source.id:e.source;
+      var tid = typeof e.target==="object"?e.target.id:e.target;
+      return (sid===d.id||tid===d.id) ? col.s : "#D1D5DB";
+    }).style("stroke-width", function(e){
+      var sid = typeof e.source==="object"?e.source.id:e.source;
+      var tid = typeof e.target==="object"?e.target.id:e.target;
+      return (sid===d.id||tid===d.id) ? 2 : 1;
+    });
+  });
+
+  svg.on("click", function(ev){
+    if(ev.target.closest(".og-node")) return;
+    nodeSel.classed("selected", false);
+    document.getElementById("og-info").style.display = "none";
+    linkPath.style("stroke","#D1D5DB").style("stroke-width",1);
+  });
+
+  // Tick
+  sim.on("tick", function(){
+    linkPath.attr("d", function(d){
+      return "M"+d.source.x+","+d.source.y+"L"+d.target.x+","+d.target.y;
+    });
+    linkLabel.attr("x",function(d){return(d.source.x+d.target.x)/2;})
+             .attr("y",function(d){return(d.source.y+d.target.y)/2-4;})
+             .attr("text-anchor","middle")
+             .style("display", function(){return showLabels?"block":"none";});
+    nodeSel.attr("transform",function(d){return "translate("+d.x+","+d.y+")";});
+  });
+
+  // Auto-fit after settling
+  setTimeout(function(){
+    sim.alphaTarget(0);
+    setTimeout(ogFit, 800);
+  }, 1500);
+
+  window.ogFit = function(){
+    var bounds = g.node().getBBox();
+    if(!bounds.width) return;
+    var fw = W/bounds.width, fh = H/bounds.height;
+    var s = Math.min(fw, fh, 1.2)*0.85;
+    var tx = W/2 - (bounds.x+bounds.width/2)*s;
+    var ty = H/2 - (bounds.y+bounds.height/2)*s;
+    svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(s));
+  };
+
+  window.ogToggleLabels = function(){
+    showLabels = !showLabels;
+    linkLabel.style("display", showLabels?"block":"none");
+  };
+}());
+
+// ── CQ example mini-graphs ─────────────────────────────────────────
+(function(){
+  var C = {
+    biblio:{s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9"},
+    struct:{s:"#B45309",f:"#FFFBEB",t:"#92400E"},
+    content:{s:"#BE185D",f:"#FDF2F8",t:"#9D174D"},
+    annot:{s:"#0F766E",f:"#F0FDF9",t:"#115E59"},
+    prov:{s:"#1D4ED8",f:"#EFF6FF",t:"#1E40AF"},
+    entity:{s:"#BE185D",f:"#FDF2F8",t:"#9D174D"},
+    ookb:{s:"#B91C1C",f:"#FEF2F2",t:"#991B1B"},
+    wd:{s:"#166534",f:"#F0FDF4",t:"#166534"},
+  };
+
+  function miniGraph(containerId, nodes, edges){
+    var el = document.getElementById(containerId);
+    if(!el) return;
+    var W = el.clientWidth || 600, H = el.clientHeight || 180;
+    var svg = d3.select("#"+containerId).append("svg").attr("width",W).attr("height",H);
+    var g = svg.append("g");
+
+    // zoom
+    svg.call(d3.zoom().scaleExtent([0.3,2.5]).on("zoom",function(ev){g.attr("transform",ev.transform);}));
+
+    edges.forEach(function(e){e.source=e.s;e.target=e.t;});
+
+    var sim = d3.forceSimulation(nodes)
+      .force("link",d3.forceLink(edges).id(function(d){return d.id;}).distance(70).strength(0.6))
+      .force("charge",d3.forceManyBody().strength(-200))
+      .force("center",d3.forceCenter(W/2,H/2))
+      .force("collision",d3.forceCollide(40));
+
+    var linkSel = g.selectAll(".mg-edge").data(edges).enter().append("g");
+    var linkPath = linkSel.append("line").attr("stroke","#D1D5DB").attr("stroke-width",1)
+      .style("stroke-dasharray",function(d){return d.dashed?"4,3":null;});
+    var linkLabel = linkSel.append("text").attr("class","og-edge-label").text(function(d){return d.label;});
+
+    var nodeSel = g.selectAll(".mg-node").data(nodes).enter().append("g").attr("class","og-node")
+      .call(d3.drag()
+        .on("start",function(ev,d){if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+        .on("drag",function(ev,d){d.fx=ev.x;d.fy=ev.y;})
+        .on("end",function(ev,d){if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+    nodeSel.each(function(d){
+      var s=d3.select(this), col=C[d.layer]||C.struct;
+      var rw=Math.max(d.label.length*5.8+14,70); d._rw=rw;
+      s.append("rect").attr("x",-rw/2).attr("y",-16).attr("width",rw).attr("height",32)
+        .attr("rx",5).attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.2);
+      s.append("rect").attr("x",-rw/2).attr("y",-16).attr("width",rw).attr("height",11)
+        .attr("rx",5).attr("fill",col.s).attr("fill-opacity",.12);
+      s.append("rect").attr("x",-rw/2).attr("y",-7).attr("width",rw).attr("height",2)
+        .attr("fill",col.s).attr("fill-opacity",.12);
+      s.append("text").attr("y",0).attr("text-anchor","middle")
+        .attr("font-size","8.5px").attr("font-weight","600").attr("font-family","Inter,sans-serif").attr("fill",col.t)
+        .text(d.label.length>26?d.label.substring(0,24)+"\u2026":d.label);
+      if(d.sub) s.append("text").attr("y",10).attr("text-anchor","middle")
+        .attr("font-size","7px").attr("font-family","Inter,sans-serif").attr("fill",col.t).attr("fill-opacity",.65)
+        .text(d.sub);
+    });
+
+    sim.on("tick",function(){
+      linkPath.attr("x1",function(d){return d.source.x;}).attr("y1",function(d){return d.source.y;})
+              .attr("x2",function(d){return d.target.x;}).attr("y2",function(d){return d.target.y;});
+      linkLabel.attr("x",function(d){return(d.source.x+d.target.x)/2;})
+               .attr("y",function(d){return(d.source.y+d.target.y)/2-3;})
+               .attr("text-anchor","middle");
+      nodeSel.attr("transform",function(d){return"translate("+d.x+","+d.y+")";});
+    });
+
+    // fit after settling
+    setTimeout(function(){
+      var bounds = g.node().getBBox();
+      if(!bounds.width)return;
+      var s=Math.min(W/bounds.width,H/bounds.height,1.3)*0.8;
+      var tx=W/2-(bounds.x+bounds.width/2)*s, ty=H/2-(bounds.y+bounds.height/2)*s;
+      svg.transition().duration(400).call(
+        d3.zoom().scaleExtent([0.3,2.5]).on("zoom",function(ev){g.attr("transform",ev.transform);}).transform,
+        d3.zoomIdentity.translate(tx,ty).scale(s));
+    },1200);
+  }
+
+  // Graph 1: Co-occurrence (Cimabue-Giotto)
+  miniGraph("cq-graph-cooc",
+    [{id:"para",label:"doco:Paragraph_13",layer:"struct",sub:"Vol.1, p.7"},
+     {id:"cooc",label:"cooccurrence_cim-gio_1",layer:"content",sub:"viewsari:cooccurrence"},
+     {id:"cim",label:"viewsari:cimabue-giovanni",layer:"entity",sub:"viewsari:person"},
+     {id:"gio",label:"viewsari:giotto",layer:"entity",sub:"viewsari:person"},
+     {id:"run",label:"cooccurrence_extraction",layer:"prov",sub:"prov:Activity"}],
+    [{s:"cooc",t:"para",label:"inParagraph"},
+     {s:"cooc",t:"cim",label:"involves"},
+     {s:"cooc",t:"gio",label:"involves"},
+     {s:"run",t:"cooc",label:"wasGeneratedBy",dashed:true}]
+  );
+
+  // Graph 2: Mention types in Giotto para 96
+  miniGraph("cq-graph-mentions",
+    [{id:"para",label:"doco:Paragraph_96",layer:"struct",sub:"Giotto bio"},
+     {id:"chunk1",label:"\"the Badia of Florence\"",layer:"struct",sub:"TextChunk"},
+     {id:"m12",label:"m_0012 · S. Croce",layer:"annot",sub:"explicit"},
+     {id:"m04",label:"m_0004 · chapel of high-altar",layer:"ookb",sub:"implicit · OOKB"},
+     {id:"m07",label:"m_0007 · Madonna",layer:"annot",sub:"implicit"},
+     {id:"m06",label:"m_0006 · \"wherein\"",layer:"annot",sub:"coreferent"},
+     {id:"e1",label:"wd:Q799026",layer:"wd",sub:"Badia di Firenze"},
+     {id:"e2",label:"wd:Q117842108",layer:"wd",sub:"Annunciation"}],
+    [{s:"m12",t:"para",label:"oa:hasTarget"},
+     {s:"m04",t:"para",label:"oa:hasTarget"},
+     {s:"m07",t:"para",label:"oa:hasTarget"},
+     {s:"m06",t:"m04",label:"refersTo",dashed:true},
+     {s:"m12",t:"e1",label:"owl:sameAs"},
+     {s:"m07",t:"e2",label:"owl:sameAs"}]
+  );
+
+  // Graph 3: Bibliographic chain
+  miniGraph("cq-graph-biblio",
+    [{id:"cooc",label:"cooccurrence_cim-gio_1",layer:"content",sub:"cooccurrence"},
+     {id:"para",label:"Paragraph_13",layer:"struct",sub:"910 chars"},
+     {id:"page",label:"page_7",layer:"biblio",sub:"viewsari:page"},
+     {id:"bio",label:"cimabue-bio",layer:"biblio",sub:"viewsari:biography"},
+     {id:"vol",label:"volume-1",layer:"biblio",sub:"viewsari:volume"},
+     {id:"trans",label:"the_lives_1568",layer:"biblio",sub:"translation"},
+     {id:"ed",label:"le_vite_1568",layer:"biblio",sub:"edition"},
+     {id:"work",label:"fabio:Work",layer:"biblio",sub:"Le Vite"}],
+    [{s:"cooc",t:"para",label:"inParagraph"},
+     {s:"para",t:"page",label:"dct:isPartOf"},
+     {s:"page",t:"bio",label:"frbr:isPartOf"},
+     {s:"bio",t:"vol",label:"frbr:isPartOf"},
+     {s:"vol",t:"trans",label:"frbr:isPartOf"},
+     {s:"trans",t:"ed",label:"isBasedOn"},
+     {s:"ed",t:"work",label:"realizationOf"}]
+  );
+
+  // Graph 4: Artwork cross-references
+  miniGraph("cq-graph-artwork",
+    [{id:"m12",label:"m_0012 · \"S. Croce\"",layer:"annot",sub:"explicit"},
+     {id:"m21",label:"m_0021 · \"the said church\"",layer:"annot",sub:"coreferent"},
+     {id:"m25",label:"m_0025 · \"Church of S. Croce\"",layer:"annot",sub:"coreferent"},
+     {id:"e_sc",label:"wd:Q123258826",layer:"wd",sub:"Basilica S. Croce"},
+     {id:"m14",label:"m_0014 · Bardi chapel",layer:"ookb",sub:"implicit · OOKB"},
+     {id:"m15",label:"m_0015 · Peruzzi chapel",layer:"ookb",sub:"implicit · OOKB"},
+     {id:"cec_g",label:"Giotto: S. Cecilia",layer:"annot",sub:"wd:Q1479873"},
+     {id:"cec_c",label:"Cimabue: S. Cecilia",layer:"annot",sub:"wd:Q1479873"},
+     {id:"cec_v",label:"Cavallini: S. Cecilia",layer:"annot",sub:"wd:Q1479873"},
+     {id:"e_cec",label:"wd:Q1479873",layer:"wd",sub:"S. Cecilia"}],
+    [{s:"m21",t:"m12",label:"refersTo",dashed:true},
+     {s:"m25",t:"m12",label:"refersTo",dashed:true},
+     {s:"m12",t:"e_sc",label:"owl:sameAs"},
+     {s:"m14",t:"e_sc",label:"inside"},
+     {s:"m15",t:"e_sc",label:"inside"},
+     {s:"cec_g",t:"e_cec",label:"owl:sameAs"},
+     {s:"cec_c",t:"e_cec",label:"owl:sameAs"},
+     {s:"cec_v",t:"e_cec",label:"owl:sameAs"}]
+  );
+
+  // Graph 5: Provenance chain for implicit mention
+  miniGraph("cq-graph-prov",
+    [{id:"para",label:"doco:Paragraph_96",layer:"struct",sub:"Giotto bio"},
+     {id:"chunk",label:"TextChunk [1487:1530]",layer:"struct",sub:"\"the panel on the high-altar\""},
+     {id:"sel",label:"TextPositionSelector",layer:"struct",sub:"start:1487 end:1530"},
+     {id:"run",label:"obliquer_run_1",layer:"prov",sub:"NER · prov:Activity"},
+     {id:"m08",label:"m_0008",layer:"annot",sub:"implicit_artwork_mention"},
+     {id:"el",label:"entity_linking_run_1",layer:"prov",sub:"EL · prov:Activity"},
+     {id:"ent",label:"viewsari:entity_0006",layer:"entity",sub:"extracted_content"},
+     {id:"wd",label:"wd:Q3907498",layer:"wd",sub:"Polittico Baroncelli"},
+     {id:"c1",label:"m_0010 · \"which\"",layer:"annot",sub:"coreferent"},
+     {id:"c2",label:"m_0011 · \"the work\"",layer:"annot",sub:"coreferent"}],
+    [{s:"run",t:"para",label:"prov:used",dashed:true},
+     {s:"run",t:"m08",label:"wasGeneratedBy",dashed:true},
+     {s:"m08",t:"chunk",label:"oa:hasTarget"},
+     {s:"chunk",t:"sel",label:"oa:hasSelector"},
+     {s:"m08",t:"ent",label:"oa:hasBody"},
+     {s:"el",t:"ent",label:"wasGeneratedBy",dashed:true},
+     {s:"ent",t:"wd",label:"owl:sameAs"},
+     {s:"c1",t:"m08",label:"refersTo",dashed:true},
+     {s:"c2",t:"m08",label:"refersTo",dashed:true}]
+  );
+  // Graph 6: FRBR levels for CQII.22
+  miniGraph("cq-graph-frbr",
+    [{id:"gutenberg",label:"the_lives_gutenberg_version",layer:"biblio",sub:"fabio:ManifestationCollection"},
+     {id:"trans",label:"the_lives_1568",layer:"biblio",sub:"viewsari:translation · Du Vere"},
+     {id:"ed",label:"le_vite_1568",layer:"biblio",sub:"viewsari:edition · Giunti"},
+     {id:"work",label:"le_vite (fabio:Work)",layer:"biblio",sub:"wd:Q1645493"},
+     {id:"vol",label:"volume-1",layer:"biblio",sub:"viewsari:volume"},
+     {id:"bio",label:"giotto-bio",layer:"biblio",sub:"viewsari:biography"},
+     {id:"para",label:"Paragraph_96",layer:"struct",sub:"doco:Paragraph"},
+     {id:"m07",label:"m_0007 · Madonna",layer:"annot",sub:"implicit artwork"},
+     {id:"ent",label:"wd:Q117842108",layer:"wd",sub:"Annunciation"}],
+    [{s:"trans",t:"gutenberg",label:"frbr:hasEmbodiment",dashed:true},
+     {s:"trans",t:"ed",label:"isBasedOn"},
+     {s:"ed",t:"work",label:"realizationOf"},
+     {s:"vol",t:"trans",label:"frbr:isPartOf"},
+     {s:"bio",t:"vol",label:"frbr:isPartOf"},
+     {s:"para",t:"bio",label:"dct:isPartOf"},
+     {s:"m07",t:"para",label:"oa:hasTarget"},
+     {s:"m07",t:"ent",label:"oa:hasBody"}]
+  );
+
+  // Graph 7: Wikidata linking across biographies
+  miniGraph("cq-graph-wd",
+    [{id:"smn",label:"wd:Q51175",layer:"wd",sub:"S. Maria Novella"},
+     {id:"smd",label:"wd:Q191739",layer:"wd",sub:"S. Maria del Fiore"},
+     {id:"pal",label:"wd:Q271928",layer:"wd",sub:"Palazzo della Signoria"},
+     {id:"b_ghi",label:"ghirlandaio",layer:"biblio",sub:"235 mentions"},
+     {id:"b_bot",label:"botticelli",layer:"biblio",sub:"110 mentions"},
+     {id:"b_bru",label:"brunelleschi",layer:"biblio",sub:"272 mentions"},
+     {id:"b_cim",label:"cimabue",layer:"biblio",sub:"116 mentions"},
+     {id:"b_lip",label:"lippi",layer:"biblio",sub:"118 mentions"},
+     {id:"b_gio",label:"giotto",layer:"biblio",sub:"203 mentions"},
+     {id:"b_ver",label:"verrocchio",layer:"biblio",sub:"216 mentions"},
+     {id:"ookb",label:"OOKB entities",layer:"ookb",sub:"no Wikidata match"}],
+    [{s:"b_ghi",t:"smn",label:"owl:sameAs"},
+     {s:"b_bot",t:"smn",label:"owl:sameAs"},
+     {s:"b_bru",t:"smn",label:"owl:sameAs"},
+     {s:"b_cim",t:"smn",label:"owl:sameAs"},
+     {s:"b_lip",t:"smn",label:"owl:sameAs"},
+     {s:"b_ghi",t:"smd",label:"owl:sameAs"},
+     {s:"b_bru",t:"smd",label:"owl:sameAs"},
+     {s:"b_cim",t:"smd",label:"owl:sameAs"},
+     {s:"b_gio",t:"smd",label:"owl:sameAs"},
+     {s:"b_ver",t:"smd",label:"owl:sameAs"},
+     {s:"b_bru",t:"pal",label:"owl:sameAs"},
+     {s:"b_ghi",t:"pal",label:"owl:sameAs"},
+     {s:"b_lip",t:"pal",label:"owl:sameAs"},
+     {s:"b_ghi",t:"ookb",label:"64 OOKB",dashed:true},
+     {s:"b_gio",t:"ookb",label:"52 OOKB",dashed:true}]
+  );
+}());
+
+// ── CQ SPARQL runner ────────────────────────────────────────────────
+(function(){
+  function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+  function shortUri(v){
+    return v.replace("https://viewsari.ise.fiz-karlsruhe.de/kb/","vkb:")
+            .replace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#","viewsari:")
+            .replace("http://purl.org/spar/fabio/","fabio:")
+            .replace("http://purl.org/spar/doco/","doco:")
+            .replace("http://www.w3.org/ns/prov#","prov:")
+            .replace("http://www.w3.org/ns/oa#","oa:");
+  }
+  function formatCell(v){
+    if(!v) return "";
+    if(v.startsWith("http://") || v.startsWith("https://")){
+      return "<a href='"+esc(v)+"' target='_blank' style='color:var(--bl);text-decoration:none'>"+esc(shortUri(v))+"</a>";
+    }
+    return esc(v.length>80?v.substring(0,77)+"...":v);
+  }
+
+  window.cqToggleCode = function(el){
+    var code = el.parentElement.querySelector(".cq-sparql-code");
+    code.classList.toggle("visible");
+    el.textContent = code.classList.contains("visible") ? "hide query" : "show query";
+  };
+
+  window.cqRun = function(btn, qid){
+    var codeEl = document.querySelector('.cq-sparql-code[data-qid="'+qid+'"]');
+    var resultEl = document.querySelector('.cq-sparql-result[data-qid="'+qid+'"]');
+    if(!codeEl || !resultEl) return;
+
+    // Decode HTML entities in the query
+    var tmp = document.createElement("textarea");
+    tmp.innerHTML = codeEl.innerHTML;
+    var query = tmp.value;
+
+    btn.classList.add("running");
+    btn.textContent = "Running...";
+    resultEl.classList.add("visible");
+    resultEl.innerHTML = "<div style='padding:12px;color:var(--ts);font-size:11px'>Querying KG...</div>";
+
+    fetch("/sparql/query", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({query: query})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      btn.classList.remove("running");
+      if(data.error){
+        btn.textContent = "Error";
+        resultEl.innerHTML = "<div class='cq-sparql-status err'>"+esc(data.error)+"</div>";
+        return;
+      }
+      btn.classList.add("done");
+      btn.textContent = "Confirmed (" + data.count + " results)";
+
+      if(data.columns && data.rows.length > 0){
+        var h = "<div class='cq-sparql-status ok'>"+data.count+" results returned — ontology coverage confirmed</div>";
+        h += "<table><thead><tr>";
+        data.columns.forEach(function(c){h += "<th>"+esc(c)+"</th>";});
+        h += "</tr></thead><tbody>";
+        data.rows.forEach(function(row){
+          h += "<tr>";
+          row.forEach(function(cell){h += "<td>"+formatCell(cell)+"</td>";});
+          h += "</tr>";
+        });
+        h += "</tbody></table>";
+        resultEl.innerHTML = h;
+      } else if(data.count === 0){
+        resultEl.innerHTML = "<div class='cq-sparql-status err'>No results — check query or data</div>";
+        btn.textContent = "No results";
+        btn.classList.remove("done");
+      } else {
+        resultEl.innerHTML = "<div class='cq-sparql-status ok'>Query returned: "+JSON.stringify(data.rows)+"</div>";
+      }
+    })
+    .catch(function(err){
+      btn.classList.remove("running");
+      btn.textContent = "Error";
+      resultEl.innerHTML = "<div class='cq-sparql-status err'>"+esc(""+err)+"</div>";
+    });
+  };
+}());
+</script>
+{% endblock %}

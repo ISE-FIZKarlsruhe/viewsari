@@ -1,0 +1,452 @@
+{% extends "base.html" %}
+{% block title %}ObliquER — Viewsari{% endblock %}
+
+{% block extra_styles %}
+/* ── ObliquER page layout ── */
+.oq-layout{position:fixed;top:56px;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.oq-pane{overflow-y:auto;padding:32px 36px}
+.oq-left{background:var(--bg2);border-right:1px solid var(--seam)}
+.oq-right{background:var(--bg)}
+
+.oq-section{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.oq-section::after{content:'';flex:1;height:1px;background:var(--seam)}
+
+/* Prompt display */
+.oq-prompt{background:#1A1A2E;color:#E2E8F0;font-family:'Menlo','Consolas',monospace;font-size:12px;line-height:1.7;padding:20px;border-radius:10px;margin-bottom:20px;overflow-x:auto;white-space:pre-wrap;position:relative}
+.oq-prompt .role{color:#F59E0B;font-weight:700}
+.oq-prompt .kw{color:#7DD3FC}
+.oq-prompt .tag{color:#F472B6;font-weight:600}
+.oq-prompt .comment{color:#6B7280;font-style:italic}
+.oq-prompt .hl{color:#34D399}
+
+/* Source text */
+.oq-text{font-family:'Georgia',serif;font-size:15px;line-height:1.9;color:#1A1A2E;background:#fff;border:1px solid var(--seam);border-radius:10px;padding:24px;margin-bottom:20px}
+.oq-text .ann-span{border-radius:3px;transition:background .4s,border-color .4s;position:relative}
+.oq-text .ann-span.explicit{background:var(--pill-or);border-bottom:1.5px solid var(--or)}
+.oq-text .ann-span.implicit{background:var(--pill-bl);border-bottom:1.5px solid var(--bl)}
+.oq-text .ann-span.coref{background:var(--pill-pu);border-bottom:1.5px dotted var(--pu)}
+.oq-text .ann-span.hidden{background:transparent;border-color:transparent}
+.oq-text .ann-badge{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;vertical-align:super;margin-left:1px;opacity:0;transition:opacity .4s}
+.oq-text .ann-span:not(.hidden) .ann-badge{opacity:1}
+.oq-text .ann-badge.explicit{color:var(--or)}
+.oq-text .ann-badge.implicit{color:var(--bl)}
+.oq-text .ann-badge.coref{color:var(--pu)}
+
+/* Run button */
+.oq-run{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:10px 24px;border-radius:100px;border:none;background:var(--or);color:#fff;cursor:pointer;font-family:inherit;transition:all .15s;margin-bottom:24px}
+.oq-run:hover{filter:brightness(.92)}
+.oq-run:disabled{opacity:.5;cursor:default;filter:none}
+.oq-run .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Result cards */
+.oq-results{display:flex;flex-direction:column;gap:12px}
+.oq-card{background:#fff;border:1px solid var(--seam);border-radius:10px;padding:16px 18px;opacity:0;transform:translateY(16px);transition:all .5s cubic-bezier(.16,1,.3,1)}
+.oq-card.visible{opacity:1;transform:translateY(0)}
+.oq-card-type{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.oq-card-type.explicit{color:var(--or)}
+.oq-card-type.implicit{color:var(--bl)}
+.oq-card-type.coref{color:var(--pu)}
+.oq-card-surface{font-family:'Georgia',serif;font-size:14px;color:var(--tp);margin-bottom:6px;line-height:1.4}
+.oq-card-meta{font-size:11px;color:var(--ts);line-height:1.7}
+.oq-card-meta strong{color:var(--tp);font-weight:600}
+.oq-card-wd{font-size:11px;font-weight:600;color:var(--bl);text-decoration:none;display:inline-block;margin-top:4px}
+.oq-card-wd:hover{text-decoration:underline}
+.oq-card-ookb{font-size:10px;color:#B91C1C;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:4px;padding:2px 7px;display:inline-block;margin-top:4px}
+
+/* LLM commentary */
+.oq-llm{font-family:'Georgia',serif;font-size:13px;font-style:italic;color:var(--ts);line-height:1.7;padding:12px 16px;background:linear-gradient(to right,#FFF4EE,#fff);border-left:3px solid var(--or);border-radius:0 8px 8px 0;margin-bottom:20px;opacity:0;transform:translateX(-10px);transition:all .6s}
+.oq-llm.visible{opacity:1;transform:translateX(0)}
+.oq-llm .llm-name{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);font-style:normal;display:block;margin-bottom:4px}
+
+/* Passage selector */
+.oq-passages{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.oq-passage-btn{font-size:11px;font-weight:600;padding:6px 14px;border-radius:100px;border:1.5px solid var(--seam);background:transparent;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .14s}
+.oq-passage-btn:hover{border-color:var(--or);color:var(--or)}
+.oq-passage-btn.active{background:var(--or);color:#fff;border-color:var(--or)}
+
+/* Format output box */
+.oq-format-box{background:#1A1A2E;color:#E2E8F0;font-family:'Menlo','Consolas',monospace;font-size:11px;line-height:1.6;padding:20px;border-radius:10px;overflow-x:auto;white-space:pre-wrap;max-height:500px;overflow-y:auto;margin:0}
+
+/* Legend */
+.oq-legend{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.oq-legend .li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ts);font-weight:500}
+{% endblock %}
+
+{% block topbar_chips %}
+<span class="bio-chip">ObliquER Pipeline Demo</span>
+{% endblock %}
+
+{% block status %}Interactive demo{% endblock %}
+
+{% block content %}
+<div class="oq-layout">
+  <!-- LEFT: Prompt + Source text -->
+  <div class="oq-pane oq-left">
+    <div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12px;line-height:1.6;color:#92400E">
+      <strong>Demo only.</strong> This page illustrates how the ObliquER pipeline extracts artwork mentions from Vasari's text. No live LLM is invoked &mdash; the annotations shown are pre-computed ground-truth results from the actual extraction run. The prompt and commentary are provided for illustrative purposes.
+    </div>
+    <div class="oq-section">Select a passage</div>
+    <div class="oq-passages">
+      <button class="oq-passage-btn active" onclick="selectPassage(0)">Cimabue — Maestà</button>
+      <button class="oq-passage-btn" onclick="selectPassage(1)">Giotto — Burial</button>
+    </div>
+
+    <div class="oq-section">System prompt</div>
+    <div class="oq-prompt"><span class="role">SYSTEM</span>
+<span class="comment">// ObliquER entity recognition prompt</span>
+
+You are an expert in historical text analysis with a strong
+background in interpreting biographical texts from the
+Renaissance period, especially Giorgio Vasari's <span class="hl">"Lives of the
+Most Eminent Painters, Sculptors, and Architects"</span> (1555/1568).
+
+<span class="kw">Your task:</span> Extract all <span class="tag">ARTWORK</span> entities mentioned in the
+input text, including:
+
+  <span class="tag">[EXPLICIT]</span>  Named artworks, nicknames, traditional IDs
+  <span class="tag">[IMPLICIT]</span>  Descriptive passages implying a specific artwork
+  <span class="tag">[COREFERENT]</span> Repeated references (pronouns, definite NPs)
+
+For each mention return: <span class="kw">mention_id</span>, <span class="kw">type</span>, <span class="kw">surface_form</span>,
+<span class="kw">entity_id</span>, <span class="kw">refers_to</span> (for coreferents), <span class="kw">confidence</span>.</div>
+
+    <div class="oq-section">Input passage</div>
+    <div class="oq-text" id="oq-text-display"></div>
+
+    <button class="oq-run" id="oq-run-btn" onclick="runExtraction()">
+      Run ObliquER extraction
+    </button>
+  </div>
+
+  <!-- RIGHT: Results -->
+  <div class="oq-pane oq-right">
+    <div class="oq-section">ObliquER output</div>
+
+    <div class="oq-llm" id="oq-llm-intro">
+      <span class="llm-name">ObliquER (GPT-4o, few-shot)</span>
+      <span id="oq-llm-text"></span>
+    </div>
+
+    <div class="oq-legend" id="oq-legend" style="display:none">
+      <div class="li"><span class="ll e"></span> Explicit</div>
+      <div class="li"><span class="ll i"></span> Implicit</div>
+      <div class="li"><span class="ll c"></span> Coreferent</div>
+    </div>
+
+    <div class="oq-results" id="oq-results"></div>
+
+    <div id="oq-format-btns" style="display:none;margin-top:20px">
+      <div class="oq-section">Raw output formats</div>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button class="oq-run" style="font-size:11px;padding:6px 16px;margin:0" onclick="toggleFormat('json')">{ } JSON</button>
+        <button class="oq-run" style="font-size:11px;padding:6px 16px;margin:0;background:var(--pu)" onclick="toggleFormat('ttl')">&#9653; RDF/Turtle</button>
+      </div>
+      <pre class="oq-format-box" id="oq-format-box" style="display:none"></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Pre-computed annotation data ──────────────────────────────────
+var PASSAGES = [
+  {
+    id: "cimabue_2",
+    bio: "Giovanni Cimabue",
+    paragraph_id: 2,
+    text: "Having next undertaken to make a large panel for the monks of Vallombrosa, in the Abbey of S. Trinita in Florence, he showed in that work (using therein great diligence, so as to rise equal to the esteem which had already been conceived of him) better inventions and a beautiful method in the attitude of a Madonna, whom he made with the Child in her arms and with many angels round her in adoration, on a gold ground; which panel, being finished, was placed by these monks over the high-altar of the said church, and being afterwards removed, in order to give that place to the panel by Alesso Baldovinetti which is there to-day, it was placed in a smaller chapel in the left-hand aisle of the said church",
+    mentions: [
+      {id:"m_0015",type:"implicit artwork mention",surface:"a large panel for the monks of Vallombrosa",start:31,end:73,entity:"entity_0011",label:"Cimabue\u2019s Maest\u00e0 (Santa Trinita)",wd:"",ookb:true,refers_to:""},
+      {id:"m_0016",type:"explicit artwork mention",surface:"the Abbey of S. Trinita in Florence",start:78,end:113,entity:"entity_0012",label:"Basilica di Santa Trinita",wd:"Q3685200",ookb:false,refers_to:""},
+      {id:"m_0017",type:"coreferent",surface:"that work",start:128,end:137,entity:"entity_0011",label:"",wd:"",ookb:false,refers_to:"m_0015"},
+      {id:"m_0018",type:"implicit artwork mention",surface:"a Madonna, whom he made with the Child in her arms and with many angels round her in adoration",start:305,end:399,entity:"entity_0013",label:"Maest\u00e0 (Cimabue, Florence)",wd:"Q1569622",ookb:false,refers_to:""},
+      {id:"m_0019",type:"implicit artwork mention",surface:"the high-altar of the said church",start:479,end:512,entity:"entity_0014",label:"High altar of S. Trinita",wd:"",ookb:true,refers_to:""},
+      {id:"m_0021",type:"implicit artwork mention",surface:"the panel by Alesso Baldovinetti",start:575,end:607,entity:"entity_0015",label:"Baldovinetti altarpiece (S. Trinita)",wd:"Q117662139",ookb:false,refers_to:""},
+      {id:"m_0022",type:"coreferent",surface:"which",start:608,end:613,entity:"entity_0015",label:"",wd:"",ookb:false,refers_to:"m_0021"},
+      {id:"m_0023",type:"coreferent",surface:"it",start:631,end:633,entity:"entity_0013",label:"",wd:"",ookb:false,refers_to:"m_0018"},
+      {id:"m_0024",type:"implicit artwork mention",surface:"a smaller chapel in the left-hand aisle of the said church",start:648,end:706,entity:"entity_0016",label:"Chapel in the left aisle of S. Trinita",wd:"",ookb:true,refers_to:""}
+    ],
+    llm_comments: [
+      "Ah, Cimabue and his monks of Vallombrosa! Let me examine this passage carefully...",
+      "I detect 9 artwork references here \u2014 quite dense, even for Vasari. Five are implicit (the old master loved to describe rather than name), one is explicit, and three are coreferent chains threading back through the text.",
+      "Notice how 'a large panel' is never called by its proper name \u2014 we know it today as the Maest\u00e0, one of Cimabue's masterpieces, now in the Uffizi. Vasari assumed his readers would know. I, however, assume nothing.",
+      "The coreference chain is particularly rich: 'that work' \u2192 the panel, 'it' \u2192 the Madonna, 'which' \u2192 Baldovinetti's replacement. Three separate chains in a single sentence!"
+    ]
+  },
+  {
+    id: "giotto_117",
+    bio: "Giotto di Bondone",
+    paragraph_id: 117,
+    text: "Giotto was buried in S. Maria del Fiore, on the left side as you enter the church, where there is a slab of white marble in memory of so great a man. And, as was told in the Life of Cimabue, a commentator of Dante, who lived at the same time as Giotto, said: \u201cGiotto was and is the most eminent among painters in the same city of Florence, and his works bear testimony for him in Rome, in Naples, in Avignon, in Florence, in Padua, and in many other parts of the world.\u201d",
+    mentions: [
+      {id:"m_0195",type:"explicit artwork mention",surface:"S. Maria del Fiore",start:21,end:39,entity:"entity_0074",label:"Cathedral of Santa Maria del Fiore",wd:"Q191739",ookb:false,refers_to:""},
+      {id:"m_0196",type:"coreferent",surface:"the church",start:71,end:81,entity:"entity_0074",label:"",wd:"",ookb:false,refers_to:"m_0195"},
+      {id:"m_0197",type:"implicit artwork mention",surface:"a slab of white marble in memory of so great a man",start:98,end:148,entity:"entity_0102",label:"Memorial slab of Giotto (Florence Cathedral)",wd:"Q119098258",ookb:false,refers_to:""}
+    ],
+    llm_comments: [
+      "A funeral passage \u2014 even in death, Giotto cannot escape my annotations.",
+      "Three mentions detected: the great cathedral named explicitly, its coreferent echo as 'the church', and \u2014 most touchingly \u2014 an implicit reference to his memorial slab. Vasari describes it without naming it, as one does with things seen through tears.",
+      "The marble slab still exists, by the way. I have linked it to Wikidata. Posterity, you are welcome."
+    ]
+  }
+];
+
+var currentPassage = 0;
+var running = false;
+
+function selectPassage(idx) {
+  if (running) return;
+  currentPassage = idx;
+  document.querySelectorAll(".oq-passage-btn").forEach(function(b,i){
+    b.classList.toggle("active", i===idx);
+  });
+  renderText(PASSAGES[idx], false);
+  // Clear results
+  document.getElementById("oq-results").innerHTML = "";
+  document.getElementById("oq-llm-intro").classList.remove("visible");
+  document.getElementById("oq-legend").style.display = "none";
+  document.getElementById("oq-run-btn").disabled = false;
+  document.getElementById("oq-run-btn").innerHTML = "Run ObliquER extraction";
+}
+
+function renderText(passage, annotated) {
+  var el = document.getElementById("oq-text-display");
+  if (!annotated) {
+    el.innerHTML = passage.text;
+    return;
+  }
+  // Build annotated HTML
+  var segs = [];
+  var sorted = passage.mentions.slice().sort(function(a,b){ return a.start - b.start; });
+  var cursor = 0;
+  // Remove overlapping mentions (keep first by start)
+  var used = [];
+  sorted.forEach(function(m){
+    if (used.length === 0 || m.start >= used[used.length-1].end) {
+      used.push({start:m.start, end:m.end, m:m});
+    }
+  });
+  used.forEach(function(u){
+    var m = u.m;
+    if (cursor < m.start) {
+      segs.push(esc(passage.text.substring(cursor, m.start)));
+    }
+    var cls = m.type === "explicit artwork mention" ? "explicit" :
+              m.type === "implicit artwork mention" ? "implicit" : "coref";
+    segs.push('<span class="ann-span hidden '+cls+'" data-mid="'+m.id+'">'
+      + esc(passage.text.substring(m.start, m.end))
+      + '<span class="ann-badge '+cls+'">'
+      + (cls==="explicit"?"E":cls==="implicit"?"I":"C")
+      + '</span></span>');
+    cursor = m.end;
+  });
+  if (cursor < passage.text.length) {
+    segs.push(esc(passage.text.substring(cursor)));
+  }
+  el.innerHTML = segs.join("");
+}
+
+function esc(s) {
+  var d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function sleep(ms) {
+  return new Promise(function(r){ setTimeout(r, ms); });
+}
+
+async function runExtraction() {
+  if (running) return;
+  running = true;
+  var btn = document.getElementById("oq-run-btn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Extracting\u2026';
+
+  var passage = PASSAGES[currentPassage];
+  var results = document.getElementById("oq-results");
+  var llmEl = document.getElementById("oq-llm-intro");
+  var llmText = document.getElementById("oq-llm-text");
+  results.innerHTML = "";
+
+  // Step 1: Show annotated text (hidden spans)
+  renderText(passage, true);
+  await sleep(600);
+
+  // Step 2: LLM intro comment
+  llmEl.classList.add("visible");
+  llmText.textContent = passage.llm_comments[0];
+  await sleep(1500);
+
+  // Step 3: Show legend
+  document.getElementById("oq-legend").style.display = "flex";
+
+  // Step 4: Reveal mentions one by one
+  var sorted = passage.mentions.slice().sort(function(a,b){ return a.start - b.start; });
+  // Remove overlapping (same as renderText)
+  var used = [];
+  sorted.forEach(function(m){
+    if (used.length === 0 || m.start >= used[used.length-1].end) {
+      used.push(m);
+    }
+  });
+
+  for (var i = 0; i < used.length; i++) {
+    var m = used[i];
+    // Reveal the span in text
+    var span = document.querySelector('[data-mid="'+m.id+'"]');
+    if (span) span.classList.remove("hidden");
+
+    // Create result card
+    var cls = m.type === "explicit artwork mention" ? "explicit" :
+              m.type === "implicit artwork mention" ? "implicit" : "coref";
+    var card = document.createElement("div");
+    card.className = "oq-card";
+    var h = '<div class="oq-card-type '+cls+'">'+m.type+'</div>';
+    h += '<div class="oq-card-surface">\u201c'+esc(m.surface)+'\u201d</div>';
+    h += '<div class="oq-card-meta">';
+    h += '<strong>'+m.id+'</strong> \u00b7 entity: '+m.entity;
+    if (m.refers_to) {
+      h += ' \u00b7 refers to: <strong>'+m.refers_to+'</strong>';
+    }
+    if (m.label) {
+      h += '<br>Label: <strong>'+esc(m.label)+'</strong>';
+    }
+    h += '</div>';
+    if (m.wd) {
+      h += '<a class="oq-card-wd" href="https://www.wikidata.org/wiki/'+m.wd+'" target="_blank">\u2197 Wikidata ('+m.wd+')</a>';
+    }
+    if (m.ookb) {
+      h += ' <span class="oq-card-ookb">OOKB</span>';
+    }
+    card.innerHTML = h;
+    results.appendChild(card);
+
+    await sleep(80);
+    card.classList.add("visible");
+    await sleep(320);
+
+    // Update LLM comment at intervals
+    var commentIdx = Math.floor((i+1) / used.length * (passage.llm_comments.length - 1)) + 1;
+    if (commentIdx < passage.llm_comments.length) {
+      llmText.textContent = passage.llm_comments[commentIdx];
+    }
+  }
+
+  // Final
+  await sleep(400);
+  btn.innerHTML = "\u2713 Extraction complete";
+  llmText.textContent = passage.llm_comments[passage.llm_comments.length - 1];
+  document.getElementById("oq-format-btns").style.display = "block";
+  running = false;
+}
+
+var activeFormat = null;
+
+function toggleFormat(fmt) {
+  var box = document.getElementById("oq-format-box");
+  if (activeFormat === fmt) {
+    box.style.display = "none";
+    activeFormat = null;
+    return;
+  }
+  activeFormat = fmt;
+  var passage = PASSAGES[currentPassage];
+  if (fmt === "json") {
+    box.textContent = buildJSON(passage);
+  } else {
+    box.textContent = buildTurtle(passage);
+  }
+  box.style.display = "block";
+  box.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function buildJSON(passage) {
+  var out = passage.mentions
+    .filter(function(m){ return m.type !== "coreferent"; })
+    .map(function(m){
+      var obj = {
+        paragraph_id: passage.paragraph_id,
+        mention_id: m.id,
+        type: m.type,
+        surface_form: m.surface,
+        entity_id: m.entity,
+        confidence: "manual annotation",
+        start_offset: m.start,
+        end_offset: m.end
+      };
+      if (m.refers_to) obj.refers_to = m.refers_to;
+      if (m.label) obj.label = m.label;
+      if (m.wd) obj.wikidata_id = "https://www.wikidata.org/wiki/" + m.wd;
+      if (m.ookb) obj.ookb = true;
+      return obj;
+    });
+  return JSON.stringify(out, null, 2);
+}
+
+function buildTurtle(passage) {
+  var KB = "https://viewsari.ise.fiz-karlsruhe.de/kb/";
+  var lines = [
+    "@prefix vkb:  <" + KB + "> .",
+    "@prefix oa:   <http://www.w3.org/ns/oa#> .",
+    "@prefix prov: <http://www.w3.org/ns/prov#> .",
+    "@prefix doco: <http://purl.org/spar/doco/> .",
+    "@prefix dct:  <http://purl.org/dc/terms/> .",
+    "@prefix owl:  <http://www.w3.org/2002/07/owl#> .",
+    "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .",
+    "@prefix viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#> .",
+    ""
+  ];
+
+  var paraUri = "vkb:the_lives_1568_volume-1_paragraph-" + passage.paragraph_id;
+
+  passage.mentions.forEach(function(m) {
+    if (m.type === "coreferent") return;
+
+    var slug = passage.id + "_" + m.id;
+    var tcUri = "vkb:textchunk_" + slug;
+    var selUri = "vkb:selector_" + slug;
+    var annUri = "vkb:annotation_" + slug;
+
+    // TextChunk
+    lines.push(tcUri + " a doco:TextChunk ;");
+    lines.push("    oa:hasSource " + paraUri + " ;");
+    lines.push("    oa:hasSelector " + selUri + " .");
+    lines.push("");
+
+    // Selector
+    lines.push(selUri + " a oa:TextPositionSelector ;");
+    lines.push("    oa:start " + m.start + " ;");
+    lines.push("    oa:end " + m.end + " .");
+    lines.push("");
+
+    // Annotation
+    var typeClass = m.type === "explicit artwork mention"
+      ? "viewsari:explicit_artwork_mention"
+      : m.type === "implicit artwork mention"
+        ? "viewsari:implicit_artwork_mention"
+        : "viewsari:generic_mention";
+    lines.push(annUri + " a oa:Annotation , prov:Entity , " + typeClass + " ;");
+    lines.push("    oa:hasTarget " + tcUri + " ;");
+    lines.push('    oa:hasBodyValue "' + m.surface.replace(/"/g, '\\"') + '" ;');
+    lines.push("    oa:hasSource " + paraUri + " ;");
+    lines.push("    prov:wasGeneratedBy vkb:named_entity_recognition_run_1 .");
+    if (m.wd) {
+      lines.push("");
+      lines.push("vkb:" + m.entity + " owl:sameAs <http://www.wikidata.org/entity/" + m.wd + "> .");
+    }
+    if (m.label) {
+      lines.push("vkb:" + m.entity + ' rdfs:label "' + m.label.replace(/"/g, '\\"') + '"@en .');
+    }
+    lines.push("");
+  });
+
+  return lines.join("\n");
+}
+
+// Initial render
+selectPassage(0);
+</script>
+{% endblock %}

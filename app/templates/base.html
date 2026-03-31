@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{% block title %}Viewsari{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --or:#F05A1A;--bl:#1B6EF3;--pu:#7C3AED;
+  --tp:#0D0D14;--ts:#6B7280;--tt:#9CA3AF;
+  --seam:#E5E7EB;--bg:#fff;--bg2:#F9FAFB;--bg3:#F3F4F6;
+  --pill-or:rgba(240,90,26,.08);--pill-bl:rgba(27,110,243,.08);--pill-pu:rgba(124,58,237,.08);
+  /* graph colours */
+  --gc-biblio-s:#7C3AED;--gc-biblio-f:#F5F3FF;--gc-biblio-t:#6D28D9;
+  --gc-content-s:#B45309;--gc-content-f:#FFFBEB;--gc-content-t:#92400E;
+  --gc-annot-s:#0F766E;--gc-annot-f:#F0FDF9;--gc-annot-t:#115E59;
+  --gc-entity-s:#BE185D;--gc-entity-f:#FDF2F8;--gc-entity-t:#9D174D;
+  --gc-ookb-s:#B91C1C;--gc-ookb-f:#FEF2F2;--gc-ookb-t:#991B1B;
+  --gc-agent-s:#1D4ED8;--gc-agent-f:#EFF6FF;--gc-agent-t:#1E40AF;
+  --edge:#D1D5DB;
+}
+html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--tp);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--seam);display:flex;flex-wrap:nowrap;align-items:center;padding:0 24px;gap:8px;overflow:hidden}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--tp);margin-right:14px;text-decoration:none;flex-shrink:0}
+.logo em{color:var(--or);font-style:normal}
+.bio-chip{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;background:var(--pill-pu);color:var(--pu);border:1px solid rgba(124,58,237,.2);white-space:nowrap;flex-shrink:0}
+.sep{width:1px;height:20px;background:var(--seam);margin:0 2px;flex-shrink:0}
+.chip{font-size:11px;font-weight:600;padding:5px 13px;border-radius:100px;border:1.5px solid transparent;cursor:pointer;transition:all .14s;background:transparent;color:var(--ts);font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap;flex-shrink:0}
+.chip:hover{color:var(--tp);border-color:var(--seam);background:var(--bg2)}
+.chip.active{background:var(--or);color:#fff;border-color:var(--or)}
+#st{font-size:11px;color:var(--tt);margin-left:auto;white-space:nowrap;flex-shrink:0}
+.topbar-page-chips{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow:hidden}
+
+/* ── BURGER MENU ── */
+.burger{display:none;flex-shrink:0;width:32px;height:32px;border:1.5px solid var(--seam);border-radius:6px;background:transparent;cursor:pointer;align-items:center;justify-content:center;padding:0;font-size:18px;color:var(--ts);font-family:inherit;transition:all .14s}
+.burger:hover{background:var(--bg2);color:var(--tp);border-color:var(--tp)}
+.nav-links{display:contents}
+.nav-links .sep-nav{width:1px;height:20px;background:var(--seam);margin:0 2px}
+
+/* Dropdown when collapsed */
+.nav-dropdown{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--seam);padding:12px 24px;flex-direction:column;gap:4px;z-index:199;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.nav-dropdown.open{display:flex}
+.nav-dropdown .chip{width:100%;justify-content:flex-start;padding:8px 16px;border-radius:8px}
+.nav-dropdown .chip:hover{background:var(--bg2)}
+
+@media(max-width:900px){
+  .burger#burger-btn{display:flex}
+  .nav-links{display:none}
+}
+
+/* ── BODY LAYOUT ── */
+.layout{position:fixed;top:56px;left:0;right:0;bottom:0;display:flex;flex-direction:column}
+
+/* ── TOP SPLIT (facsimile + text) ── */
+.split{display:grid;grid-template-columns:1fr 1fr;flex-shrink:0;height:50%;min-height:0;border-bottom:1px solid var(--seam)}
+.pane{padding:22px 24px;position:relative;overflow-y:auto}
+.pane.left{background:var(--bg2);border-right:1px solid var(--seam)}
+.pane.right{background:var(--bg)}
+.pane-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pane-label::after{content:'';flex:1;height:1px;background:var(--seam)}
+#fac-img{width:100%;display:block;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07)}
+.section-title{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--seam)}
+.textbody{font-family:'Georgia',serif;font-size:15px;line-height:1.9;color:#1A1A2E}
+.beam{position:absolute;left:0;right:0;height:1px;background:var(--or);box-shadow:0 0 12px 3px rgba(240,90,26,.4);opacity:0;pointer-events:none;z-index:30;transition:opacity .2s;top:0}
+.beam.on{opacity:1}
+
+/* ── ANNOTATIONS ── */
+.ann{display:inline;cursor:default;border-radius:3px;transition:background .12s;position:relative;pointer-events:none}
+.ann.lit{cursor:pointer;pointer-events:auto}
+.ann.lit.explicit{background:var(--pill-or);border-bottom:1.5px solid var(--or)}
+.ann.lit.implicit{background:var(--pill-bl);border-bottom:1.5px solid var(--bl)}
+.ann.lit.coref{background:var(--pill-pu);border-bottom:1.5px dotted var(--pu)}
+.ann.lit.generic{border-bottom:1.5px solid var(--seam)}
+.ann.pick{box-shadow:0 0 0 2px var(--or);border-radius:3px}
+.ann.graph-highlight{animation:text-pulse 1.2s ease-out 3;background:rgba(240,90,26,.25)!important;box-shadow:0 0 0 2px var(--or)!important;border-radius:3px}
+@keyframes text-pulse{0%,100%{background:rgba(240,90,26,.25);box-shadow:0 0 0 2px var(--or)}50%{background:rgba(240,90,26,.5);box-shadow:0 0 0 3px var(--or)}}
+.ann.lit:hover{filter:brightness(.96)}
+.ann-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--or);vertical-align:middle;margin:0 1px 2px 2px;opacity:0;transition:opacity .2s}
+.ann.lit .ann-dot{opacity:1}
+.badge{display:inline-block;font-size:8px;font-weight:700;vertical-align:super;margin-left:1px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:'Inter',sans-serif}
+.ann.lit .badge{opacity:1}
+.ann.explicit .badge{color:var(--or)}
+.ann.implicit .badge{color:var(--bl)}
+.ann.coref    .badge{color:var(--pu)}
+.ookb{font-size:8px;color:var(--or);vertical-align:super;font-family:'Inter',sans-serif;font-weight:700;margin-left:1px;display:none}
+.ann.lit .ookb{display:inline}
+
+/* ── LEGEND ── */
+.legend{flex-shrink:0;display:flex;gap:16px;padding:7px 24px;border-top:1px solid var(--seam);background:var(--bg);flex-wrap:wrap;align-items:center}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ts);font-weight:500}
+.ll{width:16px;height:0;display:inline-block}
+.ll.e{border-bottom:1.5px solid var(--or)}
+.ll.i{border-bottom:1.5px solid var(--bl)}
+.ll.c{border-bottom:1.5px dotted var(--pu)}
+.ll.g{border-bottom:1.5px solid var(--seam)}
+.l-dot{width:5px;height:5px;border-radius:50%;background:var(--or);display:inline-block}
+
+/* ── BOTTOM PANEL (Vasari + graph) ── */
+#detail{flex:1;min-height:0;display:grid;grid-template-columns:240px 240px 1fr;border-top:2px solid var(--or);overflow:hidden;transform:translateY(100%);transition:transform .6s cubic-bezier(.16,1,.3,1);opacity:0}
+#detail.open{transform:translateY(0);opacity:1}
+
+/* Vasari column */
+.vasari-col{background:linear-gradient(to bottom,#fff,#FFF4EE);border-right:1px solid var(--seam);display:flex;flex-direction:column;align-items:flex-start;padding:24px 20px 0;overflow:hidden;position:relative}
+#vasari-wrap{display:flex;flex-direction:column;gap:0;width:100%;transform:translateY(80px);opacity:0;transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .7s}
+#vasari-wrap.risen{transform:translateY(0);opacity:1}
+#vasari-img{width:130px;object-fit:contain;object-position:bottom;display:block;mix-blend-mode:multiply;filter:contrast(1.1) brightness(1.05);align-self:flex-end}
+.vasari-speech-wrap{padding:0 0 16px 0;width:100%}
+.vasari-byline{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--or);margin-bottom:8px}
+#bubble{font-family:'Georgia',serif;font-size:13px;line-height:1.7;color:var(--tp);font-style:italic;min-height:48px}
+.typing-cursor::after{content:'▌';animation:blink 1s step-end infinite;color:var(--or);font-style:normal;margin-left:1px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Graph column */
+.graph-col{background:var(--bg);position:relative;overflow:hidden}
+.graph-topbar{position:absolute;top:0;left:0;right:0;height:36px;display:flex;align-items:center;padding:0 14px;gap:8px;border-bottom:1px solid var(--seam);z-index:10;background:rgba(255,255,255,.9);backdrop-filter:blur(8px)}
+.graph-title{font-size:11px;font-weight:600;color:var(--ts);flex:1}
+.graph-hint{font-size:10px;color:var(--tt)}
+.graph-btn{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;border:1px solid var(--seam);background:transparent;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .12s}
+.graph-btn:hover{background:var(--bg2);color:var(--tp)}
+/* artwork / WD column */
+.art-col{border-right:1px solid var(--seam);display:flex;flex-direction:column;overflow:hidden;background:#fff}
+.art-col-top{flex:0 0 auto;padding:20px 18px 0;overflow:hidden;position:relative;min-height:140px;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(to bottom,#fff,#F9FAFB)}
+#art-img{max-height:160px;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;display:block;mix-blend-mode:multiply;transform:translateY(50px);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .8s}
+#art-img.risen{transform:translateY(0);opacity:1}
+.art-col-body{flex:1;overflow-y:auto;padding:14px 18px 16px;border-top:1px solid var(--seam)}
+.wd-qid{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bl);margin-bottom:6px}
+.wd-title{font-family:'Georgia',serif;font-size:16px;color:var(--tp);margin-bottom:3px;line-height:1.25}
+.wd-creator{font-size:12px;color:var(--ts);margin-bottom:12px}
+.wd-dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:12px;margin-bottom:12px}
+.wd-dl dt{color:var(--tt);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding-top:2px;white-space:nowrap}
+.wd-dl dd{color:var(--tp)}
+.wd-link{font-size:11px;font-weight:600;color:var(--bl);text-decoration:none}
+.wd-link:hover{text-decoration:underline}
+.wd-ookb{font-size:11px;color:#B91C1C;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:6px;padding:8px 10px;margin-bottom:10px}
+.wd-empty{font-size:12px;color:var(--tt);font-style:italic;padding:20px 0;text-align:center}
+#graph-svg{position:absolute;top:36px;left:0;right:0;bottom:0;width:100%;height:calc(100% - 36px);cursor:grab}
+#graph-svg.dragging{cursor:grabbing}
+
+/* ── GRAPH NODE STYLES ── */
+.gnode{cursor:pointer;transition:filter .15s}
+.gnode:hover .gnode-rect{filter:drop-shadow(0 2px 8px rgba(0,0,0,.12))}
+.gnode.selected .gnode-rect-outer{stroke-width:2.5}
+.gnode-rect{rx:6;ry:6}
+.gnode-tag{font-family:'Inter',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:.06em}
+.gnode-label{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:600}
+.gnode-sub{font-family:'Inter',sans-serif;font-size:8.5px}
+.gedge{fill:none;stroke-width:1;marker-end:url(#garrow)}
+.gedge-label{font-family:'Inter',sans-serif;font-size:8px;fill:var(--tt)}
+.gedge-dashed{stroke-dasharray:5,4}
+
+/* Graph legend (inside graph area) */
+.graph-legend{position:absolute;bottom:10px;left:10px;background:rgba(255,255,255,.92);border:1px solid var(--seam);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;pointer-events:none}
+.gl-item{display:flex;align-items:center;gap:6px;font-size:9.5px;color:var(--ts);font-weight:500}
+.gl-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+/* Empty state */
+.graph-empty{position:absolute;top:36px;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--tt)}
+.graph-empty-icon{font-size:28px;opacity:.4}
+.graph-empty-text{font-size:12px;font-weight:500}
+
+{% block extra_styles %}{% endblock %}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/">View<em>sari</em></a>
+  <button class="burger" id="burger-btn" onclick="document.getElementById('nav-dropdown').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  <span class="nav-links">
+    <a class="chip" href="/" title="Back to index">&#8592; Home</a>
+    <a class="chip" href="/annotations" title="Annotation corpus">Annotations</a>
+    <a class="chip" href="/ontology" title="Ontology overview">Ontology</a>
+    <a class="chip" href="/ontology/docs" title="Ontology documentation (WIDOCO)">Ontology Docs</a>
+    <a class="chip" href="/explore" title="Knowledge Graph Explorer">KG Explorer</a>
+    <a class="chip" href="/obliquer" title="ObliquER Pipeline Demo">ObliquER</a>
+    <a class="chip" href="/kb" title="Knowledge Base">KB</a>
+    <a class="chip" href="/sparql" title="SPARQL Endpoint">SPARQL</a>
+    <a class="chip" href="/publications" title="Publications">Publications</a>
+    <span class="sep-nav"></span>
+  </span>
+  <span class="topbar-page-chips">{% block topbar_chips %}{% endblock %}</span>
+  <span id="st">{% block status %}Ready{% endblock %}</span>
+</div>
+<div class="nav-dropdown" id="nav-dropdown">
+  <a class="chip" href="/" onclick="document.getElementById('nav-dropdown').classList.remove('open')">&#8592; Home</a>
+  <a class="chip" href="/annotations" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Annotations</a>
+  <a class="chip" href="/ontology" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Ontology</a>
+  <a class="chip" href="/ontology/docs" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Ontology Documentation</a>
+  <a class="chip" href="/explore" onclick="document.getElementById('nav-dropdown').classList.remove('open')">KG Explorer</a>
+  <a class="chip" href="/obliquer" onclick="document.getElementById('nav-dropdown').classList.remove('open')">ObliquER</a>
+  <a class="chip" href="/kb" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Knowledge Base</a>
+  <a class="chip" href="/sparql" onclick="document.getElementById('nav-dropdown').classList.remove('open')">SPARQL</a>
+  <a class="chip" href="/publications" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Publications</a>
+</div>
+
+{% block content %}{% endblock %}
+
+{% block scripts %}{% endblock %}
+<script>
+document.addEventListener("click",function(ev){
+  var dd=document.getElementById("nav-dropdown");
+  if(!dd) return;
+  if(!ev.target.closest("#nav-dropdown")&&!ev.target.closest("#burger-btn")){
+    dd.classList.remove("open");
+  }
+});
+</script>
+</body>
+</html>

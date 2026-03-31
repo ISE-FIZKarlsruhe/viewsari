@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · {{ bio_name }} · §{{ paragraph.paragraph_id }}{% endblock %}
+
+{% block extra_styles %}
+.nav-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 100px;
+  border: 1.5px solid var(--seam);
+  cursor: pointer;
+  background: transparent;
+  color: var(--ts);
+  font-family: inherit;
+  transition: all .14s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-chip:hover { color: var(--tp); background: var(--bg2); border-color: var(--tp); }
+.nav-chip.disabled { opacity: .3; pointer-events: none; }
+.para-select {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ts);
+  background: transparent;
+  border: 1.5px solid var(--seam);
+  border-radius: 100px;
+  padding: 4px 10px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+.para-select:hover { border-color: var(--tp); }
+.para-indicator {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ts);
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--bg2);
+  border: 1.5px solid var(--seam);
+  white-space: nowrap;
+}
+
+/* ── FACSIMILE BOOKLET ── */
+.fac-booklet { display:flex; flex-direction:column; height:100%; min-height:0; }
+.fac-main { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; position:relative; }
+.fac-main img { max-width:100%; max-height:100%; object-fit:contain; border-radius:6px; box-shadow:0 1px 4px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07); display:block; }
+.fac-controls { display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 0 6px; flex-shrink:0; }
+.fac-btn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--seam); background:transparent; color:var(--ts); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .14s; font-family:inherit; }
+.fac-btn:hover { background:var(--bg3); color:var(--tp); border-color:var(--tp); }
+.fac-btn:disabled { opacity:.25; pointer-events:none; }
+.fac-page-label { font-size:11px; font-weight:600; color:var(--ts); min-width:60px; text-align:center; }
+.fac-page-label .fac-cur { color:var(--tp); }
+
+/* ── THUMBNAIL STRIP ── */
+.fac-thumbs { display:flex; gap:4px; overflow-x:auto; padding:4px 0 2px; flex-shrink:0; scrollbar-width:thin; scrollbar-color:var(--seam) transparent; }
+.fac-thumbs::-webkit-scrollbar { height:4px; }
+.fac-thumbs::-webkit-scrollbar-thumb { background:var(--seam); border-radius:2px; }
+.fac-thumb { flex:0 0 auto; width:40px; height:52px; border-radius:4px; border:1.5px solid var(--seam); overflow:hidden; cursor:pointer; position:relative; transition:all .14s; background:var(--bg3); }
+.fac-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.fac-thumb:hover { border-color:var(--tp); }
+.fac-thumb.active { border-color:var(--or); box-shadow:0 0 0 1.5px var(--or); }
+.fac-thumb.current-para { border-color:var(--bl); box-shadow:0 0 0 1.5px var(--bl); }
+.fac-thumb.current-para.active { border-color:var(--or); box-shadow:0 0 0 1.5px var(--or); }
+.fac-thumb-label { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.55); color:#fff; font-size:7px; font-weight:700; text-align:center; padding:1px 0; }
+/* ── Bio responsive ── */
+.bio-actions-wide{display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
+.bio-actions-btn{display:none;flex-shrink:0;width:28px;height:28px;border:1.5px solid var(--seam);border-radius:6px;background:transparent;cursor:pointer;align-items:center;justify-content:center;padding:0;font-size:16px;color:var(--ts);font-family:inherit;transition:all .14s}
+.bio-actions-btn:hover{background:var(--bg2);color:var(--tp);border-color:var(--tp)}
+.bio-actions-dd{display:none}
+.bio-actions-dd.open{display:flex}
+
+@media(max-width:900px){
+  .bio-actions-wide{display:none !important}
+  .bio-actions-sep{display:none}
+  .bio-actions-btn{display:flex}
+  .bio-name-chip{max-width:100px;overflow:hidden;text-overflow:ellipsis}
+  .bio-sep{display:none}
+}
+@media(max-width:600px){
+  .bio-name-chip{display:none}
+  .bio-sep{display:none}
+}
+{% endblock %}
+
+{% block topbar_chips %}
+  <div class="bio-chip bio-name-chip">{{ bio_name }}</div>
+  <div class="sep bio-sep"></div>
+  <a class="nav-chip{% if not prev_id %} disabled{% endif %}" {% if prev_id %}href="/biography/{{ slug }}/{{ prev_id }}"{% endif %} title="Previous paragraph">&#8592;</a>
+  <select class="para-select" id="para-jump" onchange="window.location='/biography/{{ slug }}/'+this.value">
+    {% for p in all_paragraphs %}
+    <option value="{{ p.paragraph_id }}"{% if p.paragraph_id == paragraph.paragraph_id %} selected{% endif %}>§{{ p.paragraph_id }}{% if p.page %} · p.{{ p.page }}{% endif %}</option>
+    {% endfor %}
+  </select>
+  <a class="nav-chip{% if not next_id %} disabled{% endif %}" {% if next_id %}href="/biography/{{ slug }}/{{ next_id }}"{% endif %} title="Next paragraph">&#8594;</a>
+  <div class="sep bio-actions-sep"></div>
+  <span class="bio-actions-wide">
+    <button class="chip active" id="bscan" onclick="startScan()">&#9654; Scan</button>
+    <button class="chip" onclick="revealAll()">Show all</button>
+    <button class="chip" onclick="clearAll()">Reset</button>
+  </span>
+  <button class="bio-actions-btn" id="bio-burger" onclick="document.getElementById('bio-actions-dd').classList.toggle('open')" aria-label="Actions">&#8943;</button>
+{% endblock %}
+
+{% block content %}
+<!-- Bio actions dropdown (mobile) -->
+<div class="nav-dropdown bio-actions-dd" id="bio-actions-dd">
+  <button class="chip active" onclick="startScan();document.getElementById('bio-actions-dd').classList.remove('open')">&#9654; Scan</button>
+  <button class="chip" onclick="revealAll();document.getElementById('bio-actions-dd').classList.remove('open')">Show all</button>
+  <button class="chip" onclick="clearAll();document.getElementById('bio-actions-dd').classList.remove('open')">Reset</button>
+</div>
+
+<!-- Viewer data injected for JS -->
+<script id="vsr-data" type="application/json">{{ raw_json | safe }}</script>
+
+<div class="layout">
+  <div class="split">
+    <div class="pane left">
+      <div class="pane-label">Facsimile · De Vere ed.</div>
+      <div class="fac-booklet" id="fac-booklet">
+        <div class="fac-main" id="fac-main">
+          <div class="wd-empty" id="fac-placeholder">No facsimile available</div>
+          <img id="fac-img" alt="Facsimile" style="display:none">
+        </div>
+        <div class="fac-controls" id="fac-controls" style="display:none">
+          <button class="fac-btn" id="fac-prev" title="Previous page">&#8592;</button>
+          <span class="fac-page-label">p. <span class="fac-cur" id="fac-cur-page">—</span> <span id="fac-page-pos"></span></span>
+          <button class="fac-btn" id="fac-next" title="Next page">&#8594;</button>
+        </div>
+        <div class="fac-thumbs" id="fac-thumbs" style="display:none"></div>
+      </div>
+      <div class="beam" id="fb"></div>
+    </div>
+    <div class="pane right">
+      <div class="pane-label">Plain text · ObliquER annotation schema</div>
+      <div class="textbody">
+        <div class="section-title">{{ bio_name }}</div>
+        <div id="tbody"></div>
+      </div>
+      <div class="beam" id="tb"></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="li"><span class="ll e"></span>Explicit</div>
+    <div class="li"><span class="ll i"></span>Implicit artwork</div>
+    <div class="li"><span class="ll c"></span>Coreferent</div>
+    <div class="li"><span class="ll g"></span>Generic</div>
+    <div class="li"><span class="l-dot"></span>Click for detail + graph</div>
+  </div>
+
+  <section id="detail">
+    <!-- Vasari column -->
+    <div class="vasari-col">
+      <div id="vasari-wrap">
+        <!-- vasari.png placeholder: place app/static/vasari.png for Vasari portrait -->
+        <img id="vasari-img" alt="Giorgio Vasari">
+        <div class="vasari-speech-wrap">
+          <div class="vasari-byline">Giorgio Vasari · 1511–1574</div>
+          <div id="bubble"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artwork + WD info column -->
+    <div class="art-col">
+      <div class="art-col-top">
+        <img id="art-img" alt="Artwork">
+      </div>
+      <div class="art-col-body" id="wd-panel">
+        <div class="wd-empty">Select a mention to see linked data</div>
+      </div>
+    </div>
+
+    <!-- Graph column -->
+    <div class="graph-col">
+      <div class="graph-topbar">
+        <span class="graph-title" id="graph-title">Click a mention to see its provenance graph</span>
+        <span class="graph-hint">Drag nodes · scroll to zoom</span>
+        <button class="graph-btn" onclick="resetGraphZoom()">Fit</button>
+      </div>
+
+      <svg id="graph-svg">
+        <defs>
+          <marker id="garrow" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M1 2L8 5L1 8" fill="none" stroke="#9CA3AF" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <g id="g-viewport">
+          <g id="g-edges"></g>
+          <g id="g-nodes"></g>
+        </g>
+      </svg>
+
+      <!-- Empty state -->
+      <div id="graph-empty" class="graph-empty">
+        <div class="graph-empty-icon">&#9652;</div>
+        <div class="graph-empty-text">Click any annotated mention above</div>
+      </div>
+
+      <!-- Node info panel inside graph -->
+      <div id="g-info" style="display:none;position:absolute;top:46px;right:12px;width:220px;background:white;border:1px solid var(--seam);border-radius:8px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.08);font-size:12px;z-index:20;max-height:calc(100% - 60px);overflow-y:auto"></div>
+
+      <!-- Graph legend -->
+      <div class="graph-legend">
+        <div class="gl-item"><div class="gl-dot" style="background:#7C3AED"></div>Bibliographic</div>
+        <div class="gl-item"><div class="gl-dot" style="background:#B45309"></div>Content / Text</div>
+        <div class="gl-item"><div class="gl-dot" style="background:#0F766E"></div>Annotation</div>
+        <div class="gl-item"><div class="gl-dot" style="background:#BE185D"></div>Entity</div>
+        <div class="gl-item"><div class="gl-dot" style="background:#B91C1C"></div>Out-of-KB</div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/viewer.js"></script>
+<script>
+document.addEventListener("click",function(ev){
+  var dd=document.getElementById("bio-actions-dd");
+  if(dd&&!ev.target.closest("#bio-actions-dd")&&!ev.target.closest("#bio-burger")){
+    dd.classList.remove("open");
+  }
+});
+</script>
+{% endblock %}

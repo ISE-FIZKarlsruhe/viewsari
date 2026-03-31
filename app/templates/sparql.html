@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · SPARQL Endpoint{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.layout-sparql {
+  position: relative;
+  top: 56px;
+  padding: 24px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sparql-header { margin-bottom: 20px; }
+.sparql-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.sparql-subtitle {
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.6;
+}
+.sparql-editor-wrap {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.sparql-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--seam);
+  background: var(--bg2);
+}
+.sparql-toolbar-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+  flex: 1;
+}
+.sparql-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+}
+.sparql-btn.primary {
+  background: var(--or);
+  color: #fff;
+}
+.sparql-btn.primary:hover { background: #d94f15; }
+.sparql-btn.secondary {
+  background: transparent;
+  color: var(--ts);
+  border: 1.5px solid var(--seam);
+}
+.sparql-btn.secondary:hover { background: var(--bg3); color: var(--tp); }
+#sparql-input {
+  width: 100%;
+  min-height: 200px;
+  padding: 16px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--tp);
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: var(--bg);
+}
+.sparql-status {
+  font-size: 11px;
+  color: var(--ts);
+  padding: 8px 14px;
+  border-top: 1px solid var(--seam);
+  background: var(--bg2);
+}
+.sparql-status.error { color: #B91C1C; background: #FEF2F2; }
+.sparql-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.sparql-example-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1.5px solid var(--seam);
+  background: var(--bg);
+  color: var(--ts);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+}
+.sparql-example-btn:hover { border-color: var(--or); color: var(--or); background: var(--pill-or); }
+.sparql-results-wrap {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sparql-results-header {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--seam);
+  background: var(--bg2);
+}
+.sparql-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  overflow-x: auto;
+  display: block;
+}
+.sparql-results-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tt);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--seam);
+  background: var(--bg2);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+.sparql-results-table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--seam);
+  color: var(--tp);
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sparql-results-table tr:hover td { background: var(--bg3); }
+.sparql-results-table a { color: var(--bl); text-decoration: none; }
+.sparql-results-table a:hover { text-decoration: underline; }
+.sparql-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--tt);
+  font-size: 13px;
+}
+.sparql-prefixes {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ts);
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">SPARQL</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-sparql">
+
+  <div class="sparql-header">
+    <div class="sparql-title">SPARQL Endpoint</div>
+    <div class="sparql-subtitle">
+      Query the Viewsari Knowledge Graph directly. The endpoint serves 378K+ triples
+      covering volumes, biographies, pages, paragraphs, persons, co-occurrences, and provenance.
+    </div>
+  </div>
+
+  <div class="sparql-prefixes">
+PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/&gt;
+PREFIX fabio: &lt;http://purl.org/spar/fabio/&gt;
+PREFIX doco: &lt;http://purl.org/spar/doco/&gt;
+PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
+PREFIX prov: &lt;http://www.w3.org/ns/prov#&gt;
+PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
+  </div>
+
+  <div class="sparql-examples">
+    <button class="sparql-example-btn" onclick="loadExample('volumes')">All volumes</button>
+    <button class="sparql-example-btn" onclick="loadExample('bios')">Biographies in Vol. 3</button>
+    <button class="sparql-example-btn" onclick="loadExample('persons')">Top persons</button>
+    <button class="sparql-example-btn" onclick="loadExample('cooc')">Co-occurrences</button>
+    <button class="sparql-example-btn" onclick="loadExample('giotto')">Giotto mentions</button>
+    <button class="sparql-example-btn" onclick="loadExample('stats')">KG statistics</button>
+  </div>
+
+  <div class="sparql-editor-wrap">
+    <div class="sparql-toolbar">
+      <span class="sparql-toolbar-label">Query Editor</span>
+      <button class="sparql-btn secondary" onclick="clearQuery()">Clear</button>
+      <button class="sparql-btn primary" onclick="runQuery()" id="run-btn">Run Query</button>
+    </div>
+    <textarea id="sparql-input" spellcheck="false">SELECT ?vol ?label
+WHERE {
+  ?vol a viewsari:0001006 .
+  ?vol rdfs:label ?label .
+}
+ORDER BY ?label</textarea>
+    <div class="sparql-status" id="sparql-status">Ready</div>
+  </div>
+
+  <div class="sparql-results-wrap">
+    <div class="sparql-results-header" id="results-header">Results</div>
+    <div id="results-body">
+      <div class="sparql-empty">Run a query to see results</div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>\n' +
+  'PREFIX vkb: <https://viewsari.ise.fiz-karlsruhe.de/kb/>\n' +
+  'PREFIX fabio: <http://purl.org/spar/fabio/>\n' +
+  'PREFIX doco: <http://purl.org/spar/doco/>\n' +
+  'PREFIX frbr: <http://purl.org/vocab/frbr/core#>\n' +
+  'PREFIX prov: <http://www.w3.org/ns/prov#>\n' +
+  'PREFIX oa: <http://www.w3.org/ns/oa#>\n' +
+  'PREFIX dct: <http://purl.org/dc/terms/>\n';
+
+var EXAMPLES = {
+  volumes: 'SELECT ?vol ?label\nWHERE {\n  ?vol a viewsari:0001006 .\n  ?vol rdfs:label ?label .\n}\nORDER BY ?label',
+  bios: 'SELECT ?bio ?label ?startPage\nWHERE {\n  ?bio a viewsari:0001008 .\n  ?bio rdfs:label ?label .\n  ?bio frbr:isPartOf vkb:the_lives_1568_volume-3 .\n  ?bio viewsari:hasStartPage ?startPage .\n}\nORDER BY ?startPage',
+  persons: 'SELECT ?person ?label (COUNT(?annot) AS ?mentions)\nWHERE {\n  ?person a viewsari:0001013 .\n  ?person rdfs:label ?label .\n  ?annot oa:hasBodyValue ?text .\n  FILTER(CONTAINS(LCASE(?text), LCASE(?label)))\n}\nGROUP BY ?person ?label\nORDER BY DESC(?mentions)\nLIMIT 20',
+  cooc: 'SELECT ?label ?p1_label ?p2_label\nWHERE {\n  ?cooc a viewsari:0001025 .\n  ?cooc rdfs:label ?label .\n  ?cooc viewsari:involves ?p1, ?p2 .\n  ?p1 rdfs:label ?p1_label .\n  ?p2 rdfs:label ?p2_label .\n  FILTER(?p1 < ?p2)\n}\nORDER BY ?label\nLIMIT 30',
+  giotto: 'SELECT ?chunk ?text ?start ?end\nWHERE {\n  ?annot a oa:Annotation .\n  ?annot oa:hasTarget ?chunk .\n  ?annot oa:hasBodyValue ?text .\n  ?chunk oa:hasSource vkb:the_lives_1568_volume-1_paragraph-95 .\n  ?chunk oa:hasSelector ?sel .\n  ?sel oa:start ?start .\n  ?sel oa:end ?end .\n}\nORDER BY ?start\nLIMIT 20',
+  stats: 'SELECT ?type (COUNT(?s) AS ?count)\nWHERE {\n  ?s a ?type .\n  FILTER(?type IN (\n    viewsari:0001006, viewsari:0001008, viewsari:0001009,\n    doco:Paragraph, viewsari:0001013, viewsari:0001025,\n    oa:Annotation, doco:TextChunk, prov:Activity\n  ))\n}\nGROUP BY ?type\nORDER BY DESC(?count)'
+};
+
+function loadExample(key) {
+  document.getElementById('sparql-input').value = EXAMPLES[key] || '';
+}
+
+function clearQuery() {
+  document.getElementById('sparql-input').value = '';
+  document.getElementById('results-body').innerHTML = '<div class="sparql-empty">Run a query to see results</div>';
+  document.getElementById('results-header').textContent = 'Results';
+  document.getElementById('sparql-status').textContent = 'Ready';
+  document.getElementById('sparql-status').className = 'sparql-status';
+}
+
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function formatCell(val) {
+  if (!val) return '';
+  if (val.startsWith('http://') || val.startsWith('https://')) {
+    var short = val.replace('https://viewsari.ise.fiz-karlsruhe.de/kb/', 'vkb:')
+                   .replace('https://viewsari.ise.fiz-karlsruhe.de/ontology/#', 'viewsari:')
+                   .replace('http://purl.org/spar/fabio/', 'fabio:')
+                   .replace('http://purl.org/spar/doco/', 'doco:')
+                   .replace('http://www.w3.org/ns/prov#', 'prov:')
+                   .replace('http://www.w3.org/ns/oa#', 'oa:');
+    return '<a href="' + esc(val) + '" target="_blank" title="' + esc(val) + '">' + esc(short) + '</a>';
+  }
+  return esc(val.length > 120 ? val.substring(0, 117) + '...' : val);
+}
+
+function runQuery() {
+  var query = document.getElementById('sparql-input').value.trim();
+  if (!query) return;
+
+  var fullQuery = query;
+  if (!query.toLowerCase().includes('prefix')) {
+    fullQuery = PREFIXES + query;
+  }
+
+  var status = document.getElementById('sparql-status');
+  var btn = document.getElementById('run-btn');
+  status.textContent = 'Running...';
+  status.className = 'sparql-status';
+  btn.disabled = true;
+
+  var t0 = performance.now();
+  fetch('/sparql/query', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({query: fullQuery})
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    btn.disabled = false;
+    var elapsed = ((performance.now() - t0) / 1000).toFixed(2);
+
+    if (data.error) {
+      status.textContent = 'Error: ' + data.error;
+      status.className = 'sparql-status error';
+      document.getElementById('results-body').innerHTML = '<div class="sparql-empty" style="color:#B91C1C">' + esc(data.error) + '</div>';
+      return;
+    }
+
+    if (data.columns) {
+      status.textContent = data.count + ' results in ' + elapsed + 's';
+      document.getElementById('results-header').textContent = 'Results (' + data.count + ' rows)';
+
+      if (data.rows.length === 0) {
+        document.getElementById('results-body').innerHTML = '<div class="sparql-empty">No results</div>';
+        return;
+      }
+
+      var h = '<table class="sparql-results-table"><thead><tr>';
+      data.columns.forEach(function(c) { h += '<th>' + esc(c) + '</th>'; });
+      h += '</tr></thead><tbody>';
+      data.rows.forEach(function(row) {
+        h += '<tr>';
+        row.forEach(function(cell) { h += '<td>' + formatCell(cell) + '</td>'; });
+        h += '</tr>';
+      });
+      h += '</tbody></table>';
+      document.getElementById('results-body').innerHTML = h;
+    } else if (data.result !== undefined) {
+      status.textContent = 'ASK result in ' + elapsed + 's';
+      document.getElementById('results-body').innerHTML = '<div class="sparql-empty" style="font-size:24px;font-weight:700;color:var(--tp)">' + (data.result ? 'TRUE' : 'FALSE') + '</div>';
+    }
+  })
+  .catch(function(err) {
+    btn.disabled = false;
+    status.textContent = 'Network error: ' + err;
+    status.className = 'sparql-status error';
+  });
+}
+
+// Ctrl+Enter to run
+document.getElementById('sparql-input').addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runQuery(); }
+});
+</script>
+{% endblock %}

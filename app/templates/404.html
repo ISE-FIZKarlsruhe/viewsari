@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Not Found{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.not-found {
+  position: relative;
+  top: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  flex-direction: column;
+  gap: 12px;
+  color: var(--tt);
+  padding: 40px;
+  text-align: center;
+}
+.not-found-code {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--seam);
+  letter-spacing: -.05em;
+}
+.not-found-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ts);
+}
+.not-found-msg {
+  font-size: 13px;
+  color: var(--tt);
+  max-width: 400px;
+  line-height: 1.6;
+}
+{% endblock %}
+
+{% block content %}
+<div class="not-found">
+  <div class="not-found-code">404</div>
+  <div class="not-found-title">Not Found</div>
+  <div class="not-found-msg">{{ message }}</div>
+  <a href="/" class="chip" style="margin-top:8px">&#8592; Back to index</a>
+</div>
+{% endblock %}

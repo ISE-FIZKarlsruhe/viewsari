@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Publications{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.layout-pub {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 960px;
+  margin: 0 auto;
+}
+.pub-header { margin-bottom: 36px; }
+.pub-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.pub-subtitle {
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.6;
+}
+.pub-section { margin-bottom: 28px; }
+.pub-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pub-section-title::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.pub-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.pub-card-authors {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tp);
+  margin-bottom: 4px;
+}
+.pub-card-title {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--tp);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.pub-card-venue {
+  font-size: 12px;
+  color: var(--ts);
+}
+.pub-card-venue strong { color: var(--tp); }
+.pub-card.dissertation {
+  border-left: 3px solid var(--or);
+  background: linear-gradient(135deg, #FFF8F5, #fff);
+}
+.pub-bibtex {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  color: var(--ts);
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">Publications</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-pub">
+
+  <div class="pub-header">
+    <div class="pub-title">Publications</div>
+    <div class="pub-subtitle">
+      Peer-reviewed publications associated with the Viewsari project. Parts of the research
+      presented in the dissertation previously appeared in workshops and conference contributions.
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">Dissertation</div>
+    <div class="pub-card dissertation">
+      <div class="pub-card-authors">Sarah Rebecca Ondraszek</div>
+      <div class="pub-card-title">Modeling Interpretation in the Age of GenAI: Semantic Technologies for Digital Humanities Research Based on Giorgio Vasari's The Lives</div>
+      <div class="pub-card-venue">Doctoral dissertation, Karlsruher Institut f&uuml;r Technologie (KIT), Faculty of Economics, 2026.<br>Supervisors: Prof. Dr. rer. nat. Harald Sack (KIT / FIZ Karlsruhe)</div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">Ontology Design and Knowledge Graph Construction</div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2024)</div>
+      <div class="pub-card-title">eXtreme Design for Ontological Engineering in the Digital Humanities with Viewsari</div>
+      <div class="pub-card-venue"><strong>SemDH Workshop</strong> @ ESWC 2024</div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2024)</div>
+      <div class="pub-card-title">Viewsari: New Perspectives on Historical Network Analysis in Giorgio Vasari's The Lives</div>
+      <div class="pub-card-venue"><strong>SemDH Workshop</strong> @ ESWC 2024</div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">Ontology Design Patterns</div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2024)</div>
+      <div class="pub-card-title">One Pattern to Express Them All? Towards Generalized Patterns for Ontology Design in the Digital Humanities</div>
+      <div class="pub-card-venue"><strong>ODP Workshop</strong> @ ISWC 2024</div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">NFDI4Memory and Adjacent Infrastructure</div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2025)</div>
+      <div class="pub-card-title">Indexing Historical Research Data: MemO and the NFDI4Memory Data Portal</div>
+      <div class="pub-card-venue"><strong>CoRDI 2025</strong></div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2025)</div>
+      <div class="pub-card-title">Interlinking Research Data and Services in the Historical Sciences with MemO and the NFDI4Memory Knowledge Graph</div>
+      <div class="pub-card-venue"><strong>Sci-K Workshop 2025</strong></div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-card-authors">G&ouml;ller et al. (2025)</div>
+      <div class="pub-card-title">4Memory DataSpace Architecture</div>
+      <div class="pub-card-venue"><strong>DataSpace 2025</strong></div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Tietz et al. (2024)</div>
+      <div class="pub-card-title">NFDIcore</div>
+      <div class="pub-card-venue"><strong>NFDIcore publication 2024</strong></div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">Doctoral Consortium</div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek (2025)</div>
+      <div class="pub-card-title">Viewsari: Enabling New Perspectives on the Renaissance with a Knowledge Graph of Giorgio Vasari's The Lives</div>
+      <div class="pub-card-venue"><strong>Doctoral Consortium</strong> @ ISWC 2025</div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">Related Work</div>
+    <div class="pub-card">
+      <div class="pub-card-authors">Ondraszek et al. (2025)</div>
+      <div class="pub-card-title">Ontologies in Motion: A BFO-Based Approach to Knowledge Graph Construction for Motor Performance Research Data in Sports Science</div>
+      <div class="pub-card-venue">(venue tbc)</div>
+    </div>
+  </div>
+
+  <div class="pub-section">
+    <div class="pub-section-title">How to Cite</div>
+    {% raw %}<div class="pub-bibtex">@phdthesis{ondraszek2026viewsari,
+  author    = {Ondraszek, Sarah Rebecca},
+  title     = {Modeling Interpretation in the Age of GenAI: Semantic Technologies
+               for Digital Humanities Research Based on Giorgio {Vasari's} {The Lives}},
+  school    = {Karlsruher Institut f{\"u}r Technologie (KIT)},
+  year      = {2026}
+}</div>
+    <div class="pub-bibtex" style="margin-top:8px">@inproceedings{ondraszek2024xd,
+  author    = {Ondraszek, Sarah Rebecca and others},
+  title     = {{eXtreme Design} for Ontological Engineering in the Digital
+               Humanities with {Viewsari}},
+  booktitle = {Proceedings of the SemDH Workshop at ESWC},
+  year      = {2024}
+}</div>{% endraw %}
+  </div>
+
+</div>
+{% endblock %}

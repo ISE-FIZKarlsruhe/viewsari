@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · Knowledge Base{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.kb-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.kb-header { margin-bottom: 32px; }
+.kb-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.kb-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; max-width: 700px; }
+.kb-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
+.kb-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+
+/* Stats grid */
+.kb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.kb-stat { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 16px 18px; }
+.kb-stat-value { font-size: 28px; font-weight: 700; color: var(--tp); letter-spacing: -.02em; }
+.kb-stat-label { font-size: 11px; color: var(--ts); font-weight: 500; margin-top: 2px; }
+.kb-stat.or .kb-stat-value { color: var(--or); }
+.kb-stat.bl .kb-stat-value { color: var(--bl); }
+.kb-stat.pu .kb-stat-value { color: var(--pu); }
+.kb-stat.rd .kb-stat-value { color: #B91C1C; }
+
+/* Mention type breakdown */
+.kb-type-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.kb-type-bar div { height: 100%; }
+.kb-type-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.kb-type-legend span { font-size: 11px; color: var(--ts); display: flex; align-items: center; gap: 4px; }
+.kb-type-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+
+/* Bio table */
+.kb-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; overflow: hidden; }
+.kb-table th { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tt); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--seam); background: var(--bg2); }
+.kb-table td { padding: 8px 14px; border-bottom: 1px solid var(--bg3); color: var(--tp); }
+.kb-table tr:last-child td { border-bottom: none; }
+.kb-table tr:hover td { background: var(--bg2); }
+.kb-table a { color: var(--bl); text-decoration: none; font-weight: 600; }
+.kb-table a:hover { text-decoration: underline; }
+.kb-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Entity list */
+.kb-ent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.kb-ent-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 14px 16px; transition: all .14s; text-decoration: none; display: block; }
+.kb-ent-card:hover { border-color: var(--or); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.kb-ent-label { font-size: 13px; font-weight: 600; color: var(--tp); margin-bottom: 4px; line-height: 1.3; }
+.kb-ent-id { font-size: 10px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 6px; }
+.kb-ent-surfaces { font-size: 11px; color: var(--ts); line-height: 1.6; }
+.kb-ent-surfaces em { font-style: normal; background: var(--pill-bl); padding: 1px 5px; border-radius: 3px; font-size: 10px; }
+.kb-ent-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.kb-ent-tag { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+.kb-ent-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+.kb-ent-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
+.kb-ent-tag.bio { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+
+/* Tabs */
+.kb-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+.kb-tab { font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 100px; border: 1.5px solid var(--seam); background: transparent; color: var(--ts); cursor: pointer; font-family: inherit; transition: all .14s; }
+.kb-tab:hover { border-color: var(--or); color: var(--or); }
+.kb-tab.active { background: var(--or); color: #fff; border-color: var(--or); }
+.kb-tab-panel { display: none; }
+.kb-tab-panel.active { display: block; }
+
+/* Search */
+.kb-search { width: 100%; max-width: 400px; padding: 8px 14px; border: 1.5px solid var(--seam); border-radius: 100px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 16px; }
+.kb-search:focus { border-color: var(--or); }
+{% endblock %}
+
+{% block topbar_chips %}
+<span class="bio-chip">Knowledge Base</span>
+{% endblock %}
+
+{% block status %}{{ kb.total_entities }} entities{% endblock %}
+
+{% block content %}
+<div class="kb-layout">
+  <div class="kb-header">
+    <div class="kb-title">Viewsari Knowledge Base</div>
+    <div class="kb-subtitle">
+      Entity inventory extracted by the ObliquER pipeline from {{ kb.bio_stats | length }} annotated biographies
+      in the ground truth corpus. Entities are linked to Wikidata where possible; those without
+      a knowledge base counterpart are classified as Out-of-Knowledge-Base (OOKB).
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="kb-section">Overview</div>
+  <div class="kb-stats">
+    <div class="kb-stat">
+      <div class="kb-stat-value">{{ "{:,}".format(kb.total_mentions) }}</div>
+      <div class="kb-stat-label">Total mentions</div>
+    </div>
+    <div class="kb-stat or">
+      <div class="kb-stat-value">{{ kb.total_entities }}</div>
+      <div class="kb-stat-label">Unique entities</div>
+    </div>
+    <div class="kb-stat bl">
+      <div class="kb-stat-value">{{ kb.wd_count }}</div>
+      <div class="kb-stat-label">Wikidata-linked</div>
+    </div>
+    <div class="kb-stat rd">
+      <div class="kb-stat-value">{{ kb.ookb_count }}</div>
+      <div class="kb-stat-label">Out-of-KB (OOKB)</div>
+    </div>
+  </div>
+
+  <!-- Mention type breakdown -->
+  <div class="kb-section">Mention type distribution</div>
+  {% set exp = kb.mention_types.get('explicit artwork mention', 0) %}
+  {% set imp = kb.mention_types.get('implicit artwork mention', 0) %}
+  {% set cor = kb.mention_types.get('coreferent', 0) %}
+  {% set gen = kb.mention_types.get('generic mention', 0) %}
+  {% set tot = exp + imp + cor + gen %}
+  <div class="kb-type-bar">
+    <div style="width:{{ (exp/tot*100)|round(1) }}%;background:var(--or)"></div>
+    <div style="width:{{ (imp/tot*100)|round(1) }}%;background:var(--bl)"></div>
+    <div style="width:{{ (cor/tot*100)|round(1) }}%;background:var(--pu)"></div>
+    <div style="width:{{ (gen/tot*100)|round(1) }}%;background:var(--seam)"></div>
+  </div>
+  <div class="kb-type-legend">
+    <span><i style="background:var(--or)"></i> Explicit ({{ exp }})</span>
+    <span><i style="background:var(--bl)"></i> Implicit ({{ imp }})</span>
+    <span><i style="background:var(--pu)"></i> Coreferent ({{ cor }})</span>
+    <span><i style="background:var(--seam)"></i> Generic ({{ gen }})</span>
+  </div>
+
+  <!-- Per-biography table -->
+  <div class="kb-section">Per-biography statistics</div>
+  <table class="kb-table">
+    <thead>
+      <tr>
+        <th>Biography</th>
+        <th class="num">Mentions</th>
+        <th class="num">Entities</th>
+        <th class="num">Wikidata</th>
+        <th class="num">OOKB</th>
+        <th class="num">Linking %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for slug, st in kb.bio_stats.items() | sort(attribute='1.slug') %}
+      <tr>
+        <td><a href="/biography/{{ slug }}">{{ slug | replace('-', ' ') | title }}</a></td>
+        <td class="num">{{ st.mentions }}</td>
+        <td class="num">{{ st.entities }}</td>
+        <td class="num">{{ st.wd }}</td>
+        <td class="num">{{ st.ookb }}</td>
+        <td class="num">{% if st.entities > 0 %}{{ ((st.wd / st.entities) * 100) | round(1) }}%{% else %}&mdash;{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Entity browser -->
+  <div class="kb-section">Entity browser</div>
+  <div class="kb-tabs">
+    <button class="kb-tab active" onclick="showTab('all',this)">All ({{ kb.total_entities }})</button>
+    <button class="kb-tab" onclick="showTab('ookb',this)">OOKB ({{ kb.ookb_count }})</button>
+    <button class="kb-tab" onclick="showTab('wd',this)">Wikidata-linked ({{ kb.wd_count }})</button>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:10px;font-weight:600;color:var(--tt);text-transform:uppercase;letter-spacing:.06em">Mention types:</span>
+    <button class="kb-tab active" style="font-size:10px;padding:4px 12px" data-filter="all" onclick="toggleTypeFilter('all',this)">All</button>
+    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--or);color:var(--or)" data-filter="explicit" onclick="toggleTypeFilter('explicit',this)">Explicit</button>
+    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--bl);color:var(--bl)" data-filter="implicit" onclick="toggleTypeFilter('implicit',this)">Implicit</button>
+    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--seam);color:var(--ts)" data-filter="generic" onclick="toggleTypeFilter('generic',this)">Generic</button>
+  </div>
+  <input class="kb-search" id="kb-search" type="text" placeholder="Search entities by label or surface form..." oninput="filterEntities()">
+
+  <div class="kb-tab-panel active" id="panel-all">
+    <div class="kb-ent-grid" id="grid-all">
+      {% for eid, ent in kb.entities.items() | sort(attribute='1.label') %}
+      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
+        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
+        <div class="kb-ent-id">{{ eid }}</div>
+        <div class="kb-ent-surfaces">
+          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
+          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
+        </div>
+        <div class="kb-ent-meta">
+          {% if ent.ookb %}<span class="kb-ent-tag ookb">OOKB</span>{% endif %}
+          {% if ent.wikidata %}<span class="kb-ent-tag wd">{{ ent.wikidata }}</span>{% endif %}
+          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
+          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="kb-tab-panel" id="panel-ookb">
+    <div class="kb-ent-grid" id="grid-ookb">
+      {% for eid, ent in kb.ookb_entities.items() | sort(attribute='1.label') %}
+      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
+        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
+        <div class="kb-ent-id">{{ eid }}{% if ent.ookb_uri %} &middot; <span style="font-size:9px;color:var(--tt)">{{ ent.ookb_uri | truncate(60) }}</span>{% endif %}</div>
+        <div class="kb-ent-surfaces">
+          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
+          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
+        </div>
+        <div class="kb-ent-meta">
+          <span class="kb-ent-tag ookb">OOKB</span>
+          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
+          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="kb-tab-panel" id="panel-wd">
+    <div class="kb-ent-grid" id="grid-wd">
+      {% for eid, ent in kb.wd_entities.items() | sort(attribute='1.label') %}
+      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
+        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
+        <div class="kb-ent-id">{{ eid }}</div>
+        <div class="kb-ent-surfaces">
+          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
+          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
+        </div>
+        <div class="kb-ent-meta">
+          <span class="kb-ent-tag wd">{{ ent.wikidata }}</span>
+          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
+          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var activeTypeFilter = "all";
+
+function showTab(name, btn) {
+  // Only toggle among the top row (entity-level) tabs
+  document.querySelectorAll(".kb-tabs .kb-tab").forEach(function(b){ b.classList.remove("active"); });
+  document.querySelectorAll(".kb-tab-panel").forEach(function(p){ p.classList.remove("active"); });
+  if(btn) btn.classList.add("active");
+  document.getElementById("panel-"+name).classList.add("active");
+  filterEntities();
+}
+
+function toggleTypeFilter(type, btn) {
+  activeTypeFilter = type;
+  document.querySelectorAll("[data-filter]").forEach(function(b){ b.classList.remove("active"); });
+  btn.classList.add("active");
+  filterEntities();
+}
+
+function filterEntities() {
+  var q = document.getElementById("kb-search").value.toLowerCase();
+  var active = document.querySelector(".kb-tab-panel.active");
+  if(!active) return;
+  active.querySelectorAll(".kb-ent-card").forEach(function(card){
+    var text = card.getAttribute("data-search") || "";
+    var types = card.getAttribute("data-types") || "";
+    var matchText = !q || text.indexOf(q) >= 0;
+    var matchType = activeTypeFilter === "all" || types.indexOf(activeTypeFilter) >= 0;
+    card.style.display = (matchText && matchType) ? "" : "none";
+  });
+}
+</script>
+{% endblock %}

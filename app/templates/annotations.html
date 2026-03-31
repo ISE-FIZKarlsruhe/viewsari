@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Annotations{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.layout-ann {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 960px;
+  margin: 0 auto;
+}
+.ann-header { margin-bottom: 36px; }
+.ann-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.ann-subtitle {
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.6;
+  max-width: 700px;
+}
+.ann-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.ann-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--tp);
+  letter-spacing: -.02em;
+}
+.ann-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+}
+.ann-section { margin-bottom: 28px; }
+.ann-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ann-section-title::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.ann-overview-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--tp);
+  margin-bottom: 14px;
+}
+.ann-type-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.ann-type-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ts);
+}
+.ann-type-dot { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+.ann-type-dot.e { background: var(--or); }
+.ann-type-dot.i { background: var(--bl); }
+.ann-type-dot.c { background: var(--pu); border-style: dotted; }
+.ann-type-dot.g { background: var(--seam); }
+.ann-bio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ann-bio-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tt);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--seam);
+  white-space: nowrap;
+}
+.ann-bio-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--seam);
+  color: var(--tp);
+  vertical-align: middle;
+}
+.ann-bio-table tr:last-child td { border-bottom: none; }
+.ann-bio-table tbody tr { transition: background .12s; }
+.ann-bio-table tbody tr:hover { background: var(--bg3); }
+.ann-bio-name {
+  font-weight: 600;
+  color: var(--tp);
+  text-decoration: none;
+}
+.ann-bio-name:hover { color: var(--or); }
+.ann-bar {
+  display: flex;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 120px;
+}
+.ann-bar-seg { height: 100%; }
+.ann-bar-seg.e { background: var(--or); }
+.ann-bar-seg.i { background: var(--bl); }
+.ann-bar-seg.c { background: var(--pu); }
+.ann-bar-seg.g { background: var(--seam); }
+.ann-bio-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.ann-bio-badge.wd { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+.ann-bio-badge.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+.ann-info-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.ann-info-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tp);
+  margin-bottom: 6px;
+}
+.ann-info-card-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ts);
+}
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">Annotations</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-ann">
+
+  <div class="ann-header">
+    <div class="ann-title">Annotation Corpus</div>
+    <div class="ann-subtitle">
+      Gold-standard annotation corpus for artwork entity recognition in Vasari's <em>The Lives</em>,
+      manually annotated in INCEpTION with the ObliquER annotation schema.
+    </div>
+    <div class="ann-stats">
+      <div>
+        <div class="ann-stat-num">{{ total_bios }}</div>
+        <div class="ann-stat-label">Biographies</div>
+      </div>
+      <div>
+        <div class="ann-stat-num">{{ total_paras }}</div>
+        <div class="ann-stat-label">Paragraphs</div>
+      </div>
+      <div>
+        <div class="ann-stat-num">{{ total_mentions }}</div>
+        <div class="ann-stat-label">Mentions</div>
+      </div>
+      <div>
+        <div class="ann-stat-num">{{ total_entities }}</div>
+        <div class="ann-stat-label">Unique Entities</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ann-section">
+    <div class="ann-section-title">Annotation Schema</div>
+    <p class="ann-overview-text">
+      Each mention is classified into one of four types following the ObliquER annotation schema.
+      Mentions are anchored to exact character positions within paragraphs and linked to entities
+      via Wikidata QIDs or Viewsari-internal OOKB IRIs.
+    </p>
+    <div class="ann-type-legend">
+      <div class="ann-type-item"><span class="ann-type-dot e"></span> Explicit &mdash; artwork named directly</div>
+      <div class="ann-type-item"><span class="ann-type-dot i"></span> Implicit &mdash; artwork described without title</div>
+      <div class="ann-type-item"><span class="ann-type-dot c"></span> Coreferent &mdash; anaphoric reference to earlier mention</div>
+      <div class="ann-type-item"><span class="ann-type-dot g"></span> Generic &mdash; non-specific artwork reference</div>
+    </div>
+    <div class="ann-info-card">
+      <div class="ann-info-card-title">Sampling and Annotation Process</div>
+      <div class="ann-info-card-text">
+        Paragraphs were selected via stratified sampling (random seed 42), capped at 10&ndash;25
+        paragraphs per biography depending on corpus size. Annotations follow the ObliquER pipeline schema
+        with character-level offsets, entity IDs, Wikidata linking, and OOKB classification.
+      </div>
+    </div>
+  </div>
+
+  <div class="ann-section">
+    <div class="ann-section-title">Annotated Biographies</div>
+    <div style="overflow-x:auto">
+      <table class="ann-bio-table">
+        <thead>
+          <tr>
+            <th>Biography</th>
+            <th>Vol.</th>
+            <th>Paragraphs</th>
+            <th>Mentions</th>
+            <th>Type Distribution</th>
+            <th>Wikidata</th>
+            <th>OOKB</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for bio in bio_stats %}
+          <tr>
+            <td><a class="ann-bio-name" href="/biography/{{ bio.slug }}">{{ bio.name }}</a></td>
+            <td>{{ bio.volume }}</td>
+            <td>{{ bio.paras }}</td>
+            <td>{{ bio.mentions }}</td>
+            <td>
+              {% if bio.mentions > 0 %}
+              <div class="ann-bar">
+                <div class="ann-bar-seg e" style="width:{{ (bio.explicit / bio.mentions * 100) | round(1) }}%"></div>
+                <div class="ann-bar-seg i" style="width:{{ (bio.implicit / bio.mentions * 100) | round(1) }}%"></div>
+                <div class="ann-bar-seg c" style="width:{{ (bio.coref / bio.mentions * 100) | round(1) }}%"></div>
+                <div class="ann-bar-seg g" style="width:{{ (bio.generic / bio.mentions * 100) | round(1) }}%"></div>
+              </div>
+              {% endif %}
+            </td>
+            <td><span class="ann-bio-badge wd">{{ bio.wd }} ({{ bio.wd_pct }}%)</span></td>
+            <td><span class="ann-bio-badge ookb">{{ bio.ookb }} ({{ bio.ookb_pct }}%)</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ann-section">
+    <div class="ann-section-title">Components</div>
+    <div class="ann-info-card">
+      <div class="ann-info-card-title">ObliquER Pipeline</div>
+      <div class="ann-info-card-text">
+        LLM-based entity recognition and linking pipeline designed for implicit and long-tail entities.
+        Features formal task definitions grounded in the Viewsari ontology, prompt engineering for zero-shot
+        and few-shot extraction, dynamic chunking, entity linking with OOKB tagging, and coreference clustering.
+      </div>
+    </div>
+    <div class="ann-info-card">
+      <div class="ann-info-card-title">Viewsari Knowledge Graph</div>
+      <div class="ann-info-card-text">
+        The populated KG covers the full <em>Lives</em> corpus: person entities from the index of names,
+        co-occurrence instances with PMI and Dice scores, Web Annotation layer for paragraph-level mention
+        anchoring, provenance activities for each extraction run, and FRBR-level bibliographic metadata.
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

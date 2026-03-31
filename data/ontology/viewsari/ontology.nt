@@ -1,0 +1,351 @@
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2002/07/owl#versionIRI> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#/1.0.0> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2002/07/owl#imports> <http://purl.org/spar/doco/2015-07-03> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2002/07/owl#imports> <http://purl.org/spar/fabio/2019-02-19> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2002/07/owl#imports> <http://www.w3.org/ns/prov-o-20130430> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2002/07/owl#imports> <http://www.w3.org/ns/oa#> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://purl.org/dc/elements/1.1/contributor> "FIZ Karlsruhe — Leibniz Institute for Information Infrastructure, Information Service Engineering group" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://purl.org/dc/elements/1.1/creator> "Sarah Rebecca Ondraszek" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://purl.org/dc/elements/1.1/date> "2024-01-01T09:09:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://purl.org/dc/elements/1.1/rights> "https://creativecommons.org/licenses/by/4.0/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://purl.org/dc/terms/modified> "2026-03-27T09:09:28Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#> <http://www.w3.org/2000/01/rdf-schema#comment> "The Viewsari ontology provides a\n        provenance-aware, FRBR-structured formal vocabulary for the\n        Viewsari knowledge graph, which models entity extraction from\n        Giorgio Vasari's Le Vite de' più eccellenti pittori, scultori,\n        e architettori (1568). It integrates the FaBiO bibliographic\n        layer, the DoCO document component vocabulary, PROV-O for\n        extraction provenance, and the W3C Web Annotation Ontology for\n        anchoring mentions to their textual evidence. The ontology\n        distinguishes three representational layers: a bibliographic\n        layer (edition, translation, volume, biography, page and their\n        web manifestations), a structural layer (paragraphs, text\n        chunks, position selectors), and a content layer (extracted\n        entities such as persons, artworks, locations, and\n        co-occurrences, together with their typed mention\n        annotations)." .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://www.w3.org/2008/05/skos#example
+<http://www.w3.org/2008/05/skos#example> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/2000/01/rdf-schema#domain> <http://purl.org/spar/doco/Paragraph> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/2000/01/rdf-schema#range> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/2000/01/rdf-schema#comment> "Links a doco:Paragraph to the\n        viewsari:page_web_representation instance that corresponds to\n        the first printed page on which the paragraph begins. For\n        paragraphs confined to a single page this property and\n        viewsari:hasEndPage resolve to the same individual. The range\n        is intentionally set to the manifestation level (page web\n        representation) rather than the expression level (page), because\n        physical page extent is a property of the embodied digital text,\n        not of the abstract intellectual content." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/2000/01/rdf-schema#label> "has start page"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_paragraph-1\n        viewsari:hasStartPage viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_cimabue-bio_page_3 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/2000/01/rdf-schema#domain> <http://purl.org/spar/doco/Paragraph> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/2000/01/rdf-schema#range> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/2000/01/rdf-schema#comment> "Links a doco:Paragraph to the\n        viewsari:page_web_representation instance that corresponds to\n        the last printed page on which the paragraph ends. For\n        paragraphs confined to a single page this property and\n        viewsari:hasStartPage resolve to the same individual. Across all\n        ten volumes of the Du Vere translation, 48.2% of paragraphs\n        span more than one printed page, making this property necessary\n        to faithfully represent the physical extent of each\n        passage." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/2000/01/rdf-schema#label> "has end page"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_paragraph-1\n        viewsari:hasEndPage\n        viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_cimabue-bio_page_4 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://purl.org/vocab/frbr/core#relatedEndeavour> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2002/07/owl#inverseOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2000/01/rdf-schema#domain> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2000/01/rdf-schema#range> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2000/01/rdf-schema#comment> "Records the derivation relationship\n        between a viewsari:translation and the viewsari:edition from\n        which it was made. This property is a subproperty of\n        frbr:relatedEndeavour and specialises it for the specific\n        case of a translation deriving from an edition of the same\n        work. In the Viewsari knowledge graph, the Du Vere English\n        translation (the_lives_1568) is based on the 1568 Giunti\n        Italian edition (le_vite_1568)." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2000/01/rdf-schema#label> "is based on"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568\n        viewsari:isBasedOn viewsari:le_vite_1568 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://purl.org/dc/terms/relation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2000/01/rdf-schema#domain> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2000/01/rdf-schema#range> <http://purl.org/spar/doco/Paragraph> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2000/01/rdf-schema#comment> "Anchors a viewsari:extracted_content\n        individual — most commonly a viewsari:cooccurrence — to the\n        doco:Paragraph in which the co-occurring surface forms appear.\n        This property provides the primary provenance link between the\n        content layer and the structural layer and is the key predicate\n        for source-text queries such as \"retrieve all co-occurrences\n        attested in paragraph X\". The subproperty relationship to\n        dct:relation is intentional: the paragraph is the relational\n        context, not a part-of relationship." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2000/01/rdf-schema#label> "in paragraph"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032> <http://www.w3.org/2008/05/skos#example> "viewsari:cooccurrence_cim-gio_1\n        viewsari:inParagraph\n        viewsari:the_lives_1568_volume-1_paragraph-13 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://purl.org/dc/terms/relation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034> <http://www.w3.org/2000/01/rdf-schema#label> "involves"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://purl.org/dc/terms/relation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/2000/01/rdf-schema#domain> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/2000/01/rdf-schema#range> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/2000/01/rdf-schema#comment> "Links a coreferent mention to the antecedent\n       mention (explicit or implicit) to which it co-refers within\n       the same biography. The antecedent must lie within the current\n       biography; cross-biography coreference is not represented." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035> <http://www.w3.org/2000/01/rdf-schema#label> "refers to"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://purl.org/vocab/frbr/core#relatedEndeavour> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036> <http://www.w3.org/2000/01/rdf-schema#label> "is basis of" .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#topDataProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2000/01/rdf-schema#domain> <http://purl.org/spar/doco/Paragraph> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2000/01/rdf-schema#comment> "Stores the full normalized plain-text\n        content of a doco:Paragraph as a string literal. The text is stored\n        after normalization (removal of HTML markup artefacts and\n        restoration of paragraph boundaries split across source\n        pages)." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2000/01/rdf-schema#label> "has text"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_paragraph-2\n        viewsari:hasText \"Having next undertaken to make a large panel\n        for the monks of Vallombrosa...\"^^xsd:string ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2000/01/rdf-schema#domain> <http://purl.org/spar/doco/Paragraph> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#int> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2000/01/rdf-schema#comment> "Records the character length of the\n        merged plain-text content of a doco:Paragraph as a\n        non-negative integer. The value is computed after page-fragment\n        merging and normalization and reflects the length of the string\n        stored in viewsari:hasText. This property supports\n        corpus-statistical queries (e.g., identifying paragraphs likely\n        to contain multiple entity mentions by length threshold) and\n        provides a fast validation check: the oa:end offset of any\n        viewsari:position_selector contained within a paragraph must\n        not exceed this value." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2000/01/rdf-schema#label> "has length in characters"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_paragraph-2\n        viewsari:hasLengthInCharacters 707 ." .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/Expression> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/2000/01/rdf-schema#comment> "A published version of a work,\n        representing a distinct textual state produced by an editorial\n        process. In Viewsari, the primary instance is the 1568 Giunti\n        edition of Le Vite. As a subclass of fabio:Expression, an\n        edition is an abstract intellectual entity independent of any\n        physical or digital carrier; physical or digital realizations\n        are represented as fabio:Manifestation individuals linked via\n        frbr:hasEmbodiment. Editions may differ from one another in\n        textual content, organization, and completeness; the 1568\n        edition of The Lives differs substantially from the 1550 edition\n        (Torrentiniana) and is the basis for the Du Vere\n        translation." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/2000/01/rdf-schema#label> "edition"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/2008/05/skos#example> "viewsari:le_vite_1568 a viewsari:edition" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> <http://www.w3.org/2008/05/skos#note> "Do not use this class for\n        translations; use viewsari:translation instead.\n        viewsari:isBasedOn links a translation to its source\n        edition." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/Expression> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/2000/01/rdf-schema#comment> "A rendering of a work into a language\n        other than that of the source edition, treated as a distinct\n        fabio:Expression rather than a mere derivative. In Viewsari, the\n        primary instance is the 1912 English translation by Gaston C.\n        du Vere, published by Macmillan and the Medici Society in ten\n        volumes. All volumes, biographies, pages, and paragraphs in the\n        Viewsari knowledge graph are derived from this\n        translation." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/2000/01/rdf-schema#label> "translation"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568 a viewsari:translation ;\n        viewsari:isBasedOn viewsari:le_vite_1568 ." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> <http://www.w3.org/2008/05/skos#note> "The translator (Gaston C. du Vere) should be\n        recorded using dct:creator on the translation individual, and\n        the publication year using dct:date." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/Book> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006> <http://www.w3.org/2000/01/rdf-schema#comment> "A physically or digitally bounded\n        division of an edition or translation, corresponding to a single\n        book in a multi-volume set. As a subclass of fabio:Book, a\n        volume is an expression-level entity: it represents the\n        intellectual content of one numbered volume independent of its\n        digital or print carrier. In Viewsari, the ten volumes of the\n        Du Vere translation are the primary instances of this class.\n        Each volume contains a subset of artist biographies and is\n        embodied by a corresponding viewsari:volume_web_representation\n        on Project Gutenberg." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006> <http://www.w3.org/2000/01/rdf-schema#label> "volume"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1 a viewsari:volume ;\n        frbr:isPartOf viewsari:the_lives_1568 ;\n        frbr:hasEmbodiment\n            viewsari:the_lives_1568_gutenberg_web_version_of_volume-1 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/WebSite> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007> <http://www.w3.org/2000/01/rdf-schema#comment> "The web-accessible digital manifestation\n        of a single volume of The Lives, hosted as a single HTML file\n        on Project Gutenberg. As a subclass of fabio:WebSite, this\n        class represents the entire Gutenberg HTML file for one volume\n        (e.g., https://www.gutenberg.org/files/25326/25326-h/25326-h.htm\n        for Volume 1). The file contains all biographies of that volume\n        and embeds printed page markers as HTML anchors in the form\n        #Page_N, which are the targets of viewsari:hasStartPage and\n        viewsari:hasEndPage links from paragraph individuals.\n        rdfs:seeAlso on instances of this class points to the\n        Gutenberg HTML URL." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007> <http://www.w3.org/2000/01/rdf-schema#label> "volume web representation"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_gutenberg_web_version_of_volume-1\n        a viewsari:volume_web_representation ;\n        frbr:isPartOf viewsari:the_lives_gutenberg-version ;\n        rdfs:seeAlso\n          &lt;https://www.gutenberg.org/files/25326/25326-h/25326-h.htm&gt; ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/Expression> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008> <http://www.w3.org/2000/01/rdf-schema#comment> "The life and works account of a single\n        artist or craftsman as written by Vasari. Each biography is\n        treated as a distinct fabio:Expression that is part of a volume\n        expression, spans a contiguous range of printed pages, and\n        contains a set of paragraphs. In Viewsari, biographies are the\n        primary unit of discourse for coreference resolution: ObliquER\n        does not draw coreference arcs across biography boundaries.\n        Page ranges are derived from the printed page numbers of the Du\n        Vere edition; the start page of a biography is the first\n        #Page_N anchor in the Gutenberg HTML at which that biography's\n        text begins." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008> <http://www.w3.org/2000/01/rdf-schema#label> "biography"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_giotto-bio\n        a viewsari:biography ;\n        frbr:isPartOf viewsari:the_lives_1568_volume-1 ;\n        frbr:hasEmbodiment\n            viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_giotto-bio ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/Expression> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009> <http://www.w3.org/2000/01/rdf-schema#comment> "A single numbered printed page within a\n        biography, corresponding to one #Page_N anchor in the Gutenberg\n        HTML file and to one printed page in the 1912 Medici Society\n        edition. Page individuals serve as the range of the\n        viewsari:hasStartPage and viewsari:hasEndPage properties — more\n        precisely, their corresponding web representation instances do —\n        and as the structural unit that links paragraphs to their\n        position within the document hierarchy. A page belongs to\n        exactly one biography expression via frbr:isPartOf." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009> <http://www.w3.org/2000/01/rdf-schema#label> "page"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_volume-1_giotto-bio_page_82\n        a viewsari:page ;\n        frbr:isPartOf viewsari:the_lives_1568_volume-1_giotto-bio ;\n        frbr:hasEmbodiment\n            viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_giotto-bio_page_82 ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/WebPage> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010> <http://www.w3.org/2000/01/rdf-schema#comment> "The web-accessible manifestation of a\n        single artist biography within a volume HTML file on Project\n        Gutenberg. Because the Gutenberg edition hosts all biographies\n        of a volume in one HTML file, the biography web representation\n        is identified by the URL of the volume file combined with the\n        #Page_N anchor of the biography's first page\n        (e.g., https://…/25326-h.htm#Page_69 for Giotto's biography in\n        Volume 1). As a subclass of fabio:WebPage, instances of this\n        class carry an rdfs:seeAlso link to that anchor URL. The class\n        serves as the range of frbr:isPartOf links from\n        viewsari:page_web_representation instances." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010> <http://www.w3.org/2000/01/rdf-schema#label> "biography web representation"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_giotto-bio\n        a viewsari:biography_web_representation ;\n        frbr:isPartOf\n            viewsari:the_lives_1568_gutenberg_web_version_of_volume-1 ;\n        rdfs:seeAlso\n          &lt;https://www.gutenberg.org/files/25326/25326-h/25326-h.htm#Page_69&gt; ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.org/spar/fabio/WebPage> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> <http://www.w3.org/2000/01/rdf-schema#comment> "The web-accessible manifestation of a\n        single printed page within the Gutenberg HTML edition. Each\n        instance corresponds to one #Page_N anchor in the volume HTML\n        file. Instances of this class are the range of both\n        viewsari:hasStartPage and viewsari:hasEndPage, meaning that\n        paragraph instances link directly to dereferenceable page-level\n        resources, enabling a researcher to navigate from a knowledge\n        graph triple to the exact passage in the source text by\n        following the rdfs:seeAlso URL. Instances are grouped under\n        their containing viewsari:biography_web_representation via\n        frbr:isPartOf." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> <http://www.w3.org/2000/01/rdf-schema#label> "page web representation"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011> <http://www.w3.org/2008/05/skos#example> "viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_giotto-bio_page_82\n        a viewsari:page_web_representation ;\n        frbr:isPartOf\n            viewsari:the_lives_1568_gutenberg_web_version_of_volume-1_giotto-bio ;\n        rdfs:seeAlso\n          &lt;https://www.gutenberg.org/files/25326/25326-h/25326-h.htm#Page_82&gt; ." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012> <http://www.w3.org/2000/01/rdf-schema#comment> "A creative work — painting, sculpture,\n        fresco, architectural project, or decorative object — mentioned\n        or described in the Vasari corpus. Artwork individuals are the\n        body values of viewsari:explicit_mention and\n        viewsari:implicit_mention instances. Where a Wikidata entity\n        exists for the artwork, owl:sameAs links the Viewsari individual\n        to the corresponding QID. Where no Wikidata entity exists (the\n        out-of-knowledge-base case), the individual receives a\n        Viewsari-internal IRI and is marked as such; it remains\n        referenceable and queryable within the knowledge graph. Artwork\n        individuals produced by ObliquER carry prov:wasGeneratedBy\n        pointing to the viewsari:entity_linking activity that resolved\n        them." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012> <http://www.w3.org/2000/01/rdf-schema#comment> "Generic references to artistic\n        practice (e.g., \"works of painting\" as a craft concept) are not\n        instances of this class; they receive a\n        viewsari:generic_mention annotation. An artwork individual is\n        only created when a specific, recoverable real-world artwork is\n        referred to, whether explicitly or implicitly." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012> <http://www.w3.org/2000/01/rdf-schema#label> "artwork"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013> <http://www.w3.org/2000/01/rdf-schema#comment> "A historical individual mentioned in\n        the Vasari corpus — primarily artists, architects, sculptors,\n        and patrons, but also popes, rulers, and other figures named in\n        the biographies. Person individuals are derived from the Index\n        of Names in each volume of the Du Vere translation, augmented\n        by coreference resolution over the paragraph texts. Each person\n        individual is globally unique across all ten volumes: the same\n        canonical index name yields the same person IRI regardless of\n        which volume the mention appears in. Where a Wikidata entry\n        exists, owl:sameAs links to the QID. Person individuals carry\n        prov:wasGeneratedBy pointing to the\n        viewsari:coreference_reconciliation activity that resolved\n        them." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013> <http://www.w3.org/2000/01/rdf-schema#label> "person"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013> <http://www.w3.org/2008/05/skos#note> "The Index of Names occasionally\n        records two plausible identities for the same set of surface\n        forms using a pipe separator (e.g., Lippi, Fra Filippo | Lippi,\n        Filippo (Filippino)). In such cases, both identities are\n        instantiated as separate person individuals, each receiving the\n        full set of mention annotations. This design preserves\n        interpretive ambiguity as a structural feature rather than\n        suppressing it." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014> <http://www.w3.org/2000/01/rdf-schema#label> "organization"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015> <http://www.w3.org/2000/01/rdf-schema#label> "location"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015> <http://www.w3.org/2008/05/skos#note> "A geographical place mentioned in the\n        Vasari corpus, including cities, regions, churches, palaces,\n        chapels, and other named sites. Location entities are recognized\n        by the extraction pipeline and linked to Wikidata QIDs where\n        available. In art-historical texts, locations often function as\n        implicit identifiers for artworks (e.g., \"the chapel in S.\n        Trinita\") and are therefore important both as standalone entities\n        and as contextual signals in entity linking." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/oa#Annotation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/2000/01/rdf-schema#comment> "A mention in which a specific,\n        recoverable entity is described but not named through a\n        canonical surface form. The entity must be uniquely identifiable\n        from contextual evidence (commission, location, medium,\n        iconographic subject) even without a formal title. This is the\n        paradigmatic mention type for artworks in Vasari, where\n        descriptive circumlocutions such as \"a panel he executed for the\n        high altar of S. Croce\" constitute the primary referential mode.\n        The principal distinguishing criterion is recoverability: the\n        mention must refer to a unique concrete entity that can in\n        principle be identified on the basis of the passage." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/2000/01/rdf-schema#label> "implicit mention"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> <http://www.w3.org/2008/05/skos#example> "\"a panel for the friars of Vallombrosa, in\n        the Abbey of S. Trinita in Florence\" is an implicit mention of\n        the Madonna and Child Enthroned with Angels by Cimabue." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/oa#Annotation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/2000/01/rdf-schema#comment> "A mention in which the entity is\n        identified through a canonical surface form — a proper name,\n        an established title, or a recognized traditional identifier\n        (e.g., \"La Gioconda\", \"The Battle of Marciano\", \"Michelagnolo\n        Buonarroti\"). Explicit mentions are the most straightforward\n        case for entity linking because the surface form is directly\n        comparable to knowledge base labels." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/2000/01/rdf-schema#label> "explicit mention"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> <http://www.w3.org/2008/05/skos#example> "\"Giotto\" in \"Giotto, his pupil\" is an\n        explicit mention of the person Giotto di Bondone." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/oa#Annotation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/2000/01/rdf-schema#comment> "A mention that refers back to an entity\n        already introduced earlier in the same biography, realised as a\n        pronoun, demonstrative, definite noun phrase, or descriptive\n        repetition (e.g., \"it\", \"the work\", \"the said panel\",\n        \"the same altarpiece\"). Coreferent mentions do not introduce new\n        entities; they extend existing coreference clusters established\n        by prior explicit or implicit mentions within the same\n        biography. Coreference is bounded by biography: arcs are never\n        drawn across biography boundaries. Identity across biographies\n        is established at the knowledge graph level via shared\n        owl:sameAs links to external identifiers, not through\n        coreferential annotation." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/2000/01/rdf-schema#label> "coreferent"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018> <http://www.w3.org/2008/05/skos#note> "The antecedent mention is recorded\n        via viewsari:refersTo (to be added as a property pointing from\n        a coreferent to its antecedent mention individual)" .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/oa#Annotation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019> <http://www.w3.org/2000/01/rdf-schema#comment> "A mention that refers to an entity type\n        in general rather than to a specific individual. Generic\n        mentions arise when Vasari speaks of artistic practice as a\n        craft process (e.g., \"works of painting\" in the sense of the\n        art of painting) rather than to a specific artwork. Generic\n        mention instances are retained in the knowledge graph to support\n        studies of Vasari's rhetorical register and the distinction\n        between referential and predicative language in art-historical\n        prose, but they are excluded from ObliquER precision and recall\n        computation and do not generate viewsari:artwork\n        individuals." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019> <http://www.w3.org/2000/01/rdf-schema#label> "generic mention"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020> <http://www.w3.org/2000/01/rdf-schema#comment> "An explicit mention whose body resolves\n        to a viewsari:artwork individual. The surface form is a\n        canonical title or recognized traditional identifier for an\n        artwork (e.g., \"The Last Judgment\", \"La Gioconda\"). Explicit\n        artwork mentions are the starting point for entity linking: the\n        surface form is compared against Wikidata labels to generate\n        candidates for the viewsari:entity_linking\n        activity." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020> <http://www.w3.org/2000/01/rdf-schema#label> "explicit artwork mention"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021> <http://www.w3.org/2000/01/rdf-schema#comment> "An implicit mention whose referent is a\n        specific, recoverable viewsari:artwork individual described\n        through a descriptive passage rather than a canonical title.\n        This is the primary target of the ObliquER extraction pipeline,\n        as implicit artwork mentions constitute the majority of artwork\n        references in Vasari and are the hardest to link to external\n        knowledge bases. Entity linking for implicit artwork mentions\n        relies on contextual signals (artist identity, location,\n        iconographic subject, medium) rather than surface-form\n        similarity." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021> <http://www.w3.org/2000/01/rdf-schema#label> "implicit artwork mention"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021> <http://www.w3.org/2008/05/skos#example> "\"a large Crucifix painted on a panel\n        for the Church of S. Croce\" is an implicit artwork\n        mention of the Crucifix attributed to Cimabue in S. Croce a (wd:Q3698260)." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Activity> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/2000/01/rdf-schema#comment> "A prov:Activity subclass representing a\n        single run of the named entity recognition and coreference\n        resolution pipeline. In the first population stage, instances\n        of this class correspond to runs of the Index-of-Names-based\n        NER pipeline that produced viewsari:mention individuals from the\n        paragraphs of the Du Vere translation. In the ObliquER stage,\n        instances correspond to LLM inference runs that produced\n        viewsari:explicit_mention, viewsari:implicit_mention,\n        viewsari:coreferent, and viewsari:generic_mention individuals.\n        Each activity instance carries prov:wasAssociatedWith pointing\n        to the executing prov:SoftwareAgent (a Python script or an LLM\n        identifier), prov:used pointing to the consumed paragraphs and\n        index resources, and prov:startedAtTime /\n        prov:endedAtTime timestamps where available." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/2000/01/rdf-schema#comment> "Corresponds to Wikidata item Q403574\n        (named-entity recognition) as the classifier for the activity\n        type." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/2000/01/rdf-schema#label> "named entity recognition"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "https://www.wikidata.org/wiki/Q403574"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Activity> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023> <http://www.w3.org/2000/01/rdf-schema#comment> "A prov:Activity subclass representing a\n        single run of the entity linking pipeline, in which recognized\n        mention clusters are matched against a Wikidata candidate set to\n        produce owl:sameAs assertions or out-of-knowledge-base\n        designations. Each activity instance carries\n        prov:wasAssociatedWith pointing to the LLM used as the linking\n        decision-maker, prov:used pointing to the candidate index and\n        the annotations it consumed, and prov:wasGeneratedBy on the\n        resulting viewsari:artwork individuals. The prompt template\n        version and the Wikidata dump date used for candidate generation\n        should be recorded as additional data properties on each\n        activity instance to ensure reproducibility." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023> <http://www.w3.org/2000/01/rdf-schema#label> "entity linking"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "https://www.wikidata.org/wiki/Q17012245"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Activity> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024> <http://www.w3.org/2000/01/rdf-schema#comment> "A prov:Activity subclass representing a\n        single run of the co-occurrence extraction pipeline, which\n        identifies pairwise entity co-occurrences within paragraphs of\n        the Vasari corpus. Each activity instance carries\n        prov:wasAssociatedWith pointing to the executing Python script,\n        prov:used pointing to the paragraphs it consumed, and\n        prov:wasGeneratedBy on the resulting viewsari:cooccurrence\n        individuals. In the Viewsari knowledge graph, one instance of\n        this class — viewsari:cooccurrence_extraction_run_1 — covers\n        the full ten-volume co-occurrence extraction." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024> <http://www.w3.org/2000/01/rdf-schema#label> "cooccurrence analysis"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:genid1 .
+_:genid1 <http://www.w3.org/2002/07/owl#onClass> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> .
+_:genid1 <http://www.w3.org/2002/07/owl#minQualifiedCardinality> "2"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+_:genid1 <http://www.w3.org/2002/07/owl#onProperty> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034> .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/2000/01/rdf-schema#label> "cooccurrence"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/2008/05/skos#example> "viewsari:cooccurrence_cim-gio_1\n        a viewsari:cooccurrence ;\n        viewsari:involves viewsari:cimabue-giovanni ;\n        viewsari:involves viewsari:giotto ;\n        viewsari:inParagraph\n            viewsari:the_lives_1568_volume-1_paragraph-13 ;\n        prov:wasGeneratedBy\n            viewsari:cooccurrence_extraction_run_1 ." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025> <http://www.w3.org/2008/05/skos#note> "The joint appearance of two or more\n        named entities within a single paragraph of the Vasari corpus,\n        as identified by the co-occurrence extraction pipeline. A\n        co-occurrence is a first-class entity in Viewsari: it is not\n        merely an annotated edge between persons but a structured\n        provenance-bearing resource that carries its own evidence trail.\n        Each co-occurrence instance links to its participating entities\n        via viewsari:involves (minimum two), to its source paragraph via\n        viewsari:inParagraph, and to the extraction activity that\n        produced it via prov:wasGeneratedBy. The modeling follows the\n        Participation Ontology Design Pattern from the ODP catalog,\n        adapted to the co-occurrence-in-paragraph context.\n        Co-occurrences encode implicit relationships that art historians\n        interpret as evidence of collaboration, influence, or social\n        connection." .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/oa#Annotation> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Entity> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> <http://www.w3.org/2000/01/rdf-schema#comment> "A surface-form reference to an entity\n        in the Vasari corpus, extracted by the ObliquER pipeline or by\n        the NER and coreference resolution step over the Index of Names.\n        Every mention is typed simultaneously as oa:Annotation (carrying\n        oa:hasTarget, oa:hasBodyValue, oa:hasSource) and as prov:Entity\n        (carrying prov:wasGeneratedBy, prov:wasDerivedFrom), reflecting\n        its dual role as a scholarly annotation anchored in the source\n        text and as the output of a documented computational process.\n        The four disjoint subclasses — viewsari:explicit_mention,\n        viewsari:implicit_mention, viewsari:coreferent, and\n        viewsari:generic_mention — classify the referential mode of the\n        mention. Subclasses for artwork mentions\n        (viewsari:explicit_artwork_mention,\n        viewsari:implicit_artwork_mention) further specialize the entity\n        type." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026> <http://www.w3.org/2000/01/rdf-schema#label> "mention"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Entity> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> <http://www.w3.org/2000/01/rdf-schema#comment> "The common superclass for all\n        content-layer individuals produced by computational extraction\n        from the Vasari corpus. By extending prov:Entity, every\n        instance of this class inherits the provenance vocabulary\n        (prov:wasGeneratedBy, prov:wasDerivedFrom) and can be linked to\n        the extraction activity that produced it. Specific entity types\n        — viewsari:person, viewsari:artwork, viewsari:location,\n        viewsari:organization, viewsari:cooccurrence — are subclasses of\n        this class. The class supports uniform provenance queries across\n        all entity types without requiring UNION clauses for each\n        subclass separately. Use this class as a filter in SPARQL when\n        querying for any extracted entity regardless of type." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> <http://www.w3.org/2000/01/rdf-schema#comment> "This class plays the role of\n        viewsari:ContentResource used in earlier versions of the\n        ontology. Instances should be typed with the most specific\n        available subclass in addition to this superclass." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033> <http://www.w3.org/2000/01/rdf-schema#label> "extracted content"@en .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/spar/fabio/Work> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://purl.org/dc/terms/creator> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://purl.org/vocab/frbr/core#realization> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://purl.org/vocab/frbr/core#realization> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/2000/01/rdf-schema#comment> "The abstract intellectual work\n        Le Vite de' più eccellenti pittori, scultori, e architettori by\n        Giorgio Vasari. This individual represents the work in the FRBR\n        sense — the abstract conception independent of any specific\n        edition, translation, or physical carrier. The Wikidata item\n        Q1645493 is the external authority record for this\n        work." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/2000/01/rdf-schema#label> "le_vite"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/2000/01/rdf-schema#label> "Le vite de' piu eccellenti pittori, scultori, e architettori" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "https://www.wikidata.org/wiki/Q1645493"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://purl.org/dc/elements/1.1/date> "1568"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/2000/01/rdf-schema#comment> "The 1568 Giunti (Giuntina) edition of\n        Le Vite, published in Florence by the Giunti press. This is the\n        canonical edition of The Lives, substantially expanded and\n        revised relative to the first 1550 Torrentiniana edition, and\n        is the source text on which the Du Vere English translation\n        (viewsari:the_lives_1568) is based. All volume, biography,\n        page, and paragraph instances in the Viewsari knowledge graph\n        ultimately trace their editorial provenance to this\n        edition." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/2000/01/rdf-schema#label> "Le vite de' piu eccellenti pittori, scultori, e architettori"@it .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/2000/01/rdf-schema#label> "le_vite_1568"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "https://www.wikidata.org/wiki/Q113560433" .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://purl.org/vocab/frbr/core#embodiment> <https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://purl.org/dc/elements/1.1/creator> "Gaston C. du Vere" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://purl.org/dc/elements/1.1/date> "1912-1915" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://www.w3.org/2000/01/rdf-schema#comment> "The 1912 English translation of Le Vite\n        by Gaston C. du Vere, published in ten volumes by Macmillan and\n        the Medici Society (London, 1912–1914). This is the primary\n        source text for all extraction and annotation in the Viewsari\n        project. The translation follows the 1568 Giunti edition closely\n        and is the version digitised by Project Gutenberg (EBook series\n        starting at #25326). It is the parent of all ten\n        viewsari:volume individuals in the knowledge\n        graph." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://www.w3.org/2000/01/rdf-schema#label> "The Lives of the Most Eminent Painters Sculptors and Architects"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029> <http://www.w3.org/2000/01/rdf-schema#label> "the_lives_1568"@en .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/spar/fabio/ManifestationCollection> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://purl.org/dc/elements/1.1/contributor> "Project Gutenberg" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://purl.org/dc/elements/1.1/rights> "https://www.gutenberg.org/policy/license.html" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/2000/01/rdf-schema#comment> "The Project Gutenberg web publication\n        of the Du Vere translation, comprising ten separate HTML files\n        (one per volume). This individual represents the collection as a\n        whole; each volume web representation links to it via\n        frbr:isPartOf. The HTML files embed printed page markers as\n        #Page_N anchors, which are the targets of all rdfs:seeAlso\n        links on page and biography web representation instances.\n        The Gutenberg release was produced from images provided by the\n        Internet Archive / Canadian Libraries and encoded in\n        ISO-8859-1." .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/2000/01/rdf-schema#label> "the_lives_gutenberg-version"@en .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/2000/01/rdf-schema#label> "Project Gutenberg Web Version of The Lives" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "https://onlinebooks.library.upenn.edu/webbin/metabook?id=livespainters" .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031> <http://www.w3.org/2008/05/skos#note> "text/html" .
+# 
+# https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037> <http://www.w3.org/2000/01/rdf-schema#label> "giorgio_vasari" .
+# 
+# Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/

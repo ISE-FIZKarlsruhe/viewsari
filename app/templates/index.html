@@ -1,0 +1,745 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Lives of the Artists{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.layout-home {
+  position: relative;
+  top: 56px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+}
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, #fff 0%, #FFF8F5 50%, #FFF4EE 100%);
+  border-bottom: 1px solid var(--seam);
+  padding: 56px 40px 48px;
+  text-align: center;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--tp);
+  margin-bottom: 8px;
+}
+.hero-title em { color: var(--or); font-style: normal; }
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--ts);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 28px;
+}
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all .15s;
+  cursor: pointer;
+  border: none;
+}
+.hero-btn.primary {
+  background: var(--or);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(240,90,26,.25);
+}
+.hero-btn.primary:hover {
+  background: #d94f15;
+  box-shadow: 0 4px 16px rgba(240,90,26,.35);
+  transform: translateY(-1px);
+}
+.hero-btn.secondary {
+  background: var(--bg);
+  color: var(--tp);
+  border: 1.5px solid var(--seam);
+}
+.hero-btn.secondary:hover {
+  border-color: var(--tp);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transform: translateY(-1px);
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--tp);
+  letter-spacing: -.02em;
+}
+.hero-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+}
+
+/* ── Section cards ── */
+.home-sections {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 40px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.home-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 12px;
+  padding: 24px 24px 20px;
+  text-decoration: none;
+  color: var(--tp);
+  transition: box-shadow .15s, border-color .15s, transform .15s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.home-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  border-color: var(--or);
+  transform: translateY(-2px);
+}
+.home-card-icon {
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--pill-or);
+  margin-bottom: 4px;
+}
+.home-card.onto .home-card-icon { background: var(--pill-pu); }
+.home-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--tp);
+}
+.home-card-desc {
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.6;
+}
+.home-card-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--or);
+  margin-top: auto;
+}
+.home-card.onto .home-card-badge { color: var(--pu); }
+
+/* ── Biographies section ── */
+.bio-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 40px 60px;
+}
+.volume-section { margin-bottom: 28px; }
+.volume-heading {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.volume-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--seam);
+}
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.bio-card {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--tp);
+  transition: box-shadow .15s, border-color .15s, transform .15s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.bio-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  border-color: var(--or);
+  transform: translateY(-1px);
+}
+.bio-card-preview {
+  height: 120px;
+  background: var(--bg3);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--seam);
+}
+.bio-card-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: sepia(.08) contrast(1.02);
+  transition: transform .3s;
+}
+.bio-card:hover .bio-card-preview img { transform: scale(1.04); }
+.bio-card-preview-empty {
+  font-size: 11px;
+  color: var(--tt);
+  font-style: italic;
+}
+.bio-card-body {
+  padding: 14px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.bio-card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tp);
+  line-height: 1.3;
+}
+.bio-card-meta {
+  font-size: 11px;
+  color: var(--tt);
+  display: flex;
+  gap: 10px;
+}
+.bio-card-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--or);
+}
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--tt);
+}
+.empty-state-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ts);
+}
+.empty-state-text {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.empty-state code {
+  background: var(--bg3);
+  border: 1px solid var(--seam);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+/* ── Project overview ── */
+.home-overview {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 40px 8px;
+}
+.home-overview-quote {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ts);
+  border-left: 3px solid var(--or);
+  padding: 10px 18px;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  background: linear-gradient(135deg, #FFF8F5, #fff);
+  border-radius: 0 8px 8px 0;
+}
+.home-overview-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--tp);
+  margin-bottom: 14px;
+}
+.home-overview-text a { color: var(--bl); text-decoration: none; }
+.home-overview-text a:hover { text-decoration: underline; }
+.home-overview-heading {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  margin-bottom: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.home-overview-heading::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.home-rq {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+}
+.home-rq-id {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--or);
+  margin-bottom: 4px;
+}
+.home-rq-text {
+  font-size: 13px;
+  color: var(--tp);
+  line-height: 1.6;
+}
+.home-sections { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+/* ── KG preview ── */
+.home-kg-preview {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px 20px;
+}
+.home-kg-box {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 360px;
+}
+.home-kg-box svg { width: 100%; height: 100%; cursor: grab; }
+.home-kg-toolbar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+.home-kg-btn {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--seam);
+  background: rgba(255,255,255,.9);
+  color: var(--ts);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .12s;
+  backdrop-filter: blur(8px);
+}
+.home-kg-btn:hover { background: var(--bg2); color: var(--tp); }
+.home-kg-btn.active { background: var(--or); color: #fff; border-color: var(--or); }
+.home-kg-cta {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+}
+.home-kg-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  gap: 10px;
+  pointer-events: none;
+  font-size: 9px;
+  color: var(--ts);
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+.home-kg-legend span { display: flex; align-items: center; gap: 4px; }
+.home-kg-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; }
+{% endblock %}
+
+{% block topbar_chips %}{% endblock %}
+
+{% block content %}
+<div class="layout-home">
+
+  <div class="hero">
+    <div class="hero-title">View<em>sari</em></div>
+    <div class="hero-subtitle">
+      A provenance-aware knowledge graph built from Giorgio Vasari's
+      <em>Le Vite de' piu eccellenti pittori, scultori, e architettori</em> (1568),
+      developed at KIT / FIZ Karlsruhe (ISE group) as part of a doctoral dissertation.
+    </div>
+    <div class="hero-actions">
+      <a class="hero-btn primary" href="#biographies">Browse annotations</a>
+      <a class="hero-btn secondary" href="/ontology">Ontology introduction</a>
+    </div>
+    {% if biographies %}
+    {% set total_paras = biographies | map(attribute='paragraph_count') | sum %}
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">{{ biographies | length }}</div>
+        <div class="hero-stat-label">Biographies</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">{{ total_paras }}</div>
+        <div class="hero-stat-label">Paragraphs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">{{ biographies | map(attribute='volume') | unique | list | length }}</div>
+        <div class="hero-stat-label">Volumes</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="home-overview">
+    <div class="home-overview-quote">
+      Knowledge extracted from interpretive texts is not discovered but constructed;
+      therefore, knowledge graphs must model the construction process itself.
+    </div>
+    <p class="home-overview-text">
+      Cultural heritage materials, once digitized, remain largely unstructured: human-readable, but not
+      systematically queryable, linkable, or analyzable. Large language models have improved access to such
+      content, yet they cannot guarantee epistemic traceability. Viewsari addresses this gap by treating
+      knowledge extraction from historical text as an <strong>interpretive activity</strong>, recording agents,
+      prompts, software versions, and source contexts for each extracted statement.
+    </p>
+    <p class="home-overview-text">
+      The approach is positioned in the <strong>neuro-symbolic space</strong>: the Viewsari ontology (symbolic
+      component) provides a formal schema that structures and constrains extraction tasks assigned to a large
+      language model (neural component). Vasari's <em>Lives</em> (1568) serves as testbed &mdash; a founding
+      document of art history characterized by implicit entity references, attributions presented as facts,
+      and long-tail entities absent from standard knowledge bases.
+    </p>
+
+    <div class="home-overview-heading">Research Questions</div>
+    <div class="home-rq">
+      <div class="home-rq-id">RQ1</div>
+      <div class="home-rq-text">In what way can semantic technologies model the heterogeneous content, provenance, and interpretive complexity of historical texts?</div>
+    </div>
+    <div class="home-rq">
+      <div class="home-rq-id">RQ2</div>
+      <div class="home-rq-text">How can NLP methods, and LLMs in particular, be used to extract and link both explicitly and implicitly mentioned entities?</div>
+    </div>
+    <div class="home-rq">
+      <div class="home-rq-id">RQ3</div>
+      <div class="home-rq-text">What are the common challenges in modeling complex, multilingual historical sources, and how can a generalizable approach be drawn?</div>
+    </div>
+  </div>
+
+  <div class="home-kg-preview">
+    <div class="home-overview-heading">Knowledge Graph Preview</div>
+    <div class="home-kg-box" id="home-kg">
+      <svg id="home-kg-svg"></svg>
+      <div class="home-kg-toolbar">
+        <button class="home-kg-btn" onclick="homeKgLoad('person','Giotto',this)">Giotto</button>
+        <button class="home-kg-btn" onclick="homeKgLoad('person','Michelagnolo',this)">Michelangelo</button>
+        <button class="home-kg-btn" onclick="homeKgLoad('person','Donatello',this)">Donatello</button>
+        <button class="home-kg-btn" onclick="homeKgLoad('artwork','Croce',this)">S. Croce</button>
+        <button class="home-kg-btn active" onclick="homeKgLoad('artwork','Sistine',this)">Sistine</button>
+      </div>
+      <div class="home-kg-legend">
+        <span><i style="background:#BE185D"></i> Person</span>
+        <span><i style="background:#B45309"></i> Artwork</span>
+        <span><i style="background:#0F766E"></i> Co-occurrence</span>
+        <span><i style="background:#7C3AED"></i> Biography</span>
+      </div>
+      <div class="home-kg-cta">
+        <a class="hero-btn secondary" href="/explore" style="font-size:12px;padding:7px 16px">Open full explorer &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-sections">
+    <a class="home-card" href="#biographies">
+      <div class="home-card-icon">&#9998;</div>
+      <div class="home-card-title">Annotation Viewer</div>
+      <div class="home-card-desc">
+        Browse annotated biographies with facsimile pages, entity mentions,
+        provenance graphs, and Wikidata links.
+      </div>
+      <div class="home-card-badge">{{ biographies | length }} biographies &rarr;</div>
+    </a>
+    <a class="home-card onto" href="/ontology">
+      <div class="home-card-icon">&#9670;</div>
+      <div class="home-card-title">Viewsari Ontology &mdash; An Introduction</div>
+      <div class="home-card-desc">
+        A guided overview of the three-layer OWL ontology: bibliographic structure,
+        document components, and extracted entities with full provenance.
+      </div>
+      <div class="home-card-badge">Overview &rarr;</div>
+    </a>
+    <a class="home-card onto" href="/ontology/docs">
+      <div class="home-card-icon">&#9671;</div>
+      <div class="home-card-title">Ontology Documentation</div>
+      <div class="home-card-desc">
+        Formal WIDOCO-generated reference with complete class hierarchy,
+        property definitions, and cross-references.
+      </div>
+      <div class="home-card-badge">OWL / RDF-XML &rarr;</div>
+    </a>
+    <a class="home-card" href="/explore">
+      <div class="home-card-icon">&#9673;</div>
+      <div class="home-card-title">KG Explorer</div>
+      <div class="home-card-desc">
+        Interactive graph visualization of the Viewsari Knowledge Graph.
+        Explore persons, co-occurrences, and biographies as a force-directed network.
+      </div>
+      <div class="home-card-badge">378K+ triples &rarr;</div>
+    </a>
+    <a class="home-card" href="/annotations">
+      <div class="home-card-icon">&#9776;</div>
+      <div class="home-card-title">Annotations</div>
+      <div class="home-card-desc">
+        Gold-standard annotation corpus: 16 biographies, 2,438 artwork mentions
+        with explicit, implicit, coreferent, and generic types.
+      </div>
+      <div class="home-card-badge">ObliquER corpus &rarr;</div>
+    </a>
+    <a class="home-card" href="/publications">
+      <div class="home-card-icon">&#9998;</div>
+      <div class="home-card-title">Publications</div>
+      <div class="home-card-desc">
+        Peer-reviewed publications from the Viewsari project: ontology design,
+        extraction provenance, NFDI4Memory, and more.
+      </div>
+      <div class="home-card-badge">Dissertation + papers &rarr;</div>
+    </a>
+  </div>
+
+  <div class="bio-section" id="biographies">
+    {% if biographies %}
+      {% set volumes = biographies | map(attribute='volume') | unique | list | sort %}
+      {% for vol in volumes %}
+        {% set vol_bios = biographies | selectattr('volume', 'equalto', vol) | list %}
+        <div class="volume-section">
+          <div class="volume-heading">Volume {{ vol if vol else "Unknown" }}</div>
+          <div class="bio-grid">
+            {% for bio in vol_bios %}
+            <a class="bio-card" href="/biography/{{ bio.slug }}">
+              <div class="bio-card-preview">
+                {% if bio.preview %}
+                <img src="{{ bio.preview }}" alt="{{ bio.name }} facsimile" loading="lazy">
+                {% else %}
+                <span class="bio-card-preview-empty">No preview</span>
+                {% endif %}
+              </div>
+              <div class="bio-card-body">
+                <div class="bio-card-name">{{ bio.name }}</div>
+                <div class="bio-card-meta">
+                  <span>Vol. {{ bio.volume if bio.volume else "–" }}</span>
+                  <span class="bio-card-count">{{ bio.paragraph_count }} §</span>
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <div class="empty-state-title">No biographies loaded</div>
+        <div class="empty-state-text">
+          Place JSON annotation files in the <code>annotations/</code> directory.<br>
+          Each file should be named <code>{slug}.json</code> and contain an array of paragraph objects.
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+  var NC = {
+    person:       {s:"#BE185D",f:"#FDF2F8",t:"#9D174D"},
+    artwork:      {s:"#B45309",f:"#FFFBEB",t:"#92400E"},
+    cooccurrence: {s:"#0F766E",f:"#F0FDF9",t:"#115E59"},
+    biography:    {s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9"},
+    paragraph:    {s:"#6B7280",f:"#F3F4F6",t:"#374151"},
+    mention:      {s:"#0F766E",f:"#F0FDF9",t:"#115E59"},
+  };
+  var svg = d3.select("#home-kg-svg");
+  var cont = document.getElementById("home-kg");
+  var gRoot = svg.append("g");
+  var homeDefs = svg.append("defs");
+  var edgeG = gRoot.append("g");
+  var nodeG = gRoot.append("g");
+  var sim = null;
+  var zoom = d3.zoom().scaleExtent([0.15,2.5]).on("zoom",function(ev){gRoot.attr("transform",ev.transform);});
+  svg.call(zoom);
+
+  function displayName(label,type){
+    if(type==="person"){
+      var base=label.replace(/\s*\([^)]*\)/g,"").trim();
+      var parts=base.split(",",2);
+      if(parts.length===2) return parts[1].trim()+" "+parts[0].trim();
+      return base;
+    }
+    return label;
+  }
+  function shortLabel(s){return s.length>24?s.substring(0,22)+"\u2026":s;}
+
+  function render(data){
+    var W=cont.clientWidth||800, H=cont.clientHeight||360;
+    edgeG.selectAll("*").remove(); nodeG.selectAll("*").remove(); homeDefs.selectAll("*").remove();
+    if(sim) sim.stop();
+    var nodes=data.nodes, edges=data.edges;
+    var nodeMap={}; nodes.forEach(function(n){nodeMap[n.id]=n;});
+    edges.forEach(function(e){e.sourceNode=nodeMap[e.source];e.targetNode=nodeMap[e.target];});
+    edges=edges.filter(function(e){return e.sourceNode&&e.targetNode;});
+
+    sim=d3.forceSimulation(nodes)
+      .force("link",d3.forceLink(edges).id(function(d){return d.id;}).distance(function(d){return d.label==="involves"?45:80;}).strength(0.5))
+      .force("charge",d3.forceManyBody().strength(function(d){
+        if(d.type==="cooccurrence") return -60;
+        if(d.wikidata&&(d.type==="artwork"||d.type==="person")) return -350;
+        return -200;
+      }))
+      .force("center",d3.forceCenter(W/2,H/2))
+      .force("collision",d3.forceCollide(function(d){
+        if(d.type==="cooccurrence") return 16;
+        if(d.wikidata&&(d.type==="artwork"||d.type==="person")) return 50;
+        return 35;
+      }))
+      .force("x",d3.forceX(W/2).strength(0.04))
+      .force("y",d3.forceY(H/2).strength(0.04));
+
+    var linkPath=edgeG.selectAll("line").data(edges).enter().append("line")
+      .attr("stroke","#D1D5DB").attr("stroke-width",1)
+      .style("stroke-dasharray",function(d){return d.dashed?"4,3":null;});
+
+    var nodeSel=nodeG.selectAll("g").data(nodes).enter().append("g")
+      .style("cursor","pointer")
+      .call(d3.drag()
+        .on("start",function(ev,d){if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+        .on("drag",function(ev,d){d.fx=ev.x;d.fy=ev.y;})
+        .on("end",function(ev,d){if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+    nodeSel.each(function(d){
+      var s=d3.select(this),col=NC[d.type]||NC.person;
+      if(d.type==="cooccurrence"){
+        s.append("circle").attr("r",6).attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.2);
+      } else {
+        var hasImg=d.wikidata&&(d.type==="artwork"||d.type==="person");
+        var imgR=28;
+        var dname=displayName(d.label,d.type);
+        var rw=Math.max(dname.length*5.5+16,65); d._rw=rw;
+        var rectY=hasImg?imgR+2:-14;
+        var rectH=28;
+
+        s.append("rect").attr("x",-rw/2).attr("y",rectY).attr("width",rw).attr("height",rectH)
+          .attr("rx",d.type==="biography"?14:5).attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.2);
+        s.append("text").attr("y",rectY+rectH/2+1).attr("text-anchor","middle").attr("dominant-baseline","central")
+          .attr("font-size","9px").attr("font-weight","600").attr("font-family","Inter,sans-serif").attr("fill",col.t)
+          .text(shortLabel(dname));
+
+        if(hasImg){
+          var strokeCol=d.type==="person"?col.s:"#B45309";
+          s.append("circle").attr("cx",0).attr("cy",0).attr("r",imgR)
+            .attr("fill","#E5E7EB").attr("stroke",strokeCol).attr("stroke-width",1.5);
+          var clipId="hkg-clip-"+(d.id.split("/").pop());
+          homeDefs.append("clipPath").attr("id",clipId)
+            .append("circle").attr("cx",0).attr("cy",0).attr("r",imgR-1);
+          var imgG=s.append("g").attr("clip-path","url(#"+clipId+")");
+          imgG.append("image")
+            .attr("class","hkg-img")
+            .attr("data-qid",d.wikidata)
+            .attr("x",-imgR).attr("y",-imgR)
+            .attr("width",imgR*2).attr("height",imgR*2)
+            .attr("preserveAspectRatio","xMidYMid slice");
+        }
+      }
+    });
+
+    nodeSel.on("dblclick",function(ev,d){
+      ev.preventDefault();
+      if(d.link) window.location.href=d.link;
+      else if(d.type==="person") window.location.href="/explore?seed="+encodeURIComponent(d.label);
+    });
+
+    sim.on("tick",function(){
+      linkPath.attr("x1",function(d){return d.source.x;}).attr("y1",function(d){return d.source.y;})
+              .attr("x2",function(d){return d.target.x;}).attr("y2",function(d){return d.target.y;});
+      nodeSel.attr("transform",function(d){return"translate("+d.x+","+d.y+")";});
+    });
+
+    setTimeout(function(){
+      var b=gRoot.node().getBBox();if(!b.width)return;
+      var s=Math.min(W/b.width,H/b.height,1.2)*0.8;
+      var tx=W/2-(b.x+b.width/2)*s,ty=H/2-(b.y+b.height/2)*s;
+      svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity.translate(tx,ty).scale(s));
+    },1800);
+
+    // Fetch Wikidata images
+    var wdImgs=nodeG.selectAll("image.hkg-img");
+    if(!wdImgs.empty()){
+      var qids=[];
+      wdImgs.each(function(){qids.push(this.getAttribute("data-qid"));});
+      var uniq=[...new Set(qids)];
+      for(var i=0;i<uniq.length;i+=50){
+        (function(batch){
+          fetch("https://www.wikidata.org/w/api.php?action=wbgetentities&ids="
+            +batch.join("|")+"&props=claims&format=json&origin=*")
+            .then(function(r){return r.json();}).then(function(j){
+              var ents=j.entities||{};
+              Object.keys(ents).forEach(function(qid){
+                var p18=(ents[qid].claims||{}).P18;
+                if(!p18||!p18.length) return;
+                var fname=p18[0].mainsnak.datavalue.value;
+                var url="https://commons.wikimedia.org/wiki/Special:FilePath/"
+                  +encodeURIComponent(fname)+"?width=100";
+                wdImgs.filter(function(){return this.getAttribute("data-qid")===qid;})
+                  .attr("href",url).attr("xlink:href",url);
+              });
+            }).catch(function(){});
+        })(uniq.slice(i,i+50));
+      }
+    }
+  }
+
+  window.homeKgLoad=function(mode,seed,btn){
+    document.querySelectorAll(".home-kg-btn").forEach(function(b){b.classList.remove("active");});
+    if(btn) btn.classList.add("active");
+    fetch("/explore/subgraph?mode="+mode+"&seed="+encodeURIComponent(seed))
+      .then(function(r){return r.json();})
+      .then(render);
+  };
+  homeKgLoad("artwork","Sistine",null);
+}());
+</script>
+{% endblock %}

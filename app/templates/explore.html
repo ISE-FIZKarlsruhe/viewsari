@@ -1,0 +1,692 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Knowledge Graph Explorer{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: hidden !important; height: 100% !important; }
+.layout-explore {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.explore-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--seam);
+  background: var(--bg2);
+  flex-shrink: 0;
+}
+.explore-toolbar-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+}
+.explore-input {
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1.5px solid var(--seam);
+  border-radius: 100px;
+  outline: none;
+  font-family: inherit;
+  width: 220px;
+  transition: border-color .14s;
+}
+.explore-input:focus { border-color: var(--or); }
+.explore-input-wrap { position: relative; }
+.explore-suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  z-index: 100;
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+}
+.explore-suggest.open { display: block; }
+.suggest-item {
+  padding: 7px 12px;
+  font-size: 12px;
+  color: var(--tp);
+  cursor: pointer;
+  transition: background .1s;
+}
+.suggest-item:hover, .suggest-item.active { background: var(--pill-or); color: var(--or); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.explore-btn .spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+}
+.explore-btn.loading { pointer-events: none; opacity: .8; }
+.explore-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--seam);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+  background: var(--bg);
+  color: var(--ts);
+}
+.explore-btn:hover { border-color: var(--tp); color: var(--tp); background: var(--bg3); }
+.explore-btn.primary { background: var(--or); color: #fff; border-color: var(--or); }
+.explore-btn.primary:hover { background: #d94f15; }
+.explore-btn.active { background: var(--or); color: #fff; border-color: var(--or); }
+.explore-presets {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.explore-graph {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.explore-graph svg { width: 100%; height: 100%; cursor: grab; }
+.explore-graph svg.dragging { cursor: grabbing; }
+/* Node styles */
+.eg-node { cursor: pointer; }
+.eg-node:hover .eg-body { filter: drop-shadow(0 2px 8px rgba(0,0,0,.15)); }
+.eg-node.selected .eg-body { stroke-width: 3; }
+.eg-label { font-family: 'Inter',sans-serif; pointer-events: none; }
+.eg-edge { fill: none; stroke: #D1D5DB; stroke-width: 1; }
+.eg-edge.dashed { stroke-dasharray: 5,4; }
+.eg-edge-label { font-family: 'Inter',sans-serif; font-size: 7.5px; fill: var(--tt); pointer-events: none; }
+/* Graph loading overlay */
+.eg-loading{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85);z-index:20;flex-direction:column;gap:10px;transition:opacity .4s}
+.eg-loading.hidden{opacity:0;pointer-events:none}
+.eg-loading-spinner{width:28px;height:28px;border:3px solid var(--seam);border-top-color:var(--or);border-radius:50%;animation:eg-spin .7s linear infinite}
+.eg-loading-text{font-size:11px;font-weight:600;color:var(--ts)}
+@keyframes eg-spin{to{transform:rotate(360deg)}}
+.eg-arrow { fill: none; stroke: #9CA3AF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* Info panel */
+.explore-info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 260px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  font-size: 12px;
+  z-index: 10;
+  display: none;
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+  backdrop-filter: blur(8px);
+}
+/* Legend */
+.explore-legend {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid var(--seam);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.el-item { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--ts); font-weight: 500; }
+.el-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+/* Loading */
+.explore-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 13px;
+  color: var(--ts);
+  display: none;
+}
+.explore-stats {
+  font-size: 10px;
+  color: var(--tt);
+  font-weight: 600;
+}
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">KG Explorer</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-explore">
+  <div class="explore-toolbar">
+    <span class="explore-toolbar-label">Search</span>
+    <div class="explore-input-wrap">
+      <input class="explore-input" id="eg-search" type="text" placeholder="Person or artwork (e.g. Giotto, S. Croce)" autocomplete="off" />
+      <div class="explore-suggest" id="eg-suggest"></div>
+    </div>
+    <button class="explore-btn primary" id="eg-search-btn" onclick="searchPerson()">Search</button>
+    <button class="explore-btn" onclick="loadRandom()">Random</button>
+    <span class="explore-stats" id="eg-stats"></span>
+    <div class="explore-presets">
+      <button class="explore-btn" onclick="loadFile('person','Giotto')">Giotto</button>
+      <button class="explore-btn" onclick="loadFile('person','Michelagnolo')">Michelangelo</button>
+      <button class="explore-btn" onclick="loadFile('person','Brunelleschi')">Brunelleschi</button>
+      <button class="explore-btn" onclick="loadFile('person','Donatello')">Donatello</button>
+      <span class="explore-toolbar-label" style="margin:0 2px">|</span>
+      <button class="explore-btn" onclick="loadFile('artwork','S. Croce')">S. Croce</button>
+      <button class="explore-btn" onclick="loadFile('artwork','Sistine')">Sistine</button>
+      <button class="explore-btn" onclick="loadFile('artwork','Madonna')">Madonna</button>
+      <span class="explore-toolbar-label" style="margin:0 2px">|</span>
+      <button class="explore-btn" onclick="loadFile('biography','Botticelli')">Bio: Botticelli</button>
+      <button class="explore-btn" onclick="loadFile('biography','Giotto')">Bio: Giotto</button>
+    </div>
+  </div>
+  <div class="explore-graph" id="eg-container">
+    <svg id="eg-svg">
+      <defs>
+        <marker id="eg-arrow" viewBox="0 0 10 10" refX="22" refY="5"
+                markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M1 2L8 5L1 8" class="eg-arrow"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="explore-legend">
+      <div class="el-item"><div class="el-dot" style="background:#BE185D"></div>Person</div>
+      <div class="el-item"><div class="el-dot" style="background:#B45309"></div>Artwork</div>
+      <div class="el-item"><div class="el-dot" style="background:#0F766E"></div>Co-occurrence / Mention</div>
+      <div class="el-item"><div class="el-dot" style="background:#7C3AED"></div>Biography</div>
+      <div class="el-item"><div class="el-dot" style="background:#6B7280"></div>Paragraph</div>
+    </div>
+    <div class="explore-info" id="eg-info"></div>
+    <div class="eg-loading hidden" id="eg-loading">
+      <div class="eg-loading-spinner"></div>
+      <div class="eg-loading-text">Loading images…</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+  var NC = {
+    person:       {s:"#BE185D",f:"#FDF2F8",t:"#9D174D",icon:"\u263A"},
+    artwork:      {s:"#B45309",f:"#FFFBEB",t:"#92400E",icon:"\u2606"},
+    cooccurrence: {s:"#0F766E",f:"#F0FDF9",t:"#115E59",icon:"\u2194"},
+    biography:    {s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9",icon:"\u25C6"},
+    paragraph:    {s:"#6B7280",f:"#F3F4F6",t:"#374151",icon:"\u00B6"},
+    mention:      {s:"#0F766E",f:"#F0FDF9",t:"#115E59",icon:"\u270E"},
+  };
+
+  var svg = d3.select("#eg-svg");
+  var container = document.getElementById("eg-container");
+  var W, H;
+  var gRoot = svg.append("g");
+  var defs = svg.append("defs");
+  var edgeG = gRoot.append("g");
+  var nodeG = gRoot.append("g");
+  var sim = null;
+
+  var zoom = d3.zoom().scaleExtent([0.1, 3]).on("zoom", function(ev){
+    gRoot.attr("transform", ev.transform);
+  });
+  svg.call(zoom);
+
+  function getSize(){
+    W = container.clientWidth || 800;
+    H = container.clientHeight || 600;
+  }
+
+  function esc(s){ var d=document.createElement("div");d.textContent=s;return d.innerHTML; }
+
+  function displayName(label, type){
+    if(type==="person"){
+      // Strip parenthetical, flip "Surname, First" → "First Surname"
+      var base = label.replace(/\s*\([^)]*\)/g,"").trim();
+      var parts = base.split(",",2);
+      if(parts.length===2) return parts[1].trim()+" "+parts[0].trim();
+      return base;
+    }
+    return label;
+  }
+
+  function shortLabel(label){
+    if(label.length > 28) return label.substring(0,26)+"\u2026";
+    return label;
+  }
+
+  function renderGraph(data){
+    getSize();
+    edgeG.selectAll("*").remove();
+    nodeG.selectAll("*").remove();
+    defs.selectAll("*").remove();
+    if(sim) sim.stop();
+
+    var nodes = data.nodes;
+    var edges = data.edges;
+
+    document.getElementById("eg-stats").textContent =
+      nodes.length + " nodes, " + edges.length + " edges";
+
+    // Map edges to node objects
+    var nodeMap = {};
+    nodes.forEach(function(n){ nodeMap[n.id] = n; });
+    edges.forEach(function(e){
+      e.sourceNode = nodeMap[e.source];
+      e.targetNode = nodeMap[e.target];
+    });
+    // Filter out edges with missing nodes
+    edges = edges.filter(function(e){ return e.sourceNode && e.targetNode; });
+
+    sim = d3.forceSimulation(nodes)
+      .force("link", d3.forceLink(edges)
+        .id(function(d){return d.id;})
+        .distance(function(d){return d.label==="involves"?50:90;})
+        .strength(0.5))
+      .force("charge", d3.forceManyBody().strength(function(d){
+        if(d.type==="cooccurrence") return -80;
+        if(d.wikidata && (d.type==="artwork"||d.type==="person")) return -400;
+        return -250;
+      }))
+      .force("center", d3.forceCenter(W/2, H/2))
+      .force("collision", d3.forceCollide(function(d){
+        if(d.type==="cooccurrence") return 20;
+        if(d.wikidata && (d.type==="artwork"||d.type==="person")) return 65;
+        return 40;
+      }))
+      .force("x", d3.forceX(W/2).strength(0.03))
+      .force("y", d3.forceY(H/2).strength(0.03));
+
+    // Edges
+    var linkSel = edgeG.selectAll("g").data(edges).enter().append("g");
+    var linkPath = linkSel.append("line")
+      .attr("class", function(d){return "eg-edge"+(d.dashed?" dashed":"");})
+      .attr("marker-end","url(#eg-arrow)");
+    var linkLabel = linkSel.append("text").attr("class","eg-edge-label")
+      .text(function(d){return d.label||"";});
+
+    // Nodes
+    var nodeSel = nodeG.selectAll("g").data(nodes).enter().append("g")
+      .attr("class","eg-node")
+      .call(d3.drag()
+        .on("start",function(ev,d){if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+        .on("drag",function(ev,d){d.fx=ev.x;d.fy=ev.y;})
+        .on("end",function(ev,d){if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+    nodeSel.each(function(d){
+      var s = d3.select(this);
+      var col = NC[d.type] || NC.person;
+
+      if(d.type === "cooccurrence"){
+        // Small circle for co-occurrence nodes
+        s.append("circle").attr("class","eg-body")
+          .attr("r",8).attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.5);
+        s.append("text").attr("text-anchor","middle").attr("dy","0.35em")
+          .attr("font-size","9px").attr("font-weight","700").attr("fill",col.t)
+          .attr("class","eg-label").text("\u2194");
+      } else {
+        var hasImg = d.wikidata && (d.type==="artwork" || d.type==="person");
+        var imgR = 36;
+        var rw = Math.max(d.label.length * 6 + 20, 80);
+        // If image, shift label rect down to make room for circle above
+        var rectY = hasImg ? imgR + 4 : -18;
+        var rectH = 36;
+        d._rw = rw;
+
+        // Rectangle for label
+        s.append("rect").attr("class","eg-body")
+          .attr("x",-rw/2).attr("y",rectY).attr("width",rw).attr("height",rectH)
+          .attr("rx",d.type==="biography"?18:6)
+          .attr("fill",col.f).attr("stroke",col.s).attr("stroke-width",1.5);
+
+        if(!hasImg){
+          // Icon badge (only when no image)
+          s.append("circle")
+            .attr("cx",-rw/2+12).attr("cy",rectY+rectH/2).attr("r",8)
+            .attr("fill",col.s).attr("fill-opacity",.15);
+          s.append("text").attr("x",-rw/2+12).attr("y",rectY+rectH/2+1)
+            .attr("text-anchor","middle").attr("dominant-baseline","central")
+            .attr("font-size","10px").attr("fill",col.t).attr("class","eg-label")
+            .text(d.type==="person"?"\u263A":"\u25C6");
+        }
+
+        // Label text
+        s.append("text").attr("x",0).attr("y",rectY+rectH/2+1)
+          .attr("text-anchor","middle").attr("dominant-baseline","central")
+          .attr("font-size","10px").attr("font-weight","600")
+          .attr("fill",col.t).attr("class","eg-label")
+          .text(shortLabel(displayName(d.label, d.type)));
+
+        // Wikidata image circle — large, centered above label
+        if(hasImg){
+          var strokeCol = d.type==="person" ? col.s : "#B45309";
+          s.append("circle")
+            .attr("cx",0).attr("cy",0).attr("r",imgR)
+            .attr("fill","#E5E7EB").attr("stroke",strokeCol).attr("stroke-width",2);
+          var clipId = "wd-clip-"+(d.id.split("/").pop());
+          defs.append("clipPath").attr("id",clipId)
+            .append("circle").attr("cx",0).attr("cy",0).attr("r",imgR-1);
+          var imgG = s.append("g").attr("clip-path","url(#"+clipId+")");
+          imgG.append("image")
+            .attr("class","wd-img")
+            .attr("data-qid",d.wikidata)
+            .attr("x",-imgR).attr("y",-imgR)
+            .attr("width",imgR*2).attr("height",imgR*2)
+            .attr("preserveAspectRatio","xMidYMid slice");
+        }
+      }
+    });
+
+    // Hover + click
+    nodeSel.on("click", function(ev, d){
+      ev.stopPropagation();
+      nodeSel.classed("selected",function(n){return n.id===d.id;});
+      var col = NC[d.type] || NC.person;
+      // Highlight connected edges
+      linkPath.style("stroke",function(e){
+        var sid = typeof e.source==="object"?e.source.id:e.source;
+        var tid = typeof e.target==="object"?e.target.id:e.target;
+        return (sid===d.id||tid===d.id)?col.s:"#D1D5DB";
+      }).style("stroke-width",function(e){
+        var sid = typeof e.source==="object"?e.source.id:e.source;
+        var tid = typeof e.target==="object"?e.target.id:e.target;
+        return (sid===d.id||tid===d.id)?2.5:1;
+      });
+      // Find connected nodes
+      var connected = edges.filter(function(e){
+        var sid = typeof e.source==="object"?e.source.id:e.source;
+        var tid = typeof e.target==="object"?e.target.id:e.target;
+        return sid===d.id||tid===d.id;
+      });
+      var info = document.getElementById("eg-info");
+      var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+d.type.toUpperCase()+"</div>";
+      h += "<div style='font-size:13px;font-weight:700;color:var(--tp);margin-bottom:8px;word-break:break-word'>"+esc(displayName(d.label,d.type))+"</div>";
+      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Connections ("+connected.length+")</div>";
+      connected.forEach(function(e){
+        var other = (typeof e.source==="object"?e.source:nodeMap[e.source]);
+        if(other && other.id===d.id) other = (typeof e.target==="object"?e.target:nodeMap[e.target]);
+        if(other){
+          var ocol = NC[other.type]||NC.person;
+          h += "<div style='font-size:11px;color:var(--ts);line-height:1.7;display:flex;align-items:center;gap:4px'>";
+          h += "<span style='display:inline-block;width:8px;height:8px;border-radius:2px;background:"+ocol.s+";flex-shrink:0'></span>";
+          h += esc(other.label.substring(0,40));
+          h += "</div>";
+        }
+      });
+      if(d.type==="person"){
+        h += "<div style='margin-top:8px'><button onclick=\"loadPreset('"+esc(d.label.split(',')[0])+"')\" style='font-size:10px;font-weight:600;padding:4px 10px;border-radius:100px;border:1.5px solid "+col.s+";background:transparent;color:"+col.s+";cursor:pointer;font-family:inherit'>Explore neighborhood</button></div>";
+      }
+      if(d.wikidata){
+        h += "<a href='https://www.wikidata.org/wiki/"+esc(d.wikidata)+"' target='_blank' style='font-size:11px;font-weight:600;color:#1B6EF3;text-decoration:none;margin-top:8px;display:inline-block'>\u2197 Wikidata ("+esc(d.wikidata)+")</a><br>";
+      }
+      if(d.link){
+        var annLink = d.link;
+        if(d.type==="artwork" && d.label){
+          annLink += (annLink.indexOf("?")>=0?"&":"?") + "highlight=" + encodeURIComponent(d.label);
+        }
+        h += "<a href='"+esc(annLink)+"' style='font-size:11px;font-weight:600;color:var(--or);text-decoration:none;margin-top:4px;display:inline-block'>\u2192 View in annotations</a>";
+        h += "<div style='font-size:9px;color:var(--tt);margin-top:4px'>Double-click node to open</div>";
+      }
+      info.innerHTML = h;
+      info.style.display = "block";
+    });
+
+    // Double-click: navigate to annotation viewer
+    nodeSel.on("dblclick", function(ev, d){
+      ev.stopPropagation();
+      ev.preventDefault();
+      if(d.link){
+        var url = d.link;
+        if(d.type==="artwork" && d.label){
+          url += (url.indexOf("?")>=0?"&":"?") + "highlight=" + encodeURIComponent(d.label);
+        }
+        window.location.href = url;
+      }
+    });
+
+    svg.on("click", function(ev){
+      if(ev.target.closest(".eg-node")) return;
+      nodeSel.classed("selected",false);
+      document.getElementById("eg-info").style.display="none";
+      linkPath.style("stroke","#D1D5DB").style("stroke-width",1);
+    });
+
+    sim.on("tick", function(){
+      linkPath
+        .attr("x1",function(d){return d.source.x;}).attr("y1",function(d){return d.source.y;})
+        .attr("x2",function(d){return d.target.x;}).attr("y2",function(d){return d.target.y;});
+      linkLabel
+        .attr("x",function(d){return(d.source.x+d.target.x)/2;})
+        .attr("y",function(d){return(d.source.y+d.target.y)/2-3;})
+        .attr("text-anchor","middle");
+      nodeSel.attr("transform",function(d){return"translate("+d.x+","+d.y+")";});
+    });
+
+    // Auto-fit after settling
+    setTimeout(function(){
+      var bounds = gRoot.node().getBBox();
+      if(!bounds.width) return;
+      var s = Math.min(W/bounds.width, H/bounds.height, 1.3)*0.8;
+      var tx = W/2-(bounds.x+bounds.width/2)*s;
+      var ty = H/2-(bounds.y+bounds.height/2)*s;
+      svg.transition().duration(600).call(
+        zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(s));
+    }, 2000);
+
+    // ── Fetch Wikidata images, then reveal graph ──────────────────────
+    var wdImgs = nodeG.selectAll("image.wd-img");
+    var loadingEl = document.getElementById("eg-loading");
+
+    if(!wdImgs.empty()){
+      // Hide graph, show loader
+      svg.style("opacity","0");
+      loadingEl.classList.remove("hidden");
+
+      var qids = [];
+      wdImgs.each(function(){ qids.push(this.getAttribute("data-qid")); });
+      var uniq = [...new Set(qids)];
+
+      // Fetch QID → thumbnail URL mapping
+      var qidToUrl = {};
+      var fetches = [];
+      for(var i=0; i<uniq.length; i+=50){
+        fetches.push((function(batch){
+          return fetch("https://www.wikidata.org/w/api.php?action=wbgetentities&ids="
+            +batch.join("|")+"&props=claims&format=json&origin=*")
+            .then(function(r){return r.json();})
+            .then(function(j){
+              var entities = j.entities||{};
+              Object.keys(entities).forEach(function(qid){
+                var p18 = (entities[qid].claims||{}).P18;
+                if(p18 && p18.length){
+                  var fname = p18[0].mainsnak.datavalue.value;
+                  qidToUrl[qid] = "https://commons.wikimedia.org/wiki/Special:FilePath/"
+                    +encodeURIComponent(fname)+"?width=100";
+                }
+              });
+            }).catch(function(){});
+        })(uniq.slice(i, i+50)));
+      }
+
+      Promise.all(fetches).then(function(){
+        // Set all image hrefs
+        wdImgs.each(function(){
+          var qid = this.getAttribute("data-qid");
+          var url = qidToUrl[qid];
+          if(url){
+            this.setAttribute("href", url);
+            this.setAttribute("xlink:href", url);
+          }
+        });
+
+        // Pre-load all image files
+        var urls = Object.values(qidToUrl);
+        if(!urls.length){ reveal(); return; }
+        var loaded = 0;
+        urls.forEach(function(url){
+          var img = new Image();
+          img.onload = img.onerror = function(){
+            loaded++;
+            if(loaded >= urls.length) reveal();
+          };
+          img.src = url;
+        });
+        // Safety timeout — reveal after 5s regardless
+        setTimeout(reveal, 5000);
+      });
+    } else {
+      svg.style("opacity","1");
+    }
+
+    var revealed = false;
+    function reveal(){
+      if(revealed) return;
+      revealed = true;
+      loadingEl.classList.add("hidden");
+      svg.transition().duration(400).style("opacity","1");
+    }
+  }
+
+  // ── Loading spinner ────────────────────────────────────────────────
+  var searchBtn = document.getElementById("eg-search-btn");
+  function setLoading(on){
+    if(on){
+      searchBtn.innerHTML = '<span class="spinner"></span>';
+      searchBtn.classList.add("loading");
+    } else {
+      searchBtn.textContent = "Search";
+      searchBtn.classList.remove("loading");
+    }
+  }
+
+  function fetchGraph(url){
+    setLoading(true);
+    document.getElementById("eg-info").style.display="none";
+    fetch(url)
+      .then(function(r){return r.json();})
+      .then(function(data){
+        setLoading(false);
+        renderGraph(data);
+      })
+      .catch(function(err){
+        setLoading(false);
+        document.getElementById("eg-stats").textContent="Error: "+err;
+      });
+  }
+
+  // ── Autocomplete ──────────────────────────────────────────────────
+  var suggestEl = document.getElementById("eg-suggest");
+  var searchInput = document.getElementById("eg-search");
+  var suggestIdx = -1;
+  var suggestTimer = null;
+
+  function closeSuggest(){ suggestEl.classList.remove("open"); suggestEl.innerHTML=""; suggestIdx=-1; }
+
+  searchInput.addEventListener("input", function(){
+    clearTimeout(suggestTimer);
+    var q = this.value.trim();
+    if(q.length < 2){ closeSuggest(); return; }
+    suggestTimer = setTimeout(function(){
+      fetch("/explore/suggest?q="+encodeURIComponent(q))
+        .then(function(r){return r.json();})
+        .then(function(items){
+          if(!items.length){ closeSuggest(); return; }
+          suggestIdx = -1;
+          var h = "";
+          items.forEach(function(item, i){
+            var typeColor = item.type==="artwork"?"#B45309":"#BE185D";
+            var typeLabel = item.type==="artwork"?"artwork":"person";
+            h += "<div class='suggest-item' data-idx='"+i+"' data-type='"+item.type+"' data-label='"+esc(item.label)+"'>";
+            h += "<span style='display:inline-block;font-size:8px;font-weight:700;padding:1px 5px;border-radius:100px;background:"+typeColor+"15;color:"+typeColor+";margin-right:6px;vertical-align:middle'>"+typeLabel+"</span>";
+            h += esc(item.label);
+            h += "</div>";
+          });
+          suggestEl.innerHTML = h;
+          suggestEl.classList.add("open");
+          suggestEl.querySelectorAll(".suggest-item").forEach(function(el){
+            el.addEventListener("mousedown", function(ev){
+              ev.preventDefault();
+              searchInput.value = this.dataset.label;
+              searchInput.dataset.searchType = this.dataset.type;
+              closeSuggest();
+              doSearch();
+            });
+          });
+        });
+    }, 150);
+  });
+
+  searchInput.addEventListener("keydown", function(e){
+    var items = suggestEl.querySelectorAll(".suggest-item");
+    if(e.key === "ArrowDown" && items.length){
+      e.preventDefault();
+      suggestIdx = Math.min(suggestIdx+1, items.length-1);
+      items.forEach(function(el,i){ el.classList.toggle("active", i===suggestIdx); });
+    } else if(e.key === "ArrowUp" && items.length){
+      e.preventDefault();
+      suggestIdx = Math.max(suggestIdx-1, 0);
+      items.forEach(function(el,i){ el.classList.toggle("active", i===suggestIdx); });
+    } else if(e.key === "Enter"){
+      if(suggestIdx >= 0 && items[suggestIdx]){
+        searchInput.value = items[suggestIdx].dataset.label;
+        searchInput.dataset.searchType = items[suggestIdx].dataset.type;
+        closeSuggest();
+      }
+      doSearch();
+    } else if(e.key === "Escape"){
+      closeSuggest();
+    }
+  });
+
+  searchInput.addEventListener("blur", function(){ setTimeout(closeSuggest, 200); });
+
+  // ── Actions ───────────────────────────────────────────────────────
+  function doSearch(){
+    closeSuggest();
+    var q = searchInput.value.trim();
+    if(!q) return;
+    var type = searchInput.dataset.searchType || "person";
+    searchInput.dataset.searchType = "";
+    fetchGraph("/explore/subgraph?mode="+type+"&seed="+encodeURIComponent(q));
+  }
+
+  window.searchPerson = doSearch;
+
+  window.loadRandom = function(){
+    fetchGraph("/explore/subgraph?mode=random&seed="+Math.random());
+  };
+
+  window.loadFile = function(mode, label){
+    searchInput.value = label;
+    closeSuggest();
+    fetchGraph("/explore/subgraph?mode="+mode+"&seed="+encodeURIComponent(label));
+  };
+
+  window.loadPreset = window.loadFile.bind(null, "person");
+
+  // Load Giotto on page load
+  loadFile("person", "Giotto");
+}());
+</script>
+{% endblock %}
