@@ -11,6 +11,7 @@
   var FAC_CUR      = raw.pages     || [];   // pages for the current paragraph
   var FAC_VOL      = raw.vol       || "";
   var PAGE_MAP     = raw.page_map  || {};   // page_number → paragraph_id
+  var OCR_HL       = raw.ocr_hl    || {};   // page → { img_w, img_h, rects }
 
   document.getElementById("vasari-img").src = raw.vasari;
 
@@ -38,6 +39,10 @@
 
   // ── Facsimile booklet ─────────────────────────────────────────────
   var facIdx = 0;  // index into FAC_PAGES
+  var facCurrentPage = 0;  // page number currently displayed
+  var facOverlay = document.getElementById("fac-overlay");
+  var facRects = [];  // {el, mid} — one per OCR-matched mention on current page
+  var pendingHighlight = null;  // mention ID to highlight after page switch
 
   function facUrl(pageNum) {
     return "/facsimile/" + FAC_VOL + "/" + pageNum + ".png";
@@ -72,6 +77,8 @@
     document.querySelectorAll(".fac-thumb").forEach(function(t) {
       t.classList.toggle("active", parseInt(t.dataset.page) === page);
     });
+    // Store current page for overlay rebuild after image loads
+    facCurrentPage = page;
   }
 
   function facInit() {
@@ -125,6 +132,183 @@
   }
 
   facInit();
+
+  // ── Facsimile zoom & pan ────────────────────────────────────────────
+  (function initFacZoom() {
+    var main  = document.getElementById("fac-main");
+    var inner = document.getElementById("fac-inner");
+    var img   = document.getElementById("fac-img");
+    var controls = document.getElementById("fac-zoom-controls");
+    if (!main || !inner || !img) return;
+
+    var scale = 1;
+    var baseW = 0, baseH = 0;   // image size at scale=1, fit to container
+    var ox = 0, oy = 0;         // origin offset (centring at scale=1)
+    var tx = 0, ty = 0;         // user pan offset (pixels, at scale=1)
+    var MIN_SCALE = 1, MAX_SCALE = 6;
+    var dragging = false, lastX = 0, lastY = 0;
+
+    function fitImage() {
+      // Compute the image size that fits the container while preserving aspect ratio
+      var mw = main.clientWidth, mh = main.clientHeight;
+      var natW = img.naturalWidth, natH = img.naturalHeight;
+      if (!natW || !natH) return;
+      var ratio = Math.min(mw / natW, mh / natH);
+      baseW = natW * ratio;
+      baseH = natH * ratio;
+      img.style.width = baseW + "px";
+      img.style.height = baseH + "px";
+      // Centre in container
+      ox = (mw - baseW) / 2;
+      oy = (mh - baseH) / 2;
+    }
+
+    function apply() {
+      var x = ox + tx * scale;
+      var y = oy + ty * scale;
+      inner.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
+    }
+
+    function clampPan() {
+      if (scale <= 1) { tx = 0; ty = 0; return; }
+      var mw = main.clientWidth, mh = main.clientHeight;
+      var sw = baseW * scale, sh = baseH * scale;
+      // Don't let any edge come inside the viewport
+      var minTx = (mw - sw - 2 * ox) / scale;
+      var maxTx = -ox * (scale - 1) / scale;
+      if (minTx > maxTx) { var mid = (minTx + maxTx) / 2; minTx = maxTx = mid; }
+      tx = Math.max(minTx, Math.min(maxTx, tx));
+      var minTy = (mh - sh - 2 * oy) / scale;
+      var maxTy = -oy * (scale - 1) / scale;
+      if (minTy > maxTy) { var midY = (minTy + maxTy) / 2; minTy = maxTy = midY; }
+      ty = Math.max(minTy, Math.min(maxTy, ty));
+    }
+
+    function zoomTo(newScale, cx, cy) {
+      var mw = main.clientWidth, mh = main.clientHeight;
+      if (cx == null) cx = mw / 2;
+      if (cy == null) cy = mh / 2;
+      newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+      // Adjust pan so the point under (cx, cy) stays fixed
+      // Current world coords under cursor: wx = (cx - ox) / scale - tx, same for y
+      var wx = (cx - ox) / scale - tx;
+      var wy = (cy - oy) / scale - ty;
+      scale = newScale;
+      tx = (cx - ox) / scale - wx;
+      ty = (cy - oy) / scale - wy;
+      clampPan();
+      apply();
+    }
+
+    function resetZoom() {
+      fitImage();
+      scale = 1; tx = 0; ty = 0;
+      apply();
+    }
+
+    // Scroll-wheel zoom
+    main.addEventListener("wheel", function(e) {
+      if (img.style.display === "none") return;
+      e.preventDefault();
+      var rect = main.getBoundingClientRect();
+      var cx = e.clientX - rect.left;
+      var cy = e.clientY - rect.top;
+      var delta = e.deltaY > 0 ? -0.15 : 0.15;
+      zoomTo(scale * (1 + delta), cx, cy);
+    }, { passive: false });
+
+    // Drag to pan
+    main.addEventListener("mousedown", function(e) {
+      if (img.style.display === "none") return;
+      if (e.button !== 0) return;
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      main.classList.add("dragging");
+      e.preventDefault();
+    });
+    window.addEventListener("mousemove", function(e) {
+      if (!dragging) return;
+      tx += (e.clientX - lastX) / scale;
+      ty += (e.clientY - lastY) / scale;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      clampPan();
+      apply();
+    });
+    window.addEventListener("mouseup", function() {
+      if (dragging) { dragging = false; main.classList.remove("dragging"); }
+    });
+
+    // Touch: pinch-zoom + drag
+    var touches0 = null, touchDist0 = 0, touchScale0 = 1;
+    main.addEventListener("touchstart", function(e) {
+      if (img.style.display === "none") return;
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        touches0 = [e.touches[0], e.touches[1]];
+        touchDist0 = Math.hypot(touches0[1].clientX - touches0[0].clientX, touches0[1].clientY - touches0[0].clientY);
+        touchScale0 = scale;
+      } else if (e.touches.length === 1) {
+        dragging = true;
+        lastX = e.touches[0].clientX;
+        lastY = e.touches[0].clientY;
+      }
+    }, { passive: false });
+    main.addEventListener("touchmove", function(e) {
+      if (img.style.display === "none") return;
+      if (e.touches.length === 2 && touches0) {
+        e.preventDefault();
+        var dist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+        var rect = main.getBoundingClientRect();
+        var cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+        var cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+        zoomTo(touchScale0 * (dist / touchDist0), cx, cy);
+      } else if (dragging && e.touches.length === 1) {
+        tx += (e.touches[0].clientX - lastX) / scale;
+        ty += (e.touches[0].clientY - lastY) / scale;
+        lastX = e.touches[0].clientX;
+        lastY = e.touches[0].clientY;
+        clampPan();
+        apply();
+      }
+    }, { passive: false });
+    main.addEventListener("touchend", function() {
+      dragging = false; touches0 = null;
+    });
+
+    // Double-click to zoom in at point
+    main.addEventListener("dblclick", function(e) {
+      if (img.style.display === "none") return;
+      var rect = main.getBoundingClientRect();
+      var cx = e.clientX - rect.left;
+      var cy = e.clientY - rect.top;
+      if (scale > 1.5) { resetZoom(); }
+      else { zoomTo(3, cx, cy); }
+    });
+
+    // Button controls
+    document.getElementById("fac-zoom-in").addEventListener("click", function() { zoomTo(scale * 1.4); });
+    document.getElementById("fac-zoom-out").addEventListener("click", function() { zoomTo(scale / 1.4); });
+    document.getElementById("fac-zoom-reset").addEventListener("click", resetZoom);
+
+    // Size image and show controls on load; reset on page change
+    img.addEventListener("load", function() {
+      controls.style.display = "flex";
+      resetZoom();
+      // Build OCR overlay once image has dimensions
+      buildFacOverlay(facCurrentPage);
+      // Apply any pending highlight from a page switch
+      if (pendingHighlight) {
+        var mid = pendingHighlight;
+        pendingHighlight = null;
+        highlightFacMention(mid);
+      }
+    });
+    window.addEventListener("resize", function() {
+      if (img.style.display !== "none") resetZoom();
+    });
+  })();
 
   var SVG_NS = "http://www.w3.org/2000/svg";
   function svgEl(tag, attrs) {
@@ -668,6 +852,7 @@
     var id=el.getAttribute("data-id");
     document.querySelectorAll(".ann.pick").forEach(function(a){a.classList.remove("pick");});
     el.classList.add("pick");el.classList.add("lit");
+    highlightFacMention(id);
 
     var det=document.getElementById("detail");
     det.classList.add("open");
@@ -777,6 +962,7 @@
 
   function doClear(){
     clearTimeout(scanTimer);clearTimeout(typeTimer);
+    clearFacHighlight();
     document.querySelectorAll(".ann").forEach(function(a){a.classList.remove("lit");a.classList.remove("pick");a.classList.remove("graph-highlight");});
     document.getElementById("fb").classList.remove("on");
     document.getElementById("tb").classList.remove("on");
@@ -809,6 +995,83 @@
   window.resetGraphZoom = resetGraphZoom;
 
   buildText();
+
+  // ── Facsimile annotation overlay (OCR-based) ────────────────────────
+  function buildFacOverlay(pageNum) {
+    if (!facOverlay) return;
+    facOverlay.innerHTML = "";
+    facRects = [];
+
+    var hl = OCR_HL[String(pageNum)];
+    if (!hl || !hl.rects || !hl.rects.length) return;
+
+    var imgW = hl.img_w, imgH = hl.img_h;
+    if (!imgW || !imgH) return;
+
+    // Size overlay to match the rendered image
+    var img = document.getElementById("fac-img");
+    if (img) {
+      facOverlay.style.width  = img.offsetWidth  + "px";
+      facOverlay.style.height = img.offsetHeight + "px";
+    }
+
+    for (var i = 0; i < hl.rects.length; i++) {
+      var r = hl.rects[i];
+      var rect = document.createElement("div");
+      rect.className = "fac-rect " + r.type;
+      rect.dataset.id = r.mid;
+      // Position as percentage of original image dimensions
+      rect.style.left   = (r.x / imgW * 100) + "%";
+      rect.style.top    = (r.y / imgH * 100) + "%";
+      rect.style.width  = (r.w / imgW * 100) + "%";
+      rect.style.height = (r.h / imgH * 100) + "%";
+      facOverlay.appendChild(rect);
+      facRects.push({ el: rect, mid: r.mid });
+    }
+  }
+
+  function highlightFacMention(mentionId) {
+    // Check if mention is on the current page
+    var onCurrent = false;
+    for (var i = 0; i < facRects.length; i++) {
+      if (facRects[i].mid === mentionId) { onCurrent = true; break; }
+    }
+
+    if (!onCurrent) {
+      // Find which page has this mention
+      var targetPage = null;
+      for (var p in OCR_HL) {
+        var rects = OCR_HL[p].rects || [];
+        for (var j = 0; j < rects.length; j++) {
+          if (rects[j].mid === mentionId) { targetPage = p; break; }
+        }
+        if (targetPage) break;
+      }
+      if (targetPage) {
+        // Switch page — highlight will apply after image loads
+        pendingHighlight = mentionId;
+        var pageIdx = FAC_PAGES.indexOf(parseInt(targetPage));
+        if (pageIdx !== -1) {
+          facShow(pageIdx, false);
+          return;
+        }
+      }
+    }
+
+    // Clear previous and show match
+    for (var i = 0; i < facRects.length; i++) {
+      facRects[i].el.classList.remove("visible");
+    }
+    for (var i = 0; i < facRects.length; i++) {
+      if (facRects[i].mid === mentionId) facRects[i].el.classList.add("visible");
+    }
+  }
+
+  function clearFacHighlight() {
+    for (var i = 0; i < facRects.length; i++) {
+      facRects[i].el.classList.remove("visible");
+    }
+  }
 
   // ── Auto-highlight mention from ?highlight= param (KG explorer link) ──
   var hlParam = new URLSearchParams(window.location.search).get("highlight");

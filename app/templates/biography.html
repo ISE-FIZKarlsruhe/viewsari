@@ -46,8 +46,13 @@
 
 /* ── FACSIMILE BOOKLET ── */
 .fac-booklet { display:flex; flex-direction:column; height:100%; min-height:0; }
-.fac-main { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; position:relative; }
-.fac-main img { max-width:100%; max-height:100%; object-fit:contain; border-radius:6px; box-shadow:0 1px 4px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07); display:block; }
+.fac-main { flex:1; min-height:0; position:relative; overflow:hidden; cursor:grab; }
+.fac-main.dragging { cursor:grabbing; }
+.fac-inner { position:absolute; transform-origin:0 0; will-change:transform; }
+.fac-inner img { display:block; border-radius:6px; box-shadow:0 1px 4px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07); }
+.fac-zoom-controls { position:absolute; bottom:8px; right:8px; display:flex; gap:4px; z-index:15; }
+.fac-zoom-btn { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--seam); background:rgba(255,255,255,.9); backdrop-filter:blur(6px); color:var(--ts); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .14s; font-family:inherit; line-height:1; }
+.fac-zoom-btn:hover { background:#fff; color:var(--tp); border-color:var(--tp); }
 .fac-controls { display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 0 6px; flex-shrink:0; }
 .fac-btn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--seam); background:transparent; color:var(--ts); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .14s; font-family:inherit; }
 .fac-btn:hover { background:var(--bg3); color:var(--tp); border-color:var(--tp); }
@@ -123,7 +128,15 @@
       <div class="fac-booklet" id="fac-booklet">
         <div class="fac-main" id="fac-main">
           <div class="wd-empty" id="fac-placeholder">No facsimile available</div>
-          <img id="fac-img" alt="Facsimile" style="display:none">
+          <div class="fac-inner" id="fac-inner">
+            <img id="fac-img" alt="Facsimile" style="display:none">
+            <div class="fac-overlay" id="fac-overlay"></div>
+          </div>
+          <div class="fac-zoom-controls" id="fac-zoom-controls" style="display:none">
+            <button class="fac-zoom-btn" id="fac-zoom-in" title="Zoom in">+</button>
+            <button class="fac-zoom-btn" id="fac-zoom-out" title="Zoom out">&minus;</button>
+            <button class="fac-zoom-btn" id="fac-zoom-reset" title="Reset zoom">&#8634;</button>
+          </div>
         </div>
         <div class="fac-controls" id="fac-controls" style="display:none">
           <button class="fac-btn" id="fac-prev" title="Previous page">&#8592;</button>

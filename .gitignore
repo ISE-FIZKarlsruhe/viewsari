@@ -1,1 +1,8 @@
 .DS_Store
+.env
+.htaccess
+__pycache__/
+*.pyc
+.idea/
+*.egg-info/
+venv/

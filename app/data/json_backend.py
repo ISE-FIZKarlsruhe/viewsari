@@ -159,6 +159,97 @@ def _repair_offsets(text: str, mentions: list[dict]) -> list[dict]:
     return repaired
 
 
+def _match_surface_in_ocr(surface: str, words: list[dict]) -> dict | None:
+    """Find a surface form in OCR words and return bounding box, or None."""
+    surface_tokens = surface.split()
+    n = len(surface_tokens)
+    if n == 0:
+        return None
+
+    for i in range(len(words) - n + 1):
+        # Try exact match (case-insensitive, stripping punctuation from OCR)
+        match = True
+        for j, st in enumerate(surface_tokens):
+            ocr_clean = words[i + j]["t"].strip(".,;:!?\"'()[]—-–")
+            st_clean = st.strip(".,;:!?\"'()[]—-–")
+            if ocr_clean.lower() != st_clean.lower():
+                match = False
+                break
+        if match:
+            x0 = min(words[i + j]["x"] for j in range(n))
+            y0 = min(words[i + j]["y"] for j in range(n))
+            x1 = max(words[i + j]["x"] + words[i + j]["w"] for j in range(n))
+            y1 = max(words[i + j]["y"] + words[i + j]["h"] for j in range(n))
+            return {"x": x0, "y": y0, "w": x1 - x0, "h": y1 - y0}
+
+    # Fallback: try substring containment for multi-word surface forms
+    if n >= 2:
+        for i in range(len(words) - n + 1):
+            match = True
+            for j, st in enumerate(surface_tokens):
+                ocr_low = words[i + j]["t"].lower()
+                st_low = st.strip(".,;:!?\"'()[]—-–").lower()
+                if st_low not in ocr_low and ocr_low not in st_low:
+                    match = False
+                    break
+            if match:
+                x0 = min(words[i + j]["x"] for j in range(n))
+                y0 = min(words[i + j]["y"] for j in range(n))
+                x1 = max(words[i + j]["x"] + words[i + j]["w"] for j in range(n))
+                y1 = max(words[i + j]["y"] + words[i + j]["h"] for j in range(n))
+                return {"x": x0, "y": y0, "w": x1 - x0, "h": y1 - y0}
+
+    return None
+
+
+def _build_ocr_highlights(mentions_list: list[dict], pages: list[int],
+                          ocr_dir: Path, vol: str) -> dict:
+    """Match annotation mentions against OCR data and return highlight rects per page.
+
+    Returns: { "<page_num>": { "img_w": int, "img_h": int, "rects": [ {mid, x, y, w, h, type}, ... ] } }
+    """
+    result = {}
+    # Load OCR data for each page
+    page_ocr = {}
+    for p in pages:
+        ocr_path = ocr_dir / vol / f"{p}.json"
+        if ocr_path.exists():
+            with open(ocr_path, "r", encoding="utf-8") as f:
+                page_ocr[p] = json.load(f)
+
+    if not page_ocr:
+        return result
+
+    for p, ocr in page_ocr.items():
+        words = ocr.get("words", [])
+        if not words:
+            continue
+        rects = []
+        for m in mentions_list:
+            surface = m.get("surface_form", "")
+            if not surface:
+                continue
+            bbox = _match_surface_in_ocr(surface, words)
+            if bbox:
+                css = TYPE_CLASS.get(m.get("type", ""), "generic")
+                rects.append({
+                    "mid": m.get("mention_id", ""),
+                    "x": bbox["x"],
+                    "y": bbox["y"],
+                    "w": bbox["w"],
+                    "h": bbox["h"],
+                    "type": css,
+                })
+        if rects:
+            result[str(p)] = {
+                "img_w": ocr.get("width", 0),
+                "img_h": ocr.get("height", 0),
+                "rects": rects,
+            }
+
+    return result
+
+
 def build_viewer_data(para_dict: dict, meta: dict | None = None) -> dict:
     """Build the viewer_data dict that the JS expects."""
     text = para_dict.get("text", "")
@@ -267,12 +358,20 @@ def build_viewer_data(para_dict: dict, meta: dict | None = None) -> dict:
 
         biblio = build_biblio(para_dict, meta)
         page_map = meta.get("page_map", {})
+
+        # OCR-based annotation highlights on facsimile
+        ocr_dir = meta.get("ocr_dir")
+        if ocr_dir and vol and pages:
+            ocr_highlights = _build_ocr_highlights(mentions_list, pages, ocr_dir, vol)
+        else:
+            ocr_highlights = {}
     else:
         pages     = []
         all_pages = []
         vol       = ""
         biblio    = {}
         page_map  = {}
+        ocr_highlights = {}
 
     return {
         "segs": segs,
@@ -292,6 +391,7 @@ def build_viewer_data(para_dict: dict, meta: dict | None = None) -> dict:
         "vol":       vol,
         "biblio":    biblio,
         "page_map":  {str(k): v for k, v in page_map.items()},
+        "ocr_hl":    ocr_highlights,
     }
 
 
@@ -304,6 +404,7 @@ class JSONBackend(DataBackend):
         # Root of the project (two levels up from this file: app/data/ -> app/ -> project root)
         ROOT = Path(__file__).resolve().parent.parent.parent
         self._facsimile_dir: Path = ROOT / "data" / "facsimile_pages"
+        self._ocr_dir: Path = ROOT / "data" / "ocr"
 
         # Index: slug -> list of paragraph dicts
         self._index: dict[str, list[dict]] = {}
@@ -534,6 +635,7 @@ class JSONBackend(DataBackend):
                     "vol":           vol,
                     "all_pages":     self._all_pages.get(slug, []),
                     "facsimile_dir": self._facsimile_dir,
+                    "ocr_dir":       self._ocr_dir,
                     "para_csv":      self._para_csv.get((vol, para.get("paragraph_id"))),
                     "bio_csv":       self._bio_csv,
                     "vol_csv":       self._vol_csv,

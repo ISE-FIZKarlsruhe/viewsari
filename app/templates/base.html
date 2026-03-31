@@ -65,7 +65,13 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;f
 .pane.right{background:var(--bg)}
 .pane-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .pane-label::after{content:'';flex:1;height:1px;background:var(--seam)}
-#fac-img{width:100%;display:block;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07)}
+.fac-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10}
+.fac-rect{position:absolute;border-radius:2px;opacity:0;transition:opacity .2s;box-sizing:border-box}
+.fac-rect.visible{opacity:1}
+.fac-rect.explicit{background:rgba(240,90,26,.3);border:1.5px solid var(--or)}
+.fac-rect.implicit{background:rgba(59,130,246,.3);border:1.5px solid var(--bl)}
+.fac-rect.coref{background:rgba(139,92,246,.3);border:1.5px solid var(--pu)}
+.fac-rect.generic{background:rgba(0,0,0,.1);border:1.5px solid var(--seam)}
 .section-title{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .section-title::after{content:'';flex:1;height:1px;background:var(--seam)}
 .textbody{font-family:'Georgia',serif;font-size:15px;line-height:1.9;color:#1A1A2E}
