@@ -1,0 +1,28 @@
+services:
+  viewsari:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./annotations:/app/annotations
+    environment:
+      - DATA_DIR=/app/data/kg_foundation
+      - ANNOTATIONS_DIR=/app/annotations
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - viewsari
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
