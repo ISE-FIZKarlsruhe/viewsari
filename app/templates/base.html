@@ -222,6 +222,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;f
     <a class="chip" href="/kb" title="Knowledge Base">KB</a>
     <a class="chip" href="/sparql" title="SPARQL Endpoint">SPARQL</a>
     <a class="chip" href="/publications" title="Publications">Publications</a>
+    <a class="chip" href="/about" title="About the project">About</a>
     <span class="sep-nav"></span>
   </span>
   <span class="topbar-page-chips">{% block topbar_chips %}{% endblock %}</span>
@@ -238,6 +239,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;f
   <a class="chip" href="/kb" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Knowledge Base</a>
   <a class="chip" href="/sparql" onclick="document.getElementById('nav-dropdown').classList.remove('open')">SPARQL</a>
   <a class="chip" href="/publications" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Publications</a>
+  <a class="chip" href="/about" onclick="document.getElementById('nav-dropdown').classList.remove('open')">About</a>
 </div>
 
 {% block content %}{% endblock %}
