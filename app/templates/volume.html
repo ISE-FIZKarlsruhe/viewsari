@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · {{ vol.label }}{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.vol-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.vol-header { margin-bottom: 32px; }
+.vol-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.vol-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; max-width: 700px; }
+.vol-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
+.vol-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+
+.vol-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.vol-stat { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 16px 18px; }
+.vol-stat-value { font-size: 28px; font-weight: 700; color: var(--tp); letter-spacing: -.02em; }
+.vol-stat-label { font-size: 11px; color: var(--ts); font-weight: 500; margin-top: 2px; }
+.vol-stat.or .vol-stat-value { color: var(--or); }
+
+.vol-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; overflow: hidden; }
+.vol-table th { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tt); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--seam); background: var(--bg2); }
+.vol-table td { padding: 8px 14px; border-bottom: 1px solid var(--bg3); color: var(--tp); }
+.vol-table tr:last-child td { border-bottom: none; }
+.vol-table tr:hover td { background: var(--bg2); }
+.vol-table a { color: var(--bl); text-decoration: none; font-weight: 600; }
+.vol-table a:hover { text-decoration: underline; }
+.vol-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.vol-table .muted { color: var(--tt); }
+
+.vol-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.vol-nav-chip {
+  font-size: 11px; font-weight: 600; padding: 5px 14px;
+  border-radius: 100px; border: 1.5px solid var(--seam);
+  background: transparent; color: var(--ts); cursor: pointer;
+  font-family: inherit; transition: all .14s; text-decoration: none;
+}
+.vol-nav-chip:hover { border-color: var(--or); color: var(--or); }
+.vol-nav-chip.active { background: var(--or); color: #fff; border-color: var(--or); }
+
+.vol-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--bl); text-decoration: none; margin-top: 8px; }
+.vol-link:hover { text-decoration: underline; }
+{% endblock %}
+
+{% block topbar_chips %}
+<a href="/kb" class="bio-chip" style="text-decoration:none">Knowledge Base</a>
+<span class="bio-chip">Volume {{ vol.number }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="vol-layout">
+  <div class="vol-header">
+    <div class="vol-title">{{ vol.label }}</div>
+    <div class="vol-subtitle">
+      Volume {{ vol.number }} of Giorgio Vasari's <em>Lives of the Most Excellent Painters, Sculptors, and Architects</em> (1568 edition),
+      containing {{ vol.biographies | length }} biographies.
+    </div>
+    {% if vol.gutenberg_url %}
+    <a class="vol-link" href="{{ vol.gutenberg_url }}" target="_blank" rel="noopener">&#8599; Read on Project Gutenberg</a>
+    {% endif %}
+  </div>
+
+  <!-- Stats -->
+  <div class="vol-section">Overview</div>
+  <div class="vol-stats">
+    <div class="vol-stat or">
+      <div class="vol-stat-value">{{ vol.biographies | length }}</div>
+      <div class="vol-stat-label">Biographies</div>
+    </div>
+    <div class="vol-stat">
+      <div class="vol-stat-value">{{ vol.biographies | selectattr('available') | list | length }}</div>
+      <div class="vol-stat-label">With annotations</div>
+    </div>
+    <div class="vol-stat">
+      <div class="vol-stat-value">{{ vol.biographies | sum(attribute='paragraph_count') }}</div>
+      <div class="vol-stat-label">Paragraphs</div>
+    </div>
+  </div>
+
+  <!-- Volume navigation -->
+  <div class="vol-section">All volumes</div>
+  <div class="vol-nav">
+    {% for num, v in volumes | dictsort %}
+    <a class="vol-nav-chip{{ ' active' if v.number == vol.number }}" href="/kb/{{ v.slug }}">Vol. {{ v.number }}</a>
+    {% endfor %}
+  </div>
+
+  <!-- Biography table -->
+  <div class="vol-section">Biographies</div>
+  <table class="vol-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Biography</th>
+        <th class="num">Start page</th>
+        <th class="num">Paragraphs</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bio in vol.biographies %}
+      <tr>
+        <td class="muted">{{ loop.index }}</td>
+        <td>
+          {% if bio.available %}
+          <a href="/biography/{{ bio.slug }}">{{ bio.label }}</a>
+          {% else %}
+          {{ bio.label }}
+          {% endif %}
+        </td>
+        <td class="num">{{ bio.start_page }}</td>
+        <td class="num">{{ bio.paragraph_count if bio.available else '&mdash;' | safe }}</td>
+        <td>
+          {% if bio.available %}
+          <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:var(--pill-or);color:var(--or)">Annotated</span>
+          {% else %}
+          <span style="font-size:10px;color:var(--tt)">Not yet available</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

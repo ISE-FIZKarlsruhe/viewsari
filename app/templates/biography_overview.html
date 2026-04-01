@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · {{ bio_name }} · Overview{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.ov-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.ov-header { margin-bottom: 32px; }
+.ov-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.ov-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; }
+.ov-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
+.ov-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+
+.ov-chunk {
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  transition: border-color .14s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.ov-chunk:hover { border-color: var(--or); }
+.ov-chunk-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.ov-chunk-id {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--or);
+  background: var(--pill-or);
+  padding: 2px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.ov-chunk-page {
+  font-size: 10px;
+  color: var(--tt);
+  font-weight: 600;
+}
+.ov-chunk-mentions {
+  font-size: 10px;
+  color: var(--bl);
+  font-weight: 600;
+  margin-left: auto;
+}
+.ov-chunk-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ts);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ov-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.ov-stat { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 16px 18px; }
+.ov-stat-value { font-size: 28px; font-weight: 700; color: var(--tp); letter-spacing: -.02em; }
+.ov-stat-label { font-size: 11px; color: var(--ts); font-weight: 500; margin-top: 2px; }
+.ov-stat.or .ov-stat-value { color: var(--or); }
+{% endblock %}
+
+{% block topbar_chips %}
+<a href="/biography/{{ slug }}" class="bio-chip" style="text-decoration:none">{{ bio_name }}</a>
+<span class="bio-chip">Overview</span>
+{% endblock %}
+
+{% block content %}
+<div class="ov-layout">
+  <div class="ov-header">
+    <div class="ov-title">{{ bio_name }}</div>
+    <div class="ov-subtitle">Text chunks overview — click any chunk to view its annotations.</div>
+  </div>
+
+  <div class="ov-section">Summary</div>
+  <div class="ov-stats">
+    <div class="ov-stat or">
+      <div class="ov-stat-value">{{ chunks | length }}</div>
+      <div class="ov-stat-label">Text chunks</div>
+    </div>
+    <div class="ov-stat">
+      <div class="ov-stat-value">{{ chunks | sum(attribute='mention_count') }}</div>
+      <div class="ov-stat-label">Total mentions</div>
+    </div>
+  </div>
+
+  <div class="ov-section">Text chunks</div>
+  {% for chunk in chunks %}
+  <a class="ov-chunk" href="/biography/{{ slug }}/{{ chunk.paragraph_id }}">
+    <div class="ov-chunk-head">
+      <span class="ov-chunk-id">&sect;{{ chunk.paragraph_id }}</span>
+      {% if chunk.page %}<span class="ov-chunk-page">p. {{ chunk.page }}</span>{% endif %}
+      {% if chunk.mention_count %}<span class="ov-chunk-mentions">{{ chunk.mention_count }} mention{{ 's' if chunk.mention_count != 1 }}</span>{% endif %}
+    </div>
+    <div class="ov-chunk-text">{{ chunk.text }}</div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

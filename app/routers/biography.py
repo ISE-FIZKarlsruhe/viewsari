@@ -27,6 +27,35 @@ async def biography_redirect(slug: str, request: Request):
     return RedirectResponse(url=f"/biography/{slug}/{first_id}")
 
 
+@router.get("/biography/{slug}/overview", response_class=HTMLResponse)
+async def biography_overview(slug: str, request: Request):
+    backend = request.app.state.backend
+    resolved = backend.resolve_slug(slug)
+    if resolved and resolved != slug:
+        return RedirectResponse(url=f"/biography/{resolved}/overview")
+    paragraphs = backend.get_paragraphs(slug)
+    if not paragraphs:
+        return templates.TemplateResponse(
+            request, "404.html",
+            {"message": f"Biography '{slug}' not found."},
+            status_code=404,
+        )
+    bio_name = paragraphs[0].get("biography", slug) if paragraphs else slug
+    chunks = []
+    for p in paragraphs:
+        mention_count = len(p.get("mentions", []))
+        chunks.append({
+            "paragraph_id": p.get("paragraph_id"),
+            "page": p.get("page", ""),
+            "text": p.get("text", ""),
+            "mention_count": mention_count,
+        })
+    return templates.TemplateResponse(
+        request, "biography_overview.html",
+        {"slug": slug, "bio_name": bio_name, "chunks": chunks},
+    )
+
+
 @router.get("/biography/{slug}/{paragraph_id}", response_class=HTMLResponse)
 async def biography_paragraph(slug: str, paragraph_id: int, request: Request):
     backend = request.app.state.backend
