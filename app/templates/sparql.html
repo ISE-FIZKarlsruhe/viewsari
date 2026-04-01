@@ -252,8 +252,8 @@ var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology
 var EXAMPLES = {
   volumes: 'SELECT ?vol ?label\nWHERE {\n  ?vol a viewsari:0001006 .\n  ?vol rdfs:label ?label .\n}\nORDER BY ?label',
   bios: 'SELECT ?bio ?label ?startPage\nWHERE {\n  ?bio a viewsari:0001008 .\n  ?bio rdfs:label ?label .\n  ?bio frbr:isPartOf vkb:the_lives_1568_volume-3 .\n  ?bio viewsari:hasStartPage ?startPage .\n}\nORDER BY ?startPage',
-  persons: 'SELECT ?person ?label (COUNT(?annot) AS ?mentions)\nWHERE {\n  ?person a viewsari:0001013 .\n  ?person rdfs:label ?label .\n  ?annot oa:hasBodyValue ?text .\n  FILTER(CONTAINS(LCASE(?text), LCASE(?label)))\n}\nGROUP BY ?person ?label\nORDER BY DESC(?mentions)\nLIMIT 20',
-  cooc: 'SELECT ?label ?p1_label ?p2_label\nWHERE {\n  ?cooc a viewsari:0001025 .\n  ?cooc rdfs:label ?label .\n  ?cooc viewsari:involves ?p1, ?p2 .\n  ?p1 rdfs:label ?p1_label .\n  ?p2 rdfs:label ?p2_label .\n  FILTER(?p1 < ?p2)\n}\nORDER BY ?label\nLIMIT 30',
+  persons: 'SELECT ?person ?label (COUNT(?cooc) AS ?cooccurrences)\nWHERE {\n  ?person a viewsari:0001013 .\n  ?person rdfs:label ?label .\n  ?cooc viewsari:involves ?person .\n}\nGROUP BY ?person ?label\nORDER BY DESC(?cooccurrences)\nLIMIT 20',
+  cooc: 'SELECT ?label ?p1_label ?p2_label\nWHERE {\n  ?cooc a viewsari:0001025 .\n  ?cooc rdfs:label ?label .\n  ?cooc viewsari:involves ?p1 .\n  ?cooc viewsari:involves ?p2 .\n  ?p1 rdfs:label ?p1_label .\n  ?p2 rdfs:label ?p2_label .\n  FILTER(STR(?p1) < STR(?p2))\n}\nORDER BY ?label\nLIMIT 30',
   giotto: 'SELECT ?chunk ?text ?start ?end\nWHERE {\n  ?annot a oa:Annotation .\n  ?annot oa:hasTarget ?chunk .\n  ?annot oa:hasBodyValue ?text .\n  ?chunk oa:hasSource vkb:the_lives_1568_volume-1_paragraph-95 .\n  ?chunk oa:hasSelector ?sel .\n  ?sel oa:start ?start .\n  ?sel oa:end ?end .\n}\nORDER BY ?start\nLIMIT 20',
   stats: 'SELECT ?type (COUNT(?s) AS ?count)\nWHERE {\n  ?s a ?type .\n  FILTER(?type IN (\n    viewsari:0001006, viewsari:0001008, viewsari:0001009,\n    doco:Paragraph, viewsari:0001013, viewsari:0001025,\n    oa:Annotation, doco:TextChunk, prov:Activity\n  ))\n}\nGROUP BY ?type\nORDER BY DESC(?count)'
 };
