@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · {{ chunk.id }}{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.kbt-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.kbt-back { font-size: 12px; font-weight: 600; color: var(--ts); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 20px; }
+.kbt-back:hover { color: var(--or); }
+.kbt-header { margin-bottom: 28px; }
+.kbt-title { font-size: 22px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.kbt-id { font-size: 11px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 10px; word-break: break-all; }
+.kbt-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.kbt-tag { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+.kbt-tag.chunk { background: #F3F4F6; color: #6B7280; border: 1px solid #D1D5DB; }
+.kbt-tag.para { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+.kbt-tag.vol { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); }
+
+.kbt-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; }
+.kbt-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+
+.kbt-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--tp);
+  background: var(--bg);
+  border: 1px solid var(--seam);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.kbt-highlight { background: var(--pill-or); padding: 1px 2px; border-radius: 3px; font-weight: 600; }
+
+.kbt-meta { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 16px 20px; }
+.kbt-meta-key { font-weight: 700; color: var(--tt); text-transform: uppercase; font-size: 9px; letter-spacing: .06em; padding-top: 2px; }
+.kbt-meta-val { color: var(--tp); }
+.kbt-meta-val a { color: var(--bl); text-decoration: none; font-weight: 600; }
+.kbt-meta-val a:hover { text-decoration: underline; }
+.kbt-meta-val code { font-family: 'Menlo', monospace; font-size: 11px; background: var(--bg2); padding: 2px 6px; border-radius: 4px; }
+{% endblock %}
+
+{% block topbar_chips %}
+<a href="/kb" class="bio-chip" style="text-decoration:none">Knowledge Base</a>
+<span class="bio-chip" style="background:#F3F4F6;color:#6B7280;border-color:#D1D5DB">Text Chunk</span>
+{% endblock %}
+
+{% block content %}
+<div class="kbt-layout">
+  <a class="kbt-back" href="/kb">&larr; Knowledge Base</a>
+
+  <div class="kbt-header">
+    <div class="kbt-title">{{ chunk.id }}</div>
+    <div class="kbt-id">vkb:{{ chunk.id }}</div>
+    <div class="kbt-tags">
+      <span class="kbt-tag chunk">Text Chunk</span>
+      {% if chunk.paragraph_id %}<span class="kbt-tag para">&sect;{{ chunk.paragraph_id }}</span>{% endif %}
+      {% if chunk.volume %}<span class="kbt-tag vol">Volume {{ chunk.volume }}</span>{% endif %}
+    </div>
+  </div>
+
+  {% if chunk.text %}
+  <div class="kbt-section">Text</div>
+  <div class="kbt-text">&ldquo;{{ chunk.text }}&rdquo;</div>
+  {% endif %}
+
+  <div class="kbt-section">Properties</div>
+  <div class="kbt-meta">
+    <div class="kbt-meta-key">Source</div>
+    <div class="kbt-meta-val">
+      {% if chunk.source %}
+      <a href="/kb/{{ chunk.source }}">{{ chunk.source }}</a>
+      {% else %}
+      &mdash;
+      {% endif %}
+    </div>
+
+    <div class="kbt-meta-key">Paragraph</div>
+    <div class="kbt-meta-val">{{ chunk.paragraph_id if chunk.paragraph_id else '&mdash;' | safe }}</div>
+
+    <div class="kbt-meta-key">Volume</div>
+    <div class="kbt-meta-val">{{ chunk.volume if chunk.volume else '&mdash;' | safe }}</div>
+
+    <div class="kbt-meta-key">Start</div>
+    <div class="kbt-meta-val"><code>{{ chunk.start }}</code></div>
+
+    <div class="kbt-meta-key">End</div>
+    <div class="kbt-meta-val"><code>{{ chunk.end }}</code></div>
+
+    {% if chunk.provenance %}
+    <div class="kbt-meta-key">Provenance</div>
+    <div class="kbt-meta-val">{{ chunk.provenance }}</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

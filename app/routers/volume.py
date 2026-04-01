@@ -90,36 +90,13 @@ def _load_volumes(data_dir: str) -> dict:
     return _vol_cache
 
 
-@router.get("/kb/{volume_slug}", response_class=HTMLResponse)
-async def volume_page(volume_slug: str, request: Request):
-    backend = request.app.state.backend
-    data_dir = os.getenv("DATA_DIR", "./data/kg_foundation")
+def try_volume(volume_slug: str, data_dir: str) -> dict | None:
+    """Return volume dict if slug matches, else None."""
     volumes = _load_volumes(data_dir)
-
-    # Match slug like "the_lives_1568_volume-9" to volume number
     vol_num = volume_slug.rsplit("-", 1)[-1]
     vol = volumes.get(vol_num)
-    if not vol or vol["slug"] != volume_slug:
-        return templates.TemplateResponse(
-            request, "404.html",
-            {"message": f"Volume '{volume_slug}' not found."},
-            status_code=404,
-        )
+    if vol and vol["slug"] == volume_slug:
+        return vol
+    return None
 
-    # Get available biographies from the backend to check which have data
-    all_bios = backend.list_biographies()
-    available_slugs = {b["slug"] for b in all_bios}
 
-    # Enrich volume biographies with availability + paragraph count
-    for bio in vol["biographies"]:
-        bio["available"] = bio["slug"] in available_slugs
-        bio["paragraph_count"] = 0
-        if bio["available"]:
-            match = next((b for b in all_bios if b["slug"] == bio["slug"]), None)
-            if match:
-                bio["paragraph_count"] = match["paragraph_count"]
-
-    return templates.TemplateResponse(
-        request, "volume.html",
-        {"vol": vol, "volumes": volumes},
-    )

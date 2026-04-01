@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · {{ person.label }}{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.kbp-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.kbp-back { font-size: 12px; font-weight: 600; color: var(--ts); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 20px; }
+.kbp-back:hover { color: var(--or); }
+.kbp-header { margin-bottom: 28px; }
+.kbp-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.kbp-id { font-size: 11px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 10px; word-break: break-all; }
+.kbp-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.kbp-tag { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+.kbp-tag.person { background: #FDF2F8; color: #BE185D; border: 1px solid #F9A8D4; }
+.kbp-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
+.kbp-tag.cooc { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); }
+
+.kbp-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; }
+.kbp-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+
+.kbp-link { font-size: 13px; font-weight: 600; color: var(--bl); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+.kbp-link:hover { text-decoration: underline; }
+
+.kbp-alt-labels { display: flex; flex-wrap: wrap; gap: 6px; }
+.kbp-alt { font-size: 11px; background: var(--bg); border: 1px solid var(--seam); border-radius: 6px; padding: 4px 10px; color: var(--ts); }
+
+.kbp-cooc { display: flex; align-items: center; gap: 10px; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 8px; padding: 10px 14px; text-decoration: none; transition: border-color .14s; margin-bottom: 8px; }
+.kbp-cooc:hover { border-color: var(--or); }
+.kbp-cooc-other { font-weight: 600; color: var(--bl); }
+.kbp-cooc-label { font-size: 11px; color: var(--ts); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+{% endblock %}
+
+{% block topbar_chips %}
+<a href="/kb" class="bio-chip" style="text-decoration:none">Knowledge Base</a>
+<span class="bio-chip" style="background:#FDF2F8;color:#BE185D;border-color:#F9A8D4">Person</span>
+{% endblock %}
+
+{% block content %}
+<div class="kbp-layout">
+  <a class="kbp-back" href="/kb">&larr; Knowledge Base</a>
+
+  <div class="kbp-header">
+    <div class="kbp-title">{{ person.label }}</div>
+    <div class="kbp-id">vkb:{{ person.id }}</div>
+    <div class="kbp-tags">
+      <span class="kbp-tag person">Person</span>
+      {% if person.wikidata_id %}<span class="kbp-tag wd">{{ person.wikidata_id }}</span>{% endif %}
+      <span class="kbp-tag cooc">{{ person.cooccurrences | length }} co-occurrence{{ 's' if person.cooccurrences | length != 1 }}</span>
+    </div>
+    {% if person.wikidata_url %}
+    <a class="kbp-link" href="{{ person.wikidata_url }}" target="_blank" rel="noopener">&#8599; View on Wikidata ({{ person.wikidata_id }})</a>
+    {% endif %}
+  </div>
+
+  {% if person.alt_labels %}
+  <div class="kbp-section">Alternative labels ({{ person.alt_labels | length }})</div>
+  <div class="kbp-alt-labels">
+    {% for alt in person.alt_labels %}
+    <span class="kbp-alt">{{ alt }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if person.cooccurrences %}
+  <div class="kbp-section">Co-occurrences ({{ person.cooccurrences | length }})</div>
+  {% for cooc in person.cooccurrences %}
+  {% for other in cooc.others %}
+  <a class="kbp-cooc" href="/kb/{{ other.id }}">
+    <span class="kbp-cooc-other">{{ other.label }}</span>
+    <span class="kbp-cooc-label">{{ cooc.label }}</span>
+  </a>
+  {% endfor %}
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
