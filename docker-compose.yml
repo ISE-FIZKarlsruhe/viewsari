@@ -3,7 +3,7 @@ services:
     build: .
     volumes:
       - ./data:/app/data
-      - ./annotations:/app/annotations
+      - ./obliquer/data/viewsari/ground_truth:/app/annotations
     environment:
       - DATA_DIR=/app/data/kg_foundation
       - ANNOTATIONS_DIR=/app/annotations
