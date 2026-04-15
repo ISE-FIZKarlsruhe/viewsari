@@ -1,31 +1,3 @@
-"""
-ingest_ner_results.py
-=====================
-Ingests ObliquER LLM extraction results into the Viewsari Knowledge Graph.
-
-Reads raw .response.json files from:
-    obliquer/data/viewsari/prompting_results/<run>/<strategy>/
-
-and provenance metadata from the corresponding provenance.jsonl, then
-extends the existing KG Turtle file with:
-
-  - One prov:Activity (viewsari:0001022 named entity recognition) per strategy,
-    carrying prov:wasAssociatedWith → LLM SoftwareAgent, prov:startedAtTime,
-    prov:endedAtTime derived from provenance.jsonl.
-  - Per mention: doco:TextChunk + oa:TextPositionSelector + typed mention
-    annotation (viewsari:0001016–0001021), all prov:wasGeneratedBy the activity.
-  - Per entity cluster: a viewsari:artwork stub (viewsari:0001012) linked via
-    oa:hasBody; viewsari:0001035 (refersTo) wired for coreferents.
-
-Span offsets are resolved from the <<surface_form>> in-text annotation markers
-produced by the LLM, with a normalised-string fallback.
-
-Usage:
-    python scripts/ingest_ner_results.py
-    python scripts/ingest_ner_results.py --run oss_v3
-    python scripts/ingest_ner_results.py --run oss_v3 --strategies few_shot_v2
-"""
-
 from __future__ import annotations
 
 import argparse
