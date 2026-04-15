@@ -1,0 +1,529 @@
+{% extends "base.html" %}
+
+{% block title %}ObliquER · Extraction Explorer{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: hidden !important; height: 100% !important; }
+.layout-explore {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.explore-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--seam);
+  background: var(--bg2);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.explore-toolbar-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tt);
+  white-space: nowrap;
+}
+.explore-select {
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1.5px solid var(--seam);
+  border-radius: 100px;
+  outline: none;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--ts);
+  cursor: pointer;
+  transition: border-color .14s;
+}
+.explore-select:focus { border-color: var(--or); }
+.explore-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--seam);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+  background: var(--bg);
+  color: var(--ts);
+  white-space: nowrap;
+}
+.explore-btn:hover { border-color: var(--tp); color: var(--tp); background: var(--bg3); }
+.explore-btn.active { background: var(--or); color: #fff; border-color: var(--or); }
+.explore-stats {
+  font-size: 10px;
+  color: var(--tt);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.explore-graph {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.explore-graph svg { width: 100%; height: 100%; cursor: grab; }
+.explore-graph svg.dragging { cursor: grabbing; }
+/* Node styles */
+.eg-node { cursor: pointer; }
+.eg-node:hover .eg-body { filter: drop-shadow(0 2px 8px rgba(0,0,0,.15)); }
+.eg-node.selected .eg-body { stroke-width: 3; }
+.eg-label { font-family: 'Inter',sans-serif; pointer-events: none; }
+.eg-edge { fill: none; stroke: #D1D5DB; stroke-width: 1; }
+.eg-edge.dashed { stroke-dasharray: 5,4; stroke: #E5E7EB; }
+.eg-edge-label { font-family: 'Inter',sans-serif; font-size: 7px; fill: var(--tt); pointer-events: none; }
+/* Loading overlay */
+.eg-loading {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.85); z-index: 20;
+  flex-direction: column; gap: 10px; transition: opacity .4s;
+}
+.eg-loading.hidden { opacity: 0; pointer-events: none; }
+.eg-loading-spinner {
+  width: 28px; height: 28px;
+  border: 3px solid var(--seam); border-top-color: var(--or);
+  border-radius: 50%; animation: eg-spin .7s linear infinite;
+}
+.eg-loading-text { font-size: 11px; font-weight: 600; color: var(--ts); }
+@keyframes eg-spin { to { transform: rotate(360deg); } }
+.eg-arrow { fill: none; stroke: #9CA3AF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* Info panel */
+.explore-info {
+  position: absolute; top: 10px; right: 10px; width: 270px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid var(--seam); border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  font-size: 12px; z-index: 10; display: none;
+  max-height: calc(100% - 24px); overflow-y: auto;
+  backdrop-filter: blur(8px);
+}
+.info-tag {
+  display: inline-block; font-size: 8px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 100px; margin-bottom: 6px;
+}
+.info-row { display: flex; gap: 6px; margin-bottom: 3px; font-size: 11px; color: var(--ts); line-height: 1.6; }
+.info-row-label { color: var(--tt); font-weight: 600; white-space: nowrap; min-width: 80px; }
+/* Legend */
+.explore-legend {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid var(--seam); border-radius: 8px;
+  padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 5px;
+  pointer-events: none; backdrop-filter: blur(8px);
+}
+.el-item { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--ts); font-weight: 500; }
+.el-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">ObliquER Extraction Explorer</div>
+{% endblock %}
+
+{% block content %}
+<div class="layout-explore">
+  <div class="explore-toolbar">
+    <span class="explore-toolbar-label">Strategy</span>
+    <div style="display:flex;gap:4px">
+      {% for name in strategies %}
+      <button class="explore-btn{% if loop.first %} active{% endif %}"
+              id="strat-btn-{{ name }}"
+              onclick="setStrategy('{{ name }}')">
+        {{ name.replace('_', ' ') }}
+      </button>
+      {% endfor %}
+    </div>
+    <span class="explore-toolbar-label" style="margin-left:8px">Biography</span>
+    <select class="explore-select" id="bio-select" onchange="loadSelected()">
+      <option value="">— select —</option>
+    </select>
+    <button class="explore-btn" onclick="loadRandom()">Random</button>
+    <span class="explore-stats" id="eg-stats"></span>
+  </div>
+  <div class="explore-graph" id="eg-container">
+    <svg id="eg-svg">
+      <defs>
+        <marker id="eg-arrow" viewBox="0 0 10 10" refX="22" refY="5"
+                markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M1 2L8 5L1 8" class="eg-arrow"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="explore-legend" id="eg-legend">
+      <div class="el-item"><div class="el-dot" style="background:#7C3AED"></div>Biography</div>
+      <div class="el-item"><div class="el-dot" style="background:#6B7280"></div>Paragraph</div>
+      <div class="el-item"><div class="el-dot" style="background:#B45309"></div>Explicit mention</div>
+      <div class="el-item"><div class="el-dot" style="background:#0369A1"></div>Implicit mention</div>
+      <div class="el-item"><div class="el-dot" style="background:#9333EA"></div>Coreferent mention</div>
+      <div class="el-item"><div class="el-dot" style="background:#9CA3AF"></div>Generic mention</div>
+      <div class="el-item"><div class="el-dot" style="background:#D97706"></div>Entity cluster</div>
+      <div class="el-item"><div class="el-dot" style="background:#0F766E"></div>NER activity</div>
+      <div class="el-item"><div class="el-dot" style="background:#374151"></div>LLM agent</div>
+    </div>
+    <div class="explore-info" id="eg-info"></div>
+    <div class="eg-loading" id="eg-loading">
+      <div class="eg-loading-spinner"></div>
+      <div class="eg-loading-text" id="eg-loading-text">Loading graph…</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+
+// ── Strategy index data (injected from server) ────────────────────────────
+var STRATEGIES = {{ strategies | tojson }};
+
+// Node colour palette
+var NC = {
+  biography:   {s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9"},
+  paragraph:   {s:"#6B7280",f:"#F3F4F6",t:"#374151"},
+  explicit:    {s:"#B45309",f:"#FFFBEB",t:"#92400E"},
+  implicit:    {s:"#0369A1",f:"#EFF6FF",t:"#1E40AF"},
+  coreferent:  {s:"#9333EA",f:"#FAF5FF",t:"#7E22CE"},
+  generic:     {s:"#9CA3AF",f:"#F9FAFB",t:"#6B7280"},
+  entity:      {s:"#D97706",f:"#FFF7ED",t:"#B45309"},
+  activity:    {s:"#0F766E",f:"#F0FDF9",t:"#115E59"},
+  agent:       {s:"#374151",f:"#F3F4F6",t:"#111827"},
+};
+
+var currentStrategy = Object.keys(STRATEGIES)[0] || "";
+var svg = d3.select("#eg-svg");
+var container = document.getElementById("eg-container");
+var W, H;
+var gRoot = svg.append("g");
+var edgeG = gRoot.append("g");
+var nodeG = gRoot.append("g");
+var sim = null;
+
+var zoom = d3.zoom().scaleExtent([0.08, 4]).on("zoom", function(ev){
+  gRoot.attr("transform", ev.transform);
+});
+svg.call(zoom);
+
+function getSize(){
+  W = container.clientWidth || 800;
+  H = container.clientHeight || 600;
+}
+
+function esc(s){
+  var d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function shortLabel(label, max){
+  max = max || 26;
+  if(label.length > max) return label.substring(0, max - 1) + "\u2026";
+  return label;
+}
+
+// ── Biography selector ─────────────────────────────────────────────────────
+function populateBioSelect(strategyName){
+  var sel = document.getElementById("bio-select");
+  sel.innerHTML = "<option value=''>— select —</option>";
+  var idx = STRATEGIES[strategyName];
+  if(!idx) return;
+  idx.biographies.forEach(function(b){
+    var opt = document.createElement("option");
+    opt.value = b.slug;
+    opt.textContent = b.label + " (" + b.mentions + " mentions)";
+    sel.appendChild(opt);
+  });
+}
+
+window.setStrategy = function(name){
+  currentStrategy = name;
+  document.querySelectorAll("[id^='strat-btn-']").forEach(function(btn){
+    btn.classList.toggle("active", btn.id === "strat-btn-" + name);
+  });
+  populateBioSelect(name);
+};
+
+window.loadSelected = function(){
+  var slug = document.getElementById("bio-select").value;
+  if(slug) fetchGraph(currentStrategy, slug);
+};
+
+window.loadRandom = function(){
+  var idx = STRATEGIES[currentStrategy];
+  if(!idx || !idx.biographies.length) return;
+  var bios = idx.biographies;
+  var b = bios[Math.floor(Math.random() * bios.length)];
+  document.getElementById("bio-select").value = b.slug;
+  fetchGraph(currentStrategy, b.slug);
+};
+
+// ── Graph fetch + render ───────────────────────────────────────────────────
+function fetchGraph(strategy, slug){
+  document.getElementById("eg-loading").classList.remove("hidden");
+  document.getElementById("eg-loading-text").textContent = "Loading graph\u2026";
+  document.getElementById("eg-info").style.display = "none";
+  document.getElementById("eg-stats").textContent = "";
+  fetch("/obliquer/explore/subgraph?strategy=" + encodeURIComponent(strategy) + "&bio=" + encodeURIComponent(slug))
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      renderGraph(data);
+    })
+    .catch(function(err){
+      document.getElementById("eg-loading").classList.add("hidden");
+      document.getElementById("eg-stats").textContent = "Error: " + err;
+    });
+}
+
+function renderGraph(data){
+  getSize();
+  edgeG.selectAll("*").remove();
+  nodeG.selectAll("*").remove();
+  if(sim) sim.stop();
+
+  var nodes = data.nodes.map(function(n){ return Object.assign({}, n); });
+  var edges = data.edges.map(function(e){ return Object.assign({}, e); });
+
+  document.getElementById("eg-stats").textContent =
+    nodes.length + " nodes · " + edges.length + " edges";
+
+  // Build node map
+  var nodeMap = {};
+  nodes.forEach(function(n){ nodeMap[n.id] = n; });
+
+  // Assign initial positions by type for better layout
+  nodes.forEach(function(n){
+    if(n.type === "biography")  { n.x = W/2; n.y = H/2; n.fx = W/2; n.fy = H/2; }
+    else if(n.type === "activity") { n.x = W*0.85; n.y = H*0.15; }
+    else if(n.type === "agent")    { n.x = W*0.85; n.y = H*0.25; }
+    else if(!n.x) { n.x = W/2 + (Math.random()-.5)*200; n.y = H/2 + (Math.random()-.5)*200; }
+  });
+
+  // Filter edges to known nodes
+  edges = edges.filter(function(e){ return nodeMap[e.source] && nodeMap[e.target]; });
+
+  sim = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(edges)
+      .id(function(d){ return d.id; })
+      .distance(function(d){
+        if(d.label === "hasPartParagraph") return 80;
+        if(d.label === "contains") return 60;
+        if(d.label === "wasGeneratedBy") return 120;
+        return 70;
+      })
+      .strength(function(d){
+        if(d.label === "wasGeneratedBy") return 0.1;
+        return 0.5;
+      }))
+    .force("charge", d3.forceManyBody().strength(function(d){
+      if(d.type === "biography") return -600;
+      if(d.type === "paragraph") return -200;
+      if(d.type === "activity" || d.type === "agent") return -300;
+      return -120;
+    }))
+    .force("center", d3.forceCenter(W/2, H/2).strength(0.05))
+    .force("collision", d3.forceCollide(function(d){
+      if(d.type === "biography") return 50;
+      if(d.type === "paragraph") return 30;
+      if(d.type === "activity" || d.type === "agent") return 40;
+      return 22;
+    }))
+    .force("x", d3.forceX(W/2).strength(0.02))
+    .force("y", d3.forceY(H/2).strength(0.02));
+
+  // Unfix biography after a tick so it can drift but starts centered
+  setTimeout(function(){ nodes.forEach(function(n){ if(n.type==="biography"){n.fx=null;n.fy=null;} }); }, 800);
+
+  // Edges
+  var linkSel = edgeG.selectAll("g").data(edges).enter().append("g");
+  var linkPath = linkSel.append("line")
+    .attr("class", function(d){ return "eg-edge" + (d.dashed ? " dashed" : ""); })
+    .attr("marker-end", "url(#eg-arrow)");
+  linkSel.append("text").attr("class", "eg-edge-label")
+    .text(function(d){ return d.label || ""; });
+
+  // Nodes
+  var nodeSel = nodeG.selectAll("g").data(nodes).enter().append("g")
+    .attr("class", "eg-node")
+    .call(d3.drag()
+      .on("start", function(ev, d){ if(!ev.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on("drag",  function(ev, d){ d.fx=ev.x; d.fy=ev.y; })
+      .on("end",   function(ev, d){ if(!ev.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }));
+
+  nodeSel.each(function(d){
+    var s = d3.select(this);
+    var col = NC[d.type] || NC.generic;
+    var rw = Math.max(d.label.length * 5.5 + 24, 60);
+    if(rw > 160) rw = 160;
+    d._rw = rw;
+
+    s.append("rect").attr("class", "eg-body")
+      .attr("x", -rw/2).attr("y", -14).attr("width", rw).attr("height", 28)
+      .attr("rx", d.type === "biography" ? 14 : (d.type === "activity" || d.type === "agent" ? 6 : 5))
+      .attr("fill", col.f).attr("stroke", col.s).attr("stroke-width", 1.5);
+
+    // Type indicator dot (left side of rect)
+    s.append("circle")
+      .attr("cx", -rw/2 + 10).attr("cy", 0).attr("r", 4)
+      .attr("fill", col.s).attr("fill-opacity", 0.7);
+
+    s.append("text")
+      .attr("x", 2).attr("y", 1)
+      .attr("text-anchor", "middle").attr("dominant-baseline", "central")
+      .attr("font-size", d.type === "biography" ? "11px" : "9.5px")
+      .attr("font-weight", d.type === "biography" ? "700" : "600")
+      .attr("fill", col.t).attr("class", "eg-label")
+      .text(shortLabel(d.label, d.type === "biography" ? 32 : 24));
+  });
+
+  // ── Click handler ────────────────────────────────────────────────────────
+  nodeSel.on("click", function(ev, d){
+    ev.stopPropagation();
+    nodeSel.classed("selected", function(n){ return n.id === d.id; });
+    var col = NC[d.type] || NC.generic;
+
+    // Highlight edges
+    linkPath.style("stroke", function(e){
+      var sid = typeof e.source === "object" ? e.source.id : e.source;
+      var tid = typeof e.target === "object" ? e.target.id : e.target;
+      return (sid === d.id || tid === d.id) ? col.s : (e.dashed ? "#E5E7EB" : "#D1D5DB");
+    }).style("stroke-width", function(e){
+      var sid = typeof e.source === "object" ? e.source.id : e.source;
+      var tid = typeof e.target === "object" ? e.target.id : e.target;
+      return (sid === d.id || tid === d.id) ? 2.5 : 1;
+    });
+
+    // Build info panel
+    var info = document.getElementById("eg-info");
+    var h = "<span class='info-tag' style='background:"+col.s+"20;color:"+col.s+"'>"+esc(d.type.toUpperCase())+"</span>";
+    h += "<div style='font-size:13px;font-weight:700;color:var(--tp);margin-bottom:10px;word-break:break-word;line-height:1.4'>"+esc(d.label)+"</div>";
+
+    // Type-specific metadata
+    if(d.type === "activity"){
+      if(d.model)      h += row("Model", d.model);
+      if(d.started_at) h += row("Started", d.started_at.replace("T"," ").substring(0,19)+" UTC");
+      if(d.ended_at)   h += row("Ended",   d.ended_at.replace("T"," ").substring(0,19)+" UTC");
+      if(d.paragraphs_processed) h += row("Paragraphs", d.paragraphs_processed);
+    } else if(d.type === "agent"){
+      h += row("Role", "LLM inference agent");
+    } else if(d.type === "explicit" || d.type === "implicit" || d.type === "coreferent" || d.type === "generic"){
+      if(d.full_type) h += row("Full type", d.full_type);
+      if(d.mention_id) h += row("Mention ID", d.mention_id);
+      if(d.vol && d.paragraph) h += row("Location", "vol. "+d.vol+", §"+d.paragraph);
+    } else if(d.type === "entity"){
+      if(d.entity_id)  h += row("Entity ID", d.entity_id);
+      if(d.para)       h += row("Paragraph", "§"+d.para);
+    } else if(d.type === "paragraph"){
+      h += row("Paragraph", d.label);
+    }
+
+    // Connected nodes summary
+    var connected = edges.filter(function(e){
+      var sid = typeof e.source === "object" ? e.source.id : e.source;
+      var tid = typeof e.target === "object" ? e.target.id : e.target;
+      return sid === d.id || tid === d.id;
+    });
+    if(connected.length){
+      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin:8px 0 4px'>Connections ("+connected.length+")</div>";
+      var shown = 0;
+      connected.forEach(function(e){
+        if(shown >= 8) return;
+        var sid = typeof e.source === "object" ? e.source.id : e.source;
+        var tid = typeof e.target === "object" ? e.target.id : e.target;
+        var otherId = (sid === d.id) ? tid : sid;
+        var other = nodeMap[otherId];
+        if(!other) return;
+        var ocol = NC[other.type] || NC.generic;
+        h += "<div style='font-size:10.5px;color:var(--ts);line-height:1.7;display:flex;align-items:center;gap:5px'>";
+        h += "<span style='display:inline-block;width:7px;height:7px;border-radius:2px;background:"+ocol.s+";flex-shrink:0'></span>";
+        h += "<span style='color:var(--tt);font-size:9px;font-weight:600;margin-right:2px'>"+esc(e.label||"")+"</span>";
+        h += esc(other.label.substring(0, 36));
+        h += "</div>";
+        shown++;
+      });
+      if(connected.length > 8){
+        h += "<div style='font-size:9px;color:var(--tt);margin-top:2px'>+"+(connected.length-8)+" more</div>";
+      }
+    }
+
+    info.innerHTML = h;
+    info.style.display = "block";
+  });
+
+  svg.on("click", function(ev){
+    if(ev.target.closest(".eg-node")) return;
+    nodeSel.classed("selected", false);
+    document.getElementById("eg-info").style.display = "none";
+    linkPath.style("stroke", function(e){ return e.dashed ? "#E5E7EB" : "#D1D5DB"; }).style("stroke-width", 1);
+  });
+
+  // Tick
+  var linkLabels = linkSel.select("text");
+  sim.on("tick", function(){
+    linkPath
+      .attr("x1", function(d){ return d.source.x; }).attr("y1", function(d){ return d.source.y; })
+      .attr("x2", function(d){ return d.target.x; }).attr("y2", function(d){ return d.target.y; });
+    linkLabels
+      .attr("x", function(d){ return (d.source.x + d.target.x) / 2; })
+      .attr("y", function(d){ return (d.source.y + d.target.y) / 2 - 3; })
+      .attr("text-anchor", "middle");
+    nodeSel.attr("transform", function(d){ return "translate(" + d.x + "," + d.y + ")"; });
+  });
+
+  // Auto-fit after settling
+  sim.on("end", function(){
+    autoFit();
+    document.getElementById("eg-loading").classList.add("hidden");
+  });
+  // Safety reveal after 3s
+  setTimeout(function(){
+    document.getElementById("eg-loading").classList.add("hidden");
+    autoFit();
+  }, 3000);
+}
+
+function autoFit(){
+  var bounds = gRoot.node().getBBox();
+  if(!bounds.width || !bounds.height) return;
+  getSize();
+  var pad = 40;
+  var s = Math.min((W - pad*2) / bounds.width, (H - pad*2) / bounds.height, 1.5) * 0.85;
+  var tx = W/2 - (bounds.x + bounds.width/2) * s;
+  var ty = H/2 - (bounds.y + bounds.height/2) * s;
+  svg.transition().duration(700).call(
+    zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(s));
+}
+
+function row(label, value){
+  return "<div class='info-row'><span class='info-row-label'>"+esc(label)+"</span><span>"+esc(String(value))+"</span></div>";
+}
+
+// ── Initialise ────────────────────────────────────────────────────────────
+populateBioSelect(currentStrategy);
+
+// Load a default biography (first one with a reasonable number of mentions)
+var firstStrategy = STRATEGIES[currentStrategy];
+if(firstStrategy && firstStrategy.biographies.length){
+  var bios = firstStrategy.biographies;
+  // pick one that has mentions > 10, or just first
+  var pick = bios.find(function(b){ return b.mentions > 10 && b.mentions < 200; }) || bios[0];
+  document.getElementById("bio-select").value = pick.slug;
+  fetchGraph(currentStrategy, pick.slug);
+}
+
+}());
+</script>
+{% endblock %}

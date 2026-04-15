@@ -1,0 +1,1155 @@
+{
+  "strategy": "few_shot_v2",
+  "model": "openai/gpt-oss-120b",
+  "run": "oss_v3",
+  "biographies": [
+    {
+      "slug": "festive-preparations",
+      "label": "Description of Festive Preparations",
+      "file": "bio_festive-preparations.json",
+      "mentions": 328,
+      "paragraphs": 40
+    },
+    {
+      "slug": "divers-flemings",
+      "label": "Divers Flemings",
+      "file": "bio_divers-flemings.json",
+      "mentions": 42,
+      "paragraphs": 10
+    },
+    {
+      "slug": "divers-italian-craftsmen",
+      "label": "Divers Italian Craftsmen",
+      "file": "bio_divers-italian-craftsmen.json",
+      "mentions": 97,
+      "paragraphs": 7
+    },
+    {
+      "slug": "agnolo-gaddi",
+      "label": "Life of Agnolo Gaddi",
+      "file": "bio_agnolo-gaddi.json",
+      "mentions": 63,
+      "paragraphs": 8
+    },
+    {
+      "slug": "agostino-agnolo-siena",
+      "label": "Life of Agostino and Agnolo of Siena",
+      "file": "bio_agostino-agnolo-siena.json",
+      "mentions": 141,
+      "paragraphs": 17
+    },
+    {
+      "slug": "baldovinetti",
+      "label": "Life of Alesso Baldovinetti",
+      "file": "bio_baldovinetti.json",
+      "mentions": 50,
+      "paragraphs": 8
+    },
+    {
+      "slug": "alfonso-lombardi",
+      "label": "Life of Alfonso Lombardi, Michelagnolo da Siena, Girolamo Santa Croce, and Dosso and Battista Dossi",
+      "file": "bio_alfonso-lombardi.json",
+      "mentions": 142,
+      "paragraphs": 15
+    },
+    {
+      "slug": "ambrogio-lorenzetti",
+      "label": "Life of Ambrogio Lorenzetti",
+      "file": "bio_ambrogio-lorenzetti.json",
+      "mentions": 45,
+      "paragraphs": 5
+    },
+    {
+      "slug": "mantegna",
+      "label": "Life of Andrea Mantegna",
+      "file": "bio_mantegna.json",
+      "mentions": 80,
+      "paragraphs": 14
+    },
+    {
+      "slug": "andrea-pisano",
+      "label": "Life of Andrea Pisano",
+      "file": "bio_andrea-pisano.json",
+      "mentions": 147,
+      "paragraphs": 12
+    },
+    {
+      "slug": "andrea-tafi",
+      "label": "Life of Andrea Tafi",
+      "file": "bio_andrea-tafi.json",
+      "mentions": 60,
+      "paragraphs": 7
+    },
+    {
+      "slug": "verrocchio",
+      "label": "Life of Andrea Verrocchio",
+      "file": "bio_verrocchio.json",
+      "mentions": 159,
+      "paragraphs": 16
+    },
+    {
+      "slug": "andrea-da-fiesole",
+      "label": "Life of Andrea da Fiesole and Others",
+      "file": "bio_andrea-da-fiesole.json",
+      "mentions": 87,
+      "paragraphs": 10
+    },
+    {
+      "slug": "andrea-dal-castagno",
+      "label": "Life of Andrea dal Castagno and Domenico Viniziano",
+      "file": "bio_andrea-dal-castagno.json",
+      "mentions": 115,
+      "paragraphs": 12
+    },
+    {
+      "slug": "andrea-dal-monte-sansovino",
+      "label": "Life of Andrea dal Monte Sansovino",
+      "file": "bio_andrea-dal-monte-sansovino.json",
+      "mentions": 160,
+      "paragraphs": 15
+    },
+    {
+      "slug": "andrea-del-sarto",
+      "label": "Life of Andrea del Sarto",
+      "file": "bio_andrea-del-sarto.json",
+      "mentions": 475,
+      "paragraphs": 64
+    },
+    {
+      "slug": "andrea-orcagna",
+      "label": "Life of Andrea di Cione Orcagna",
+      "file": "bio_andrea-orcagna.json",
+      "mentions": 139,
+      "paragraphs": 14
+    },
+    {
+      "slug": "antonello-da-messina",
+      "label": "Life of Antonello da Messina",
+      "file": "bio_antonello-da-messina.json",
+      "mentions": 43,
+      "paragraphs": 8
+    },
+    {
+      "slug": "filarete-simone",
+      "label": "Life of Antonio Filarete and Simone",
+      "file": "bio_filarete-simone.json",
+      "mentions": 70,
+      "paragraphs": 6
+    },
+    {
+      "slug": "rossellino",
+      "label": "Life of Antonio Rossellino and Bernardo Rossellino",
+      "file": "bio_rossellino.json",
+      "mentions": 90,
+      "paragraphs": 7
+    },
+    {
+      "slug": "antonio-viniziano",
+      "label": "Life of Antonio Viniziano",
+      "file": "bio_antonio-viniziano.json",
+      "mentions": 48,
+      "paragraphs": 4
+    },
+    {
+      "slug": "pollaiuolo",
+      "label": "Life of Antonio and Piero Pollaiuolo",
+      "file": "bio_pollaiuolo.json",
+      "mentions": 112,
+      "paragraphs": 13
+    },
+    {
+      "slug": "antonio-da-correggio",
+      "label": "Life of Antonio da Correggio",
+      "file": "bio_antonio-da-correggio.json",
+      "mentions": 53,
+      "paragraphs": 10
+    },
+    {
+      "slug": "antonio-da-san-gallo",
+      "label": "Life of Antonio da San Gallo",
+      "file": "bio_antonio-da-san-gallo.json",
+      "mentions": 272,
+      "paragraphs": 31
+    },
+    {
+      "slug": "arnolfo-di-lapo",
+      "label": "Life of Arnolfo di Lapo",
+      "file": "bio_arnolfo-di-lapo.json",
+      "mentions": 216,
+      "paragraphs": 17
+    },
+    {
+      "slug": "baccio-bandinelli",
+      "label": "Life of Baccio Bandinelli",
+      "file": "bio_baccio-bandinelli.json",
+      "mentions": 726,
+      "paragraphs": 69
+    },
+    {
+      "slug": "baccio-d-agnolo",
+      "label": "Life of Baccio d'Agnolo",
+      "file": "bio_baccio-d-agnolo.json",
+      "mentions": 150,
+      "paragraphs": 12
+    },
+    {
+      "slug": "baccio-da-montelupo",
+      "label": "Life of Baccio da Montelupo and Raffaello His Son",
+      "file": "bio_baccio-da-montelupo.json",
+      "mentions": 90,
+      "paragraphs": 11
+    },
+    {
+      "slug": "baldassarre-peruzzi",
+      "label": "Life of Baldassarre Peruzzi",
+      "file": "bio_baldassarre-peruzzi.json",
+      "mentions": 142,
+      "paragraphs": 19
+    },
+    {
+      "slug": "bartolommeo-da-bagnacavallo",
+      "label": "Life of Bartolommeo da Bagnacavallo and Others",
+      "file": "bio_bartolommeo-da-bagnacavallo.json",
+      "mentions": 110,
+      "paragraphs": 12
+    },
+    {
+      "slug": "bastiano-da-san-gallo",
+      "label": "Life of Bastiano da San Gallo, Called Aristotile",
+      "file": "bio_bastiano-da-san-gallo.json",
+      "mentions": 188,
+      "paragraphs": 21
+    },
+    {
+      "slug": "battista-franco",
+      "label": "Life of Battista Franco",
+      "file": "bio_battista-franco.json",
+      "mentions": 321,
+      "paragraphs": 26
+    },
+    {
+      "slug": "benedetto-da-maiano",
+      "label": "Life of Benedetto da Maiano",
+      "file": "bio_benedetto-da-maiano.json",
+      "mentions": 114,
+      "paragraphs": 11
+    },
+    {
+      "slug": "benedetto-da-rovezzano",
+      "label": "Life of Benedetto da Rovezzano",
+      "file": "bio_benedetto-da-rovezzano.json",
+      "mentions": 63,
+      "paragraphs": 7
+    },
+    {
+      "slug": "benozzo-gozzoli",
+      "label": "Life of Benozzo Gozzoli",
+      "file": "bio_benozzo-gozzoli.json",
+      "mentions": 81,
+      "paragraphs": 10
+    },
+    {
+      "slug": "benvenuto-garofalo",
+      "label": "Life of Benvenuto Garofalo and Girolamo da Carpi, and Other Lombards",
+      "file": "bio_benvenuto-garofalo.json",
+      "mentions": 559,
+      "paragraphs": 60
+    },
+    {
+      "slug": "berna",
+      "label": "Life of Berna",
+      "file": "bio_berna.json",
+      "mentions": 48,
+      "paragraphs": 4
+    },
+    {
+      "slug": "bernardino-pinturicchio",
+      "label": "Life of Bernardino Pinturicchio",
+      "file": "bio_bernardino-pinturicchio.json",
+      "mentions": 85,
+      "paragraphs": 9
+    },
+    {
+      "slug": "bramante-da-urbino",
+      "label": "Life of Bramante da Urbino",
+      "file": "bio_bramante-da-urbino.json",
+      "mentions": 179,
+      "paragraphs": 17
+    },
+    {
+      "slug": "buffalmacco",
+      "label": "Life of Buonamico Buffalmacco",
+      "file": "bio_buffalmacco.json",
+      "mentions": 151,
+      "paragraphs": 19
+    },
+    {
+      "slug": "cecca",
+      "label": "Life of Cecca",
+      "file": "bio_cecca.json",
+      "mentions": 86,
+      "paragraphs": 11
+    },
+    {
+      "slug": "cosimo-rosselli",
+      "label": "Life of Cosimo Rosselli",
+      "file": "bio_cosimo-rosselli.json",
+      "mentions": 49,
+      "paragraphs": 4
+    },
+    {
+      "slug": "cristofano-gherardi",
+      "label": "Life of Cristofano Gherardi, Called Doceno",
+      "file": "bio_cristofano-gherardi.json",
+      "mentions": 288,
+      "paragraphs": 39
+    },
+    {
+      "slug": "daniello-ricciarelli",
+      "label": "Life of Daniello Ricciarelli",
+      "file": "bio_daniello-ricciarelli.json",
+      "mentions": 200,
+      "paragraphs": 19
+    },
+    {
+      "slug": "dello",
+      "label": "Life of Dello",
+      "file": "bio_dello.json",
+      "mentions": 27,
+      "paragraphs": 4
+    },
+    {
+      "slug": "desiderio-da-settignano",
+      "label": "Life of Desiderio da Settignano",
+      "file": "bio_desiderio-da-settignano.json",
+      "mentions": 60,
+      "paragraphs": 5
+    },
+    {
+      "slug": "domenico-beccafumi",
+      "label": "Life of Domenico Beccafumi",
+      "file": "bio_domenico-beccafumi.json",
+      "mentions": 230,
+      "paragraphs": 25
+    },
+    {
+      "slug": "ghirlandajo",
+      "label": "Life of Domenico Ghirlandajo",
+      "file": "bio_ghirlandajo.json",
+      "mentions": 224,
+      "paragraphs": 19
+    },
+    {
+      "slug": "domenico-puligo",
+      "label": "Life of Domenico Puligo",
+      "file": "bio_domenico-puligo.json",
+      "mentions": 71,
+      "paragraphs": 9
+    },
+    {
+      "slug": "don-bartolommeo-della-gatta",
+      "label": "Life of Don Bartolommeo della Gatta",
+      "file": "bio_don-bartolommeo-della-gatta.json",
+      "mentions": 157,
+      "paragraphs": 12
+    },
+    {
+      "slug": "don-giulio-clovio",
+      "label": "Life of Don Giulio Clovio",
+      "file": "bio_don-giulio-clovio.json",
+      "mentions": 131,
+      "paragraphs": 11
+    },
+    {
+      "slug": "don-lorenzo-monaco",
+      "label": "Life of Don Lorenzo Monaco",
+      "file": "bio_don-lorenzo-monaco.json",
+      "mentions": 66,
+      "paragraphs": 3
+    },
+    {
+      "slug": "donatello",
+      "label": "Life of Donatello",
+      "file": "bio_donatello.json",
+      "mentions": 235,
+      "paragraphs": 22
+    },
+    {
+      "slug": "duccio",
+      "label": "Life of Duccio",
+      "file": "bio_duccio.json",
+      "mentions": 42,
+      "paragraphs": 3
+    },
+    {
+      "slug": "ercole-ferrarese",
+      "label": "Life of Ercole Ferrarese",
+      "file": "bio_ercole-ferrarese.json",
+      "mentions": 37,
+      "paragraphs": 5
+    },
+    {
+      "slug": "brunelleschi",
+      "label": "Life of Filippo Brunelleschi",
+      "file": "bio_brunelleschi.json",
+      "mentions": 448,
+      "paragraphs": 40
+    },
+    {
+      "slug": "filippino-lippi",
+      "label": "Life of Filippo Lippi, Called Filippino",
+      "file": "bio_filippino-lippi.json",
+      "mentions": 117,
+      "paragraphs": 8
+    },
+    {
+      "slug": "fra-bartolommeo-di-san-marco",
+      "label": "Life of Fra Bartolommeo di San Marco",
+      "file": "bio_fra-bartolommeo-di-san-marco.json",
+      "mentions": 145,
+      "paragraphs": 21
+    },
+    {
+      "slug": "fra-filippo-lippi",
+      "label": "Life of Fra Filippo Lippi",
+      "file": "bio_fra-filippo-lippi.json",
+      "mentions": 114,
+      "paragraphs": 14
+    },
+    {
+      "slug": "fra-giocondo-liberale",
+      "label": "Life of Fra Giocondo, Liberale, and Others",
+      "file": "bio_fra-giocondo-liberale.json",
+      "mentions": 795,
+      "paragraphs": 89
+    },
+    {
+      "slug": "fra-giovanni-agnolo-montorsoli",
+      "label": "Life of Fra Giovanni Agnolo Montorsoli",
+      "file": "bio_fra-giovanni-agnolo-montorsoli.json",
+      "mentions": 316,
+      "paragraphs": 27
+    },
+    {
+      "slug": "fra-angelico",
+      "label": "Life of Fra Giovanni da Fiesole (Fra Angelico)",
+      "file": "bio_fra-angelico.json",
+      "mentions": 141,
+      "paragraphs": 13
+    },
+    {
+      "slug": "fra-sebastiano-del-piombo",
+      "label": "Life of Fra Sebastiano Viniziano del Piombo",
+      "file": "bio_fra-sebastiano-del-piombo.json",
+      "mentions": 169,
+      "paragraphs": 19
+    },
+    {
+      "slug": "francesco-francia",
+      "label": "Life of Francesco Francia",
+      "file": "bio_francesco-francia.json",
+      "mentions": 113,
+      "paragraphs": 11
+    },
+    {
+      "slug": "francesco-granacci",
+      "label": "Life of Francesco Granacci",
+      "file": "bio_francesco-granacci.json",
+      "mentions": 66,
+      "paragraphs": 11
+    },
+    {
+      "slug": "francesco-mazzuoli",
+      "label": "Life of Francesco Mazzuoli (Parmigiano)",
+      "file": "bio_francesco-mazzuoli.json",
+      "mentions": 204,
+      "paragraphs": 23
+    },
+    {
+      "slug": "francesco-primaticcio",
+      "label": "Life of Francesco Primaticcio",
+      "file": "bio_francesco-primaticcio.json",
+      "mentions": 184,
+      "paragraphs": 16
+    },
+    {
+      "slug": "francesco-salviati",
+      "label": "Life of Francesco Salviati",
+      "file": "bio_francesco-salviati.json",
+      "mentions": 425,
+      "paragraphs": 39
+    },
+    {
+      "slug": "francesco-di-giorgio",
+      "label": "Life of Francesco di Giorgio and Lorenzo Vecchietto",
+      "file": "bio_francesco-di-giorgio.json",
+      "mentions": 49,
+      "paragraphs": 5
+    },
+    {
+      "slug": "franciabigio",
+      "label": "Life of Franciabigio",
+      "file": "bio_franciabigio.json",
+      "mentions": 116,
+      "paragraphs": 13
+    },
+    {
+      "slug": "gaddo-gaddi",
+      "label": "Life of Gaddo Gaddi",
+      "file": "bio_gaddo-gaddi.json",
+      "mentions": 77,
+      "paragraphs": 10
+    },
+    {
+      "slug": "galasso-ferrarese",
+      "label": "Life of Galasso Ferrarese",
+      "file": "bio_galasso-ferrarese.json",
+      "mentions": 12,
+      "paragraphs": 4
+    },
+    {
+      "slug": "gentile-pisanello",
+      "label": "Life of Gentile da Fabriano and Vittore Pisanello",
+      "file": "bio_gentile-pisanello.json",
+      "mentions": 77,
+      "paragraphs": 9
+    },
+    {
+      "slug": "gherardo",
+      "label": "Life of Gherardo",
+      "file": "bio_gherardo.json",
+      "mentions": 39,
+      "paragraphs": 5
+    },
+    {
+      "slug": "starnina",
+      "label": "Life of Gherardo Starnina",
+      "file": "bio_starnina.json",
+      "mentions": 28,
+      "paragraphs": 4
+    },
+    {
+      "slug": "giorgio-vasari",
+      "label": "Life of Giorgio Vasari",
+      "file": "bio_giorgio-vasari.json",
+      "mentions": 514,
+      "paragraphs": 41
+    },
+    {
+      "slug": "vasari-v10",
+      "label": "Life of Giorgio Vasari",
+      "file": "bio_vasari-v10.json",
+      "mentions": 7,
+      "paragraphs": 1
+    },
+    {
+      "slug": "giorgione-da-castelfranco",
+      "label": "Life of Giorgione da Castelfranco",
+      "file": "bio_giorgione-da-castelfranco.json",
+      "mentions": 59,
+      "paragraphs": 7
+    },
+    {
+      "slug": "giotto",
+      "label": "Life of Giotto",
+      "file": "bio_giotto.json",
+      "mentions": 292,
+      "paragraphs": 30
+    },
+    {
+      "slug": "giovanfrancesco-penni",
+      "label": "Life of Giovan Francesco Penni and Pellegrino da Modena",
+      "file": "bio_giovanfrancesco-penni.json",
+      "mentions": 65,
+      "paragraphs": 12
+    },
+    {
+      "slug": "giovan-francesco-rustici",
+      "label": "Life of Giovan Francesco Rustici",
+      "file": "bio_giovan-francesco-rustici.json",
+      "mentions": 160,
+      "paragraphs": 19
+    },
+    {
+      "slug": "il-sodoma",
+      "label": "Life of Giovanni Antonio Bazzi, Called Il Sodoma",
+      "file": "bio_il-sodoma.json",
+      "mentions": 178,
+      "paragraphs": 18
+    },
+    {
+      "slug": "giovanni-antonio-lappoli",
+      "label": "Life of Giovanni Antonio Lappoli",
+      "file": "bio_giovanni-antonio-lappoli.json",
+      "mentions": 83,
+      "paragraphs": 14
+    },
+    {
+      "slug": "giovanni-antonio-licinio",
+      "label": "Life of Giovanni Antonio Licinio of Pordenone and Others",
+      "file": "bio_giovanni-antonio-licinio.json",
+      "mentions": 143,
+      "paragraphs": 22
+    },
+    {
+      "slug": "giovanni-antonio-sogliani",
+      "label": "Life of Giovanni Antonio Sogliani",
+      "file": "bio_giovanni-antonio-sogliani.json",
+      "mentions": 128,
+      "paragraphs": 12
+    },
+    {
+      "slug": "cimabue",
+      "label": "Life of Giovanni Cimabue",
+      "file": "bio_cimabue.json",
+      "mentions": 106,
+      "paragraphs": 13
+    },
+    {
+      "slug": "giovanni-da-udine",
+      "label": "Life of Giovanni da Udine",
+      "file": "bio_giovanni-da-udine.json",
+      "mentions": 141,
+      "paragraphs": 15
+    },
+    {
+      "slug": "giovanni-dal-ponte",
+      "label": "Life of Giovanni dal Ponte",
+      "file": "bio_giovanni-dal-ponte.json",
+      "mentions": 36,
+      "paragraphs": 4
+    },
+    {
+      "slug": "girolamo-and-bartolommeo-genga",
+      "label": "Life of Girolamo and Bartolommeo Genga, and Giovan Battista San Marino",
+      "file": "bio_girolamo-and-bartolommeo-genga.json",
+      "mentions": 203,
+      "paragraphs": 23
+    },
+    {
+      "slug": "girolamo-da-treviso",
+      "label": "Life of Girolamo da Treviso",
+      "file": "bio_girolamo-da-treviso.json",
+      "mentions": 44,
+      "paragraphs": 3
+    },
+    {
+      "slug": "giuliano-bugiardini",
+      "label": "Life of Giuliano Bugiardini",
+      "file": "bio_giuliano-bugiardini.json",
+      "mentions": 97,
+      "paragraphs": 12
+    },
+    {
+      "slug": "giuliano-and-antonio-da-san-gallo",
+      "label": "Life of Giuliano and Antonio da San Gallo",
+      "file": "bio_giuliano-and-antonio-da-san-gallo.json",
+      "mentions": 220,
+      "paragraphs": 33
+    },
+    {
+      "slug": "giuliano-da-maiano",
+      "label": "Life of Giuliano da Maiano",
+      "file": "bio_giuliano-da-maiano.json",
+      "mentions": 68,
+      "paragraphs": 6
+    },
+    {
+      "slug": "giulio-romano",
+      "label": "Life of Giulio Romano",
+      "file": "bio_giulio-romano.json",
+      "mentions": 268,
+      "paragraphs": 36
+    },
+    {
+      "slug": "guglielmo-da-marcilla",
+      "label": "Life of Guglielmo da Marcilla",
+      "file": "bio_guglielmo-da-marcilla.json",
+      "mentions": 123,
+      "paragraphs": 19
+    },
+    {
+      "slug": "il-rosso",
+      "label": "Life of Il Rosso",
+      "file": "bio_il-rosso.json",
+      "mentions": 151,
+      "paragraphs": 26
+    },
+    {
+      "slug": "bellini",
+      "label": "Life of Jacopo Giovanni and Gentile Bellini",
+      "file": "bio_bellini.json",
+      "mentions": 144,
+      "paragraphs": 19
+    },
+    {
+      "slug": "jacopo-palma-and-lorenzo-lotto",
+      "label": "Life of Jacopo Palma and Lorenzo Lotto",
+      "file": "bio_jacopo-palma-and-lorenzo-lotto.json",
+      "mentions": 152,
+      "paragraphs": 12
+    },
+    {
+      "slug": "jacopo-sansovino",
+      "label": "Life of Jacopo Sansovino",
+      "file": "bio_jacopo-sansovino.json",
+      "mentions": 523,
+      "paragraphs": 41
+    },
+    {
+      "slug": "jacopo-da-pontormo",
+      "label": "Life of Jacopo da Pontormo",
+      "file": "bio_jacopo-da-pontormo.json",
+      "mentions": 491,
+      "paragraphs": 63
+    },
+    {
+      "slug": "jacopo-della-quercia",
+      "label": "Life of Jacopo della Quercia",
+      "file": "bio_jacopo-della-quercia.json",
+      "mentions": 95,
+      "paragraphs": 9
+    },
+    {
+      "slug": "jacopo-casentino",
+      "label": "Life of Jacopo di Casentino",
+      "file": "bio_jacopo-casentino.json",
+      "mentions": 62,
+      "paragraphs": 7
+    },
+    {
+      "slug": "jacopo-lindaco",
+      "label": "Life of Jacopo, Called L'Indaco",
+      "file": "bio_jacopo-lindaco.json",
+      "mentions": 28,
+      "paragraphs": 4
+    },
+    {
+      "slug": "lazzaro-vasari",
+      "label": "Life of Lazzaro Vasari",
+      "file": "bio_lazzaro-vasari.json",
+      "mentions": 60,
+      "paragraphs": 7
+    },
+    {
+      "slug": "alberti",
+      "label": "Life of Leon Battista Alberti",
+      "file": "bio_alberti.json",
+      "mentions": 74,
+      "paragraphs": 7
+    },
+    {
+      "slug": "leonardo-da-vinci",
+      "label": "Life of Leonardo da Vinci",
+      "file": "bio_leonardo-da-vinci.json",
+      "mentions": 193,
+      "paragraphs": 28
+    },
+    {
+      "slug": "leone-lioni",
+      "label": "Life of Leone Lioni of Arezzo",
+      "file": "bio_leone-lioni.json",
+      "mentions": 259,
+      "paragraphs": 21
+    },
+    {
+      "slug": "lippo",
+      "label": "Life of Lippo",
+      "file": "bio_lippo.json",
+      "mentions": 42,
+      "paragraphs": 4
+    },
+    {
+      "slug": "lorenzetto-and-boccaccino",
+      "label": "Life of Lorenzetto and Boccaccino",
+      "file": "bio_lorenzetto-and-boccaccino.json",
+      "mentions": 71,
+      "paragraphs": 11
+    },
+    {
+      "slug": "lorenzo-costa",
+      "label": "Life of Lorenzo Costa",
+      "file": "bio_lorenzo-costa.json",
+      "mentions": 75,
+      "paragraphs": 7
+    },
+    {
+      "slug": "ghiberti",
+      "label": "Life of Lorenzo Ghiberti",
+      "file": "bio_ghiberti.json",
+      "mentions": 277,
+      "paragraphs": 27
+    },
+    {
+      "slug": "lorenzo-di-bicci",
+      "label": "Life of Lorenzo di Bicci",
+      "file": "bio_lorenzo-di-bicci.json",
+      "mentions": 143,
+      "paragraphs": 15
+    },
+    {
+      "slug": "lorenzo-di-credi",
+      "label": "Life of Lorenzo di Credi",
+      "file": "bio_lorenzo-di-credi.json",
+      "mentions": 68,
+      "paragraphs": 8
+    },
+    {
+      "slug": "luca-signorelli",
+      "label": "Life of Luca Signorelli",
+      "file": "bio_luca-signorelli.json",
+      "mentions": 130,
+      "paragraphs": 19
+    },
+    {
+      "slug": "luca-della-robbia",
+      "label": "Life of Luca della Robbia",
+      "file": "bio_luca-della-robbia.json",
+      "mentions": 137,
+      "paragraphs": 13
+    },
+    {
+      "slug": "madonna-properzia-de-rossi",
+      "label": "Life of Madonna Properzia de' Rossi",
+      "file": "bio_madonna-properzia-de-rossi.json",
+      "mentions": 49,
+      "paragraphs": 8
+    },
+    {
+      "slug": "marc-antonio-bolognese",
+      "label": "Life of Marc'Antonio Bolognese and Others",
+      "file": "bio_marc-antonio-bolognese.json",
+      "mentions": 582,
+      "paragraphs": 53
+    },
+    {
+      "slug": "marco-calavrese",
+      "label": "Life of Marco Calavrese",
+      "file": "bio_marco-calavrese.json",
+      "mentions": 19,
+      "paragraphs": 7
+    },
+    {
+      "slug": "margaritone",
+      "label": "Life of Margaritone",
+      "file": "bio_margaritone.json",
+      "mentions": 74,
+      "paragraphs": 6
+    },
+    {
+      "slug": "mariotto-albertinelli",
+      "label": "Life of Mariotto Albertinelli",
+      "file": "bio_mariotto-albertinelli.json",
+      "mentions": 68,
+      "paragraphs": 11
+    },
+    {
+      "slug": "masaccio",
+      "label": "Life of Masaccio",
+      "file": "bio_masaccio.json",
+      "mentions": 86,
+      "paragraphs": 10
+    },
+    {
+      "slug": "masolino",
+      "label": "Life of Masolino da Panicale",
+      "file": "bio_masolino.json",
+      "mentions": 23,
+      "paragraphs": 3
+    },
+    {
+      "slug": "michelangelo",
+      "label": "Life of Michelagnolo Buonarroti",
+      "file": "bio_michelangelo.json",
+      "mentions": 1376,
+      "paragraphs": 170
+    },
+    {
+      "slug": "michele-san-michele",
+      "label": "Life of Michele San Michele",
+      "file": "bio_michele-san-michele.json",
+      "mentions": 325,
+      "paragraphs": 38
+    },
+    {
+      "slug": "michelozzo",
+      "label": "Life of Michelozzo Michelozzi",
+      "file": "bio_michelozzo.json",
+      "mentions": 151,
+      "paragraphs": 11
+    },
+    {
+      "slug": "mino-da-fiesole",
+      "label": "Life of Mino da Fiesole",
+      "file": "bio_mino-da-fiesole.json",
+      "mentions": 70,
+      "paragraphs": 6
+    },
+    {
+      "slug": "morto-da-feltro",
+      "label": "Life of Morto da Feltro and Andrea di Cosimo Feltrini",
+      "file": "bio_morto-da-feltro.json",
+      "mentions": 100,
+      "paragraphs": 12
+    },
+    {
+      "slug": "nanni-di-banco",
+      "label": "Life of Nanni d'Antonio di Banco",
+      "file": "bio_nanni-di-banco.json",
+      "mentions": 13,
+      "paragraphs": 2
+    },
+    {
+      "slug": "niccola-giovanni-pisa",
+      "label": "Life of Niccola and Giovanni of Pisa",
+      "file": "bio_niccola-giovanni-pisa.json",
+      "mentions": 237,
+      "paragraphs": 34
+    },
+    {
+      "slug": "niccolo-soggi",
+      "label": "Life of Niccolo Soggi",
+      "file": "bio_niccolo-soggi.json",
+      "mentions": 108,
+      "paragraphs": 13
+    },
+    {
+      "slug": "tribolo",
+      "label": "Life of Niccolo, Called Tribolo",
+      "file": "bio_tribolo.json",
+      "mentions": 533,
+      "paragraphs": 42
+    },
+    {
+      "slug": "niccolo-aretino",
+      "label": "Life of Niccolò Aretino",
+      "file": "bio_niccolo-aretino.json",
+      "mentions": 57,
+      "paragraphs": 5
+    },
+    {
+      "slug": "paolo-romano",
+      "label": "Life of Paolo Romano and Maestro Mino and Chimenti Camicia",
+      "file": "bio_paolo-romano.json",
+      "mentions": 81,
+      "paragraphs": 6
+    },
+    {
+      "slug": "paolo-uccello",
+      "label": "Life of Paolo Uccello",
+      "file": "bio_paolo-uccello.json",
+      "mentions": 109,
+      "paragraphs": 11
+    },
+    {
+      "slug": "parri-spinelli",
+      "label": "Life of Parri Spinelli",
+      "file": "bio_parri-spinelli.json",
+      "mentions": 118,
+      "paragraphs": 10
+    },
+    {
+      "slug": "perino-del-vaga",
+      "label": "Life of Perino del Vaga",
+      "file": "bio_perino-del-vaga.json",
+      "mentions": 469,
+      "paragraphs": 52
+    },
+    {
+      "slug": "pesello-peselli",
+      "label": "Life of Pesello and Francesco Peselli",
+      "file": "bio_pesello-peselli.json",
+      "mentions": 36,
+      "paragraphs": 2
+    },
+    {
+      "slug": "pierino-da-vinci",
+      "label": "Life of Pierino da Vinci",
+      "file": "bio_pierino-da-vinci.json",
+      "mentions": 121,
+      "paragraphs": 18
+    },
+    {
+      "slug": "piero-della-francesca",
+      "label": "Life of Piero della Francesca",
+      "file": "bio_piero-della-francesca.json",
+      "mentions": 99,
+      "paragraphs": 13
+    },
+    {
+      "slug": "piero-di-cosimo",
+      "label": "Life of Piero di Cosimo",
+      "file": "bio_piero-di-cosimo.json",
+      "mentions": 89,
+      "paragraphs": 14
+    },
+    {
+      "slug": "pietro-cavallini",
+      "label": "Life of Pietro Cavallini",
+      "file": "bio_pietro-cavallini.json",
+      "mentions": 71,
+      "paragraphs": 8
+    },
+    {
+      "slug": "pietro-laurati",
+      "label": "Life of Pietro Laurati",
+      "file": "bio_pietro-laurati.json",
+      "mentions": 49,
+      "paragraphs": 5
+    },
+    {
+      "slug": "pietro-perugino",
+      "label": "Life of Pietro Perugino",
+      "file": "bio_pietro-perugino.json",
+      "mentions": 243,
+      "paragraphs": 22
+    },
+    {
+      "slug": "polidoro-da-caravaggio",
+      "label": "Life of Polidoro da Caravaggio and Maturino",
+      "file": "bio_polidoro-da-caravaggio.json",
+      "mentions": 157,
+      "paragraphs": 13
+    },
+    {
+      "slug": "raffaellino-del-garbo",
+      "label": "Life of Raffaellino del Garbo",
+      "file": "bio_raffaellino-del-garbo.json",
+      "mentions": 63,
+      "paragraphs": 7
+    },
+    {
+      "slug": "raffaello-da-urbino",
+      "label": "Life of Raffaello da Urbino",
+      "file": "bio_raffaello-da-urbino.json",
+      "mentions": 396,
+      "paragraphs": 62
+    },
+    {
+      "slug": "ridolfo-david-benedetto-ghirlandajo",
+      "label": "Life of Ridolfo, David, and Benedetto Ghirlandajo",
+      "file": "bio_ridolfo-david-benedetto-ghirlandajo.json",
+      "mentions": 177,
+      "paragraphs": 19
+    },
+    {
+      "slug": "botticelli",
+      "label": "Life of Sandro Botticelli",
+      "file": "bio_botticelli.json",
+      "mentions": 76,
+      "paragraphs": 10
+    },
+    {
+      "slug": "simone-mosca",
+      "label": "Life of Simone Mosca",
+      "file": "bio_simone-mosca.json",
+      "mentions": 189,
+      "paragraphs": 13
+    },
+    {
+      "slug": "simone-sanese",
+      "label": "Life of Simone Sanese",
+      "file": "bio_simone-sanese.json",
+      "mentions": 112,
+      "paragraphs": 14
+    },
+    {
+      "slug": "simone-il-cronaca",
+      "label": "Life of Simone, Called Il Cronaca",
+      "file": "bio_simone-il-cronaca.json",
+      "mentions": 133,
+      "paragraphs": 11
+    },
+    {
+      "slug": "spinello-aretino",
+      "label": "Life of Spinello Aretino",
+      "file": "bio_spinello-aretino.json",
+      "mentions": 228,
+      "paragraphs": 14
+    },
+    {
+      "slug": "stefano-ugolino-sanese",
+      "label": "Life of Stefano and Ugolino Sanese",
+      "file": "bio_stefano-ugolino-sanese.json",
+      "mentions": 76,
+      "paragraphs": 9
+    },
+    {
+      "slug": "taddeo-bartoli",
+      "label": "Life of Taddeo Bartoli",
+      "file": "bio_taddeo-bartoli.json",
+      "mentions": 59,
+      "paragraphs": 8
+    },
+    {
+      "slug": "taddeo-gaddi",
+      "label": "Life of Taddeo Gaddi",
+      "file": "bio_taddeo-gaddi.json",
+      "mentions": 168,
+      "paragraphs": 18
+    },
+    {
+      "slug": "taddeo-zucchero",
+      "label": "Life of Taddeo Zucchero",
+      "file": "bio_taddeo-zucchero.json",
+      "mentions": 714,
+      "paragraphs": 80
+    },
+    {
+      "slug": "titian",
+      "label": "Life of Tiziano da Cadore",
+      "file": "bio_titian.json",
+      "mentions": 400,
+      "paragraphs": 35
+    },
+    {
+      "slug": "giottino",
+      "label": "Life of Tommaso Giottino",
+      "file": "bio_giottino.json",
+      "mentions": 95,
+      "paragraphs": 9
+    },
+    {
+      "slug": "torrigiano",
+      "label": "Life of Torrigiano",
+      "file": "bio_torrigiano.json",
+      "mentions": 22,
+      "paragraphs": 5
+    },
+    {
+      "slug": "valerio-vicentino",
+      "label": "Life of Valerio Vicentino, Giovanni da Castel Bolognese, Matteo dal Nassaro, and Others",
+      "file": "bio_valerio-vicentino.json",
+      "mentions": 183,
+      "paragraphs": 27
+    },
+    {
+      "slug": "vellano",
+      "label": "Life of Vellano da Padova",
+      "file": "bio_vellano.json",
+      "mentions": 39,
+      "paragraphs": 4
+    },
+    {
+      "slug": "vincenzio-da-san-gimignano",
+      "label": "Life of Vincenzio da San Gimignano and Timoteo da Urbino",
+      "file": "bio_vincenzio-da-san-gimignano.json",
+      "mentions": 64,
+      "paragraphs": 11
+    },
+    {
+      "slug": "vittore-scarpaccia",
+      "label": "Life of Vittore Scarpaccia and Other Venetian and Lombard Painters",
+      "file": "bio_vittore-scarpaccia.json",
+      "mentions": 170,
+      "paragraphs": 23
+    },
+    {
+      "slug": "academicians-design",
+      "label": "Of the Academicians of Design",
+      "file": "bio_academicians-design.json",
+      "mentions": 1292,
+      "paragraphs": 138
+    }
+  ]
+}
