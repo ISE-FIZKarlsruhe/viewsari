@@ -275,32 +275,28 @@ var EXAMPLES = {
   // Explicit artwork mentions (class 0001020) — Vasari actually named the work
   explicit:
     '# Explicit artwork mentions — Vasari named the work directly\n' +
-    'SELECT ?surface ?entity_label ?wikidata\n' +
+    'SELECT ?surface ?paragraph\n' +
     'WHERE {\n' +
-    '  ?mention a viewsari:0001020 .\n' +
-    '  ?mention oa:hasBodyValue ?surface .\n' +
-    '  ?mention oa:hasBody ?entity .\n' +
-    '  ?entity rdfs:label ?entity_label .\n' +
-    '  OPTIONAL { ?entity owl:sameAs ?wikidata . }\n' +
+    '  ?mention a viewsari:0001020 ;\n' +
+    '           oa:hasBodyValue ?surface ;\n' +
+    '           viewsari:0001032 ?paragraph .\n' +
     '}\n' +
     'LIMIT 10',
 
   // Implicit artwork mentions (class 0001021) — described, not named
   implicit:
     '# Implicit artwork mentions — descriptive passages implying a work\n' +
-    'SELECT ?surface ?entity_label ?wikidata\n' +
+    'SELECT ?surface ?paragraph\n' +
     'WHERE {\n' +
-    '  ?mention a viewsari:0001021 .\n' +
-    '  ?mention oa:hasBodyValue ?surface .\n' +
-    '  ?mention oa:hasBody ?entity .\n' +
-    '  ?entity rdfs:label ?entity_label .\n' +
-    '  OPTIONAL { ?entity owl:sameAs ?wikidata . }\n' +
+    '  ?mention a viewsari:0001021 ;\n' +
+    '           oa:hasBodyValue ?surface ;\n' +
+    '           viewsari:0001032 ?paragraph .\n' +
     '}\n' +
     'LIMIT 10',
 
-  // Where do GT and ObliquER disagree? Per paragraph, mention counts side by side
+  // Where do GT and ObliquER overlap? Per paragraph, mention counts side by side
   gt_vs_obq:
-    '# GT vs. ObliquER mention counts per paragraph (top 10 busiest paragraphs)\n' +
+    '# GT vs. ObliquER mention counts per paragraph (top 10 busiest)\n' +
     'SELECT ?paragraph\n' +
     '  (COUNT(DISTINCT ?gt_mention) AS ?gt_count)\n' +
     '  (COUNT(DISTINCT ?obq_mention) AS ?obliquer_count)\n' +
@@ -310,7 +306,8 @@ var EXAMPLES = {
     '  UNION\n' +
     '  { ?obq_mention prov:wasGeneratedBy ?obq_run ;\n' +
     '                 viewsari:0001032 ?paragraph .\n' +
-    '    FILTER(?obq_run IN (vkb:ner_run_few_shot_v2, vkb:ner_run_ontology_guided_v2)) }\n' +
+    '    ?obq_run prov:wasInformedBy ?parent .\n' +
+    '    FILTER(?parent IN (vkb:ner_run_few_shot_v2, vkb:ner_run_ontology_guided_v2)) }\n' +
     '}\n' +
     'GROUP BY ?paragraph\n' +
     'HAVING(?gt_count > 0 && ?obliquer_count > 0)\n' +
@@ -334,13 +331,12 @@ var EXAMPLES = {
   // Mentions Sarah annotated in March 2026
   sarah:
     '# Annotations produced by Sarah (ground truth run)\n' +
-    'SELECT ?surface ?entity_label\n' +
+    'SELECT ?surface ?paragraph\n' +
     'WHERE {\n' +
     '  vkb:ground_truth_annotation_run_2 prov:wasAssociatedWith vkb:sarah_ondraszek .\n' +
     '  ?mention prov:wasGeneratedBy vkb:ground_truth_annotation_run_2 ;\n' +
     '           oa:hasBodyValue ?surface ;\n' +
-    '           oa:hasBody ?entity .\n' +
-    '  ?entity rdfs:label ?entity_label .\n' +
+    '           viewsari:0001032 ?paragraph .\n' +
     '}\n' +
     'LIMIT 10',
 
@@ -370,15 +366,16 @@ var EXAMPLES = {
   // Entities with a Wikidata link — the successful links
   wd_heroes:
     '# Artwork entities linked to Wikidata (linking hits)\n' +
-    'SELECT ?label ?wikidata (COUNT(?mention) AS ?mentions)\n' +
+    'SELECT ?entity ?label ?wikidata (COUNT(?mention) AS ?mentions)\n' +
     'WHERE {\n' +
     '  ?entity a viewsari:0001012 ;\n' +
     '          rdfs:label ?label ;\n' +
     '          owl:sameAs ?wikidata .\n' +
-    '  ?mention oa:hasBody ?entity .\n' +
-    '  FILTER(STRSTARTS(STR(?wikidata), "http://www.wikidata.org"))\n' +
+    '  ?mention prov:wasGeneratedBy vkb:ground_truth_entity_linking_run_1 .\n' +
+    '  ?entity prov:wasDerivedFrom ?mention .\n' +
+    '  FILTER(STRSTARTS(STR(?wikidata), "http"))\n' +
     '}\n' +
-    'GROUP BY ?label ?wikidata\n' +
+    'GROUP BY ?entity ?label ?wikidata\n' +
     'ORDER BY DESC(?mentions)\n' +
     'LIMIT 10',
 
