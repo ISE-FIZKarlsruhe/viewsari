@@ -1,25 +1,16 @@
-import json
-from pathlib import Path
+import os
 
+import httpx
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
-from rdflib import Graph
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
-# Load KG once at module level
-_KG_PATH = Path("data/kg/viewsari_kg.ttl")
-_graph: Graph | None = None
-
-
-def _get_graph() -> Graph:
-    global _graph
-    if _graph is None:
-        _graph = Graph()
-        _graph.parse(str(_KG_PATH), format="turtle")
-    return _graph
+GRAPHDB_URL = os.getenv("GRAPHDB_URL", "http://localhost:7200")
+GRAPHDB_REPO = os.getenv("GRAPHDB_REPO", "viewsari")
+SPARQL_ENDPOINT = f"{GRAPHDB_URL}/repositories/{GRAPHDB_REPO}"
 
 
 @router.get("/sparql", response_class=HTMLResponse)
@@ -34,22 +25,34 @@ async def sparql_query(request: Request):
     if not query:
         return JSONResponse({"error": "Empty query"}, status_code=400)
 
-    g = _get_graph()
     try:
-        results = g.query(query)
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            resp = await client.post(
+                SPARQL_ENDPOINT,
+                data={"query": query},
+                headers={"Accept": "application/sparql-results+json, text/turtle"},
+            )
+            resp.raise_for_status()
+    except httpx.HTTPStatusError as e:
+        return JSONResponse(
+            {"error": e.response.text[:500]}, status_code=e.response.status_code
+        )
     except Exception as e:
-        return JSONResponse({"error": str(e)}, status_code=400)
+        return JSONResponse({"error": str(e)}, status_code=502)
 
-    if results.type == "SELECT":
-        cols = [str(v) for v in results.vars]
+    content_type = resp.headers.get("content-type", "")
+
+    if "sparql-results+json" in content_type:
+        data = resp.json()
+        cols = data.get("head", {}).get("vars", [])
         rows = []
-        for row in results:
-            rows.append([str(cell) if cell is not None else "" for cell in row])
+        for binding in data.get("results", {}).get("bindings", []):
+            rows.append([binding.get(c, {}).get("value", "") for c in cols])
         return JSONResponse({"columns": cols, "rows": rows, "count": len(rows)})
-    elif results.type == "ASK":
-        return JSONResponse({"result": bool(results.askAnswer)})
-    elif results.type == "CONSTRUCT" or results.type == "DESCRIBE":
-        ttl = results.serialize(format="turtle")
-        return JSONResponse({"turtle": ttl})
+    elif "turtle" in content_type or "rdf" in content_type:
+        return JSONResponse({"turtle": resp.text})
+    elif "boolean" in content_type:
+        data = resp.json()
+        return JSONResponse({"result": data.get("boolean", False)})
     else:
-        return JSONResponse({"error": f"Unsupported query type: {results.type}"}, status_code=400)
+        return JSONResponse({"turtle": resp.text})

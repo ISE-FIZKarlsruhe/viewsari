@@ -7,6 +7,21 @@ services:
     environment:
       - DATA_DIR=/app/data/kg_foundation
       - ANNOTATIONS_DIR=/app/annotations
+      - GRAPHDB_URL=http://graphdb:7200
+      - GRAPHDB_REPO=viewsari
+    depends_on:
+      - graphdb
+    restart: unless-stopped
+
+  graphdb:
+    image: ontotext/graphdb:10.8.4
+    volumes:
+      - graphdb-data:/opt/graphdb/home
+      - ./data/kg:/opt/graphdb/home/graphdb-import
+    ports:
+      - "7200:7200"
+    environment:
+      - GDB_HEAP_SIZE=2g
     restart: unless-stopped
 
   nginx:
@@ -18,3 +33,6 @@ services:
     depends_on:
       - viewsari
     restart: unless-stopped
+
+volumes:
+  graphdb-data:

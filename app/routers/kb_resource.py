@@ -1,156 +1,154 @@
-"""KG resource pages — persons, text chunks, and other RDF entities."""
+"""KG resource pages — persons, text chunks, and other RDF entities.
+
+Queries GraphDB instead of loading the TTL into memory.
+"""
 
 import os
-from pathlib import Path
 
+import httpx
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from rdflib import Graph, Namespace, URIRef
 
 from app.routers.volume import try_volume, _load_volumes
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
-_KG_PATH = Path("data/kg/viewsari_kg.ttl")
-_graph: Graph | None = None
+GRAPHDB_URL = os.getenv("GRAPHDB_URL", "http://localhost:7200")
+GRAPHDB_REPO = os.getenv("GRAPHDB_REPO", "viewsari")
+SPARQL_ENDPOINT = f"{GRAPHDB_URL}/repositories/{GRAPHDB_REPO}"
 
-VKB = Namespace("https://viewsari.ise.fiz-karlsruhe.de/kb/")
-VIEWSARI = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#")
-OA = Namespace("http://www.w3.org/ns/oa#")
-RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
-OWL = Namespace("http://www.w3.org/2002/07/owl#")
-SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
-PROV = Namespace("http://www.w3.org/ns/prov#")
-DOCO = Namespace("http://purl.org/spar/doco/")
-
-# Ontology class IDs
-PERSON_CLASS = VIEWSARI["0001013"]
-COOC_CLASS = VIEWSARI["0001025"]
-TEXTCHUNK_CLASS = DOCO["TextChunk"]
+VKB = "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#"
 
 
-def _get_graph() -> Graph:
-    global _graph
-    if _graph is None:
-        _graph = Graph()
-        _graph.parse(str(_KG_PATH), format="turtle")
-    return _graph
+async def _sparql(query: str) -> list[dict]:
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.post(
+            SPARQL_ENDPOINT,
+            data={"query": query},
+            headers={"Accept": "application/sparql-results+json"},
+        )
+        resp.raise_for_status()
+    data = resp.json()
+    cols = data.get("head", {}).get("vars", [])
+    rows = []
+    for b in data.get("results", {}).get("bindings", []):
+        rows.append({c: b.get(c, {}).get("value", "") for c in cols})
+    return rows
 
 
-def _load_person(g: Graph, uri: URIRef) -> dict | None:
-    """Load person data from the KG."""
-    label = g.value(uri, RDFS.label)
-    if label is None:
+async def _load_person(resource_id: str) -> dict | None:
+    uri = VKB + resource_id
+    rows = await _sparql(f"""
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+        SELECT ?label ?wikidata WHERE {{
+            <{uri}> a viewsari:0001013 ;
+                     rdfs:label ?label .
+            OPTIONAL {{ <{uri}> owl:sameAs ?wikidata . }}
+        }} LIMIT 1
+    """)
+    if not rows:
         return None
+    label = rows[0]["label"]
+    wikidata_url = rows[0].get("wikidata", "")
+    wikidata_id = wikidata_url.rstrip("/").split("/")[-1] if wikidata_url else ""
 
-    # Check it's actually a person
-    types = [str(o) for o in g.objects(uri, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))]
-    if str(PERSON_CLASS) not in types:
-        return None
+    alt_rows = await _sparql(f"""
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT ?alt WHERE {{
+            <{uri}> skos:altLabel ?alt .
+        }} ORDER BY ?alt
+    """)
+    alt_labels = sorted(set(r["alt"] for r in alt_rows))
 
-    wikidata = g.value(uri, OWL.sameAs)
-    wikidata_id = ""
-    if wikidata:
-        wikidata_id = str(wikidata).rstrip("/").split("/")[-1]
-
-    alt_labels = sorted(set(str(o) for o in g.objects(uri, SKOS.altLabel)))
-
-    # Co-occurrences
-    coocs = []
-    for cooc in g.subjects(VIEWSARI.involves, uri):
-        cooc_label = g.value(cooc, RDFS.label)
-        others = []
-        for other in g.objects(cooc, VIEWSARI.involves):
-            if other != uri:
-                other_label = g.value(other, RDFS.label)
-                if other_label:
-                    other_id = str(other).split("/")[-1]
-                    others.append({"id": other_id, "label": str(other_label)})
-        coocs.append({
-            "label": str(cooc_label) if cooc_label else "",
-            "others": others,
-        })
-    coocs.sort(key=lambda c: c["label"])
+    cooc_rows = await _sparql(f"""
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+        SELECT ?cooc ?cooc_label ?other ?other_label WHERE {{
+            ?cooc viewsari:involves <{uri}> ;
+                  rdfs:label ?cooc_label ;
+                  viewsari:involves ?other .
+            ?other rdfs:label ?other_label .
+            FILTER(?other != <{uri}>)
+        }} ORDER BY ?cooc_label
+    """)
+    coocs_map: dict[str, dict] = {}
+    for r in cooc_rows:
+        cid = r["cooc"]
+        if cid not in coocs_map:
+            coocs_map[cid] = {"label": r["cooc_label"], "others": []}
+        other_id = r["other"].split("#")[-1] if "#" in r["other"] else r["other"].split("/")[-1]
+        coocs_map[cid]["others"].append({"id": other_id, "label": r["other_label"]})
+    coocs = sorted(coocs_map.values(), key=lambda c: c["label"])
 
     return {
-        "id": str(uri).split("/")[-1],
-        "label": str(label),
+        "id": resource_id,
+        "label": label,
         "wikidata_id": wikidata_id,
-        "wikidata_url": str(wikidata) if wikidata else "",
+        "wikidata_url": wikidata_url,
         "alt_labels": alt_labels,
         "cooccurrences": coocs,
     }
 
 
-def _load_textchunk(g: Graph, uri: URIRef) -> dict | None:
-    """Load text chunk data from the KG."""
-    types = [str(o) for o in g.objects(uri, URIRef("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))]
-    if str(TEXTCHUNK_CLASS) not in types:
+async def _load_textchunk(resource_id: str) -> dict | None:
+    uri = VKB + resource_id
+    rows = await _sparql(f"""
+        PREFIX oa: <http://www.w3.org/ns/oa#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX doco: <http://purl.org/spar/doco/>
+        SELECT ?source ?start ?end ?body ?provenance WHERE {{
+            <{uri}> a doco:TextChunk ;
+                     oa:hasSource ?source .
+            OPTIONAL {{
+                <{uri}> oa:hasSelector ?sel .
+                ?sel oa:start ?start ; oa:end ?end .
+            }}
+            OPTIONAL {{
+                ?annot oa:hasTarget <{uri}> ;
+                       oa:hasBodyValue ?body .
+                OPTIONAL {{ ?annot prov:wasGeneratedBy ?provenance . }}
+            }}
+        }} LIMIT 1
+    """)
+    if not rows:
         return None
+    r = rows[0]
+    source_id = r["source"].split("#")[-1] if "#" in r["source"] else r["source"].split("/")[-1]
 
-    # Source paragraph
-    source = g.value(uri, OA.hasSource)
-    source_id = str(source).split("/")[-1] if source else ""
-
-    # Position selector
-    selector = g.value(uri, OA.hasSelector)
-    start = end = ""
-    if selector:
-        s = g.value(selector, OA.start)
-        e = g.value(selector, OA.end)
-        start = str(s) if s else ""
-        end = str(e) if e else ""
-
-    # Annotation body (the surface text)
-    body = ""
-    annotation = None
-    for annot in g.subjects(OA.hasTarget, uri):
-        body_val = g.value(annot, OA.hasBodyValue)
-        if body_val:
-            body = str(body_val)
-            annotation = annot
-            break
-
-    # Provenance
-    provenance = ""
-    if annotation:
-        gen = g.value(annotation, PROV.wasGeneratedBy)
-        if gen:
-            provenance = str(gen).split("/")[-1]
-
-    # Parse paragraph info from source
     para_id = ""
-    bio_slug = ""
     vol_num = ""
     if source_id:
-        # e.g. "the_lives_1568_volume-1_paragraph-95"
         parts = source_id.rsplit("_paragraph-", 1)
         if len(parts) == 2:
             para_id = parts[1]
-            bio_part = parts[0]
-            # e.g. "the_lives_1568_volume-1"
-            vol_parts = bio_part.rsplit("_volume-", 1)
+            vol_parts = parts[0].rsplit("_volume-", 1)
             if len(vol_parts) == 2:
                 vol_num = vol_parts[1]
 
+    prov = r.get("provenance", "")
+    if prov:
+        prov = prov.split("#")[-1] if "#" in prov else prov.split("/")[-1]
+
     return {
-        "id": str(uri).split("/")[-1],
+        "id": resource_id,
         "source": source_id,
-        "source_uri": str(source) if source else "",
+        "source_uri": r["source"],
         "paragraph_id": para_id,
         "volume": vol_num,
-        "start": start,
-        "end": end,
-        "text": body,
-        "provenance": provenance,
+        "start": r.get("start", ""),
+        "end": r.get("end", ""),
+        "text": r.get("body", ""),
+        "provenance": prov,
     }
 
 
 @router.get("/kb/{resource_id}", response_class=HTMLResponse)
 async def kb_resource(resource_id: str, request: Request):
-    # Try volume first
     data_dir = os.getenv("DATA_DIR", "./data/kg_foundation")
     vol = try_volume(resource_id, data_dir)
     if vol:
@@ -169,18 +167,13 @@ async def kb_resource(resource_id: str, request: Request):
             request, "volume.html", {"vol": vol, "volumes": volumes},
         )
 
-    g = _get_graph()
-    uri = VKB[resource_id]
-
-    # Try person
-    person = _load_person(g, uri)
+    person = await _load_person(resource_id)
     if person:
         return templates.TemplateResponse(
             request, "kb_person.html", {"person": person},
         )
 
-    # Try text chunk
-    chunk = _load_textchunk(g, uri)
+    chunk = await _load_textchunk(resource_id)
     if chunk:
         return templates.TemplateResponse(
             request, "kb_textchunk.html", {"chunk": chunk},
