@@ -3,7 +3,7 @@
 {% block title %}About — Viewsari{% endblock %}
 
 {% block extra_styles %}
-html, body { overflow: auto !important; height: auto !important; }
+html { overflow: hidden !important; height: 100% !important; } body { overflow-y: auto !important; height: 100% !important; }
 .about-layout {
   position: relative;
   top: 56px;
@@ -179,8 +179,8 @@ html, body { overflow: auto !important; height: auto !important; }
   <div class="about-card">
     <div class="about-person">
       <div class="about-person-info">
-        <div class="about-person-name">Prof. Dr. Harald Sack</div>
-        <div class="about-person-role">Thesis Supervisor</div>
+        <div class="about-person-name"><a href="https://www.fiz-karlsruhe.de/de/bereiche/lebenslauf-prof-dr-harald-sack" target="_blank" rel="noopener">Prof. Dr. Harald Sack</a></div>
+        <div class="about-person-role">Thesis supervisor</div>
         <div class="about-person-affil">
           Head of Information Service Engineering (ISE)<br>
           FIZ Karlsruhe &middot; Karlsruhe Institute of Technology (KIT)
@@ -193,7 +193,7 @@ html, body { overflow: auto !important; height: auto !important; }
     <div class="about-person">
       <div class="about-person-info">
         <div class="about-person-name"><a href="https://www.fmi.uni-jena.de/18546/clemens-beckstein" target="_blank" rel="noopener">Prof. Dr. Clemens Beckstein</a></div>
-        <div class="about-person-role">Thesis Supervisor</div>
+        <div class="about-person-role">Second supervisor</div>
         <div class="about-person-affil">
           Department of Mathematics and Computer Science<br>
           Friedrich Schiller University Jena

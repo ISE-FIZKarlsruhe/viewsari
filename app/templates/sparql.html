@@ -3,7 +3,7 @@
 {% block title %}Viewsari · SPARQL endpoint{% endblock %}
 
 {% block extra_styles %}
-html, body { overflow: auto !important; height: auto !important; }
+html { overflow: hidden !important; height: 100% !important; } body { overflow-y: auto !important; height: 100% !important; }
 .layout-sparql {
   position: relative;
   top: 56px;
@@ -370,10 +370,8 @@ var EXAMPLES = {
     'WHERE {\n' +
     '  ?entity a viewsari:0001012 ;\n' +
     '          rdfs:label ?label ;\n' +
-    '          owl:sameAs ?wikidata .\n' +
-    '  ?mention prov:wasGeneratedBy vkb:ground_truth_entity_linking_run_1 .\n' +
-    '  ?entity prov:wasDerivedFrom ?mention .\n' +
-    '  FILTER(STRSTARTS(STR(?wikidata), "http"))\n' +
+    '          owl:sameAs ?wikidata ;\n' +
+    '          prov:wasDerivedFrom ?mention .\n' +
     '}\n' +
     'GROUP BY ?entity ?label ?wikidata\n' +
     'ORDER BY DESC(?mentions)\n' +

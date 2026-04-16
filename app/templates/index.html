@@ -3,7 +3,7 @@
 {% block title %}Viewsari · Lives of the artists{% endblock %}
 
 {% block extra_styles %}
-html, body { overflow: auto !important; height: auto !important; }
+html { overflow: hidden !important; height: 100% !important; } body { overflow-y: auto !important; height: 100% !important; }
 .layout-home {
   position: relative;
   top: 56px;
@@ -321,20 +321,71 @@ html, body { overflow: auto !important; height: auto !important; }
   background: var(--bg);
   border: 1px solid var(--seam);
   border-radius: 8px;
-  padding: 12px 16px;
   margin-bottom: 8px;
+  overflow: hidden;
 }
+.home-rq summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.home-rq summary::-webkit-details-marker { display: none; }
+.home-rq summary::before {
+  content: '\25B6';
+  font-size: 8px;
+  color: var(--or);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.home-rq[open] summary::before { transform: rotate(90deg); }
 .home-rq-id {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--or);
-  margin-bottom: 4px;
+  flex-shrink: 0;
+  padding: 3px 12px;
+  border: 2px solid var(--or);
+  border-radius: 100px;
+  letter-spacing: .06em;
 }
 .home-rq-text {
   font-size: 13px;
   color: var(--tp);
   line-height: 1.6;
 }
+.home-rq-answer {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  color: var(--ts);
+  line-height: 1.7;
+}
+.home-rq-answer a {
+  color: var(--or);
+  font-weight: 600;
+  text-decoration: none;
+}
+.home-rq-answer a:hover { text-decoration: underline; }
+.home-rq-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.home-rq-link {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--pill-or);
+  color: var(--or);
+  text-decoration: none;
+  border: 1px solid rgba(240,90,26,.2);
+  transition: all .14s;
+}
+.home-rq-link:hover { background: var(--or); color: #fff; }
 .home-sections { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 /* ── KG preview ── */
 .home-kg-preview {
@@ -474,18 +525,60 @@ html, body { overflow: auto !important; height: auto !important; }
     </p>
 
     <div class="home-overview-heading">Research Questions</div>
-    <div class="home-rq">
-      <div class="home-rq-id">RQ1</div>
-      <div class="home-rq-text">In what way can semantic technologies model the heterogeneous content, provenance, and interpretive complexity of historical texts?</div>
-    </div>
-    <div class="home-rq">
-      <div class="home-rq-id">RQ2</div>
-      <div class="home-rq-text">How can NLP methods, and LLMs in particular, be used to extract and link both explicitly and implicitly mentioned entities?</div>
-    </div>
-    <div class="home-rq">
-      <div class="home-rq-id">RQ3</div>
-      <div class="home-rq-text">What are the common challenges in modeling complex, multilingual historical sources, and how can a generalizable approach be drawn?</div>
-    </div>
+    <details class="home-rq">
+      <summary>
+        <span class="home-rq-id">RQ1</span>
+        <span class="home-rq-text">In what way can semantic technologies model the heterogeneous content, provenance, and interpretive complexity of historical texts?</span>
+      </summary>
+      <div class="home-rq-answer">
+        The Viewsari ontology formalizes a three-layer model covering bibliographic structure,
+        document components, and extracted entities with full PROV-O provenance. Every mention,
+        entity, and extraction run is traceable back to its source paragraph and the agent that
+        produced it.
+        <div class="home-rq-links">
+          <a class="home-rq-link" href="/ontology">Ontology overview</a>
+          <a class="home-rq-link" href="/ontology/docs">WIDOCO documentation</a>
+          <a class="home-rq-link" href="/kb">Knowledge base</a>
+          <a class="home-rq-link" href="/sparql">SPARQL endpoint</a>
+        </div>
+      </div>
+    </details>
+    <details class="home-rq">
+      <summary>
+        <span class="home-rq-id">RQ2</span>
+        <span class="home-rq-text">How can NLP methods, and LLMs in particular, be used to extract and link both explicitly and implicitly mentioned entities?</span>
+      </summary>
+      <div class="home-rq-answer">
+        The ObliquER pipeline uses LLM-based named entity recognition with few-shot and
+        ontology-guided prompting strategies. Extraction runs are recorded as per-paragraph
+        PROV activities with full prompt text, timestamps, and model provenance. Entity linking
+        from the ground truth maps mentions to Wikidata or OOKB identifiers.
+        <div class="home-rq-links">
+          <a class="home-rq-link" href="/obliquer">ObliquER pipeline</a>
+          <a class="home-rq-link" href="/obliquer/explore">Knowledge graph explorer</a>
+          <a class="home-rq-link" href="/obliquer/demo">Interactive demo</a>
+          <a class="home-rq-link" href="/annotations">Annotation corpus</a>
+        </div>
+      </div>
+    </details>
+    <details class="home-rq">
+      <summary>
+        <span class="home-rq-id">RQ3</span>
+        <span class="home-rq-text">What are the common challenges in modeling complex, multilingual historical sources, and how can a generalizable approach be drawn?</span>
+      </summary>
+      <div class="home-rq-answer">
+        Vasari's text features implicit references, long-tail entities absent from standard
+        knowledge bases, and attributions presented as facts. The Viewsari approach addresses
+        these through OOKB entity handling, coreference resolution across biographies,
+        and a provenance-first KG design that separates extraction from interpretation &mdash;
+        principles applicable to other cultural heritage corpora.
+        <div class="home-rq-links">
+          <a class="home-rq-link" href="/kb">Knowledge base (OOKB entities)</a>
+          <a class="home-rq-link" href="/explore">Ground truth KG explorer</a>
+          <a class="home-rq-link" href="/publications">Publications</a>
+        </div>
+      </div>
+    </details>
   </div>
 
   <div class="home-kg-preview">
