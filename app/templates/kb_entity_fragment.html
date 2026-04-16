@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Viewsari · Entity{% endblock %}
+
+{% block extra_styles %}
+html, body { overflow: auto !important; height: auto !important; }
+.kbe-layout {
+  position: relative;
+  top: 56px;
+  padding: 40px 40px 80px;
+  min-height: calc(100vh - 56px);
+  background: var(--bg2);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.kbe-back { font-size: 12px; font-weight: 600; color: var(--ts); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 20px; }
+.kbe-back:hover { color: var(--or); }
+.kbe-title { font-size: 22px; font-weight: 700; color: var(--tp); margin-bottom: 4px; line-height:1.3; }
+.kbe-id { font-size: 11px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 8px; word-break: break-all; }
+.kbe-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.kbe-tag { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+.kbe-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+.kbe-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
+.kbe-tag.kind { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); text-transform: uppercase; letter-spacing: .08em; }
+.kbe-tag.prov { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); font-family: 'Menlo', monospace; font-size: 9px; }
+.kbe-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+.kbe-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.kbe-surfaces { display: flex; flex-wrap: wrap; gap: 6px; }
+.kbe-surface { font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 6px; padding: 6px 12px; color: var(--tp); line-height: 1.4; }
+.kbe-wd-link { font-size: 13px; font-weight: 600; color: var(--bl); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; }
+.kbe-wd-link:hover { text-decoration: underline; }
+.kbe-occ { display:flex;align-items:baseline;gap:10px;font-size:12px;background:var(--bg);border:1px solid var(--seam);border-radius:8px;padding:10px 14px;text-decoration:none;transition:all .14s;margin-bottom:6px; }
+.kbe-occ:hover { border-color:var(--or);background:#FFFBF7; }
+.kbe-empty { font-size: 13px; color: var(--ts); text-align: center; padding: 40px; }
+{% endblock %}
+
+{% block topbar_chips %}
+<span class="bio-chip">Knowledge base</span>
+{% endblock %}
+
+{% block content %}
+<div class="kbe-layout">
+  <a class="kbe-back" href="/kb">&larr; Back to Knowledge Base</a>
+  <div id="entity-content">
+    <div class="kbe-empty">Reading entity from URL fragment...</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+function renderEntity(ent) {
+  var el = document.getElementById("entity-content");
+  var h = '';
+  h += '<div class="kbe-title">'+esc(ent.label || ent.entity_id)+'</div>';
+  h += '<div class="kbe-id">'+esc(ent.entity_id)+'</div>';
+  h += '<div class="kbe-tags">';
+  if(ent.kind) h += '<span class="kbe-tag kind">'+esc(ent.kind)+'</span>';
+  if(ent.ookb) h += '<span class="kbe-tag ookb">OOKB</span>';
+  if(ent.wikidata) h += '<span class="kbe-tag wd">'+esc(ent.wikidata)+'</span>';
+  if(ent.generated_by) h += '<span class="kbe-tag prov">'+esc(ent.generated_by)+'</span>';
+  h += '</div>';
+
+  if(ent.wikidata){
+    h += '<a class="kbe-wd-link" href="https://www.wikidata.org/wiki/'+esc(ent.wikidata)+'" target="_blank">&nearr; View on Wikidata ('+esc(ent.wikidata)+')</a>';
+  }
+
+  if(ent.alt_labels && ent.alt_labels.length){
+    h += '<div class="kbe-section">Alternative labels ('+ent.alt_labels.length+')</div>';
+    h += '<div class="kbe-surfaces">';
+    ent.alt_labels.forEach(function(s){ h += '<div class="kbe-surface">&ldquo;'+esc(s)+'&rdquo;</div>'; });
+    h += '</div>';
+  }
+
+  if(ent.occurrences && ent.occurrences.length){
+    h += '<div class="kbe-section">Occurrences ('+ent.occurrences.length;
+    if(ent.paragraphs) h += ' across '+ent.paragraphs.length+' paragraph'+(ent.paragraphs.length!==1?'s':'');
+    h += ')</div>';
+    ent.occurrences.forEach(function(occ){
+      if(occ.bio){
+        h += '<a class="kbe-occ" href="/biography/'+encodeURIComponent(occ.bio)+'/'+occ.para+'?highlight='+encodeURIComponent(occ.surface)+'">';
+        h += '<span style="font-weight:600;color:var(--pu);min-width:100px">'+esc(occ.bio.replace(/-/g,' '))+'</span>';
+      } else {
+        h += '<div class="kbe-occ">';
+      }
+      h += '<span style="color:var(--tt);font-size:10px;min-width:60px">vol. '+esc(occ.vol)+' · &sect;'+esc(occ.para)+'</span>';
+      h += '<span style="color:var(--tp);flex:1">&ldquo;'+esc(occ.surface)+'&rdquo;</span>';
+      h += occ.bio ? '</a>' : '</div>';
+    });
+  }
+
+  if(ent.involves && ent.involves.length){
+    h += '<div class="kbe-section">Involves ('+ent.involves.length+')</div>';
+    ent.involves.forEach(function(p){
+      h += '<a href="/kb/1.0#'+encodeURIComponent(p)+'" style="display:inline-block;font-size:12px;padding:4px 12px;background:var(--pill-pu);color:var(--pu);border-radius:100px;text-decoration:none;border:1px solid rgba(124,58,237,.2);margin:0 6px 6px 0">'+esc(p)+'</a>';
+    });
+  }
+
+  el.innerHTML = h;
+  document.title = 'Viewsari · ' + (ent.label || ent.entity_id);
+}
+
+function loadFromHash() {
+  var id = window.location.hash.substring(1);
+  if(!id) {
+    document.getElementById("entity-content").innerHTML = '<div class="kbe-empty">No entity specified in URL fragment.</div>';
+    return;
+  }
+  id = decodeURIComponent(id);
+  fetch('/kb/entity-data/' + encodeURIComponent(id))
+    .then(function(r){ return r.json(); })
+    .then(function(ent){
+      if(ent.error){
+        document.getElementById("entity-content").innerHTML = '<div class="kbe-empty">Entity "'+esc(id)+'" not found.</div>';
+      } else {
+        renderEntity(ent);
+      }
+    })
+    .catch(function(){
+      document.getElementById("entity-content").innerHTML = '<div class="kbe-empty">Failed to load entity.</div>';
+    });
+}
+
+window.addEventListener("hashchange", loadFromHash);
+loadFromHash();
+</script>
+{% endblock %}

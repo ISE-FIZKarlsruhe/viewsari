@@ -32,6 +32,24 @@ async def obliquer_explore(request: Request):
     return templates.TemplateResponse(request, "obliquer_explore.html", {"strategies": strategies})
 
 
+RESULTS_BASE = Path("obliquer/data/viewsari/prompting_results/oss_v3")
+
+
+@router.get("/obliquer/explore/prompt", response_class=JSONResponse)
+async def obliquer_explore_prompt(
+    id: str = Query(...),
+):
+    import re
+    m = re.match(r"^prompt_([a-zA-Z0-9_]+?)_vol(\d+)_(paragraph_\d+_\d+)$", id)
+    if not m:
+        raise HTTPException(status_code=404, detail="Invalid prompt ID")
+    strategy, vol, stem = m.group(1), m.group(2), m.group(3)
+    prompt_file = RESULTS_BASE / strategy / f"volume_{vol}" / f"{stem}.j2"
+    if not prompt_file.exists():
+        raise HTTPException(status_code=404, detail="Prompt file not found")
+    return JSONResponse({"id": id, "text": prompt_file.read_text(encoding="utf-8")})
+
+
 @router.get("/obliquer/explore/subgraph", response_class=JSONResponse)
 async def obliquer_explore_subgraph(
     strategy: str = Query(...),

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Viewsari · Knowledge Base{% endblock %}
+{% block title %}Viewsari · Knowledge base{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: auto !important; height: auto !important; }
@@ -13,12 +13,11 @@ html, body { overflow: auto !important; height: auto !important; }
   margin: 0 auto;
 }
 .kb-header { margin-bottom: 32px; }
-.kb-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--tp); margin-bottom: 6px; }
+.kb-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--or); margin-bottom: 6px; }
 .kb-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; max-width: 700px; }
 .kb-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
 .kb-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
 
-/* Stats grid */
 .kb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
 .kb-stat { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 16px 18px; }
 .kb-stat-value { font-size: 28px; font-weight: 700; color: var(--tp); letter-spacing: -.02em; }
@@ -28,208 +27,194 @@ html, body { overflow: auto !important; height: auto !important; }
 .kb-stat.pu .kb-stat-value { color: var(--pu); }
 .kb-stat.rd .kb-stat-value { color: #B91C1C; }
 
-/* Mention type breakdown */
-.kb-type-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
-.kb-type-bar div { height: 100%; }
-.kb-type-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
-.kb-type-legend span { font-size: 11px; color: var(--ts); display: flex; align-items: center; gap: 4px; }
-.kb-type-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
-
-/* Bio table */
-.kb-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; overflow: hidden; }
-.kb-table th { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tt); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--seam); background: var(--bg2); }
-.kb-table td { padding: 8px 14px; border-bottom: 1px solid var(--bg3); color: var(--tp); }
-.kb-table tr:last-child td { border-bottom: none; }
-.kb-table tr:hover td { background: var(--bg2); }
-.kb-table a { color: var(--bl); text-decoration: none; font-weight: 600; }
-.kb-table a:hover { text-decoration: underline; }
-.kb-table .num { text-align: right; font-variant-numeric: tabular-nums; }
-
-/* Entity list */
 .kb-ent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
 .kb-ent-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 14px 16px; transition: all .14s; text-decoration: none; display: block; }
 .kb-ent-card:hover { border-color: var(--or); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
 .kb-ent-label { font-size: 13px; font-weight: 600; color: var(--tp); margin-bottom: 4px; line-height: 1.3; }
-.kb-ent-id { font-size: 10px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 6px; }
+.kb-ent-id { font-size: 10px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 6px; word-break: break-all; }
 .kb-ent-surfaces { font-size: 11px; color: var(--ts); line-height: 1.6; }
 .kb-ent-surfaces em { font-style: normal; background: var(--pill-bl); padding: 1px 5px; border-radius: 3px; font-size: 10px; }
-.kb-ent-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.kb-ent-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; align-items:center; }
 .kb-ent-tag { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
 .kb-ent-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
 .kb-ent-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
-.kb-ent-tag.bio { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+.kb-ent-tag.loc { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); font-family: 'Menlo', monospace; font-size: 9px; }
 
-/* Tabs */
-.kb-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+.kb-tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
 .kb-tab { font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 100px; border: 1.5px solid var(--seam); background: transparent; color: var(--ts); cursor: pointer; font-family: inherit; transition: all .14s; }
 .kb-tab:hover { border-color: var(--or); color: var(--or); }
 .kb-tab.active { background: var(--or); color: #fff; border-color: var(--or); }
 .kb-tab-panel { display: none; }
 .kb-tab-panel.active { display: block; }
 
-/* Search */
 .kb-search { width: 100%; max-width: 400px; padding: 8px 14px; border: 1.5px solid var(--seam); border-radius: 100px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 16px; }
 .kb-search:focus { border-color: var(--or); }
+
+.kb-prov { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.kb-prov-chip { font-size: 10px; font-family: 'Menlo', monospace; padding: 3px 10px; border-radius: 100px; background: var(--bg); border: 1px solid var(--seam); color: var(--ts); }
+
+.kb-pager { display: flex; gap: 8px; align-items: center; margin-top: 20px; font-size: 12px; color: var(--ts); }
+.kb-pager button { font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 100px; border: 1.5px solid var(--seam); background: var(--bg); color: var(--ts); cursor: pointer; font-family: inherit; }
+.kb-pager button:hover:not(:disabled) { border-color: var(--or); color: var(--or); }
+.kb-pager button:disabled { opacity: .4; cursor: default; }
+
+.kb-cooc-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 12px 16px; }
+.kb-cooc-label { font-size: 12px; color: var(--tp); line-height: 1.5; margin-bottom: 6px; }
+.kb-cooc-involves { display: flex; flex-wrap: wrap; gap: 4px; }
+.kb-cooc-involves a { font-size: 10px; padding: 2px 8px; background: var(--pill-pu); color: var(--pu); border-radius: 100px; text-decoration: none; border: 1px solid rgba(124,58,237,.2); }
+.kb-cooc-involves a:hover { background: var(--pu); color: #fff; }
 {% endblock %}
 
 {% block topbar_chips %}
-<span class="bio-chip">Knowledge Base</span>
+<span class="bio-chip">Knowledge base</span>
 {% endblock %}
 
-{% block status %}{{ kb.total_entities }} entities{% endblock %}
+{% block status %}{{ kb.counts.total }} entities{% endblock %}
 
 {% block content %}
 <div class="kb-layout">
   <div class="kb-header">
-    <div class="kb-title">Viewsari Knowledge Base</div>
+    <div class="kb-title">Viewsari knowledge base</div>
     <div class="kb-subtitle">
-      Entity inventory extracted by the ObliquER pipeline from {{ kb.bio_stats | length }} annotated biographies
-      in the ground truth corpus. Entities are linked to Wikidata where possible; those without
-      a knowledge base counterpart are classified as Out-of-Knowledge-Base (OOKB).
+      Entities from the Viewsari knowledge graph: consolidated <strong>persons</strong>
+      (reconciled across biographies and linked to Wikidata where possible),
+      per-paragraph <strong>artworks</strong> extracted by the ObliquER pipeline, and
+      <strong>co-occurrences</strong> between persons within a single paragraph.
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="kb-section">Overview</div>
+  <div class="kb-section">Totals across all runs</div>
   <div class="kb-stats">
     <div class="kb-stat">
       <div class="kb-stat-value">{{ "{:,}".format(kb.total_mentions) }}</div>
-      <div class="kb-stat-label">Total mentions</div>
-    </div>
-    <div class="kb-stat or">
-      <div class="kb-stat-value">{{ kb.total_entities }}</div>
-      <div class="kb-stat-label">Unique entities</div>
+      <div class="kb-stat-label">Mentions (GT + ObliquER + other)</div>
     </div>
     <div class="kb-stat bl">
-      <div class="kb-stat-value">{{ kb.wd_count }}</div>
-      <div class="kb-stat-label">Wikidata-linked</div>
+      <div class="kb-stat-value">{{ "{:,}".format(kb.counts.artworks) }}</div>
+      <div class="kb-stat-label">Artwork entities</div>
+    </div>
+    <div class="kb-stat or">
+      <div class="kb-stat-value">{{ kb.counts.persons }}</div>
+      <div class="kb-stat-label">Person entities</div>
+    </div>
+    <div class="kb-stat pu">
+      <div class="kb-stat-value">{{ kb.counts.cooccurrences }}</div>
+      <div class="kb-stat-label">Co-occurrences</div>
+    </div>
+  </div>
+
+  <div class="kb-section">Breakdown by source</div>
+  <div class="kb-stats">
+    {% set gt = kb.sources.get('gt', {'mentions':0,'artworks':0}) %}
+    {% set oq = kb.sources.get('obliquer', {'mentions':0,'artworks':0}) %}
+    {% set ot = kb.sources.get('other', {'mentions':0,'artworks':0}) %}
+    <div class="kb-stat or">
+      <div class="kb-stat-value">{{ "{:,}".format(gt.mentions) }}</div>
+      <div class="kb-stat-label">Ground-truth mentions</div>
+      <div style="font-size:10px;color:var(--tt);margin-top:4px">{{ "{:,}".format(gt.artworks) }} artwork entities</div>
+    </div>
+    <div class="kb-stat bl">
+      <div class="kb-stat-value">{{ "{:,}".format(oq.mentions) }}</div>
+      <div class="kb-stat-label">ObliquER mentions</div>
+      <div style="font-size:10px;color:var(--tt);margin-top:4px">{{ "{:,}".format(oq.artworks) }} artwork entities</div>
+    </div>
+    <div class="kb-stat">
+      <div class="kb-stat-value">{{ "{:,}".format(ot.mentions) }}</div>
+      <div class="kb-stat-label">Other runs (coref / cooccurrence)</div>
     </div>
     <div class="kb-stat rd">
-      <div class="kb-stat-value">{{ kb.ookb_count }}</div>
-      <div class="kb-stat-label">Out-of-KB (OOKB)</div>
+      <div class="kb-stat-value">{{ kb.persons_stats.ookb }}</div>
+      <div class="kb-stat-label">OOKB persons</div>
     </div>
   </div>
 
-  <!-- Mention type breakdown -->
-  <div class="kb-section">Mention type distribution</div>
-  {% set exp = kb.mention_types.get('explicit artwork mention', 0) %}
-  {% set imp = kb.mention_types.get('implicit artwork mention', 0) %}
-  {% set cor = kb.mention_types.get('coreferent', 0) %}
-  {% set gen = kb.mention_types.get('generic mention', 0) %}
-  {% set tot = exp + imp + cor + gen %}
-  <div class="kb-type-bar">
-    <div style="width:{{ (exp/tot*100)|round(1) }}%;background:var(--or)"></div>
-    <div style="width:{{ (imp/tot*100)|round(1) }}%;background:var(--bl)"></div>
-    <div style="width:{{ (cor/tot*100)|round(1) }}%;background:var(--pu)"></div>
-    <div style="width:{{ (gen/tot*100)|round(1) }}%;background:var(--seam)"></div>
-  </div>
-  <div class="kb-type-legend">
-    <span><i style="background:var(--or)"></i> Explicit ({{ exp }})</span>
-    <span><i style="background:var(--bl)"></i> Implicit ({{ imp }})</span>
-    <span><i style="background:var(--pu)"></i> Coreferent ({{ cor }})</span>
-    <span><i style="background:var(--seam)"></i> Generic ({{ gen }})</span>
-  </div>
 
-  <!-- Per-biography table -->
-  <div class="kb-section">Per-biography statistics</div>
-  <table class="kb-table">
-    <thead>
-      <tr>
-        <th>Biography</th>
-        <th class="num">Mentions</th>
-        <th class="num">Entities</th>
-        <th class="num">Wikidata</th>
-        <th class="num">OOKB</th>
-        <th class="num">Linking %</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for slug, st in kb.bio_stats.items() | sort(attribute='1.slug') %}
-      <tr>
-        <td><a href="/biography/{{ slug }}">{{ slug | replace('-', ' ') | title }}</a></td>
-        <td class="num">{{ st.mentions }}</td>
-        <td class="num">{{ st.entities }}</td>
-        <td class="num">{{ st.wd }}</td>
-        <td class="num">{{ st.ookb }}</td>
-        <td class="num">{% if st.entities > 0 %}{{ ((st.wd / st.entities) * 100) | round(1) }}%{% else %}&mdash;{% endif %}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <!-- Entity browser -->
   <div class="kb-section">Entity browser</div>
   <div class="kb-tabs">
-    <button class="kb-tab active" onclick="showTab('all',this)">All ({{ kb.total_entities }})</button>
-    <button class="kb-tab" onclick="showTab('ookb',this)">OOKB ({{ kb.ookb_count }})</button>
-    <button class="kb-tab" onclick="showTab('wd',this)">Wikidata-linked ({{ kb.wd_count }})</button>
+    <button class="kb-tab active" onclick="showTab('persons',this)">Persons ({{ kb.counts.persons }})</button>
+    <button class="kb-tab" onclick="showTab('artworks',this)">Artworks ({{ "{:,}".format(kb.counts.artworks) }})</button>
+    <button class="kb-tab" onclick="showTab('obq_explicit',this)">ObliquER explicit mentions ({{ "{:,}".format(kb.obq_explicit | length) }})</button>
+    <button class="kb-tab" onclick="showTab('obq_implicit',this)">ObliquER implicit mentions ({{ "{:,}".format(kb.obq_implicit | length) }})</button>
+    <button class="kb-tab" onclick="showTab('cooccurrences',this)">Co-occurrences ({{ kb.counts.cooccurrences }})</button>
   </div>
-  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-    <span style="font-size:10px;font-weight:600;color:var(--tt);text-transform:uppercase;letter-spacing:.06em">Mention types:</span>
-    <button class="kb-tab active" style="font-size:10px;padding:4px 12px" data-filter="all" onclick="toggleTypeFilter('all',this)">All</button>
-    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--or);color:var(--or)" data-filter="explicit" onclick="toggleTypeFilter('explicit',this)">Explicit</button>
-    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--bl);color:var(--bl)" data-filter="implicit" onclick="toggleTypeFilter('implicit',this)">Implicit</button>
-    <button class="kb-tab" style="font-size:10px;padding:4px 12px;border-color:var(--seam);color:var(--ts)" data-filter="generic" onclick="toggleTypeFilter('generic',this)">Generic</button>
-  </div>
-  <input class="kb-search" id="kb-search" type="text" placeholder="Search entities by label or surface form..." oninput="filterEntities()">
 
-  <div class="kb-tab-panel active" id="panel-all">
-    <div class="kb-ent-grid" id="grid-all">
-      {% for eid, ent in kb.entities.items() | sort(attribute='1.label') %}
-      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
-        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
+  <!-- PERSONS -->
+  <div class="kb-tab-panel active" id="panel-persons">
+    <input class="kb-search" type="text" placeholder="Search persons by label or alt label..." oninput="filterStatic('panel-persons', this.value)">
+    <div class="kb-ent-grid">
+      {% for eid, ent in kb.persons.items() | sort(attribute='1.label') %}
+      <a class="kb-ent-card" href="/kb/1.0#{{ eid }}"
+         data-search="{{ ent.label | lower }} {{ ent.alt_labels | join(' ') | lower }}">
+        <div class="kb-ent-label">{{ ent.label }}</div>
         <div class="kb-ent-id">{{ eid }}</div>
+        {% if ent.alt_labels %}
         <div class="kb-ent-surfaces">
-          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
-          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
+          {% for s in ent.alt_labels[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
+          {% if ent.alt_labels | length > 4 %}<span style="color:var(--tt)">+{{ ent.alt_labels | length - 4 }} more</span>{% endif %}
         </div>
+        {% endif %}
         <div class="kb-ent-meta">
           {% if ent.ookb %}<span class="kb-ent-tag ookb">OOKB</span>{% endif %}
           {% if ent.wikidata %}<span class="kb-ent-tag wd">{{ ent.wikidata }}</span>{% endif %}
-          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
-          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
+          <span style="font-size:10px;color:var(--tt)">{{ ent.alt_labels | length }} alt label{{ 's' if ent.alt_labels | length != 1 }}</span>
         </div>
       </a>
       {% endfor %}
     </div>
   </div>
 
-  <div class="kb-tab-panel" id="panel-ookb">
-    <div class="kb-ent-grid" id="grid-ookb">
-      {% for eid, ent in kb.ookb_entities.items() | sort(attribute='1.label') %}
-      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
-        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
-        <div class="kb-ent-id">{{ eid }}{% if ent.ookb_uri %} &middot; <span style="font-size:9px;color:var(--tt)">{{ ent.ookb_uri | truncate(60) }}</span>{% endif %}</div>
-        <div class="kb-ent-surfaces">
-          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
-          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
-        </div>
-        <div class="kb-ent-meta">
-          <span class="kb-ent-tag ookb">OOKB</span>
-          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
-          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
-        </div>
-      </a>
-      {% endfor %}
+  <!-- ARTWORKS (paginated, JS-driven) -->
+  <div class="kb-tab-panel" id="panel-artworks">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+      <span style="font-size:10px;font-weight:600;color:var(--tt);text-transform:uppercase;letter-spacing:.06em;margin-right:4px">Source:</span>
+      <button class="kb-tab active" style="font-size:10px;padding:4px 12px" data-source="all" onclick="setArtworkSource('all', this)">All</button>
+      <button class="kb-tab" style="font-size:10px;padding:4px 12px" data-source="gt" onclick="setArtworkSource('gt', this)">Ground truth ({{ "{:,}".format(gt.artworks) }})</button>
+      <button class="kb-tab" style="font-size:10px;padding:4px 12px" data-source="obliquer" onclick="setArtworkSource('obliquer', this)">ObliquER ({{ "{:,}".format(oq.artworks) }})</button>
+    </div>
+    <input class="kb-search" id="artwork-search" type="text" placeholder="Search artworks by label...">
+    <div class="kb-ent-grid" id="artworks-grid"></div>
+    <div class="kb-pager">
+      <button id="artworks-prev" onclick="artworksPage(-1)">← Prev</button>
+      <button id="artworks-next" onclick="artworksPage(1)">Next →</button>
+      <span id="artworks-status"></span>
     </div>
   </div>
 
-  <div class="kb-tab-panel" id="panel-wd">
-    <div class="kb-ent-grid" id="grid-wd">
-      {% for eid, ent in kb.wd_entities.items() | sort(attribute='1.label') %}
-      <a class="kb-ent-card" href="/kb/entity/{{ eid }}" data-search="{{ ent.label | lower }} {{ ent.surfaces | join(' ') | lower }}" data-types="{{ ent.types | join(' ') }}">
-        <div class="kb-ent-label">{{ ent.label or ent.surfaces[0] if ent.surfaces else eid }}</div>
-        <div class="kb-ent-id">{{ eid }}</div>
-        <div class="kb-ent-surfaces">
-          {% for s in ent.surfaces[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
-          {% if ent.surfaces | length > 4 %}<span style="color:var(--tt)">+{{ ent.surfaces | length - 4 }} more</span>{% endif %}
+  <!-- COOCCURRENCES -->
+  <!-- ObliquER EXPLICIT MENTIONS (paginated) -->
+  <div class="kb-tab-panel" id="panel-obq_explicit">
+    <input class="kb-search" id="obq-explicit-search" type="text" placeholder="Search explicit mentions by surface form...">
+    <div class="kb-ent-grid" id="obq-explicit-grid"></div>
+    <div class="kb-pager">
+      <button id="obq-explicit-prev" onclick="obqPage('explicit',-1)">← Prev</button>
+      <button id="obq-explicit-next" onclick="obqPage('explicit',1)">Next →</button>
+      <span id="obq-explicit-status"></span>
+    </div>
+  </div>
+
+  <!-- ObliquER IMPLICIT MENTIONS (paginated) -->
+  <div class="kb-tab-panel" id="panel-obq_implicit">
+    <input class="kb-search" id="obq-implicit-search" type="text" placeholder="Search implicit mentions by surface form...">
+    <div class="kb-ent-grid" id="obq-implicit-grid"></div>
+    <div class="kb-pager">
+      <button id="obq-implicit-prev" onclick="obqPage('implicit',-1)">← Prev</button>
+      <button id="obq-implicit-next" onclick="obqPage('implicit',1)">Next →</button>
+      <span id="obq-implicit-status"></span>
+    </div>
+  </div>
+
+  <div class="kb-tab-panel" id="panel-cooccurrences">
+    <input class="kb-search" type="text" placeholder="Search co-occurrences..." oninput="filterStatic('panel-cooccurrences', this.value)">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      {% for eid, cc in kb.cooccurrences.items() | sort(attribute='1.label') %}
+      <div class="kb-cooc-card" data-search="{{ cc.label | lower }}">
+        <div class="kb-cooc-label">{{ cc.label }}</div>
+        <div class="kb-cooc-involves">
+          {% for p in cc.involves %}
+          <a href="/kb/1.0#{{ p }}">{{ p }}</a>
+          {% endfor %}
         </div>
-        <div class="kb-ent-meta">
-          <span class="kb-ent-tag wd">{{ ent.wikidata }}</span>
-          <span class="kb-ent-tag bio">{{ ent.bios | length }} bio{{ 's' if ent.bios | length != 1 }}</span>
-          <span style="font-size:10px;color:var(--tt)">{{ ent.mention_count }} mentions</span>
-        </div>
-      </a>
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -238,35 +223,166 @@ html, body { overflow: auto !important; height: auto !important; }
 
 {% block scripts %}
 <script>
-var activeTypeFilter = "all";
-
 function showTab(name, btn) {
-  // Only toggle among the top row (entity-level) tabs
   document.querySelectorAll(".kb-tabs .kb-tab").forEach(function(b){ b.classList.remove("active"); });
   document.querySelectorAll(".kb-tab-panel").forEach(function(p){ p.classList.remove("active"); });
   if(btn) btn.classList.add("active");
   document.getElementById("panel-"+name).classList.add("active");
-  filterEntities();
+  if(name === "artworks" && !artworksInitialized){
+    artworksInitialized = true;
+    fetchArtworks();
+  }
+  if(name === "obq_explicit" && !obqState.explicit.initialized){
+    obqState.explicit.initialized = true;
+    fetchObq("explicit");
+  }
+  if(name === "obq_implicit" && !obqState.implicit.initialized){
+    obqState.implicit.initialized = true;
+    fetchObq("implicit");
+  }
 }
 
-function toggleTypeFilter(type, btn) {
-  activeTypeFilter = type;
-  document.querySelectorAll("[data-filter]").forEach(function(b){ b.classList.remove("active"); });
-  btn.classList.add("active");
-  filterEntities();
-}
-
-function filterEntities() {
-  var q = document.getElementById("kb-search").value.toLowerCase();
-  var active = document.querySelector(".kb-tab-panel.active");
-  if(!active) return;
-  active.querySelectorAll(".kb-ent-card").forEach(function(card){
-    var text = card.getAttribute("data-search") || "";
-    var types = card.getAttribute("data-types") || "";
-    var matchText = !q || text.indexOf(q) >= 0;
-    var matchType = activeTypeFilter === "all" || types.indexOf(activeTypeFilter) >= 0;
-    card.style.display = (matchText && matchType) ? "" : "none";
+function filterStatic(panelId, q) {
+  q = q.toLowerCase();
+  document.querySelectorAll("#"+panelId+" [data-search]").forEach(function(el){
+    var text = el.getAttribute("data-search") || "";
+    el.style.display = (!q || text.indexOf(q) >= 0) ? "" : "none";
   });
 }
+
+// ── Artworks pagination ─────────────────────────────────────────────────
+var artworksInitialized = false;
+var artworksOffset = 0;
+var artworksLimit = 60;
+var artworksQuery = "";
+var artworksSource = "all";
+var artworksTotal = 0;
+
+function setArtworkSource(src, btn){
+  artworksSource = src;
+  document.querySelectorAll("[data-source]").forEach(function(b){ b.classList.remove("active"); });
+  btn.classList.add("active");
+  artworksOffset = 0;
+  fetchArtworks();
+}
+
+function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+function fetchArtworks(){
+  var url = "/kb/artworks.json?offset=" + artworksOffset + "&limit=" + artworksLimit
+    + "&source=" + artworksSource + "&q=" + encodeURIComponent(artworksQuery);
+  document.getElementById("artworks-status").textContent = "Loading…";
+  fetch(url).then(function(r){ return r.json(); }).then(function(data){
+    artworksTotal = data.total;
+    renderArtworks(data.items);
+    var shown = artworksOffset + data.items.length;
+    document.getElementById("artworks-status").textContent =
+      (artworksOffset+1) + "–" + shown + " of " + data.total.toLocaleString();
+    document.getElementById("artworks-prev").disabled = artworksOffset === 0;
+    document.getElementById("artworks-next").disabled = shown >= data.total;
+  });
+}
+
+function renderArtworks(items){
+  var grid = document.getElementById("artworks-grid");
+  grid.innerHTML = "";
+  items.forEach(function(e){
+    var a = document.createElement("a");
+    a.className = "kb-ent-card";
+    a.href = "/kb/1.0#" + e.entity_id;
+    var h = '<div class="kb-ent-label">'+esc(e.label)+'</div>';
+    h += '<div class="kb-ent-id">'+esc(e.entity_id)+'</div>';
+    h += '<div class="kb-ent-meta">';
+    if(e.source === "gt")        h += '<span class="kb-ent-tag" style="background:var(--pill-or);color:var(--or);border:1px solid rgba(240,90,26,.25)">GT</span>';
+    else if(e.source === "obliquer") h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">ObliquER</span>';
+    if(e.vol && e.para){
+      h += '<span class="kb-ent-tag loc">vol. '+esc(e.vol)+' · §'+esc(e.para)+'</span>';
+    }
+    if(e.wikidata) h += '<span class="kb-ent-tag wd">'+esc(e.wikidata)+'</span>';
+    if(e.ookb)     h += '<span class="kb-ent-tag ookb">OOKB</span>';
+    h += '</div>';
+    a.innerHTML = h;
+    grid.appendChild(a);
+  });
+}
+
+function artworksPage(delta){
+  var newOffset = artworksOffset + delta * artworksLimit;
+  if(newOffset < 0) newOffset = 0;
+  if(newOffset >= artworksTotal) return;
+  artworksOffset = newOffset;
+  fetchArtworks();
+  window.scrollTo({top: document.getElementById("panel-artworks").offsetTop - 80, behavior:"smooth"});
+}
+
+var artworksSearchTimer;
+document.getElementById("artwork-search").addEventListener("input", function(ev){
+  clearTimeout(artworksSearchTimer);
+  artworksSearchTimer = setTimeout(function(){
+    artworksQuery = ev.target.value;
+    artworksOffset = 0;
+    fetchArtworks();
+  }, 250);
+});
+
+// ── ObliquER mention tabs ───────────────────────────────────────────────
+var obqState = {
+  explicit: {initialized:false, offset:0, limit:60, query:"", total:0},
+  implicit: {initialized:false, offset:0, limit:60, query:"", total:0}
+};
+
+function fetchObq(kind){
+  var st = obqState[kind];
+  var url = "/kb/obq_"+kind+".json?offset="+st.offset+"&limit="+st.limit+"&q="+encodeURIComponent(st.query);
+  document.getElementById("obq-"+kind+"-status").textContent = "Loading…";
+  fetch(url).then(function(r){return r.json();}).then(function(data){
+    st.total = data.total;
+    renderObq(kind, data.items);
+    var shown = st.offset + data.items.length;
+    document.getElementById("obq-"+kind+"-status").textContent =
+      (st.offset+1)+"–"+shown+" of "+data.total.toLocaleString();
+    document.getElementById("obq-"+kind+"-prev").disabled = st.offset===0;
+    document.getElementById("obq-"+kind+"-next").disabled = shown>=data.total;
+  });
+}
+
+function renderObq(kind, items){
+  var grid = document.getElementById("obq-"+kind+"-grid");
+  grid.innerHTML = "";
+  items.forEach(function(e){
+    var div = document.createElement("div");
+    div.className = "kb-ent-card";
+    var h = '<div class="kb-ent-label">&ldquo;'+esc(e.surface)+'&rdquo;</div>';
+    h += '<div class="kb-ent-id">'+esc(e.mention_id)+'</div>';
+    h += '<div class="kb-ent-meta">';
+    h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">'+esc(e.strategy)+'</span>';
+    if(e.vol && e.para) h += '<span class="kb-ent-tag loc">vol. '+esc(e.vol)+' · §'+esc(e.para)+'</span>';
+    h += '</div>';
+    div.innerHTML = h;
+    grid.appendChild(div);
+  });
+}
+
+function obqPage(kind, delta){
+  var st = obqState[kind];
+  var n = st.offset + delta * st.limit;
+  if(n<0) n=0;
+  if(n>=st.total) return;
+  st.offset = n;
+  fetchObq(kind);
+  window.scrollTo({top:document.getElementById("panel-obq_"+kind).offsetTop-80, behavior:"smooth"});
+}
+
+["explicit","implicit"].forEach(function(kind){
+  var timer;
+  document.getElementById("obq-"+kind+"-search").addEventListener("input", function(ev){
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      obqState[kind].query = ev.target.value;
+      obqState[kind].offset = 0;
+      fetchObq(kind);
+    }, 250);
+  });
+});
 </script>
 {% endblock %}

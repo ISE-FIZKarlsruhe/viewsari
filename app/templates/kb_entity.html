@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Viewsari · {{ ent.label or ent.entity_id }}{% endblock %}
+{% block title %}Viewsari · {{ ent.label }}{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: auto !important; height: auto !important; }
@@ -15,14 +15,14 @@ html, body { overflow: auto !important; height: auto !important; }
 .kbe-back { font-size: 12px; font-weight: 600; color: var(--ts); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 20px; }
 .kbe-back:hover { color: var(--or); }
 .kbe-header { margin-bottom: 28px; }
-.kbe-title { font-size: 22px; font-weight: 700; color: var(--tp); margin-bottom: 4px; }
+.kbe-title { font-size: 22px; font-weight: 700; color: var(--tp); margin-bottom: 4px; line-height:1.3; }
 .kbe-id { font-size: 11px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 8px; word-break: break-all; }
 .kbe-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
 .kbe-tag { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
 .kbe-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
 .kbe-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
-.kbe-tag.type { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); }
-.kbe-tag.bio { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+.kbe-tag.prov { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); font-family: 'Menlo', monospace; font-size: 9px; }
+.kbe-tag.kind { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.2); text-transform: uppercase; letter-spacing: .08em; }
 
 .kbe-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
 .kbe-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
@@ -30,73 +30,81 @@ html, body { overflow: auto !important; height: auto !important; }
 .kbe-surfaces { display: flex; flex-wrap: wrap; gap: 6px; }
 .kbe-surface { font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 6px; padding: 6px 12px; color: var(--tp); line-height: 1.4; }
 
-.kbe-occ-list { display: flex; flex-direction: column; gap: 6px; }
-.kbe-occ { display: flex; align-items: baseline; gap: 10px; font-size: 12px; background: var(--bg); border: 1px solid var(--seam); border-radius: 8px; padding: 10px 14px; text-decoration: none; transition: all .14s; }
-.kbe-occ:hover { border-color: var(--or); background: #FFFBF7; }
-.kbe-occ-bio { font-weight: 600; color: var(--pu); min-width: 100px; }
-.kbe-occ-para { color: var(--tt); font-size: 10px; min-width: 40px; }
-.kbe-occ-surface { color: var(--tp); flex: 1; }
-.kbe-occ-type { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 100px; white-space: nowrap; }
-.kbe-occ-type.explicit { background: var(--pill-or); color: var(--or); }
-.kbe-occ-type.implicit { background: var(--pill-bl); color: var(--bl); }
-.kbe-occ-type.coref { background: var(--pill-pu); color: var(--pu); }
-.kbe-occ-type.generic { background: var(--bg3); color: var(--ts); }
+.kbe-involves a { display:inline-block; font-size: 12px; padding: 4px 12px; background: var(--pill-pu); color: var(--pu); border-radius: 100px; text-decoration: none; border: 1px solid rgba(124,58,237,.2); margin: 0 6px 6px 0; }
+.kbe-involves a:hover { background: var(--pu); color: #fff; }
 
-.kbe-wd-link { font-size: 13px; font-weight: 600; color: var(--bl); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+.kbe-wd-link { font-size: 13px; font-weight: 600; color: var(--bl); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; }
 .kbe-wd-link:hover { text-decoration: underline; }
-.kbe-ookb-uri { font-size: 11px; color: var(--tt); font-family: 'Menlo', monospace; word-break: break-all; background: var(--bg); border: 1px solid var(--seam); border-radius: 6px; padding: 8px 12px; display: block; margin-top: 8px; }
 {% endblock %}
 
 {% block topbar_chips %}
-<span class="bio-chip">Knowledge Base</span>
+<span class="bio-chip">Knowledge base</span>
 <div class="sep"></div>
-<span class="bio-chip" style="background:{% if ent.ookb %}#FEF2F2;color:#B91C1C;border-color:#FCA5A5{% else %}var(--pill-bl);color:var(--bl);border-color:rgba(27,110,243,.2){% endif %}">{{ 'OOKB' if ent.ookb else ent.wikidata }}</span>
+<span class="bio-chip">{{ ent.kind | title }}</span>
 {% endblock %}
-
-{% block status %}{{ ent.mention_count }} mentions{% endblock %}
 
 {% block content %}
 <div class="kbe-layout">
   <a class="kbe-back" href="/kb">&larr; Back to Knowledge Base</a>
 
   <div class="kbe-header">
-    <div class="kbe-title">{{ ent.label or ent.surfaces[0] if ent.surfaces else ent.entity_id }}</div>
+    <div class="kbe-title">{{ ent.label }}</div>
     <div class="kbe-id">{{ ent.entity_id }}</div>
     <div class="kbe-tags">
-      {% if ent.ookb %}<span class="kbe-tag ookb">Out-of-Knowledge-Base</span>{% endif %}
+      <span class="kbe-tag kind">{{ ent.kind }}</span>
+      {% if ent.ookb %}<span class="kbe-tag ookb">OOKB</span>{% endif %}
       {% if ent.wikidata %}<span class="kbe-tag wd">{{ ent.wikidata }}</span>{% endif %}
-      {% for t in ent.types %}<span class="kbe-tag type">{{ t }}</span>{% endfor %}
-      <span class="kbe-tag bio">{{ ent.bios | length }} biograph{{ 'ies' if ent.bios | length != 1 else 'y' }}</span>
+      {% if ent.generated_by %}<span class="kbe-tag prov">{{ ent.generated_by }}</span>{% endif %}
     </div>
 
     {% if ent.wikidata %}
     <a class="kbe-wd-link" href="https://www.wikidata.org/wiki/{{ ent.wikidata }}" target="_blank">&nearr; View on Wikidata ({{ ent.wikidata }})</a>
     {% endif %}
-
-    {% if ent.ookb_uri %}
-    <div class="kbe-section">OOKB URI</div>
-    <code class="kbe-ookb-uri">{{ ent.ookb_uri }}</code>
-    {% endif %}
   </div>
 
-  <div class="kbe-section">Surface forms ({{ ent.surfaces | length }})</div>
+  {% if ent.kind == 'person' and ent.alt_labels %}
+  <div class="kbe-section">Alternative labels ({{ ent.alt_labels | length }})</div>
   <div class="kbe-surfaces">
-    {% for s in ent.surfaces %}
+    {% for s in ent.alt_labels %}
     <div class="kbe-surface">&ldquo;{{ s }}&rdquo;</div>
     {% endfor %}
   </div>
+  {% endif %}
 
-  <div class="kbe-section">Occurrences ({{ ent.occurrences | length }})</div>
-  <div class="kbe-occ-list">
-    {% for slug, pid, surface, mtype in ent.occurrences %}
-    {% set css = 'explicit' if 'explicit' in mtype else ('implicit' if 'implicit' in mtype else ('coref' if 'coref' in mtype else 'generic')) %}
-    <a class="kbe-occ" href="/biography/{{ slug }}/{{ pid }}?highlight={{ surface | urlencode }}">
-      <span class="kbe-occ-bio">{{ slug | replace('-', ' ') | title }}</span>
-      <span class="kbe-occ-para">&sect;{{ pid }}</span>
-      <span class="kbe-occ-surface">&ldquo;{{ surface[:80] }}&rdquo;</span>
-      <span class="kbe-occ-type {{ css }}">{{ mtype | replace(' artwork mention', '') | replace(' mention', '') }}</span>
+  {% if ent.kind == 'artwork' and ent.occurrences %}
+  <div class="kbe-section">Occurrences ({{ ent.occurrences | length }} across {{ ent.paragraphs | length }} paragraph{{ 's' if ent.paragraphs | length != 1 }})</div>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    {% for occ in ent.occurrences %}
+    {% if occ.bio %}
+    <a class="kbe-occ" href="/biography/{{ occ.bio }}/{{ occ.para }}?highlight={{ occ.surface | urlencode }}"
+       style="display:flex;align-items:baseline;gap:10px;font-size:12px;background:var(--bg);border:1px solid var(--seam);border-radius:8px;padding:10px 14px;text-decoration:none;transition:all .14s">
+      <span style="font-weight:600;color:var(--pu);min-width:100px">{{ occ.bio | replace('-', ' ') | title }}</span>
+      <span style="color:var(--tt);font-size:10px;min-width:60px">vol. {{ occ.vol }} · §{{ occ.para }}</span>
+      <span style="color:var(--tp);flex:1">&ldquo;{{ occ.surface }}&rdquo;</span>
     </a>
+    {% else %}
+    <div style="display:flex;align-items:baseline;gap:10px;font-size:12px;background:var(--bg);border:1px solid var(--seam);border-radius:8px;padding:10px 14px">
+      <span style="color:var(--tt);font-size:10px;min-width:80px">vol. {{ occ.vol }} · §{{ occ.para }}</span>
+      <span style="color:var(--tp);flex:1">&ldquo;{{ occ.surface }}&rdquo;</span>
+      <span style="color:var(--tt);font-family:Menlo,monospace;font-size:9px">{{ occ.mention }}</span>
+    </div>
+    {% endif %}
     {% endfor %}
   </div>
+  {% elif ent.kind == 'artwork' and (ent.vol or ent.para) %}
+  <div class="kbe-section">Location</div>
+  <div style="font-size:13px;color:var(--tp)">
+    Volume {{ ent.vol }}, paragraph §{{ ent.para }}
+  </div>
+  {% endif %}
+
+  {% if ent.kind == 'cooccurrence' and ent.involves %}
+  <div class="kbe-section">Involves ({{ ent.involves | length }})</div>
+  <div class="kbe-involves">
+    {% for p in ent.involves %}
+    <a href="/kb/1.0#{{ p }}">{{ p }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

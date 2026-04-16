@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Viewsari · SPARQL Endpoint{% endblock %}
+{% block title %}Viewsari · SPARQL endpoint{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: auto !important; height: auto !important; }
@@ -18,7 +18,7 @@ html, body { overflow: auto !important; height: auto !important; }
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -.03em;
-  color: var(--tp);
+  color: var(--or);
   margin-bottom: 6px;
 }
 .sparql-subtitle {
@@ -187,7 +187,7 @@ html, body { overflow: auto !important; height: auto !important; }
 <div class="layout-sparql">
 
   <div class="sparql-header">
-    <div class="sparql-title">SPARQL Endpoint</div>
+    <div class="sparql-title">SPARQL endpoint</div>
     <div class="sparql-subtitle">
       Query the Viewsari Knowledge Graph directly. The endpoint serves 378K+ triples
       covering volumes, biographies, pages, paragraphs, persons, co-occurrences, and provenance.
@@ -205,11 +205,15 @@ PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
   </div>
 
   <div class="sparql-examples">
-    <button class="sparql-example-btn" onclick="loadExample('volumes')">All volumes</button>
-    <button class="sparql-example-btn" onclick="loadExample('bios')">Biographies in Vol. 3</button>
-    <button class="sparql-example-btn" onclick="loadExample('persons')">Top persons</button>
-    <button class="sparql-example-btn" onclick="loadExample('cooc')">Co-occurrences</button>
-    <button class="sparql-example-btn" onclick="loadExample('giotto')">Giotto mentions</button>
+    <button class="sparql-example-btn" onclick="loadExample('runs')">Extraction runs</button>
+    <button class="sparql-example-btn" onclick="loadExample('explicit')">Explicit artwork mentions</button>
+    <button class="sparql-example-btn" onclick="loadExample('implicit')">Implicit artwork mentions</button>
+    <button class="sparql-example-btn" onclick="loadExample('gt_vs_obq')">GT vs. ObliquER coverage</button>
+    <button class="sparql-example-btn" onclick="loadExample('shared')">Entities shared across biographies</button>
+    <button class="sparql-example-btn" onclick="loadExample('sarah')">Mentions by Sarah</button>
+    <button class="sparql-example-btn" onclick="loadExample('ookb')">OOKB discoveries</button>
+    <button class="sparql-example-btn" onclick="loadExample('coref')">Coreferent chains</button>
+    <button class="sparql-example-btn" onclick="loadExample('wd_heroes')">Wikidata-linked hits</button>
     <button class="sparql-example-btn" onclick="loadExample('stats')">KG statistics</button>
   </div>
 
@@ -247,15 +251,151 @@ var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology
   'PREFIX frbr: <http://purl.org/vocab/frbr/core#>\n' +
   'PREFIX prov: <http://www.w3.org/ns/prov#>\n' +
   'PREFIX oa: <http://www.w3.org/ns/oa#>\n' +
+  'PREFIX owl: <http://www.w3.org/2002/07/owl#>\n' +
+  'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n' +
   'PREFIX dct: <http://purl.org/dc/terms/>\n';
 
 var EXAMPLES = {
-  volumes: 'SELECT ?vol ?label\nWHERE {\n  ?vol a viewsari:0001006 .\n  ?vol rdfs:label ?label .\n}\nORDER BY ?label',
-  bios: 'SELECT ?bio ?label ?startPage\nWHERE {\n  ?bio a viewsari:0001008 .\n  ?bio rdfs:label ?label .\n  ?bio frbr:isPartOf vkb:the_lives_1568_volume-3 .\n  ?bio viewsari:hasStartPage ?startPage .\n}\nORDER BY ?startPage',
-  persons: 'SELECT ?person ?label (COUNT(?cooc) AS ?cooccurrences)\nWHERE {\n  ?person a viewsari:0001013 .\n  ?person rdfs:label ?label .\n  ?cooc viewsari:involves ?person .\n}\nGROUP BY ?person ?label\nORDER BY DESC(?cooccurrences)\nLIMIT 20',
-  cooc: 'SELECT ?label ?p1_label ?p2_label\nWHERE {\n  ?cooc a viewsari:0001025 .\n  ?cooc rdfs:label ?label .\n  ?cooc viewsari:involves ?p1 .\n  ?cooc viewsari:involves ?p2 .\n  ?p1 rdfs:label ?p1_label .\n  ?p2 rdfs:label ?p2_label .\n  FILTER(STR(?p1) < STR(?p2))\n}\nORDER BY ?label\nLIMIT 30',
-  giotto: 'SELECT ?chunk ?text ?start ?end\nWHERE {\n  ?annot a oa:Annotation .\n  ?annot oa:hasTarget ?chunk .\n  ?annot oa:hasBodyValue ?text .\n  ?chunk oa:hasSource vkb:the_lives_1568_volume-1_paragraph-95 .\n  ?chunk oa:hasSelector ?sel .\n  ?sel oa:start ?start .\n  ?sel oa:end ?end .\n}\nORDER BY ?start\nLIMIT 20',
-  stats: 'SELECT ?type (COUNT(?s) AS ?count)\nWHERE {\n  ?s a ?type .\n  FILTER(?type IN (\n    viewsari:0001006, viewsari:0001008, viewsari:0001009,\n    doco:Paragraph, viewsari:0001013, viewsari:0001025,\n    oa:Annotation, doco:TextChunk, prov:Activity\n  ))\n}\nGROUP BY ?type\nORDER BY DESC(?count)'
+  // All extraction runs with their agents and mention counts
+  runs:
+    '# All extraction / annotation runs with agent and mention counts\n' +
+    'SELECT ?run ?label ?agent_label (COUNT(?mention) AS ?mentions)\n' +
+    'WHERE {\n' +
+    '  ?run a prov:Activity .\n' +
+    '  ?run rdfs:label ?label .\n' +
+    '  OPTIONAL { ?run prov:wasAssociatedWith ?agent .\n' +
+    '             ?agent rdfs:label ?agent_label . }\n' +
+    '  OPTIONAL { ?mention prov:wasGeneratedBy ?run .\n' +
+    '             ?mention a oa:Annotation . }\n' +
+    '}\n' +
+    'GROUP BY ?run ?label ?agent_label\n' +
+    'ORDER BY DESC(?mentions)\n' +
+    'LIMIT 10',
+
+  // Explicit artwork mentions (class 0001020) — Vasari actually named the work
+  explicit:
+    '# Explicit artwork mentions — Vasari named the work directly\n' +
+    'SELECT ?surface ?entity_label ?wikidata\n' +
+    'WHERE {\n' +
+    '  ?mention a viewsari:0001020 .\n' +
+    '  ?mention oa:hasBodyValue ?surface .\n' +
+    '  ?mention oa:hasBody ?entity .\n' +
+    '  ?entity rdfs:label ?entity_label .\n' +
+    '  OPTIONAL { ?entity owl:sameAs ?wikidata . }\n' +
+    '}\n' +
+    'LIMIT 10',
+
+  // Implicit artwork mentions (class 0001021) — described, not named
+  implicit:
+    '# Implicit artwork mentions — descriptive passages implying a work\n' +
+    'SELECT ?surface ?entity_label ?wikidata\n' +
+    'WHERE {\n' +
+    '  ?mention a viewsari:0001021 .\n' +
+    '  ?mention oa:hasBodyValue ?surface .\n' +
+    '  ?mention oa:hasBody ?entity .\n' +
+    '  ?entity rdfs:label ?entity_label .\n' +
+    '  OPTIONAL { ?entity owl:sameAs ?wikidata . }\n' +
+    '}\n' +
+    'LIMIT 10',
+
+  // Where do GT and ObliquER disagree? Per paragraph, mention counts side by side
+  gt_vs_obq:
+    '# GT vs. ObliquER mention counts per paragraph (top 10 busiest paragraphs)\n' +
+    'SELECT ?paragraph\n' +
+    '  (COUNT(DISTINCT ?gt_mention) AS ?gt_count)\n' +
+    '  (COUNT(DISTINCT ?obq_mention) AS ?obliquer_count)\n' +
+    'WHERE {\n' +
+    '  { ?gt_mention prov:wasGeneratedBy vkb:ground_truth_annotation_run_2 ;\n' +
+    '                viewsari:0001032 ?paragraph . }\n' +
+    '  UNION\n' +
+    '  { ?obq_mention prov:wasGeneratedBy ?obq_run ;\n' +
+    '                 viewsari:0001032 ?paragraph .\n' +
+    '    FILTER(?obq_run IN (vkb:ner_run_few_shot_v2, vkb:ner_run_ontology_guided_v2)) }\n' +
+    '}\n' +
+    'GROUP BY ?paragraph\n' +
+    'HAVING(?gt_count > 0 && ?obliquer_count > 0)\n' +
+    'ORDER BY DESC(?gt_count + ?obliquer_count)\n' +
+    'LIMIT 10',
+
+  // Artwork entities referenced by multiple biographies
+  shared:
+    '# Artwork entities referenced from multiple paragraphs (likely multi-bio)\n' +
+    'SELECT ?entity ?label ?wikidata (COUNT(DISTINCT ?para) AS ?paragraphs)\n' +
+    'WHERE {\n' +
+    '  ?entity a viewsari:0001012 ;\n' +
+    '          rdfs:label ?label ;\n' +
+    '          viewsari:0001032 ?para .\n' +
+    '  OPTIONAL { ?entity owl:sameAs ?wikidata . }\n' +
+    '}\n' +
+    'GROUP BY ?entity ?label ?wikidata\n' +
+    'ORDER BY DESC(?paragraphs)\n' +
+    'LIMIT 10',
+
+  // Mentions Sarah annotated in March 2026
+  sarah:
+    '# Annotations produced by Sarah (ground truth run)\n' +
+    'SELECT ?surface ?entity_label\n' +
+    'WHERE {\n' +
+    '  vkb:ground_truth_annotation_run_2 prov:wasAssociatedWith vkb:sarah_ondraszek .\n' +
+    '  ?mention prov:wasGeneratedBy vkb:ground_truth_annotation_run_2 ;\n' +
+    '           oa:hasBodyValue ?surface ;\n' +
+    '           oa:hasBody ?entity .\n' +
+    '  ?entity rdfs:label ?entity_label .\n' +
+    '}\n' +
+    'LIMIT 10',
+
+  // Out-of-Knowledge-Base entities (no Wikidata match)
+  ookb:
+    '# Artwork entities that are NOT in Wikidata (OOKB)\n' +
+    'SELECT ?entity ?label\n' +
+    'WHERE {\n' +
+    '  ?entity a viewsari:0001012 ;\n' +
+    '          rdfs:label ?label .\n' +
+    '  FILTER NOT EXISTS { ?entity owl:sameAs ?wd . }\n' +
+    '}\n' +
+    'LIMIT 10',
+
+  // Coreferent chains — pronouns/NPs referring back to earlier mentions
+  coref:
+    '# Coreferent mentions and the antecedent they refer to\n' +
+    'SELECT ?coref_surface ?antecedent_surface\n' +
+    'WHERE {\n' +
+    '  ?coref a viewsari:0001018 ;\n' +
+    '         oa:hasBodyValue ?coref_surface ;\n' +
+    '         viewsari:0001035 ?antecedent .\n' +
+    '  ?antecedent oa:hasBodyValue ?antecedent_surface .\n' +
+    '}\n' +
+    'LIMIT 10',
+
+  // Entities with a Wikidata link — the successful links
+  wd_heroes:
+    '# Artwork entities linked to Wikidata (linking hits)\n' +
+    'SELECT ?label ?wikidata (COUNT(?mention) AS ?mentions)\n' +
+    'WHERE {\n' +
+    '  ?entity a viewsari:0001012 ;\n' +
+    '          rdfs:label ?label ;\n' +
+    '          owl:sameAs ?wikidata .\n' +
+    '  ?mention oa:hasBody ?entity .\n' +
+    '  FILTER(STRSTARTS(STR(?wikidata), "http://www.wikidata.org"))\n' +
+    '}\n' +
+    'GROUP BY ?label ?wikidata\n' +
+    'ORDER BY DESC(?mentions)\n' +
+    'LIMIT 10',
+
+  stats:
+    '# KG statistics — counts of the main classes\n' +
+    'SELECT ?type (COUNT(?s) AS ?count)\n' +
+    'WHERE {\n' +
+    '  ?s a ?type .\n' +
+    '  FILTER(?type IN (\n' +
+    '    viewsari:0001006, viewsari:0001008, viewsari:0001009,\n' +
+    '    doco:Paragraph, viewsari:0001012, viewsari:0001013,\n' +
+    '    viewsari:0001025, oa:Annotation, doco:TextChunk, prov:Activity\n' +
+    '  ))\n' +
+    '}\n' +
+    'GROUP BY ?type\n' +
+    'ORDER BY DESC(?count)\n' +
+    'LIMIT 10'
 };
 
 function loadExample(key) {

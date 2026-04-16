@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Viewsari · Lives of the Artists{% endblock %}
+{% block title %}Viewsari · Lives of the artists{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: auto !important; height: auto !important; }
@@ -17,6 +17,7 @@ html, body { overflow: auto !important; height: auto !important; }
   border-bottom: 1px solid var(--seam);
   padding: 56px 40px 48px;
   text-align: center;
+  overflow: visible;
 }
 .hero-title {
   font-size: 36px;
@@ -27,10 +28,10 @@ html, body { overflow: auto !important; height: auto !important; }
 }
 .hero-title em { color: var(--or); font-style: normal; }
 .hero-subtitle {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--ts);
   line-height: 1.6;
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto 28px;
 }
 .hero-actions {
@@ -73,11 +74,22 @@ html, body { overflow: auto !important; height: auto !important; }
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
   transform: translateY(-1px);
 }
+.hero-stats-group {
+  margin-top: 28px;
+}
+.hero-stats-caption {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tt);
+  text-align: center;
+  margin-bottom: 8px;
+}
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 32px;
-  margin-top: 28px;
   flex-wrap: wrap;
 }
 .hero-stat {
@@ -275,12 +287,12 @@ html, body { overflow: auto !important; height: auto !important; }
 .home-overview-quote {
   font-family: 'Georgia', serif;
   font-style: italic;
-  font-size: 14px;
-  color: var(--ts);
-  border-left: 3px solid var(--or);
-  padding: 10px 18px;
+  font-size: 18px;
+  color: var(--tp);
+  border-left: 4px solid var(--or);
+  padding: 14px 22px;
   margin-bottom: 20px;
-  line-height: 1.7;
+  line-height: 1.6;
   background: linear-gradient(135deg, #FFF8F5, #fff);
   border-radius: 0 8px 8px 0;
 }
@@ -406,20 +418,38 @@ html, body { overflow: auto !important; height: auto !important; }
     </div>
     {% if biographies %}
     {% set total_paras = biographies | map(attribute='paragraph_count') | sum %}
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{ biographies | length }}</div>
-        <div class="hero-stat-label">Biographies</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{ total_paras }}</div>
-        <div class="hero-stat-label">Paragraphs</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">{{ biographies | map(attribute='volume') | unique | list | length }}</div>
-        <div class="hero-stat-label">Volumes</div>
+    <div class="hero-stats-group">
+      <div class="hero-stats-caption">Ground truth</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ biographies | length }}</div>
+          <div class="hero-stat-label">Biographies</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ total_paras }}</div>
+          <div class="hero-stat-label">Paragraphs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ biographies | map(attribute='volume') | unique | list | length }}</div>
+          <div class="hero-stat-label">Volumes</div>
+        </div>
       </div>
     </div>
+    {% if kb_counts %}
+    <div class="hero-stats-group">
+      <div class="hero-stats-caption">ObliquER</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ "{:,}".format(kb_counts.artworks) }}</div>
+          <div class="hero-stat-label">Mentions</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ kb_counts.persons }}</div>
+          <div class="hero-stat-label">Entities</div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
     {% endif %}
   </div>
 

@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from fastapi import APIRouter, Request
@@ -9,6 +10,13 @@ templates = Jinja2Templates(directory="app/templates")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 FAC_DIR = ROOT / "data" / "facsimile_pages"
+KB_PATH = ROOT / "data" / "kb" / "kb.json"
+
+
+def _kb_counts() -> dict:
+    if not KB_PATH.exists():
+        return {}
+    return json.loads(KB_PATH.read_text(encoding="utf-8")).get("counts", {})
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -35,5 +43,5 @@ async def index(request: Request):
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"biographies": biographies},
+        {"biographies": biographies, "kb_counts": _kb_counts()},
     )

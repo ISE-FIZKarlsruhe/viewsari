@@ -100,7 +100,14 @@ async def biography_paragraph(slug: str, paragraph_id: int, request: Request):
     prev_id = ids[current_index - 1] if current_index > 0 else None
     next_id = ids[current_index + 1] if current_index < len(ids) - 1 else None
 
-    bio_name = paragraph_data.get("biography", slug)
+    raw_bio_name = paragraph_data.get("biography", slug)
+    bio_name = raw_bio_name.split("[")[0].strip()
+    # Use only the short/common name (last word before comma, or first word)
+    if "," in bio_name:
+        bio_name = bio_name.split(",")[0].strip()
+    parts = bio_name.split()
+    if len(parts) > 2:
+        bio_name = parts[-1]
 
     return templates.TemplateResponse(
         request,

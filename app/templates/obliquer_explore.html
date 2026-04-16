@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}ObliquER · Extraction Explorer{% endblock %}
+{% block title %}ObliquER · Extraction explorer{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: hidden !important; height: 100% !important; }
@@ -129,7 +129,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
 {% endblock %}
 
 {% block topbar_chips %}
-<div class="bio-chip">ObliquER Extraction Explorer</div>
+<div class="bio-chip">ObliquER extraction explorer</div>
 {% endblock %}
 
 {% block content %}
@@ -141,7 +141,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
       <button class="explore-btn{% if loop.first %} active{% endif %}"
               id="strat-btn-{{ name }}"
               onclick="setStrategy('{{ name }}')">
-        {{ name.replace('_', ' ') }}
+        {{ name.replace('_', ' ').replace(' v2', '').replace(' v1', '') }}
       </button>
       {% endfor %}
     </div>
@@ -254,7 +254,21 @@ window.setStrategy = function(name){
   document.querySelectorAll("[id^='strat-btn-']").forEach(function(btn){
     btn.classList.toggle("active", btn.id === "strat-btn-" + name);
   });
+  var prevSlug = document.getElementById("bio-select").value;
   populateBioSelect(name);
+  var sel = document.getElementById("bio-select");
+  // Keep same biography if it exists in the new strategy, otherwise pick first reasonable one
+  if(prevSlug && Array.from(sel.options).some(function(o){ return o.value === prevSlug; })){
+    sel.value = prevSlug;
+    fetchGraph(name, prevSlug);
+  } else {
+    var idx = STRATEGIES[name];
+    if(idx && idx.biographies.length){
+      var pick = idx.biographies.find(function(b){ return b.mentions > 10 && b.mentions < 200; }) || idx.biographies[0];
+      sel.value = pick.slug;
+      fetchGraph(name, pick.slug);
+    }
+  }
 };
 
 window.loadSelected = function(){
@@ -319,9 +333,9 @@ function renderGraph(data){
     .force("link", d3.forceLink(edges)
       .id(function(d){ return d.id; })
       .distance(function(d){
-        if(d.label === "hasPartParagraph") return 80;
-        if(d.label === "contains") return 60;
-        if(d.label === "wasGeneratedBy") return 120;
+        if(d.label === "hasPart") return 80;
+        if(d.label === "in paragraph") return 60;
+        if(d.label === "generated" || d.label === "wasGeneratedBy") return 120;
         return 70;
       })
       .strength(function(d){
@@ -359,9 +373,20 @@ function renderGraph(data){
   var nodeSel = nodeG.selectAll("g").data(nodes).enter().append("g")
     .attr("class", "eg-node")
     .call(d3.drag()
-      .on("start", function(ev, d){ if(!ev.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
-      .on("drag",  function(ev, d){ d.fx=ev.x; d.fy=ev.y; })
-      .on("end",   function(ev, d){ if(!ev.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }));
+      .on("start", function(ev, d){ if(!ev.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; d._dragged=false; })
+      .on("drag",  function(ev, d){ d.fx=ev.x; d.fy=ev.y; d._dragged=true; })
+      .on("end",   function(ev, d){
+        if(!ev.active) sim.alphaTarget(0);
+        if(d._dragged){
+          d._pinned=true;
+          var sel = d3.select(this);
+          if(!sel.select(".eg-pin").size() || sel.select(".eg-pin").empty()){
+            sel.append("circle").attr("class","eg-pin")
+              .attr("cx", d._rw/2 - 2).attr("cy", -10).attr("r", 3)
+              .attr("fill","var(--or)").attr("stroke","#fff").attr("stroke-width",1);
+          }
+        } else { d.fx=null; d.fy=null; d._pinned=false; }
+      }));
 
   nodeSel.each(function(d){
     var s = d3.select(this);
@@ -389,7 +414,22 @@ function renderGraph(data){
       .text(shortLabel(d.label, d.type === "biography" ? 32 : 24));
   });
 
-  // ── Click handler ────────────────────────────────────────────────────────
+  // ── Click / double-click handlers ───────────────────────────────────────
+  nodeSel.style("cursor", "pointer");
+  nodeSel.on("dblclick", function(ev, d){
+    ev.stopPropagation();
+    ev.preventDefault();
+    if(d._pinned){
+      d.fx = null; d.fy = null; d._pinned = false;
+      d3.select(this).select(".eg-pin").remove();
+      sim.alpha(0.1).restart();
+      return;
+    }
+    if(d.type === "biography"){
+      var slug = d.id.replace(/^bio_/, "");
+      window.open("/biography/" + encodeURIComponent(slug), "_blank");
+    }
+  });
   nodeSel.on("click", function(ev, d){
     ev.stopPropagation();
     nodeSel.classed("selected", function(n){ return n.id === d.id; });
@@ -423,6 +463,10 @@ function renderGraph(data){
       if(d.full_type) h += row("Full type", d.full_type);
       if(d.mention_id) h += row("Mention ID", d.mention_id);
       if(d.vol && d.paragraph) h += row("Location", "vol. "+d.vol+", §"+d.paragraph);
+    } else if(d.type === "entity" && d.is_prompt){
+      h += row("Prompt ID", d.entity_id);
+      h += '<details style="margin-top:8px"><summary style="font-size:10px;font-weight:600;color:var(--or);cursor:pointer;user-select:none">Prompt text</summary>';
+      h += '<pre class="eg-prompt-text" id="eg-prompt-text" style="font-size:9px;font-family:Menlo,monospace;background:#1A1A2E;color:#E2E8F0;padding:10px;border-radius:6px;margin-top:6px;max-height:300px;overflow:auto;white-space:pre-wrap;line-height:1.5">Loading\u2026</pre></details>';
     } else if(d.type === "entity"){
       if(d.entity_id)  h += row("Entity ID", d.entity_id);
       if(d.para)       h += row("Paragraph", "§"+d.para);
@@ -447,9 +491,10 @@ function renderGraph(data){
         var other = nodeMap[otherId];
         if(!other) return;
         var ocol = NC[other.type] || NC.generic;
-        h += "<div style='font-size:10.5px;color:var(--ts);line-height:1.7;display:flex;align-items:center;gap:5px'>";
+        h += "<div class='eg-conn-link' data-node-id='"+esc(otherId)+"' style='font-size:10.5px;color:var(--ts);line-height:1.7;display:flex;align-items:center;gap:5px;cursor:pointer;border-radius:4px;padding:1px 4px;margin:0 -4px;transition:background .12s'>";
         h += "<span style='display:inline-block;width:7px;height:7px;border-radius:2px;background:"+ocol.s+";flex-shrink:0'></span>";
-        h += "<span style='color:var(--tt);font-size:9px;font-weight:600;margin-right:2px'>"+esc(e.label||"")+"</span>";
+        var edgeLabel = (tid === d.id && e.reverse_label) ? e.reverse_label : (e.label||"");
+        h += "<span style='color:var(--tt);font-size:9px;font-weight:600;margin-right:2px'>"+esc(edgeLabel)+"</span>";
         h += esc(other.label.substring(0, 36));
         h += "</div>";
         shown++;
@@ -461,6 +506,49 @@ function renderGraph(data){
 
     info.innerHTML = h;
     info.style.display = "block";
+
+    // Make connection entries clickable — simulate clicking that node
+    info.querySelectorAll(".eg-conn-link").forEach(function(el){
+      el.addEventListener("mouseenter", function(){ el.style.background = "var(--bg3)"; });
+      el.addEventListener("mouseleave", function(){ el.style.background = ""; });
+      el.addEventListener("click", function(ev){
+        ev.stopPropagation();
+        var targetId = el.getAttribute("data-node-id");
+        var targetNode = nodes.find(function(n){ return n.id === targetId; });
+        if(targetNode){
+          // Pan to the node
+          var t = d3.zoomTransform(svg.node());
+          var nx = t.applyX(targetNode.x), ny = t.applyY(targetNode.y);
+          var cx = W/2, cy = H/2;
+          var dx = cx - nx, dy = cy - ny;
+          svg.transition().duration(500).call(
+            zoom.translateBy, dx / t.k, dy / t.k
+          );
+          // Trigger the click handler on the node's DOM element
+          nodeSel.each(function(n){
+            if(n.id === targetId){
+              this.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+            }
+          });
+        }
+      });
+    });
+
+    // Lazy-load prompt text when the details element is opened
+    if(d.is_prompt && d.entity_id){
+      var det = info.querySelector("details");
+      if(det){
+        det.addEventListener("toggle", function onToggle(){
+          det.removeEventListener("toggle", onToggle);
+          if(!det.open) return;
+          var pre = document.getElementById("eg-prompt-text");
+          fetch("/obliquer/explore/prompt?id=" + encodeURIComponent(d.entity_id))
+            .then(function(r){ return r.json(); })
+            .then(function(j){ pre.textContent = j.text; })
+            .catch(function(){ pre.textContent = "Failed to load prompt."; });
+        });
+      }
+    }
   });
 
   svg.on("click", function(ev){
