@@ -60,6 +60,8 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;f
   .burger#burger-btn{display:flex}
   .nav-links{display:none}
 }
+body.force-burger .burger#burger-btn{display:flex}
+body.force-burger .nav-links{display:none}
 
 /* ── BODY LAYOUT ── */
 .layout{position:fixed;top:56px;left:0;right:0;bottom:0;display:flex;flex-direction:column}
@@ -220,7 +222,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;f
 {% block extra_styles %}{% endblock %}
 </style>
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 <div class="topbar">
   <a class="logo" href="/">View<em>sari</em></a>
   <button class="burger" id="burger-btn" onclick="document.getElementById('nav-dropdown').classList.toggle('open')" aria-label="Menu">&#9776;</button>
