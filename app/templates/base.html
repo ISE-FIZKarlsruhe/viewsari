@@ -218,6 +218,11 @@ body.force-burger .nav-links{display:none}
 .vasari-stain{position:fixed;z-index:299;width:80px;height:80px;pointer-events:none;animation:vasari-stain-in .3s ease-out forwards}
 .vasari-stain img{width:100%;height:100%;object-fit:contain}
 @keyframes vasari-stain-in{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.vasari-roam-notice{position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-12px);background:var(--or,#c4521a);color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;line-height:1.4;z-index:302;box-shadow:0 4px 16px rgba(0,0,0,.2);font-family:'Georgia',serif;max-width:420px;text-align:center;opacity:0;transition:opacity .35s ease-out,transform .35s ease-out;pointer-events:none}
+.vasari-roam-notice.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.vasari-auto-swat{position:fixed;z-index:302;width:140px;height:140px;pointer-events:none;transform:translate(-50%,-100vh) rotate(-25deg);transition:transform .55s cubic-bezier(.5,0,.75,.2)}
+.vasari-auto-swat.strike{transform:translate(-50%,-50%) rotate(0deg)}
+.vasari-auto-swat img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
 
 {% block extra_styles %}{% endblock %}
 </style>
@@ -376,6 +381,9 @@ document.addEventListener("click",function(ev){
   var roamTimer = null;
   var roamInterval = null;
   var swatted = false;
+  var autoSwatTimer = null;
+  var roamNotice = null;
+  var roamX = 0, roamY = 0;
 
   window.vasariSpeak = function(){
     if(roaming) return vasariSwat();
@@ -395,7 +403,26 @@ document.addEventListener("click",function(ev){
     // no persist — he comes back on every page
     clearTimeout(roamTimer);
     clearInterval(roamInterval);
+    clearTimeout(autoSwatTimer);
+    hideRoamNotice();
   };
+
+  function showRoamNotice(){
+    if(roamNotice) return;
+    roamNotice = document.createElement("div");
+    roamNotice.className = "vasari-roam-notice";
+    roamNotice.textContent = "Quick — swat at him with your cursor! He is a penetrant fellow and will not leave on his own.";
+    document.body.appendChild(roamNotice);
+    requestAnimationFrame(function(){ roamNotice.classList.add("visible"); });
+  }
+
+  function hideRoamNotice(){
+    if(!roamNotice) return;
+    var n = roamNotice;
+    roamNotice = null;
+    n.classList.remove("visible");
+    setTimeout(function(){ if(n.parentNode) n.parentNode.removeChild(n); }, 400);
+  }
 
   function startRoamCountdown(){
     roamTimer = setTimeout(function(){
@@ -411,6 +438,7 @@ document.addEventListener("click",function(ev){
     var vw = window.innerWidth, vh = window.innerHeight;
     var x = vw - 100, y = vh - 100;
     var dx = -2 + Math.random()*-2, dy = -1.5 + Math.random()*-1;
+    roamX = x; roamY = y;
 
     roamInterval = setInterval(function(){
       x += dx; y += dy;
@@ -425,13 +453,21 @@ document.addEventListener("click",function(ev){
       egg.style.top = y + "px";
       egg.style.right = "auto";
       egg.style.bottom = "auto";
+      roamX = x; roamY = y;
     }, 16);
+
+    showRoamNotice();
+    autoSwatTimer = setTimeout(function(){
+      if(!swatted) vasariAutoSwat();
+    }, 60000);
   }
 
   function vasariSwat(){
     if(swatted) return;
     swatted = true;
     clearInterval(roamInterval);
+    clearTimeout(autoSwatTimer);
+    hideRoamNotice();
 
     var rect = egg.getBoundingClientRect();
     var cx = rect.left + rect.width/2;
@@ -466,6 +502,44 @@ document.addEventListener("click",function(ev){
     }, 250);
 
     // no persist — he comes back on every page
+  }
+
+  function vasariAutoSwat(){
+    if(swatted) return;
+    clearInterval(roamInterval);
+    hideRoamNotice();
+
+    var rect = egg.getBoundingClientRect();
+    var cx = rect.left + rect.width/2;
+    var cy = rect.top + rect.height/2;
+
+    var auto = document.createElement("div");
+    auto.className = "vasari-auto-swat";
+    auto.innerHTML = '<img src="/static/fly-swatter.png" alt="auto-swat">';
+    auto.style.left = cx + "px";
+    auto.style.top = cy + "px";
+    document.body.appendChild(auto);
+
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ auto.classList.add("strike"); });
+    });
+
+    setTimeout(function(){
+      auto.remove();
+      swatted = true;
+      egg.style.display = "none";
+      var stain = document.createElement("div");
+      stain.className = "vasari-stain";
+      stain.innerHTML = '<img src="/static/splatter.png" alt="splat">';
+      stain.style.left = (cx - 40) + "px";
+      stain.style.top = (cy - 40) + "px";
+      document.body.appendChild(stain);
+      setTimeout(function(){
+        stain.style.transition = "opacity 3s";
+        stain.style.opacity = "0";
+        setTimeout(function(){ stain.remove(); }, 3000);
+      }, 4000);
+    }, 600);
   }
 
   if(!dismissed){
