@@ -1,0 +1,23 @@
+# CQ:        CQII.19
+# Question:  How can I distinguish work-, expression-, and manifestation-level
+#            bibliographic metadata?
+# Notes:     Returns one bibliographic node per FRBR layer with its asserted
+#            FaBiO and Viewsari types.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX fabio:    <http://purl.org/spar/fabio/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?layer ?node ?nodeLabel WHERE {
+  {
+    ?node a fabio:Work . BIND ("Work" AS ?layer)
+  } UNION {
+    ?node a fabio:Expression . BIND ("Expression" AS ?layer)
+  } UNION {
+    ?node a fabio:WebSite , viewsari:0001007 . BIND ("Manifestation (volume)" AS ?layer)
+  } UNION {
+    ?node a fabio:WebPage . BIND ("Manifestation (page/biography)" AS ?layer)
+  }
+  OPTIONAL { ?node rdfs:label ?nodeLabel }
+}
+LIMIT 50

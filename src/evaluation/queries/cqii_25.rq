@@ -1,0 +1,20 @@
+# CQ:        CQII.25
+# Question:  Which entities in the KG are linked to Wikidata, and what
+#            properties are mapped?
+# Notes:     Top-level summary: count of distinct linked entities per Viewsari
+#            entity type.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT ?entityType (COUNT(DISTINCT ?entity) AS ?linked) WHERE {
+  ?entity a ?entityType ;
+          owl:sameAs ?wd .
+  FILTER (CONTAINS(STR(?wd), "wikidata.org"))
+  FILTER (?entityType IN (
+    viewsari:0001012, viewsari:0001013,
+    viewsari:0001014, viewsari:0001015
+  ))
+}
+GROUP BY ?entityType
+ORDER BY DESC(?linked)

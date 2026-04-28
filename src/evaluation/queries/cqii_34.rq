@@ -1,0 +1,24 @@
+# CQ:        CQII.34
+# Question:  Which extraction activity (NER run, LLM prompt run) generated
+#            entity E, and what software agent was used?
+# Bindings:  E = vkb:Q1069665
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?activity ?activityLabel ?activityType ?agent ?agentLabel WHERE {
+  vkb:Q1069665 prov:wasGeneratedBy ?activity .
+  OPTIONAL {
+    ?activity a ?activityType .
+    FILTER (?activityType IN (
+      viewsari:0001022, viewsari:0001023, viewsari:0001024
+    ))
+  }
+  OPTIONAL { ?activity rdfs:label ?activityLabel }
+  OPTIONAL {
+    ?activity prov:wasAssociatedWith ?agent .
+    OPTIONAL { ?agent rdfs:label ?agentLabel }
+  }
+}

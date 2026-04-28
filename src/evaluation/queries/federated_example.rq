@@ -1,0 +1,20 @@
+# Illustrative federated query — referenced by CQII.27.
+# Pulls the birth date of every Viewsari person that is linked to Wikidata.
+# Requires a SPARQL 1.1 endpoint that allows the SERVICE keyword (rdflib does;
+# GraphDB requires the federated-query plugin to be enabled).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+PREFIX wdt:      <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?person ?personLabel ?wikidata ?birthDate WHERE {
+  ?person a viewsari:0001013 ;
+          owl:sameAs ?wikidata ;
+          rdfs:label ?personLabel .
+  FILTER (CONTAINS(STR(?wikidata), "wikidata.org"))
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?wikidata wdt:P569 ?birthDate .
+  }
+}
+LIMIT 25

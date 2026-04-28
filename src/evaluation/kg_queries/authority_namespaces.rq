@@ -1,0 +1,11 @@
+# M11 — Authority namespaces reached through owl:sameAs.
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?authority (COUNT(*) AS ?links) WHERE {
+  ?s owl:sameAs ?ext .
+  FILTER (isIRI(?ext))
+  BIND (REPLACE(STR(?ext), "^(https?://[^/]+).*$", "$1") AS ?authority)
+}
+GROUP BY ?authority
+ORDER BY DESC(?links)

@@ -1,0 +1,16 @@
+# CQ:         CQI.8
+# Question:   What is the network centrality of artist X in the co-occurrence
+#             network?
+# Bindings:   X = Michelangelo
+# Notes:      Centrality is computed externally (NetworkX). SPARQL surfaces
+#             the *degree*: the count of distinct partners with whom X
+#             co-occurs at least once. Useful as a partial answer.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+
+SELECT (COUNT(DISTINCT ?partner) AS ?degree) WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo , ?partner .
+  FILTER (?partner != vkb:buonarroti-michelagnolo)
+}

@@ -1,0 +1,24 @@
+# CQ:         CQII.9
+# Question:   Which artworks co-occur with a specific artist in a particular
+#             volume, and what are the source paragraphs?
+# Bindings:   artist = Michelangelo, volume = vkb:the_lives_1568_volume-9
+# Modelling:  Materialised cooccurrence nodes are person↔person; we approximate
+#             via paragraph co-membership (artist mention + artwork in same
+#             paragraph of the named volume).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?artwork ?artworkLabel ?paragraph WHERE {
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography frbr:isPartOf vkb:the_lives_1568_volume-9 .
+  ?artwork a viewsari:0001012 ;
+           viewsari:0001032 ?paragraph .
+  ?mentionA prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:buonarroti-michelagnolo ;
+            viewsari:0001032 ?paragraph .
+  OPTIONAL { ?artwork rdfs:label ?artworkLabel }
+}
+LIMIT 200

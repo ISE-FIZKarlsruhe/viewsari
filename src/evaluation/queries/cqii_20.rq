@@ -1,0 +1,20 @@
+# CQ:        CQII.20
+# Question:  Which edition and translation of The Lives is the source of a
+#            given extracted entity or co-occurrence?
+# Bindings:  entity = vkb:Q1069665 (S. Felicita)
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?translation ?translationLabel ?edition ?editionLabel WHERE {
+  vkb:Q1069665 viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography frbr:isPartOf ?volume .
+  ?volume    frbr:isPartOf ?translation .
+  OPTIONAL { ?translation viewsari:isBasedOn ?edition }
+  OPTIONAL { ?translation rdfs:label ?translationLabel }
+  OPTIONAL { ?edition     rdfs:label ?editionLabel     }
+}
+LIMIT 5

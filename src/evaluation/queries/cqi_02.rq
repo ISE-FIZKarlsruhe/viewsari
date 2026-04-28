@@ -1,0 +1,12 @@
+# CQ:        CQI.2
+# Question:  Did artist X co-occur with artist Y?
+# Bindings:  X = Michelangelo, Y = Raphael
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+
+ASK {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo ,
+                          vkb:sanzio-raffaello-raffaello-da-urbino .
+}

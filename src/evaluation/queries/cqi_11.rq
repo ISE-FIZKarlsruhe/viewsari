@@ -1,0 +1,18 @@
+# CQ:         CQI.11
+# Question:   Which persons in The Lives are not artists (patrons, clergy, ...)?
+# Modelling:  Complement of CQI.10 — persons in the index of names that never
+#             participate in a cooccurrence.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?person ?label WHERE {
+  ?person a viewsari:0001013 .
+  FILTER NOT EXISTS {
+    ?cooc a viewsari:0001025 ;
+          viewsari:involves ?person .
+  }
+  OPTIONAL { ?person rdfs:label ?label }
+}
+ORDER BY ?label
+LIMIT 500

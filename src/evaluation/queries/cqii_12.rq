@@ -1,0 +1,18 @@
+# CQ:        CQII.12
+# Question:  Which artists were active in location L according to The Lives?
+# Bindings:  L = Florence
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?artist ?artistLabel WHERE {
+  vkb:florence a viewsari:0001015 ;
+               viewsari:0001032 ?paragraph .
+  ?mention prov:wasDerivedFrom/^prov:wasGeneratedBy ?artist ;
+           viewsari:0001032 ?paragraph .
+  ?artist a viewsari:0001013 .
+  OPTIONAL { ?artist rdfs:label ?artistLabel }
+}
+LIMIT 200

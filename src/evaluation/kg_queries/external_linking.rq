@@ -1,0 +1,36 @@
+# M09 — External linking coverage by entity type (populates Table 9.12).
+#
+# Each VALUES tuple is paired with two OPTIONAL subqueries so empty entity
+# types still yield a row (total = linked = 0).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT
+  ?entityType ?label
+  (COALESCE(?totalRaw,  0) AS ?total)
+  (COALESCE(?linkedRaw, 0) AS ?linked)
+  (IF(COALESCE(?totalRaw, 0) = 0, 0,
+      ROUND(xsd:decimal(COALESCE(?linkedRaw, 0)) * 1000.0 /
+            xsd:decimal(?totalRaw)) / 10.0) AS ?percent)
+WHERE {
+  VALUES (?entityType ?label) {
+    (viewsari:0001013 "person")
+    (viewsari:0001012 "artwork")
+    (viewsari:0001015 "location")
+    (viewsari:0001014 "organization")
+  }
+  OPTIONAL {
+    SELECT ?entityType (COUNT(DISTINCT ?ent) AS ?totalRaw) WHERE {
+      ?ent a ?entityType .
+    } GROUP BY ?entityType
+  }
+  OPTIONAL {
+    SELECT ?entityType (COUNT(DISTINCT ?lnk) AS ?linkedRaw) WHERE {
+      ?lnk a ?entityType ;
+           owl:sameAs ?wd .
+      FILTER (CONTAINS(STR(?wd), "wikidata.org"))
+    } GROUP BY ?entityType
+  }
+}
+ORDER BY DESC(?total)

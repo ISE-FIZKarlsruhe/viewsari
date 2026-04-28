@@ -1,0 +1,19 @@
+# CQ:        CQII.37
+# Question:  What model version and timestamp are associated with extraction
+#            run R?
+# Bindings:  R = first NER run found in the KG.
+#            (Replace with a specific vkb:ner_run_few_shot_v2_* IRI to scope.)
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?run ?startedAt ?endedAt ?agent ?agentLabel ?modelURL WHERE {
+  ?run a viewsari:0001022 ;
+       prov:wasAssociatedWith ?agent .
+  OPTIONAL { ?run prov:startedAtTime ?startedAt }
+  OPTIONAL { ?run prov:endedAtTime   ?endedAt   }
+  OPTIONAL { ?agent rdfs:label ?agentLabel }
+  OPTIONAL { ?agent rdfs:seeAlso ?modelURL }
+}
+LIMIT 5

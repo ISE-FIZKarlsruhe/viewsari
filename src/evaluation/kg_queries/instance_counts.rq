@@ -1,0 +1,37 @@
+# M02 — Instance counts per ontology class (populates Table 9.11).
+# Uses VALUES so each class shows up even when its count is zero.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX doco:     <http://purl.org/spar/doco/>
+PREFIX oa:       <http://www.w3.org/ns/oa#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX fabio:    <http://purl.org/spar/fabio/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?class ?label (COUNT(DISTINCT ?inst) AS ?count) WHERE {
+  VALUES (?class ?label) {
+    (viewsari:0001000      "edition")
+    (viewsari:0001001      "translation")
+    (viewsari:0001006      "volume")
+    (viewsari:0001007      "volume_web_representation")
+    (viewsari:0001008      "biography")
+    (viewsari:0001010      "biography_web_representation")
+    (viewsari:0001009      "page")
+    (viewsari:0001011      "page_web_representation")
+    (doco:Paragraph        "doco:Paragraph")
+    (doco:TextChunk        "doco:TextChunk")
+    (oa:Annotation         "oa:Annotation")
+    (viewsari:0001013      "person")
+    (viewsari:0001012      "artwork")
+    (viewsari:0001014      "organization")
+    (viewsari:0001015      "location")
+    (viewsari:0001025      "cooccurrence")
+    (viewsari:0001026      "mention (any)")
+    (viewsari:0001033      "extracted_content (parent)")
+    (prov:Activity         "prov:Activity")
+    (prov:SoftwareAgent    "prov:SoftwareAgent")
+  }
+  OPTIONAL { ?inst a ?class }
+}
+GROUP BY ?class ?label
+ORDER BY DESC(?count)

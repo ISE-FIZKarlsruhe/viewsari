@@ -1,0 +1,22 @@
+# CQ:        CQII.39
+# Question:  For a given extraction result, can I trace the provenance chain
+#            from the entity through the annotation, the paragraph, the page,
+#            the volume, and the translation back to the original work?
+# Bindings:  E = vkb:Q1069665
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?mention ?paragraph ?biography ?volume ?translation ?edition ?work WHERE {
+  vkb:Q1069665 prov:wasDerivedFrom ?mention ;
+               viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography frbr:isPartOf ?volume .
+  ?volume    frbr:isPartOf ?translation .
+  OPTIONAL { ?translation viewsari:isBasedOn ?edition }
+  OPTIONAL { ?translation frbr:realizationOf ?work }
+}
+LIMIT 5

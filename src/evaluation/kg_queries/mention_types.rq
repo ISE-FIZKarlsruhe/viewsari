@@ -1,0 +1,17 @@
+# M03 — Counts per concrete mention subclass.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+
+SELECT ?mentionType ?label (COUNT(DISTINCT ?m) AS ?count) WHERE {
+  VALUES (?mentionType ?label) {
+    (viewsari:0001017 "explicit_mention")
+    (viewsari:0001020 "explicit_artwork_mention")
+    (viewsari:0001016 "implicit_mention")
+    (viewsari:0001021 "implicit_artwork_mention")
+    (viewsari:0001018 "coreferent")
+    (viewsari:0001019 "generic_mention")
+  }
+  OPTIONAL { ?m a ?mentionType }
+}
+GROUP BY ?mentionType ?label
+ORDER BY DESC(?count)

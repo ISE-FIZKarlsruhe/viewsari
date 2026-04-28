@@ -1,0 +1,16 @@
+# CQ:        CQI.12
+# Question:  In which biographies does person X appear?
+# Bindings:  X = Michelangelo
+# Requires:  closure rules (R2 + R3).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?biography ?biographyLabel WHERE {
+  vkb:buonarroti-michelagnolo viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography a viewsari:0001008 .
+  OPTIONAL { ?biography rdfs:label ?biographyLabel }
+}

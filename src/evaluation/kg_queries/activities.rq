@@ -1,0 +1,15 @@
+# M04 — Activity inventory by viewsari activity class.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+
+SELECT ?activityType ?label (COUNT(DISTINCT ?act) AS ?count) WHERE {
+  VALUES (?activityType ?label) {
+    (viewsari:0001022 "named_entity_recognition")
+    (viewsari:0001023 "entity_linking")
+    (viewsari:0001024 "cooccurrence_analysis")
+  }
+  OPTIONAL { ?act a ?activityType ; a prov:Activity }
+}
+GROUP BY ?activityType ?label
+ORDER BY DESC(?count)

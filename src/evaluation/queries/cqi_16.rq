@@ -1,0 +1,23 @@
+# CQ:         CQI.16
+# Question:   Which artworks were created in location L?
+# Bindings:   L = Florence (vkb:florence)
+# Modelling:  Probes both a hypothetical viewsari:createdIn edge and a
+#             paragraph-co-mention heuristic (artwork and location appear in the
+#             same paragraph). Empty result signals data gap.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?artwork ?artworkLabel WHERE {
+  {
+    ?artwork a viewsari:0001012 ;
+             viewsari:createdIn vkb:florence .
+  } UNION {
+    ?artwork a viewsari:0001012 ;
+             viewsari:0001032 ?p .
+    vkb:florence a viewsari:0001015 ;
+                 viewsari:0001032 ?p .
+  }
+  OPTIONAL { ?artwork rdfs:label ?artworkLabel }
+}

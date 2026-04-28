@@ -1,0 +1,17 @@
+# CQ:        CQI.20
+# Question:  Which volume of The Lives contains the biography of artist X?
+# Bindings:  X = Michelangelo
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?biography ?biographyLabel ?volume ?volumeLabel WHERE {
+  ?biography a viewsari:0001008 ;
+             frbr:isPartOf ?volume .
+  ?volume a viewsari:0001006 .
+  FILTER (CONTAINS(LCASE(STR(?biography)), "michelangelo"))
+  OPTIONAL { ?biography rdfs:label ?biographyLabel }
+  OPTIONAL { ?volume rdfs:label ?volumeLabel }
+}

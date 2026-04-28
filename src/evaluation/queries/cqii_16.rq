@@ -1,0 +1,15 @@
+# CQ:         CQII.16
+# Question:   Which artworks were commissioned or destroyed as part of a
+#             specific historical event E?
+# Modelling:  Population gap (CQII.15).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?event ?artwork ?relation WHERE {
+  ?event a viewsari:HistoricalEvent .
+  { ?event viewsari:commissioned ?artwork . BIND ("commissioned" AS ?relation) }
+  UNION
+  { ?event viewsari:destroyed    ?artwork . BIND ("destroyed"    AS ?relation) }
+  ?artwork a viewsari:0001012 .
+}

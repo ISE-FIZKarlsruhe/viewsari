@@ -1,0 +1,19 @@
+# M08 — Activity → SoftwareAgent / Agent inventory. One row per
+# (activity, agent) pair. The result demonstrates which model produced
+# which run and supports the claim of full pipeline traceability.
+
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?activity ?activityLabel ?agent ?agentLabel
+       (COUNT(DISTINCT ?run) AS ?runs)
+WHERE {
+  ?run a prov:Activity ;
+       prov:wasAssociatedWith ?agent .
+  OPTIONAL { ?run rdfs:label ?activityLabel }
+  OPTIONAL { ?agent rdfs:label ?agentLabel }
+  BIND (?run AS ?activity)
+}
+GROUP BY ?activity ?activityLabel ?agent ?agentLabel
+ORDER BY ?agent
+LIMIT 50

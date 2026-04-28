@@ -1,0 +1,23 @@
+# CQ:        CQI.15
+# Question:  Which locations are associated with artist X?
+# Bindings:  X = Michelangelo
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?location ?locationLabel WHERE {
+  {
+    ?cooc a viewsari:0001025 ;
+          viewsari:involves vkb:buonarroti-michelagnolo , ?location .
+    ?location a viewsari:0001015 .
+  } UNION {
+    ?mentionA prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:buonarroti-michelagnolo ;
+              viewsari:0001032 ?paragraph .
+    ?location a viewsari:0001015 ;
+              viewsari:0001032 ?paragraph .
+  }
+  OPTIONAL { ?location rdfs:label ?locationLabel }
+}

@@ -1,0 +1,25 @@
+# CQ:         CQII.24
+# Question:   For co-occurrences involving artist X, can I compare the English
+#             translation's web manifestation with the Italian edition's web
+#             manifestation?
+# Bindings:   X = Michelangelo
+# Modelling:  Italian web manifestation is not in the current KG; query returns
+#             the English manifestation only.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cooc ?englishWeb ?italianWeb WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo ;
+        viewsari:0001032 ?paragraph .
+  ?paragraph viewsari:hasStartPage ?englishWeb .
+  OPTIONAL {
+    ?paragraph viewsari:0001032 ?italianParagraph .
+    ?italianParagraph frbr:hasEmbodiment ?italianWeb .
+    FILTER (CONTAINS(STR(?italianWeb), "italian") || CONTAINS(STR(?italianWeb), "1568"))
+  }
+}
+LIMIT 20

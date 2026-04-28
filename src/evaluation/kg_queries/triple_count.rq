@@ -1,0 +1,3 @@
+# M01 — Total triples in the KG.
+
+SELECT (COUNT(*) AS ?triples) WHERE { ?s ?p ?o }

@@ -1,0 +1,17 @@
+# CQ:        CQI.6
+# Question:  Which artists have the highest co-occurrence frequency with artist X?
+# Bindings:  X = Michelangelo
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?partner ?partnerLabel (COUNT(DISTINCT ?cooc) AS ?frequency) WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo , ?partner .
+  FILTER (?partner != vkb:buonarroti-michelagnolo)
+  OPTIONAL { ?partner rdfs:label ?partnerLabel }
+}
+GROUP BY ?partner ?partnerLabel
+ORDER BY DESC(?frequency)
+LIMIT 20

@@ -1,0 +1,16 @@
+# CQ:         CQII.4
+# Question:   What is the Dice coefficient for the co-occurrence of artists X
+#             and Y, and how does it compare to the PMI score?
+# Bindings:   X = Michelangelo, Y = Raphael
+# Modelling:  Returns whichever scores are stored locally; data gap if empty.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+
+SELECT ?cooc ?pmi ?dice WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo ,
+                          vkb:sanzio-raffaello-raffaello-da-urbino .
+  OPTIONAL { ?cooc viewsari:hasPMI            ?pmi  }
+  OPTIONAL { ?cooc viewsari:hasDiceCoefficient ?dice }
+}

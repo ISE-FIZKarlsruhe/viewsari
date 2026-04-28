@@ -1,0 +1,12 @@
+# CQ:        CQII.13
+# Question:  Is location L linked to an external authority (Wikidata, GeoNames)?
+# Bindings:  L = Florence
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+ASK {
+  vkb:florence a viewsari:0001015 ;
+               owl:sameAs ?ext .
+}

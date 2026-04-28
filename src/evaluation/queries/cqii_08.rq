@@ -1,0 +1,18 @@
+# CQ:        CQII.8
+# Question:  Which artworks are classified as out-of-knowledge-base (OOKB) —
+#            no match in Wikidata?
+# Notes:     OOKB is implicit: artworks without an owl:sameAs to wikidata.org.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?artwork ?label WHERE {
+  ?artwork a viewsari:0001012 .
+  FILTER NOT EXISTS {
+    ?artwork owl:sameAs ?ext .
+    FILTER (CONTAINS(STR(?ext), "wikidata.org"))
+  }
+  OPTIONAL { ?artwork rdfs:label ?label }
+}
+LIMIT 500

@@ -1,0 +1,18 @@
+# CQ:        CQI.1
+# Question:  Who co-occurred with whom in The Lives?
+# Cluster:   1 — Artists and Co-occurrences
+# Persona:   Elena Rossi
+# Notes:     Lists every distinct pair (a, b) participating in any cooccurrence.
+#            DISTINCT + ordered IRIs avoid the (a,b)/(b,a) duplicate.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?a ?aLabel ?b ?bLabel WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves ?a, ?b .
+  FILTER (str(?a) < str(?b))
+  OPTIONAL { ?a rdfs:label ?aLabel }
+  OPTIONAL { ?b rdfs:label ?bLabel }
+}
+LIMIT 200

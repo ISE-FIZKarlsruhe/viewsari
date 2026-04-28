@@ -1,0 +1,36 @@
+# M12 — Web-manifestation depth: for each expression-level class
+# (volume, biography, page) report how many instances reach a Project
+# Gutenberg web URL via frbr:hasEmbodiment + rdfs:seeAlso.
+# OPTIONAL subqueries preserve rows for empty groups.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT
+  ?expressionType ?label
+  (COALESCE(?totalRaw,    0) AS ?total)
+  (COALESCE(?withURLRaw,  0) AS ?withWebURL)
+  (IF(COALESCE(?totalRaw, 0) = 0, 0,
+      ROUND(xsd:decimal(COALESCE(?withURLRaw, 0)) * 1000.0 /
+            xsd:decimal(?totalRaw)) / 10.0) AS ?percent)
+WHERE {
+  VALUES (?expressionType ?label) {
+    (viewsari:0001006 "volume")
+    (viewsari:0001008 "biography")
+    (viewsari:0001009 "page")
+  }
+  OPTIONAL {
+    SELECT ?expressionType (COUNT(DISTINCT ?node) AS ?totalRaw) WHERE {
+      ?node a ?expressionType .
+    } GROUP BY ?expressionType
+  }
+  OPTIONAL {
+    SELECT ?expressionType (COUNT(DISTINCT ?node) AS ?withURLRaw) WHERE {
+      ?node a ?expressionType ;
+            frbr:hasEmbodiment ?manifestation .
+      ?manifestation rdfs:seeAlso ?url .
+    } GROUP BY ?expressionType
+  }
+}
+ORDER BY DESC(?total)

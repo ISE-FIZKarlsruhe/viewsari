@@ -1,0 +1,14 @@
+# CQ:         CQII.1
+# Question:   What is the difference between a statistical co-occurrence and an
+#             explicitly typed relationship between two artists in the KG?
+# Modelling:  Probes for *both* shapes; the typed-relationship branch is empty
+#             until ontology-level relations such as viewsari:hasPupil or
+#             viewsari:Collaboration are introduced.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+
+ASK {
+  { ?cooc a viewsari:0001025 . }
+  UNION
+  { ?rel  a viewsari:Collaboration . }
+}

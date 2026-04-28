@@ -1,0 +1,19 @@
+# CQ:        CQI.3
+# Question:  Which artists are mentioned together in the same passage?
+# Requires:  closure rules (R2 + R3) — see scripts/evaluation/inferences.ru.
+#            Cooccurrence and person nodes must carry viewsari:0001032.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?paragraph ?a ?aLabel ?b ?bLabel WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves ?a, ?b ;
+        viewsari:0001032 ?paragraph .
+  FILTER (str(?a) < str(?b))
+  ?a a viewsari:0001013 .
+  ?b a viewsari:0001013 .
+  OPTIONAL { ?a rdfs:label ?aLabel }
+  OPTIONAL { ?b rdfs:label ?bLabel }
+}
+LIMIT 200

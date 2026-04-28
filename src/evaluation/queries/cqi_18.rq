@@ -1,0 +1,17 @@
+# CQ:         CQI.18
+# Question:   Where is location X located on a map?
+# Bindings:   X = Florence
+# Modelling:  Coordinates are not stored locally; the query returns the
+#             owl:sameAs anchor through which Wikidata coordinates can be
+#             federated.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT ?wikidata ?lat ?long WHERE {
+  vkb:florence a viewsari:0001015 .
+  OPTIONAL { vkb:florence owl:sameAs ?wikidata }
+  OPTIONAL { vkb:florence viewsari:hasLatitude  ?lat  }
+  OPTIONAL { vkb:florence viewsari:hasLongitude ?long }
+}

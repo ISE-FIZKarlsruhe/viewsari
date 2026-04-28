@@ -1,0 +1,21 @@
+# CQ:        CQII.6
+# Question:  Which artworks in the biography of artist X are explicitly named,
+#            and which are described only implicitly?
+# Bindings:  X = Michelangelo
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX oa:       <http://www.w3.org/ns/oa#>
+
+SELECT ?artwork ?mentionType ?surfaceForm WHERE {
+  ?paragraph frbr:isPartOf vkb:the_lives_1568_volume-9_michelangelo-bio .
+  ?artwork a viewsari:0001012 ;
+           prov:wasDerivedFrom ?mention .
+  ?mention a ?mentionType ;
+           viewsari:0001032 ?paragraph .
+  FILTER (?mentionType IN (viewsari:0001020, viewsari:0001021))
+  OPTIONAL { ?mention oa:hasBodyValue ?surfaceForm }
+}
+LIMIT 200

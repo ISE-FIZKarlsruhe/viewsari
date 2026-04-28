@@ -1,0 +1,22 @@
+# CQ:        CQII.38
+# Question:  How are implicit entity mentions distinguished from explicit ones,
+#            and can I query them separately?
+# Notes:     Returns counts per mention type so the distinction is visible.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?mentionType ?mentionTypeLabel (COUNT(DISTINCT ?mention) AS ?n) WHERE {
+  VALUES ?mentionType {
+    viewsari:0001017   # explicit_mention
+    viewsari:0001020   # explicit_artwork_mention
+    viewsari:0001016   # implicit_mention
+    viewsari:0001021   # implicit_artwork_mention
+    viewsari:0001018   # coreferent
+    viewsari:0001019   # generic_mention
+  }
+  ?mention a ?mentionType .
+  OPTIONAL { ?mentionType rdfs:label ?mentionTypeLabel }
+}
+GROUP BY ?mentionType ?mentionTypeLabel
+ORDER BY DESC(?n)

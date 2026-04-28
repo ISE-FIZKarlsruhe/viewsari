@@ -1,0 +1,21 @@
+# CQ:         CQI.7
+# Question:   What is the PMI score for the co-occurrence of artists X and Y?
+# Bindings:   X = Michelangelo, Y = Raphael
+# Modelling:  PMI is not yet materialised on viewsari:cooccurrence instances.
+#             The query probes for the most likely property names; an empty
+#             result therefore signals a *data gap* (not a modelling gap):
+#             scores can be added without changing the ontology.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+
+SELECT ?cooc ?pmi WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo ,
+                          vkb:sanzio-raffaello-raffaello-da-urbino .
+  { ?cooc viewsari:hasPMI       ?pmi }
+  UNION
+  { ?cooc viewsari:hasPMIScore  ?pmi }
+  UNION
+  { ?cooc viewsari:pmi          ?pmi }
+}

@@ -1,0 +1,28 @@
+# M07 — Strict provenance coverage (annotation reaches paragraph + activity
+# + SoftwareAgent simultaneously). Computed with two independent subqueries
+# for the same reason as M06.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX oa:       <http://www.w3.org/ns/oa#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+
+SELECT ?total ?fullChain
+       (IF(?total = 0, 0,
+           ROUND(xsd:decimal(?fullChain) * 10000.0 /
+                 xsd:decimal(?total)) / 10000.0) AS ?ratio)
+WHERE {
+  {
+    SELECT (COUNT(DISTINCT ?ann) AS ?total) WHERE {
+      ?ann a oa:Annotation .
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?ann) AS ?fullChain) WHERE {
+      ?ann a oa:Annotation ;
+           viewsari:0001032   ?paragraph ;
+           prov:wasGeneratedBy ?act .
+      ?act prov:wasAssociatedWith ?agent .
+      ?agent a prov:SoftwareAgent .
+    }
+  }
+}

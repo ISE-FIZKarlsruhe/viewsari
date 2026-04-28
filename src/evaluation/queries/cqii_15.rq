@@ -1,0 +1,23 @@
+# CQ:         CQII.15
+# Question:   Which historical events are associated with artist X?
+# Bindings:   X = Michelangelo
+# Modelling:  Probes for any class whose label starts with "Historical Event"
+#             plus a hypothetical viewsari:HistoricalEvent IRI. Empty result
+#             signals a population gap, not a modelling gap (the ontology
+#             permits subclassing prov:Entity for events).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?event ?eventLabel WHERE {
+  ?event a ?eventClass ;
+         viewsari:involves vkb:buonarroti-michelagnolo .
+  {
+    ?eventClass rdfs:label ?clsLabel .
+    FILTER (CONTAINS(LCASE(STR(?clsLabel)), "historical event"))
+  } UNION {
+    FILTER (?eventClass = viewsari:HistoricalEvent)
+  }
+  OPTIONAL { ?event rdfs:label ?eventLabel }
+}

@@ -1,0 +1,23 @@
+# CQ:        CQII.7
+# Question:  What is the surface form by which artwork A is referred to in
+#            paragraph P, and is it explicit, implicit, or coreferential?
+# Bindings:  A = vkb:Q1069665, P = whatever paragraph A is anchored in.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX oa:       <http://www.w3.org/ns/oa#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?paragraph ?surfaceForm ?mentionType ?mentionTypeLabel WHERE {
+  vkb:Q1069665 prov:wasDerivedFrom ?mention .
+  ?mention viewsari:0001032 ?paragraph ;
+           a ?mentionType .
+  FILTER (?mentionType IN (
+    viewsari:0001017, viewsari:0001020,
+    viewsari:0001016, viewsari:0001021,
+    viewsari:0001018, viewsari:0001019
+  ))
+  OPTIONAL { ?mention oa:hasBodyValue ?surfaceForm }
+  OPTIONAL { ?mentionType rdfs:label ?mentionTypeLabel }
+}

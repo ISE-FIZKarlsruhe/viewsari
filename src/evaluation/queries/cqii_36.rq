@@ -1,0 +1,27 @@
+# CQ:        CQII.36
+# Question:  Which entities were extracted by a statistical method
+#            (co-occurrence/NER) versus a generative LLM-based method?
+# Notes:     Statistical = extraction activity is cooccurrence_analysis or NER
+#            without an LLM SoftwareAgent. Generative = NER activity whose
+#            agent is a prov:SoftwareAgent (an LLM).
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+
+SELECT ?method (COUNT(DISTINCT ?entity) AS ?n) WHERE {
+  ?entity prov:wasGeneratedBy ?activity .
+  ?activity a ?activityType .
+  FILTER (?activityType IN (
+    viewsari:0001022, viewsari:0001023, viewsari:0001024
+  ))
+  OPTIONAL { ?activity prov:wasAssociatedWith ?agent .
+             ?agent a prov:SoftwareAgent .
+             BIND (?agent AS ?softwareAgent) }
+  BIND (
+    IF (BOUND(?softwareAgent), "generative-LLM",
+      IF (?activityType = viewsari:0001024, "statistical-cooccurrence",
+        "statistical-NER"))
+    AS ?method)
+}
+GROUP BY ?method
+ORDER BY DESC(?n)

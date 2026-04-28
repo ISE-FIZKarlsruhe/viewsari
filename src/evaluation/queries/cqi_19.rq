@@ -1,0 +1,14 @@
+# CQ:        CQI.19
+# Question:  Which paragraph and page in The Lives is the source of co-occurrence C?
+# Bindings:  C = vkb:cooccurrence_agn-agn_1
+# Requires:  closure rule R2 — cooccurrence -> 0001032 -> paragraph.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+
+SELECT ?paragraph ?startPage ?endPage ?paragraphText WHERE {
+  vkb:cooccurrence_agn-agn_1 viewsari:0001032 ?paragraph .
+  OPTIONAL { ?paragraph viewsari:hasStartPage ?startPage }
+  OPTIONAL { ?paragraph viewsari:hasEndPage   ?endPage  }
+  OPTIONAL { ?paragraph viewsari:hasText      ?paragraphText }
+}

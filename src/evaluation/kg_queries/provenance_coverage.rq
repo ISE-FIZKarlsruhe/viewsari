@@ -1,0 +1,28 @@
+# M06 — Provenance coverage (dissertation Listing 9.6).
+#
+# Total annotations vs annotations whose prov:wasGeneratedBy reaches a
+# prov:wasAssociatedWith agent. We compute the two counts in independent
+# subqueries to avoid the COUNT(DISTINCT ?act) miscounting that happens when
+# many annotations share an activity.
+
+PREFIX oa:   <http://www.w3.org/ns/oa#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?total ?withProv
+       (IF(?total = 0, 0,
+           ROUND(xsd:decimal(?withProv) * 10000.0 /
+                 xsd:decimal(?total)) / 10000.0) AS ?ratio)
+WHERE {
+  {
+    SELECT (COUNT(DISTINCT ?ann) AS ?total) WHERE {
+      ?ann a oa:Annotation .
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?ann) AS ?withProv) WHERE {
+      ?ann a oa:Annotation ;
+           prov:wasGeneratedBy ?act .
+      ?act prov:wasAssociatedWith ?agent .
+    }
+  }
+}

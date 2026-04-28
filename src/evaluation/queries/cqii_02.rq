@@ -1,0 +1,19 @@
+# CQ:         CQII.2
+# Question:   How can I distinguish statistical co-occurrences from explicit
+#             relationships in computational models?
+# Modelling:  Returns one row per association type with a count. Rows for
+#             typed relationships are 0 until those classes are populated.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+
+SELECT ?associationType (COUNT(?inst) AS ?n) WHERE {
+  VALUES ?associationType {
+    viewsari:0001025
+    viewsari:Collaboration
+    viewsari:Influence
+    viewsari:Pupilage
+  }
+  OPTIONAL { ?inst a ?associationType }
+}
+GROUP BY ?associationType
+ORDER BY DESC(?n)

@@ -1,0 +1,17 @@
+# CQ:         CQI.9
+# Question:   What are the birth and death dates of person X?
+# Bindings:   X = Michelangelo
+# Modelling:  Dates are not stored locally; they live on the linked Wikidata
+#             entity. The query returns the Wikidata anchor and any local date
+#             property if one is added in the future.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT ?wikidata ?birth ?death WHERE {
+  vkb:buonarroti-michelagnolo a viewsari:0001013 .
+  OPTIONAL { vkb:buonarroti-michelagnolo owl:sameAs ?wikidata }
+  OPTIONAL { vkb:buonarroti-michelagnolo viewsari:hasBirthDate ?birth }
+  OPTIONAL { vkb:buonarroti-michelagnolo viewsari:hasDeathDate ?death }
+}

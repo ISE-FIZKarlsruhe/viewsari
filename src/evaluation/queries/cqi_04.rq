@@ -1,0 +1,20 @@
+# CQ:        CQI.4
+# Question:  Where in the text did artists X and Y co-occur
+#            (paragraph, biography, volume)?
+# Bindings:  X = Michelangelo, Y = Raphael
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cooc ?paragraph ?biography ?volume ?coocLabel WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo ,
+                          vkb:sanzio-raffaello-raffaello-da-urbino ;
+        rdfs:label ?coocLabel .
+  OPTIONAL { ?cooc viewsari:0001032 ?paragraph .
+             ?paragraph frbr:isPartOf ?biography .
+             ?biography frbr:isPartOf ?volume . }
+}

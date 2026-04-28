@@ -1,0 +1,17 @@
+# CQ:        CQI.14
+# Question:  Which artworks are mentioned in the biography of artist X?
+# Bindings:  X = Michelangelo (biography vkb:the_lives_1568_volume-9_michelangelo-bio)
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?artwork ?artworkLabel WHERE {
+  ?paragraph frbr:isPartOf vkb:the_lives_1568_volume-9_michelangelo-bio .
+  ?artwork a viewsari:0001012 ;
+           viewsari:0001032 ?paragraph .
+  OPTIONAL { ?artwork rdfs:label ?artworkLabel }
+}
+LIMIT 200

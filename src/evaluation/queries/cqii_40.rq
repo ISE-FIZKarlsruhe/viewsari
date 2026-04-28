@@ -1,0 +1,44 @@
+# CQ:        CQII.40
+# Question:  Does the KG allow me to assess whether a claimed relationship
+#            between two artists is supported by explicit textual evidence,
+#            an implicit inference, or purely statistical co-occurrence?
+# Bindings:  X = Michelangelo, Y = Raphael
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+
+SELECT ?evidenceType (COUNT(DISTINCT ?node) AS ?n) WHERE {
+  {
+    # explicit: both artists explicitly mentioned in same paragraph
+    ?ma prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:buonarroti-michelagnolo ;
+        a viewsari:0001017 ;
+        viewsari:0001032 ?p .
+    ?mb prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:sanzio-raffaello-raffaello-da-urbino ;
+        a viewsari:0001017 ;
+        viewsari:0001032 ?p .
+    BIND (?p AS ?node)
+    BIND ("explicit" AS ?evidenceType)
+  } UNION {
+    # implicit: at least one of the two mentions is implicit/coreferent
+    ?ma prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:buonarroti-michelagnolo ;
+        viewsari:0001032 ?p .
+    ?mb prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:sanzio-raffaello-raffaello-da-urbino ;
+        viewsari:0001032 ?p .
+    { ?ma a viewsari:0001016 } UNION
+    { ?ma a viewsari:0001018 } UNION
+    { ?mb a viewsari:0001016 } UNION
+    { ?mb a viewsari:0001018 }
+    BIND (?p AS ?node)
+    BIND ("implicit/coreferent" AS ?evidenceType)
+  } UNION {
+    # statistical: a materialised cooccurrence node
+    ?cooc a viewsari:0001025 ;
+          viewsari:involves vkb:buonarroti-michelagnolo ,
+                            vkb:sanzio-raffaello-raffaello-da-urbino .
+    BIND (?cooc AS ?node)
+    BIND ("statistical-cooccurrence" AS ?evidenceType)
+  }
+}
+GROUP BY ?evidenceType
+ORDER BY DESC(?n)

@@ -1,0 +1,16 @@
+# CQ:        CQI.28
+# Question:  Which authority data (Wikidata, Iconclass, …) is connected to the
+#            resources?
+# Notes:     Counts owl:sameAs targets grouped by host, exposing the authority
+#            namespaces actually used.
+
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?authority (COUNT(*) AS ?links) WHERE {
+  ?s owl:sameAs ?ext .
+  FILTER (isIRI(?ext))
+  BIND (REPLACE(STR(?ext), "^(https?://[^/]+).*$", "$1") AS ?authority)
+}
+GROUP BY ?authority
+ORDER BY DESC(?links)

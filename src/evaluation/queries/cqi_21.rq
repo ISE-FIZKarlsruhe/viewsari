@@ -1,0 +1,17 @@
+# CQ:        CQI.21
+# Question:  What edition or translation of The Lives was used for extracting
+#            a given co-occurrence?
+# Bindings:  C = vkb:cooccurrence_agn-agn_1
+# Requires:  closure rule R2.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+
+SELECT ?paragraph ?biography ?volume ?translation ?edition WHERE {
+  vkb:cooccurrence_agn-agn_1 viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography frbr:isPartOf ?volume .
+  ?volume    frbr:isPartOf ?translation .
+  OPTIONAL { ?translation viewsari:isBasedOn ?edition }
+}

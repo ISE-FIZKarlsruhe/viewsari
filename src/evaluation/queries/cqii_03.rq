@@ -1,0 +1,19 @@
+# CQ:         CQII.3
+# Question:   Which artists have both a statistical co-occurrence and an
+#             explicit typed relationship with artist X?
+# Bindings:   X = Michelangelo
+# Modelling:  Empty until typed relationships are populated.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?partner ?partnerLabel WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves vkb:buonarroti-michelagnolo , ?partner .
+  FILTER (?partner != vkb:buonarroti-michelagnolo)
+  ?rel a ?relType ;
+       viewsari:involves vkb:buonarroti-michelagnolo , ?partner .
+  FILTER (?relType != viewsari:0001025)
+  OPTIONAL { ?partner rdfs:label ?partnerLabel }
+}

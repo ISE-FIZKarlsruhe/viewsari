@@ -1,0 +1,16 @@
+# CQ:        CQII.22
+# Question:  Is the extracted information derived from Du Vere's 1912 English
+#            translation, the 1568 Italian edition, or another version?
+# Bindings:  E = vkb:Q1069665
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?translation ?translationLabel WHERE {
+  vkb:Q1069665 viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf/frbr:isPartOf/frbr:isPartOf ?translation .
+  ?translation a viewsari:0001001 .
+  OPTIONAL { ?translation rdfs:label ?translationLabel }
+}

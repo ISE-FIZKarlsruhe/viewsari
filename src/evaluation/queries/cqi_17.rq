@@ -1,0 +1,20 @@
+# CQ:        CQI.17
+# Question:  Can students explore artist collaborations on a geographical map?
+# Notes:     The visualisation itself is a UX concern. SPARQL surfaces the
+#            substrate: triples (artist, partner, location) that a map view
+#            would consume. Empty until artist↔location edges are populated.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?artist ?partner ?location WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:involves ?artist , ?partner .
+  FILTER (str(?artist) < str(?partner))
+  ?artist  a viewsari:0001013 .
+  ?partner a viewsari:0001013 .
+  ?cooc viewsari:0001032 ?paragraph .
+  ?location a viewsari:0001015 ;
+            viewsari:0001032 ?paragraph .
+}
+LIMIT 100

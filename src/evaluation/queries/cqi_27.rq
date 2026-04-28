@@ -1,0 +1,12 @@
+# CQ:        CQI.27
+# Question:  Which external resources (ontologies, authority data) were used in
+#            constructing the knowledge graph?
+# Notes:     Reads owl:imports declared in the ontology header. Run with
+#            --include-ontology so the header triples are loaded.
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?import WHERE {
+  ?ontology a owl:Ontology ;
+            owl:imports ?import .
+}

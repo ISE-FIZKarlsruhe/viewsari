@@ -1,0 +1,19 @@
+# CQ:        CQII.35
+# Question:  What was the prompt template used in the extraction run that
+#            produced entity E?
+# Bindings:  E = vkb:few_shot_v2_vol10_p100_m_0001 (an LLM-generated mention)
+# Notes:     Activities expose their prompts through prov:used. We filter to
+#            resources whose IRI begins with the prompt_ prefix.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
+PREFIX prov:     <http://www.w3.org/ns/prov#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?activity ?prompt ?promptLabel WHERE {
+  vkb:few_shot_v2_vol10_p100_m_0001 prov:wasGeneratedBy ?activity .
+  ?activity prov:used ?used .
+  FILTER (STRSTARTS(STR(?used), STR(vkb:prompt_)))
+  BIND (?used AS ?prompt)
+  OPTIONAL { ?prompt rdfs:label ?promptLabel }
+}

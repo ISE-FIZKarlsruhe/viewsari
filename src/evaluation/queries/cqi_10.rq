@@ -1,0 +1,18 @@
+# CQ:         CQI.10
+# Question:   Which persons mentioned in The Lives are identified as artists?
+# Modelling:  viewsari:Artist is not a separately asserted subclass in the
+#             current KG iteration (RQII.4). We approximate by selecting
+#             persons that participate in at least one co-occurrence — the
+#             curated cooccurrence set is restricted to artists.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?person ?label WHERE {
+  ?person a viewsari:0001013 .
+  ?cooc   a viewsari:0001025 ;
+          viewsari:involves ?person .
+  OPTIONAL { ?person rdfs:label ?label }
+}
+ORDER BY ?label
+LIMIT 500

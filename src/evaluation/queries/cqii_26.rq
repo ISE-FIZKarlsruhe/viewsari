@@ -1,0 +1,20 @@
+# CQ:        CQII.26
+# Question:  Which entities are classified as OOKB (no matching Wikidata entry)?
+# Notes:     Per-type counts of entities WITHOUT any wikidata.org owl:sameAs.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT ?entityType (COUNT(DISTINCT ?entity) AS ?ookb) WHERE {
+  ?entity a ?entityType .
+  FILTER (?entityType IN (
+    viewsari:0001012, viewsari:0001013,
+    viewsari:0001014, viewsari:0001015
+  ))
+  FILTER NOT EXISTS {
+    ?entity owl:sameAs ?wd .
+    FILTER (CONTAINS(STR(?wd), "wikidata.org"))
+  }
+}
+GROUP BY ?entityType
+ORDER BY DESC(?ookb)

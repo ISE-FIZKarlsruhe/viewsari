@@ -1,0 +1,12 @@
+# M10 — OOKB artworks: artworks with NO wikidata.org owl:sameAs.
+
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+
+SELECT (COUNT(DISTINCT ?artwork) AS ?ookb) WHERE {
+  ?artwork a viewsari:0001012 .
+  FILTER NOT EXISTS {
+    ?artwork owl:sameAs ?wd .
+    FILTER (CONTAINS(STR(?wd), "wikidata.org"))
+  }
+}
