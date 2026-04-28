@@ -5,7 +5,7 @@ Builds the Viewsari Knowledge Graph as a Turtle (.ttl) file from the
 CSV seed files in data/kg_foundation/, using the Viewsari ontology as schema.
 
 Usage:
-    python scripts/build_kg_ttl.py
+    python src/kg_population/build_kg_ttl.py
 
 Output:
     data/kg/viewsari_kg.ttl

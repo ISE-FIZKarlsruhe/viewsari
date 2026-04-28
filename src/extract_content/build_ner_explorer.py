@@ -23,8 +23,8 @@ Graph structure per biography
   mention   ──refersTo──► mention  (coreferent chains)
 
 Usage:
-    python scripts/build_ner_explorer.py
-    python scripts/build_ner_explorer.py --run oss_v3
+    python src/extract_content/build_ner_explorer.py
+    python src/extract_content/build_ner_explorer.py --run oss_v3
 """
 
 from __future__ import annotations

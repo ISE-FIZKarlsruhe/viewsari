@@ -26,7 +26,12 @@ viewsari/
 │   ├── templates/          # Jinja2 HTML templates
 │   ├── static/             # Static assets (JS, images)
 │   └── data/               # Data loading backend
-├── scripts/                # Offline build & ingestion scripts
+├── src/                    # Offline build, ingestion, and evaluation code
+│   ├── kg_population/          # KG build, ingestion, GraphDB setup
+│   ├── extract_content/        # Corpus parsing, OCR, explorer graph building
+│   ├── network/                # Co-occurrence statistics, Wikidata linking
+│   ├── data_statistics/        # Notebook-based stats
+│   └── evaluation/             # CQ + KG evaluation routines
 ├── data/                   # KG foundation, ontology, facsimile pages
 │   ├── kg/                 # viewsari_kg.ttl (the KG) + explorer JSONs
 │   ├── kb/                 # kb.json (prebuilt knowledge base)
@@ -74,12 +79,12 @@ git submodule update --init --recursive
 docker compose up --build -d
 
 # Set up GraphDB repository and import the KG
-bash scripts/setup_graphdb.sh
+bash src/kg_population/setup_graphdb.sh
 
 # Or manually:
 curl -X POST http://localhost:7200/rest/repositories \
   -H "Content-Type: multipart/form-data" \
-  -F "config=@scripts/graphdb-repo-config.ttl"
+  -F "config=@src/kg_population/graphdb-repo-config.ttl"
 curl -X POST http://localhost:7200/repositories/viewsari/statements \
   -H "Content-Type: text/turtle" --data-binary @data/kg/viewsari_kg.ttl
 ```
@@ -97,9 +102,9 @@ The Viewsari KG is serialized as Turtle at `data/kg/viewsari_kg.ttl` (~1.3M trip
 | Class | Ontology ID | Count | Description |
 |---|---|---|---|
 | Person | `viewsari:0001013` | 443 | Consolidated across biographies via coreference resolution |
-| Artwork | `viewsari:0001012` | 825 | From GT entity linking (Wikidata or OOKB linked) |
+| Artwork | `viewsari:0001012` | 852 | From GT entity linking (Wikidata or OOKB linked) |
 | Co-occurrence | `viewsari:0001025` | 541 | Person pairs within a single paragraph |
-| Mention | `oa:Annotation` | 57,684 | GT (2,438) + ObliquER (55,246) |
+| Mention | `oa:Annotation` | 57,685 | GT (2,439) + ObliquER (55,246) |
 
 ### Provenance model (PROV-O)
 
@@ -133,25 +138,31 @@ No `oa:hasBody` is used. The mention-to-entity link is modeled exclusively throu
 
 ## Offline build scripts
 
-All scripts live in `scripts/` and require `rdflib`. They are not needed at runtime.
+All scripts live under `src/` and require `rdflib`. They are not needed at runtime.
 
 | Script | Purpose |
 |---|---|
-| `rebuild_kg.py` | One-shot KG rebuild from backup: namespace migration, ObliquER + GT ingestion |
-| `ingest_annotations.py` | Ingest GT annotations into the KG |
-| `ingest_ner_results.py` | Ingest ObliquER NER results into the KG |
-| `build_kb.py` | Build `data/kb/kb.json` from the KG (persons, artworks, co-occurrences, ObliquER mentions) |
-| `build_ner_explorer.py` | Build D3-ready explorer graph JSONs from ObliquER response files |
-| `build_kg_ttl.py` | Build the foundation KG layer from CSV seed files |
-| `link_persons_wikidata.py` | Link person entities to Wikidata |
-| `setup_graphdb.sh` | Create GraphDB repository and import KG |
+| `src/kg_population/rebuild_kg.py` | One-shot KG rebuild from backup: namespace migration, ObliquER + GT ingestion |
+| `src/kg_population/ingest_annotations.py` | Ingest GT annotations into the KG |
+| `src/kg_population/ingest_ner_results.py` | Ingest ObliquER NER results into the KG |
+| `src/kg_population/build_kb.py` | Build `data/kb/kb.json` from the KG (persons, artworks, co-occurrences, ObliquER mentions) |
+| `src/kg_population/build_kg_ttl.py` | Build the foundation KG layer from CSV seed files |
+| `src/kg_population/setup_graphdb.sh` | Create GraphDB repository and import KG |
+| `src/extract_content/build_ner_explorer.py` | Build D3-ready explorer graph JSONs from ObliquER response files |
+| `src/extract_content/build_explorer_graphs.py` | Build co-occurrence explorer graphs |
+| `src/extract_content/extract_facsimile_pages.py` | Slice the Gutenberg HTML into per-page facsimile pages |
+| `src/extract_content/ocr_facsimile.py` | OCR pipeline for the facsimile pages |
+| `src/network/link_persons_wikidata.py` | Link person entities to Wikidata |
+| `src/evaluation/run_cq_evaluation.py` | Competency-question coverage evaluation (§10.2.3) |
+| `src/evaluation/run_kg_evaluation.py` | Knowledge-graph population metrics (§9.3) |
+| `src/evaluation/materialise_inferences.py` | Apply closure rules to write `viewsari_kg.inferred.ttl` |
 
 ### Rebuilding the KG
 
 ```bash
-python scripts/rebuild_kg.py       # Full rebuild from backup
-python scripts/build_kb.py         # Regenerate kb.json
-python scripts/build_ner_explorer.py --run oss_v3  # Regenerate explorer graphs
+python src/kg_population/rebuild_kg.py       # Full rebuild from backup
+python src/kg_population/build_kb.py         # Regenerate kb.json
+python src/extract_content/build_ner_explorer.py --run oss_v3  # Regenerate explorer graphs
 ```
 
 After rebuilding, re-import into GraphDB:
@@ -165,9 +176,9 @@ curl -X POST http://localhost:7200/repositories/viewsari/statements \
 
 | Offline build | Output | Runtime consumer |
 |---|---|---|
-| `rebuild_kg.py` | `viewsari_kg.ttl` | GraphDB (SPARQL + person/textchunk pages) |
-| `build_kb.py` | `kb.json` | KB browser, entity pages, homepage stats |
-| `build_ner_explorer.py` | `explorer/ner/*/bio_*.json` | ObliquER KG explorer |
+| `src/kg_population/rebuild_kg.py` | `viewsari_kg.ttl` | GraphDB (SPARQL + person/textchunk pages) |
+| `src/kg_population/build_kb.py` | `kb.json` | KB browser, entity pages, homepage stats |
+| `src/extract_content/build_ner_explorer.py` | `explorer/ner/*/bio_*.json` | ObliquER KG explorer |
 
 No `rdflib` is loaded at request time. The web application queries GraphDB via HTTP (`httpx`) or reads prebuilt JSON files.
 

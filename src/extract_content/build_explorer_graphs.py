@@ -7,7 +7,7 @@ annotation data and KG foundation CSVs. No rdflib/SPARQL needed.
 Output: data/kg/explorer/ — one JSON per subgraph.
 
 Usage:
-    python scripts/build_explorer_graphs.py
+    python src/extract_content/build_explorer_graphs.py
 """
 
 import csv

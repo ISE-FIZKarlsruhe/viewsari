@@ -6,7 +6,7 @@ Entity classes surfaced:
   - viewsari:0001025  Co-occurrence
 
 Run:
-    python scripts/build_kb.py
+    python src/kg_population/build_kb.py
 """
 
 from __future__ import annotations

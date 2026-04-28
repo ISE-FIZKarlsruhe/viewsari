@@ -13,7 +13,7 @@ URI namespacing for mentions/entities is prefixed with `gt_` to avoid collision
 with ObliquER runs.
 
 Usage:
-    python scripts/ingest_annotations.py
+    python src/kg_population/ingest_annotations.py
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ PROV = Namespace("http://www.w3.org/ns/prov#")
 OA = Namespace("http://www.w3.org/ns/oa#")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parent.parent.parent
 KG_FILE = BASE / "data" / "kg" / "viewsari_kg.ttl"
 ANN_DIR = BASE / "obliquer" / "data" / "viewsari" / "ground_truth"
 PARA_CSV = BASE / "data" / "kg_foundation" / "viewsari_paragraphs.csv"

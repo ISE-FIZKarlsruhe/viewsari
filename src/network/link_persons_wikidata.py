@@ -12,7 +12,7 @@ Output:
     data/kg_foundation/persons/viewsari_persons.csv      (updated in-place with new columns)
 
 Usage:
-    python scripts/link_persons_wikidata.py
+    python src/network/link_persons_wikidata.py
 """
 
 import csv

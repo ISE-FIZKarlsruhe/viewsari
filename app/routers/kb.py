@@ -1,6 +1,6 @@
 """Knowledge Base browser — consolidated entities from data/kg/viewsari_kg.ttl.
 
-Data is prebuilt offline by scripts/build_kb.py into data/kb/kb.json.
+Data is prebuilt offline by src/kg_population/build_kb.py into data/kb/kb.json.
 """
 
 import json
@@ -23,7 +23,7 @@ def _load_kb() -> dict:
         return _kb_data
     if not KB_PATH.exists():
         raise FileNotFoundError(
-            f"{KB_PATH} is missing. Run `python scripts/build_kb.py` to generate it."
+            f"{KB_PATH} is missing. Run `python src/kg_population/build_kb.py` to generate it."
         )
     _kb_data = json.loads(KB_PATH.read_text(encoding="utf-8"))
     return _kb_data

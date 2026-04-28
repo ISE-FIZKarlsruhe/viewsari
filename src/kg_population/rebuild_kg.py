@@ -11,7 +11,7 @@ Steps:
   6. Re-ingest GT (per-cluster EL via prov:wasDerivedFrom).
   7. Serialize once at the end.
 
-Run:  python scripts/rebuild_kg.py
+Run:  python src/kg_population/rebuild_kg.py
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ from pathlib import Path
 from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 KG_PATH = ROOT / "data" / "kg" / "viewsari_kg.ttl"
 BAK_PATH = ROOT / "data" / "kg" / "viewsari_kg.ttl.bak"
@@ -108,7 +108,7 @@ def main():
 
     # Re-ingest ObliquER
     print("\nRe-ingesting ObliquER …")
-    from scripts.ingest_ner_results import (
+    from src.kg_population.ingest_ner_results import (
         load_paragraph_texts, load_para_map, ingest_strategy, RESULTS_BASE,
     )
     para_texts = load_paragraph_texts()
@@ -123,7 +123,7 @@ def main():
 
     # Re-ingest GT
     print("\nRe-ingesting GT …")
-    from scripts.ingest_annotations import (
+    from src.kg_population.ingest_annotations import (
         load_para_map as gt_para_map_fn, setup_provenance,
         TYPE_TO_CLASSES, CLS_ARTWORK, CLS_EXTRACTED_CONTENT,
         PROP_REFERS_TO, PROP_IN_PARAGRAPH, ANN_DIR, VIEWSARI_KB,

@@ -12,7 +12,7 @@ Output: data/ocr/<vol>/<page>.json with structure:
 }
 
 Usage:
-    python scripts/ocr_facsimile.py
+    python src/extract_content/ocr_facsimile.py
 """
 
 import json

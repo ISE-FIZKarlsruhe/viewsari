@@ -6,7 +6,7 @@ map printed page numbers to PDF page indices.  Only the pages that overlap
 with annotation ground truth are converted to PNG.
 
 Usage:
-    python scripts/extract_facsimile_pages.py
+    python src/extract_content/extract_facsimile_pages.py
 
 Dependencies:
     pip install pymupdf

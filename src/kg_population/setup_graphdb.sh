@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Wait for GraphDB to be ready, create the repository, and import the KG.
 # Run after `docker compose up -d`:
-#   docker compose exec viewsari bash /app/scripts/setup_graphdb.sh
+#   docker compose exec viewsari bash /app/src/kg_population/setup_graphdb.sh
 # Or from host:
-#   bash scripts/setup_graphdb.sh
+#   bash src/kg_population/setup_graphdb.sh
 
 set -euo pipefail
 

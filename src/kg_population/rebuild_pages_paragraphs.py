@@ -8,7 +8,7 @@ For each page number in each volume, determines which biography it
 belongs to based on the biography start pages in viewsari_biographies.csv.
 
 Usage:
-    python scripts/rebuild_pages_paragraphs.py
+    python src/kg_population/rebuild_pages_paragraphs.py
 """
 
 import csv

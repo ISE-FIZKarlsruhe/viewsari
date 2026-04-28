@@ -22,7 +22,7 @@ OA          = Namespace("http://www.w3.org/ns/oa#")
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 
-BASE        = Path(__file__).resolve().parent.parent
+BASE        = Path(__file__).resolve().parent.parent.parent
 KG_FILE     = BASE / "data" / "kg" / "viewsari_kg.ttl"
 RESULTS_BASE = BASE / "obliquer" / "data" / "viewsari" / "prompting_results"
 VOLUMES_DIR = BASE / "obliquer" / "data" / "viewsari" / "volumes"
