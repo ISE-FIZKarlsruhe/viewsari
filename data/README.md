@@ -7,7 +7,7 @@ This repository contains the data transformation pipeline that produces the CSV 
 for the **Viewsari Knowledge Graph** — a provenance-aware, FRBR-structured knowledge graph
 built from Giorgio Vasari's *Le Vite de' più eccellenti pittori, scultori e architettori*
 (1568 edition), specifically the Gaston du C. de Vere English translation (1912),
-as digitised by Project Gutenberg.
+as digitized by Project Gutenberg.
 
 ---
 
