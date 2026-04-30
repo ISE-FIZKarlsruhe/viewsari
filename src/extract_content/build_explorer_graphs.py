@@ -18,7 +18,7 @@ from pathlib import Path
 
 csv.field_size_limit(sys.maxsize)
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parent.parent.parent
 ANN_DIR = BASE / "obliquer" / "data" / "viewsari" / "ground_truth"
 KG_DIR = BASE / "data" / "kg_foundation"
 OUT_DIR = BASE / "data" / "kg" / "explorer"

@@ -177,6 +177,21 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   margin-bottom: 16px;
   overflow-x: auto;
 }
+.sparql-turtle {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--tp);
+  padding: 16px 18px;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+  max-height: 600px;
+}
+.sparql-turtle .ttl-prefix { color: var(--or); }
+.sparql-turtle .ttl-iri { color: var(--bl); }
+.sparql-turtle .ttl-literal { color: #047857; }
+.sparql-turtle .ttl-comment { color: var(--tt); font-style: italic; }
 {% endblock %}
 
 {% block topbar_chips %}
@@ -213,6 +228,8 @@ PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
     <button class="sparql-example-btn" onclick="loadExample('sarah')">Mentions by Sarah</button>
     <button class="sparql-example-btn" onclick="loadExample('ookb')">OOKB discoveries</button>
     <button class="sparql-example-btn" onclick="loadExample('coref')">Coreferent chains</button>
+    <button class="sparql-example-btn" onclick="loadExample('coocs')">Giotto co-occurrences</button>
+    <button class="sparql-example-btn" onclick="loadExample('describe_giotto')">Describe Giotto (Turtle)</button>
     <button class="sparql-example-btn" onclick="loadExample('wd_heroes')">Wikidata-linked hits</button>
     <button class="sparql-example-btn" onclick="loadExample('stats')">KG statistics</button>
   </div>
@@ -363,6 +380,44 @@ var EXAMPLES = {
     '}\n' +
     'LIMIT 10',
 
+  // CQI.1-4: who co-occurred with Giotto, and where
+  coocs:
+    '# CQI.1-4: Who co-occurred with Giotto, and where?\n' +
+    'SELECT ?cooc_label ?person1 ?person2\n' +
+    'WHERE {\n' +
+    '  ?cooc a viewsari:0001025 .\n' +
+    '  ?cooc rdfs:label ?cooc_label .\n' +
+    '  ?cooc viewsari:0001034 ?p1, ?p2 .\n' +
+    '  ?p1 rdfs:label ?person1 .\n' +
+    '  ?p2 rdfs:label ?person2 .\n' +
+    '  FILTER(CONTAINS(?person1, "Giotto") || CONTAINS(?person2, "Giotto"))\n' +
+    '  FILTER(STR(?p1) < STR(?p2))\n' +
+    '}\n' +
+    'ORDER BY ?cooc_label\n' +
+    'LIMIT 10',
+
+  // CONSTRUCT — co-occurrence subgraph involving Giotto, returned as Turtle
+  describe_giotto:
+    '# CONSTRUCT a Turtle subgraph of co-occurrences involving Giotto\n' +
+    'CONSTRUCT {\n' +
+    '  ?cooc a viewsari:0001025 ;\n' +
+    '        rdfs:label ?cooc_label ;\n' +
+    '        viewsari:0001034 ?p .\n' +
+    '  ?p rdfs:label ?p_label .\n' +
+    '}\n' +
+    'WHERE {\n' +
+    '  ?cooc a viewsari:0001025 ;\n' +
+    '        rdfs:label ?cooc_label ;\n' +
+    '        viewsari:0001034 ?p .\n' +
+    '  ?p rdfs:label ?p_label .\n' +
+    '  FILTER EXISTS {\n' +
+    '    ?cooc viewsari:0001034 ?giotto .\n' +
+    '    ?giotto rdfs:label ?giotto_label .\n' +
+    '    FILTER(CONTAINS(?giotto_label, "Giotto"))\n' +
+    '  }\n' +
+    '}\n' +
+    'LIMIT 50',
+
   // Entities with a Wikidata link — the successful links
   wd_heroes:
     '# Artwork entities linked to Wikidata (linking hits)\n' +
@@ -476,6 +531,22 @@ function runQuery() {
     } else if (data.result !== undefined) {
       status.textContent = 'ASK result in ' + elapsed + 's';
       document.getElementById('results-body').innerHTML = '<div class="sparql-empty" style="font-size:24px;font-weight:700;color:var(--tp)">' + (data.result ? 'TRUE' : 'FALSE') + '</div>';
+    } else if (data.turtle !== undefined) {
+      var ttl = data.turtle || '';
+      var triples = (ttl.match(/(?:^|\s)\.(?=\s|$)/gm) || []).length;
+      status.textContent = 'Turtle returned in ' + elapsed + 's';
+      document.getElementById('results-header').textContent = 'Results · Turtle' + (triples ? ' (~' + triples + ' statements)' : '');
+      if (!ttl.trim()) {
+        document.getElementById('results-body').innerHTML = '<div class="sparql-empty">No triples returned</div>';
+        return;
+      }
+      window.__lastTurtle = ttl;
+      document.getElementById('results-body').innerHTML =
+        '<div style="display:flex;justify-content:flex-end;padding:8px 14px;border-bottom:1px solid var(--seam);background:var(--bg2)">' +
+        '<button class="sparql-btn secondary" onclick="copyTurtle()">Copy Turtle</button>' +
+        '<button class="sparql-btn secondary" style="margin-left:6px" onclick="downloadTurtle()">Download .ttl</button>' +
+        '</div>' +
+        '<pre class="sparql-turtle">' + highlightTurtle(ttl) + '</pre>';
     }
   })
   .catch(function(err) {
@@ -483,6 +554,38 @@ function runQuery() {
     status.textContent = 'Network error: ' + err;
     status.className = 'sparql-status error';
   });
+}
+
+function highlightTurtle(ttl) {
+  var out = esc(ttl);
+  out = out.replace(/(^|\n)(\s*#[^\n]*)/g, '$1<span class="ttl-comment">$2</span>');
+  out = out.replace(/(@prefix\s+[^:]+:\s*&lt;[^&]+&gt;\s*\.)/g, '<span class="ttl-prefix">$1</span>');
+  out = out.replace(/(&lt;[^&\s]+&gt;)/g, '<span class="ttl-iri">$1</span>');
+  out = out.replace(/("(?:[^"\\]|\\.)*")/g, '<span class="ttl-literal">$1</span>');
+  return out;
+}
+
+function copyTurtle() {
+  if (!window.__lastTurtle) return;
+  navigator.clipboard.writeText(window.__lastTurtle).then(function() {
+    var s = document.getElementById('sparql-status');
+    var prev = s.textContent;
+    s.textContent = 'Copied Turtle to clipboard';
+    setTimeout(function() { s.textContent = prev; }, 1500);
+  });
+}
+
+function downloadTurtle() {
+  if (!window.__lastTurtle) return;
+  var blob = new Blob([window.__lastTurtle], {type: 'text/turtle'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'viewsari-query.ttl';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // Ctrl+Enter to run

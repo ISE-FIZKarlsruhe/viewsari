@@ -34,7 +34,6 @@ OA = Namespace("http://www.w3.org/ns/oa#")
 BASE = Path(__file__).resolve().parent.parent
 KG_DIR = BASE / "data" / "kg_foundation"
 OUT_DIR = BASE / "data" / "kg"
-ONTOLOGY_FILE = BASE / "data" / "ontology" / "viewsari_ontology.rdf"
 
 
 
@@ -135,7 +134,7 @@ def add_biographies(g: Graph):
         if row.get("rdfs:seeAlso"):
             g.add((subj, RDFS.seeAlso, URIRef(row["rdfs:seeAlso"])))
         if row.get("start_page"):
-            g.add((subj, VIEWSARI["hasStartPage"], Literal(int(row["start_page"]), datatype=XSD.integer)))
+            g.add((subj, VIEWSARI["0001004"], Literal(int(row["start_page"]), datatype=XSD.integer)))
 
 
 def add_pages(g: Graph):
@@ -153,7 +152,7 @@ def add_pages(g: Graph):
         if row.get("rdfs:seeAlso"):
             g.add((subj, RDFS.seeAlso, URIRef(row["rdfs:seeAlso"])))
         if row.get("page_number"):
-            g.add((subj, VIEWSARI["hasPageNumber"], Literal(int(row["page_number"]), datatype=XSD.integer)))
+            g.add((subj, VIEWSARI["0001039"], Literal(int(row["page_number"]), datatype=XSD.integer)))
 
 
 def add_paragraphs(g: Graph):
@@ -165,14 +164,14 @@ def add_paragraphs(g: Graph):
         if row.get("dct:isPartOf"):
             g.add((subj, DCTERMS.isPartOf, uri(row["dct:isPartOf"])))
         if row.get("viewsari:has start page"):
-            g.add((subj, VIEWSARI["hasStartPage"], uri(row["viewsari:has start page"])))
+            g.add((subj, VIEWSARI["0001004"], uri(row["viewsari:has start page"])))
         if row.get("viewsari:has end page"):
-            g.add((subj, VIEWSARI["hasEndPage"], uri(row["viewsari:has end page"])))
+            g.add((subj, VIEWSARI["0001005"], uri(row["viewsari:has end page"])))
         if row.get("viewsari:has length in characters"):
-            g.add((subj, VIEWSARI["hasLengthInCharacters"],
+            g.add((subj, VIEWSARI["0001003"],
                    Literal(int(row["viewsari:has length in characters"]), datatype=XSD.nonNegativeInteger)))
         if row.get("viewsari:has text"):
-            g.add((subj, VIEWSARI["hasText"], Literal(row["viewsari:has text"])))
+            g.add((subj, VIEWSARI["0001002"], Literal(row["viewsari:has text"])))
         if row.get("frbr:is part of"):
             g.add((subj, FRBR["isPartOf"], uri(row["frbr:is part of"])))
 
@@ -259,9 +258,9 @@ def add_cooccurrences(g: Graph):
         g.add((subj, RDF.type, VIEWSARI["0001025"]))
         g.add((subj, RDFS.label, Literal(row["rdfs:label"])))
         if row.get("viewsari:involves"):
-            g.add((subj, VIEWSARI.involves, uri(row["viewsari:involves"])))
+            g.add((subj, VIEWSARI["0001034"], uri(row["viewsari:involves"])))
         if row.get("viewsari:involves_2"):
-            g.add((subj, VIEWSARI.involves, uri(row["viewsari:involves_2"])))
+            g.add((subj, VIEWSARI["0001034"], uri(row["viewsari:involves_2"])))
         if row.get("prov:wasGeneratedBy"):
             g.add((subj, PROV.wasGeneratedBy, uri(row["prov:wasGeneratedBy"])))
 
@@ -313,11 +312,6 @@ def main():
     g.bind("oa", OA)
     g.bind("dct", DCTERMS)
     g.bind("skos", SKOS)
-
-    # Import ontology TBox
-    print("Loading ontology TBox …")
-    g.parse(str(ONTOLOGY_FILE), format="xml")
-    print(f"  {len(g)} triples after ontology import")
 
     print("Stage 1 — Volumes")
     add_volumes(g)

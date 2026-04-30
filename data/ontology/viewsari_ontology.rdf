@@ -218,7 +218,7 @@
         pages).</rdfs:comment>
         <rdfs:label xml:lang="en">has text</rdfs:label>
         <skos1:example>viewsari:the_lives_1568_volume-1_paragraph-2
-        viewsari:hasText &quot;Having next undertaken to make a large panel
+        viewsari:has text &quot;Having next undertaken to make a large panel
         for the monks of Vallombrosa...&quot;^^xsd:string .</skos1:example>
     </owl:DatatypeProperty>
     
@@ -234,15 +234,18 @@
         merged plain-text content of a doco:Paragraph as a
         non-negative integer. The value is computed after page-fragment
         merging and normalization and reflects the length of the string
-        stored in viewsari:hasText. This property supports
-        corpus-statistical queries (e.g., identifying paragraphs likely
-        to contain multiple entity mentions by length threshold) and
-        provides a fast validation check: the oa:end offset of any
-        viewsari:position_selector contained within a paragraph must
-        not exceed this value.</rdfs:comment>
+        stored in viewsari:hasText.</rdfs:comment>
         <rdfs:label xml:lang="en">has length in characters</rdfs:label>
         <skos1:example>viewsari:the_lives_1568_volume-1_paragraph-2
         viewsari:hasLengthInCharacters 707 .</skos1:example>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001039 -->
+
+    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001039">
+        <rdfs:label>has page number</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -819,6 +822,15 @@
         ontology. Instances should be typed with the most specific
         available subclass in addition to this superclass.</rdfs:comment>
         <rdfs:label xml:lang="en">extracted content</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001038 -->
+
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001038">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:label>coreference reconciliation</rdfs:label>
     </owl:Class>
     
 

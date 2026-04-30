@@ -38,7 +38,7 @@ from pathlib import Path
 
 csv.field_size_limit(sys.maxsize)
 
-BASE          = Path(__file__).resolve().parent.parent
+BASE          = Path(__file__).resolve().parent.parent.parent
 RESULTS_BASE  = BASE / "obliquer" / "data" / "viewsari" / "prompting_results"
 PARA_CSV      = BASE / "data" / "kg_foundation" / "viewsari_paragraphs.csv"
 BIO_CSV       = BASE / "data" / "kg_foundation" / "viewsari_biographies.csv"
