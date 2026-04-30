@@ -202,7 +202,7 @@ to its position selector via `oa:hasSelector`.
 
 #### `viewsari_selectors.csv` — 24,827 rows
 
-One `doco:TextPositionSelector` per mention, carrying `oa:start` and `oa:end`
+One `oa:TextPositionSelector` per mention, carrying `oa:start` and `oa:end`
 as character offsets within the containing paragraph text. Linked to its
 TextChunk via `dct:isPartOf`.
 
@@ -274,7 +274,7 @@ All nine CSV files will be written to `output/`.
 | `viewsari_paragraphs.csv`     | 3,479  | `doco:Paragraph`                       |
 | `viewsari_persons.csv`        | 443    | `viewsari:person`                      |
 | `viewsari_textchunks.csv`     | 24,827 | `doco:TextChunk`                       |
-| `viewsari_selectors.csv`      | 24,827 | `doco:TextPositionSelector`            |
+| `viewsari_selectors.csv`      | 24,827 | `oa:TextPositionSelector`            |
 | `viewsari_annotations.csv`    | 24,827 | `oa:Annotation`, `prov:Entity`         |
 | `viewsari_activities.csv`     | 2      | `prov:Activity`                        |
 | **Total**                     | **59,971** |                                    |

@@ -504,7 +504,7 @@ def build_annotation_layer(index_dir: str, output_dir: str, bio_lookup: dict):
                                    f"Vol. {v}, Para. {para_id}",
                                    para_expr, sel_id])
 
-                sel_rows.append([sel_id, "doco:TextPositionSelector",
+                sel_rows.append([sel_id, "oa:TextPositionSelector",
                                  start, end, chunk_id])
 
                 annot_rows.append([annot_id, "oa:Annotation, prov:Entity",

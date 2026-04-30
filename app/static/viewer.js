@@ -358,7 +358,7 @@
 
     // 3. Position selector (content)
     nodes.push({ id:"selector", layer:"content",
-      label:"doco:TextPositionSelector",
+      label:"oa:TextPositionSelector",
       sub:"oa:start " + (m ? m.start : "?") + " \u00b7 oa:end " + (m ? m.end : "?"),
       x:230, y:120, w:175, h:48 });
 

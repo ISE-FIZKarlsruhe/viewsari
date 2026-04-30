@@ -75,8 +75,8 @@ Ontology for anchoring mentions to exact character positions.
   `viewsari:hasEndPage` (both pointing to
   `viewsari:page_web_representation` instances).
 - `doco:TextChunk` — a surface-form span within a paragraph, linked to
-  its `doco:TextPositionSelector` via `oa:hasSelector`.
-- `doco:TextPositionSelector` — character-level `oa:start` / `oa:end`
+  its `oa:TextPositionSelector` via `oa:hasSelector`.
+- `oa:TextPositionSelector` — character-level `oa:start` / `oa:end`
   offsets within the paragraph text.
 
 ### Content layer

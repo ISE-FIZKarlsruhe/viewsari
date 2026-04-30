@@ -55,7 +55,6 @@ TYPE_MAP = {
     "fabio:ManifestationCollection":        FABIO.ManifestationCollection,
     "doco:Paragraph":                       DOCO.Paragraph,
     "doco:TextChunk":                       DOCO.TextChunk,
-    "doco:TextPositionSelector":            DOCO.TextPositionSelector,
     "oa:TextPositionSelector":              OA.TextPositionSelector,
     "oa:Annotation":                        OA.Annotation,
     "prov:Entity":                          PROV.Entity,
