@@ -70,7 +70,7 @@ INSERT {
 }
 WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves ?person ;
+        viewsari:0001034 ?person ;
         viewsari:0001032 ?paragraph .
   ?person a viewsari:0001013 .
   FILTER NOT EXISTS { ?person viewsari:0001032 ?paragraph }
