@@ -1,4 +1,6 @@
-Place one JSON annotation file per biography here. Files should be named {slug}.json.
+Place one JSON annotation file per biography here. Files should be named `{slug}_enriched.json` and grouped under a volume directory (e.g. `3/botticelli_enriched.json`). The loader strips the `_enriched` suffix to derive the slug and uses the parent directory name as the volume number.
+
+By default the website reads these files from the `obliquer` submodule (`./obliquer/data/viewsari/ground_truth`); set `ANNOTATIONS_DIR` in `.env` to override.
 
 Each file must be a JSON array of paragraph objects with the following schema:
 
@@ -30,4 +32,4 @@ Each file must be a JSON array of paragraph objects with the following schema:
 ]
 ```
 
-The `slug` is the filename without `.json` and is used in URLs: `/biography/{slug}/{paragraph_id}`.
+The `slug` is the filename with the `_enriched` suffix removed and is used in URLs: `/biography/{slug}/{paragraph_id}`.
