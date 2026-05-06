@@ -76,6 +76,7 @@
     <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001004 -->
 
     <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001004">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
         <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011"/>
         <rdfs:comment>Links a doco:Paragraph to the
@@ -97,6 +98,7 @@
     <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001005 -->
 
     <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001005">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
         <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011"/>
         <rdfs:comment>Links a doco:Paragraph to the
@@ -164,6 +166,7 @@
     <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001034 -->
 
     <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001034">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
         <rdfs:label xml:lang="en">involves</rdfs:label>
     </owl:ObjectProperty>
@@ -386,6 +389,13 @@
 
     <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Expression"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/vocab/frbr/core#isPartOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>A single numbered printed page within a
         biography, corresponding to one #Page_N anchor in the Gutenberg
         HTML file and to one printed page in the 1912 Medici Society
@@ -766,9 +776,11 @@
         Each co-occurrence instance links to its participating entities
         via viewsari:involves (minimum two), to its source paragraph via
         viewsari:inParagraph, and to the extraction activity that
-        produced it via prov:wasGeneratedBy. The modeling follows the
-        Participation Ontology Design Pattern from the ODP catalog,
-        adapted to the co-occurrence-in-paragraph context.
+        produced it via prov:wasGeneratedBy. The reified shape was originally
+        adapted from the (now-deprecated) Participation Ontology Design
+        Pattern from the ODP catalog, applied to the
+        co-occurrence-in-paragraph context. v1.0.0 keeps the shape but no
+        longer claims a dependency on the pattern.
         Co-occurrences encode implicit relationships that art historians
         interpret as evidence of collaboration, influence, or social
         connection.</skos1:note>
@@ -798,7 +810,17 @@
         type.</rdfs:comment>
         <rdfs:label xml:lang="en">mention</rdfs:label>
     </owl:Class>
-    
+
+    <!-- Pairwise disjointness of the four referential-mode subclasses of viewsari:mention -->
+    <owl:AllDisjointClasses>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016"/>
+            <rdf:Description rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017"/>
+            <rdf:Description rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018"/>
+            <rdf:Description rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001019"/>
+        </owl:members>
+    </owl:AllDisjointClasses>
+
 
 
     <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033 -->
