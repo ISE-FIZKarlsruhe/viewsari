@@ -717,6 +717,52 @@ a.onto-ref code { color: inherit; }
   </div>
 
   <div class="onto-section">
+    <div class="onto-section-title">Ontology Design Patterns</div>
+    <p class="onto-text" style="margin-bottom:12px">
+      Viewsari is composed from small, reusable Ontology Design Patterns (ODPs) drawn from the
+      <a href="https://odpa.github.io/patterns-repository/" target="_blank" style="color:var(--bl)">ODPA pattern repository</a>.
+      Each pattern fixes the shape of one recurring modelling problem so the Viewsari-specific
+      classes can stay narrowly focused on Vasari's <em>Lives</em>.
+    </p>
+    <div class="onto-table-wrap">
+      <table class="onto-table">
+        <thead><tr><th>Pattern</th><th>Building block for</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Persons</strong></td>
+            <td>Artists, patrons, and other named individuals lifted from the Index of Names — basis for <a class="onto-ref" href="/ontology/docs/#0001013"><code>viewsari:person</code></a> and entity-level <code>prov:wasDerivedFrom</code> chains.</td>
+          </tr>
+          <tr>
+            <td><strong>Provenance</strong></td>
+            <td>Propagating accountability from a raw paragraph &rarr; extracted mention &rarr; canonical entity, anchored on PROV-O activities and software agents.</td>
+          </tr>
+          <tr>
+            <td><strong>Place</strong></td>
+            <td>Locating biographies, workshops, and described works in space (cities, regions, churches) — basis for <a class="onto-ref" href="/ontology/docs/#0001015"><code>viewsari:location</code></a>.</td>
+          </tr>
+          <tr>
+            <td><strong>Task Execution</strong></td>
+            <td>Recording each pipeline step (NER, coreference, entity linking, co-occurrence extraction) as a discrete <code>prov:Activity</code> with inputs, outputs, and the executing software agent.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="onto-card" style="border-left:3px solid var(--tt);margin-top:16px">
+      <div class="onto-card-title">Deprecated: Participation</div>
+      <div class="onto-card-text">
+        The first ontology version used the <strong>Participation</strong> ODP to reify
+        co-occurrences as Events &mdash; one event per pair of co-occurring entities, each entity
+        participating in the event &mdash; mirroring the
+        <a href="https://w3id.org/polifonia/ontology/meetups/" target="_blank" style="color:var(--bl)">Polifonia <em>MEETUPs</em></a>
+        module. Participation has since been deprecated from the ODPA repository, so v1.0.0 keeps
+        the reified shape but no longer inherits from the pattern: a co-occurrence is now a
+        first-class <a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a>
+        instance directly, without an Event intermediary.
+      </div>
+    </div>
+  </div>
+
+  <div class="onto-section">
     <div class="onto-section-title">Fixed Individuals</div>
     <p class="onto-text" style="margin-bottom:12px">
       The ontology defines four named individuals that serve as the stable bibliographic root nodes
@@ -813,7 +859,7 @@ a.onto-ref code { color: inherit; }
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq1')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq1">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq1">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/&gt;
 
 # CQI.1-4: Who co-occurred with Giotto, and where?
@@ -902,7 +948,7 @@ LIMIT 10</div>
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq3')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq3">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq3">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 
 # CQI.14: Which artworks are mentioned in Giotto's biography?
@@ -953,7 +999,7 @@ LIMIT 15</div>
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq4')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq4">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq4">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/&gt;
 PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
 PREFIX doco: &lt;http://purl.org/spar/doco/&gt;
@@ -1058,7 +1104,7 @@ WHERE {
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq5')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq5">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq5">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 
 # CQII.6-8: Explicit vs. implicit, OOKB artworks
@@ -1149,7 +1195,7 @@ LIMIT 15</div>
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq6')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq6">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq6">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
 
 # CQII.22: Trace the FRBR chain for all volumes
@@ -1215,7 +1261,7 @@ LIMIT 10</div>
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq7')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq7">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq7">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 
 # CQII.25-26: Wikidata-linked vs. OOKB entities
@@ -1296,7 +1342,7 @@ WHERE {
             <div class="cq-sparql-wrap">
               <button class="cq-sparql-btn" onclick="cqRun(this, 'cq8')">Run SPARQL to verify</button>
               <span class="cq-sparql-toggle" onclick="cqToggleCode(this)">show query</span>
-              <div class="cq-sparql-code" data-qid="cq8">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+              <div class="cq-sparql-code" data-qid="cq8">PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX prov: &lt;http://www.w3.org/ns/prov#&gt;
 PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
 
@@ -1342,7 +1388,7 @@ ORDER BY DESC(?generated)</div>
 
     <div class="onto-card">
       <div class="onto-card-title">Co-occurrence as a first-class entity</div>
-      <div class="onto-card-text">Co-occurrences are modelled as <a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a> instances rather than annotated edges, following the Participation Ontology Design Pattern. This allows provenance metadata, paragraph anchoring, and statistical scores (e.g., PMI) to be attached directly to the co-occurrence node.</div>
+      <div class="onto-card-text">Co-occurrences are modelled as <a class="onto-ref" href="/ontology/docs/#0001025"><code>viewsari:cooccurrence</code></a> instances rather than annotated edges. The first version inherited from the (now-deprecated) Participation ODP, in line with Polifonia's <em>MEETUPs</em> module; v1.0.0 retains the same reified shape without that pattern dependency. Provenance metadata, paragraph anchoring, and statistical scores (e.g., PMI) attach directly to the co-occurrence node.</div>
     </div>
 
     <div class="onto-card">
@@ -1869,7 +1915,7 @@ ORDER BY DESC(?generated)</div>
   function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
   function shortUri(v){
     return v.replace("https://viewsari.ise.fiz-karlsruhe.de/kb/","vkb:")
-            .replace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#","viewsari:")
+            .replace("https://viewsari.ise.fiz-karlsruhe.de/ontology/","viewsari:")
             .replace("http://purl.org/spar/fabio/","fabio:")
             .replace("http://purl.org/spar/doco/","doco:")
             .replace("http://www.w3.org/ns/prov#","prov:")

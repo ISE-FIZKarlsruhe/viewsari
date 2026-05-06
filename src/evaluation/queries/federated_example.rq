@@ -3,7 +3,7 @@
 # Requires a SPARQL 1.1 endpoint that allows the SERVICE keyword (rdflib does;
 # GraphDB requires the federated-query plugin to be enabled).
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 PREFIX wdt:      <http://www.wikidata.org/prop/direct/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>

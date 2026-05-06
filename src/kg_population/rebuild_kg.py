@@ -84,7 +84,7 @@ def main():
     g = new_g
     from rdflib.namespace import Namespace as NS
     g.bind("vkb", NS(NEW_VKB))
-    g.bind("viewsari", NS("https://viewsari.ise.fiz-karlsruhe.de/ontology/#"))
+    g.bind("viewsari", NS("https://viewsari.ise.fiz-karlsruhe.de/ontology/"))
     g.bind("doco", NS("http://purl.org/spar/doco/"))
     g.bind("oa", NS("http://www.w3.org/ns/oa#"))
     g.bind("prov", NS("http://www.w3.org/ns/prov#"))

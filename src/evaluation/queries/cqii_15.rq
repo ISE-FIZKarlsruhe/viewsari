@@ -6,7 +6,7 @@
 #             signals a population gap, not a modelling gap (the ontology
 #             permits subclassing prov:Entity for events).
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 

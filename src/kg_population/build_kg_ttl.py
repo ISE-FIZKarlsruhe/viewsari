@@ -23,7 +23,7 @@ from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS
 
 # ── Namespaces ──────────────────────────────────────────────────────────────
 
-VIEWSARI = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#")
+VIEWSARI = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/")
 VIEWSARI_KB = Namespace("https://viewsari.ise.fiz-karlsruhe.de/kb/")
 FABIO = Namespace("http://purl.org/spar/fabio/")
 DOCO = Namespace("http://purl.org/spar/doco/")

@@ -5,7 +5,7 @@
 # Notes:     Activities expose their prompts through prov:used. We filter to
 #            resources whose IRI begins with the prompt_ prefix.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>

@@ -3,7 +3,7 @@
 # Modelling:  Complement of CQI.10 — persons in the index of names that never
 #             participate in a cooccurrence.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?person ?label WHERE {

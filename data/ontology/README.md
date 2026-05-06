@@ -1,6 +1,6 @@
 # Viewsari Ontology
 
-**Namespace:** `https://viewsari.ise.fiz-karlsruhe.de/ontology/#`  
+**Namespace:** `https://viewsari.ise.fiz-karlsruhe.de/ontology/`  
 **Preferred prefix:** `viewsari`  
 **File:** `viewsari_ontology.rdf` (OWL/RDF-XML, OWL API 4.5.29)  
 **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  

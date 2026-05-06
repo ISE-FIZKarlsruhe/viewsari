@@ -4,7 +4,7 @@
 # Bindings:  C = vkb:cooccurrence_agn-agn_1
 # Requires:  closure rule R2.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
 

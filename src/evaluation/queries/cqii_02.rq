@@ -4,7 +4,7 @@
 # Modelling:  Returns one row per association type with a count. Rows for
 #             typed relationships are 0 until those classes are populated.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 
 SELECT ?associationType (COUNT(?inst) AS ?n) WHERE {
   VALUES ?associationType {

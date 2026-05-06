@@ -2,7 +2,7 @@
 # Question:  Which locations are associated with artist X?
 # Bindings:  X = Michelangelo
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX frbr:     <http://purl.org/vocab/frbr/core#>

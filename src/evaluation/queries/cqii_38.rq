@@ -3,7 +3,7 @@
 #            and can I query them separately?
 # Notes:     Returns counts per mention type so the distinction is visible.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?mentionType ?mentionTypeLabel (COUNT(DISTINCT ?mention) AS ?n) WHERE {

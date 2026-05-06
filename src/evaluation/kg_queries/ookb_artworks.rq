@@ -1,6 +1,6 @@
 # M10 — OOKB artworks: artworks with NO wikidata.org owl:sameAs.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 
 SELECT (COUNT(DISTINCT ?artwork) AS ?ookb) WHERE {

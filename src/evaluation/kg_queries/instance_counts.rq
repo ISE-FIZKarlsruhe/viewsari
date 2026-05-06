@@ -1,7 +1,7 @@
 # M02 — Instance counts per ontology class (populates Table 9.11).
 # Uses VALUES so each class shows up even when its count is zero.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX doco:     <http://purl.org/spar/doco/>
 PREFIX oa:       <http://www.w3.org/ns/oa#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>

@@ -55,7 +55,7 @@ GUTENBERG_IDS = {
 }
 
 # Ontology namespace
-VIEWSARI_NS = "https://viewsari.ise.fiz-karlsruhe.de/ontology/#"
+VIEWSARI_NS = "https://viewsari.ise.fiz-karlsruhe.de/ontology/"
 
 # Top-level work / manifestation-collection nodes (fixed ontology IRIs)
 EDITION_EXPR_NODE  = f"{VIEWSARI_NS}0001029"   # edition expression (parent of all volumes)

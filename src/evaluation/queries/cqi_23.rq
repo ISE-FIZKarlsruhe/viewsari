@@ -5,11 +5,11 @@
 #            is invoked with --include-ontology) plus the Project-Gutenberg
 #            anchor on the gutenberg manifestation node.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX dc:       <http://purl.org/dc/elements/1.1/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?licence ?sourceURL WHERE {
-  OPTIONAL { <https://viewsari.ise.fiz-karlsruhe.de/ontology/#> dc:rights ?licence }
+  OPTIONAL { <https://viewsari.ise.fiz-karlsruhe.de/ontology/> dc:rights ?licence }
   OPTIONAL { viewsari:0001031 rdfs:seeAlso ?sourceURL }
 }

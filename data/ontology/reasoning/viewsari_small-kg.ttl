@@ -8,7 +8,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos1: <http://www.w3.org/2008/05/skos#> .
-@prefix viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#> .
+@prefix viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/> .
 @prefix vkb: <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -88,7 +88,7 @@ viewsari: a owl:Ontology ;
         entities such as persons, artworks, locations, and
         co-occurrences, together with their typed mention
         annotations).""" ;
-    owl:versionIRI <https://viewsari.ise.fiz-karlsruhe.de/ontology/#/1.0.0> .
+    owl:versionIRI <https://viewsari.ise.fiz-karlsruhe.de/ontology/1.0.0/> .
 
 viewsari:0001002 a owl:DatatypeProperty ;
     rdfs:label "has text"@en ;

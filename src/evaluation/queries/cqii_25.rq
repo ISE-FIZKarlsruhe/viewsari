@@ -4,7 +4,7 @@
 # Notes:     Top-level summary: count of distinct linked entities per Viewsari
 #            entity type.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 
 SELECT ?entityType (COUNT(DISTINCT ?entity) AS ?linked) WHERE {

@@ -1,6 +1,6 @@
 # M03 — Counts per concrete mention subclass.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 
 SELECT ?mentionType ?label (COUNT(DISTINCT ?m) AS ?count) WHERE {
   VALUES (?mentionType ?label) {

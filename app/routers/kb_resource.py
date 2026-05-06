@@ -44,7 +44,7 @@ async def _load_person(resource_id: str) -> dict | None:
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
         SELECT ?label ?wikidata WHERE {{
             <{uri}> a viewsari:0001013 ;
                      rdfs:label ?label .
@@ -67,7 +67,7 @@ async def _load_person(resource_id: str) -> dict | None:
 
     cooc_rows = await _sparql(f"""
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+        PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
         SELECT ?cooc ?cooc_label ?other ?other_label WHERE {{
             ?cooc viewsari:involves <{uri}> ;
                   rdfs:label ?cooc_label ;

@@ -4,7 +4,7 @@
 #            substrate: triples (artist, partner, location) that a map view
 #            would consume. Empty until artist↔location edges are populated.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?artist ?partner ?location WHERE {

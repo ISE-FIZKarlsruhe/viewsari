@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="https://viewsari.ise.fiz-karlsruhe.de/ontology/#"
+<rdf:RDF xmlns="https://viewsari.ise.fiz-karlsruhe.de/ontology/"
      xml:base="https://viewsari.ise.fiz-karlsruhe.de/ontology/"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:oa="http://www.w3.org/ns/oa#"
@@ -14,9 +14,9 @@
      xmlns:vann="http://purl.org/vocab/vann/"
      xmlns:skos1="http://www.w3.org/2008/05/skos#"
      xmlns:terms="http://purl.org/dc/terms/"
-     xmlns:viewsari="https://viewsari.ise.fiz-karlsruhe.de/ontology/#">
-    <owl:Ontology rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#">
-        <owl:versionIRI rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#/1.0.0"/>
+     xmlns:viewsari="https://viewsari.ise.fiz-karlsruhe.de/ontology/">
+    <owl:Ontology rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/">
+        <owl:versionIRI rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/1.0.0/"/>
         <owl:imports rdf:resource="http://purl.org/spar/doco/2015-07-03"/>
         <owl:imports rdf:resource="http://purl.org/spar/fabio/2019-02-19"/>
         <owl:imports rdf:resource="http://www.w3.org/ns/prov-o-20130430"/>
@@ -73,11 +73,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001004 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001004">
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
-        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011"/>
+        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011"/>
         <rdfs:comment>Links a doco:Paragraph to the
         viewsari:page_web_representation instance that corresponds to
         the first printed page on which the paragraph begins. For
@@ -94,11 +94,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001005 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001005">
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
-        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011"/>
+        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011"/>
         <rdfs:comment>Links a doco:Paragraph to the
         viewsari:page_web_representation instance that corresponds to
         the last printed page on which the paragraph ends. For
@@ -116,13 +116,13 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001030 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001030">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/vocab/frbr/core#relatedEndeavour"/>
-        <owl:inverseOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036"/>
-        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001"/>
-        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000"/>
+        <owl:inverseOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001036"/>
+        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001"/>
+        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000"/>
         <rdfs:comment>Records the derivation relationship
         between a viewsari:translation and the viewsari:edition from
         which it was made. This property is a subproperty of
@@ -138,11 +138,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001032 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001032">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
-        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:range rdf:resource="http://purl.org/spar/doco/Paragraph"/>
         <rdfs:comment>Anchors a viewsari:extracted_content
         individual — most commonly a viewsari:cooccurrence — to the
@@ -161,21 +161,21 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001034 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001034">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
         <rdfs:label xml:lang="en">involves</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001035 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001035">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001035">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/relation"/>
-        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018"/>
-        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026"/>
+        <rdfs:domain rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018"/>
+        <rdfs:range rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026"/>
         <rdfs:comment>Links a coreferent mention to the antecedent
        mention (explicit or implicit) to which it co-refers within
        the same biography. The antecedent must lie within the current
@@ -185,9 +185,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001036 -->
 
-    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001036">
+    <owl:ObjectProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001036">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/vocab/frbr/core#relatedEndeavour"/>
         <rdfs:label>is basis of</rdfs:label>
     </owl:ObjectProperty>
@@ -205,9 +205,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001002 -->
 
-    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001002">
+    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001002">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -224,9 +224,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001003 -->
 
-    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001003">
+    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001003">
         <rdfs:domain rdf:resource="http://purl.org/spar/doco/Paragraph"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
@@ -242,9 +242,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001039 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001039 -->
 
-    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001039">
+    <owl:DatatypeProperty rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001039">
         <rdfs:label>has page number</rdfs:label>
     </owl:DatatypeProperty>
     
@@ -261,9 +261,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Expression"/>
         <rdfs:comment>A published version of a work,
         representing a distinct textual state produced by an editorial
@@ -287,9 +287,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Expression"/>
         <rdfs:comment>A rendering of a work into a language
         other than that of the source edition, treated as a distinct
@@ -309,9 +309,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001006">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Book"/>
         <rdfs:comment>A physically or digitally bounded
         division of an edition or translation, corresponding to a single
@@ -332,9 +332,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001007 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001007">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001007">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/WebSite"/>
         <rdfs:comment>The web-accessible digital manifestation
         of a single volume of The Lives, hosted as a single HTML file
@@ -357,9 +357,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001008">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Expression"/>
         <rdfs:comment>The life and works account of a single
         artist or craftsman as written by Vasari. Each biography is
@@ -382,9 +382,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001009">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/Expression"/>
         <rdfs:comment>A single numbered printed page within a
         biography, corresponding to one #Page_N anchor in the Gutenberg
@@ -405,9 +405,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001010 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001010">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001010">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/WebPage"/>
         <rdfs:comment>The web-accessible manifestation of a
         single artist biography within a volume HTML file on Project
@@ -431,9 +431,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001011">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011">
         <rdfs:subClassOf rdf:resource="http://purl.org/spar/fabio/WebPage"/>
         <rdfs:comment>The web-accessible manifestation of a
         single printed page within the Gutenberg HTML edition. Each
@@ -457,10 +457,10 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:comment>A creative work — painting, sculpture,
         fresco, architectural project, or decorative object — mentioned
         or described in the Vasari corpus. Artwork individuals are the
@@ -485,10 +485,10 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:comment>A historical individual mentioned in
         the Vasari corpus — primarily artists, architects, sculptors,
         and patrons, but also popes, rulers, and other figures named in
@@ -515,19 +515,19 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001014 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001014">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001014">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:label xml:lang="en">organization</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001015 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001015">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001015">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:label xml:lang="en">location</rdfs:label>
         <skos1:note>A geographical place mentioned in the
         Vasari corpus, including cities, regions, churches, palaces,
@@ -541,11 +541,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026"/>
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026"/>
         <rdfs:comment>A mention in which a specific,
         recoverable entity is described but not named through a
         canonical surface form. The entity must be uniquely identifiable
@@ -565,11 +565,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026"/>
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026"/>
         <rdfs:comment>A mention in which the entity is
         identified through a canonical surface form — a proper name,
         an established title, or a recognized traditional identifier
@@ -584,11 +584,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026"/>
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026"/>
         <rdfs:comment>A mention that refers back to an entity
         already introduced earlier in the same biography, realised as a
         pronoun, demonstrative, definite noun phrase, or descriptive
@@ -609,11 +609,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001019 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001019">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026"/>
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026"/>
         <rdfs:comment>A mention that refers to an entity type
         in general rather than to a specific individual. Generic
         mentions arise when Vasari speaks of artistic practice as a
@@ -630,10 +630,10 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001020 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001020">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017"/>
         <rdfs:comment>An explicit mention whose body resolves
         to a viewsari:artwork individual. The surface form is a
         canonical title or recognized traditional identifier for an
@@ -647,10 +647,10 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001021 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001021">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016"/>
         <rdfs:comment>An implicit mention whose referent is a
         specific, recoverable viewsari:artwork individual described
         through a descriptive passage rather than a canonical title.
@@ -669,9 +669,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001022 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001022">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001022">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
         <rdfs:comment>A prov:Activity subclass representing a
         single run of the named entity recognition and coreference
@@ -696,9 +696,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001023 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001023">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
         <rdfs:comment>A prov:Activity subclass representing a
         single run of the entity linking pipeline, in which recognized
@@ -718,9 +718,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001024 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001024">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001024">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
         <rdfs:comment>A prov:Activity subclass representing a
         single run of the co-occurrence extraction pipeline, which
@@ -737,15 +737,15 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001025 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025">
-        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001025">
+        <rdfs:subClassOf rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034"/>
+                <owl:onProperty rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001034"/>
                 <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033"/>
+                <owl:onClass rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">cooccurrence</rdfs:label>
@@ -776,9 +776,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001026">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/oa#Annotation"/>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
         <rdfs:comment>A surface-form reference to an entity
@@ -801,9 +801,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001033">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
         <rdfs:comment>The common superclass for all
         content-layer individuals produced by computational extraction
@@ -826,9 +826,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001038 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001038 -->
 
-    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001038">
+    <owl:Class rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001038">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
         <rdfs:label>coreference reconciliation</rdfs:label>
     </owl:Class>
@@ -846,13 +846,13 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001027 -->
 
-    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027">
+    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001027">
         <rdf:type rdf:resource="http://purl.org/spar/fabio/Work"/>
-        <terms:creator rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037"/>
-        <core:realization rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028"/>
-        <core:realization rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029"/>
+        <terms:creator rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001037"/>
+        <core:realization rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001028"/>
+        <core:realization rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001029"/>
         <rdfs:comment>The abstract intellectual work
         Le Vite de&apos; più eccellenti pittori, scultori, e architettori by
         Giorgio Vasari. This individual represents the work in the FRBR
@@ -867,10 +867,10 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001028 -->
 
-    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001028">
-        <rdf:type rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001000"/>
+    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001028">
+        <rdf:type rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000"/>
         <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1568</dc:date>
         <rdfs:comment>The 1568 Giunti (Giuntina) edition of
         Le Vite, published in Florence by the Giunti press. This is the
@@ -888,11 +888,11 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001029 -->
 
-    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029">
-        <rdf:type rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001001"/>
-        <core:embodiment rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031"/>
+    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001029">
+        <rdf:type rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001"/>
+        <core:embodiment rdf:resource="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001031"/>
         <dc:creator>Gaston C. du Vere</dc:creator>
         <dc:date>1912-1915</dc:date>
         <rdfs:comment>The 1912 English translation of Le Vite
@@ -910,9 +910,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001031 -->
 
-    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001031">
+    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001031">
         <rdf:type rdf:resource="http://purl.org/spar/fabio/ManifestationCollection"/>
         <dc:contributor>Project Gutenberg</dc:contributor>
         <dc:rights>https://www.gutenberg.org/policy/license.html</dc:rights>
@@ -934,9 +934,9 @@
     
 
 
-    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037 -->
+    <!-- https://viewsari.ise.fiz-karlsruhe.de/ontology/0001037 -->
 
-    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001037">
+    <owl:NamedIndividual rdf:about="https://viewsari.ise.fiz-karlsruhe.de/ontology/0001037">
         <rdfs:label>giorgio_vasari</rdfs:label>
     </owl:NamedIndividual>
 </rdf:RDF>

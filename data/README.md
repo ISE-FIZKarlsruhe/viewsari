@@ -285,7 +285,7 @@ All nine CSV files will be written to `output/`.
 
 | Prefix    | Namespace                                      | Used for                          |
 |-----------|------------------------------------------------|-----------------------------------|
-| `viewsari` | `https://viewsari.ise.fiz-karlsruhe.de/ontology/#` | Domain classes and properties |
+| `viewsari` | `https://viewsari.ise.fiz-karlsruhe.de/ontology/` | Domain classes and properties |
 | `fabio`   | `http://purl.org/spar/fabio/`                  | FRBR-aligned bibliographic types  |
 | `frbr`    | `http://purl.org/vocab/frbr/core#`             | Work / Expression / Manifestation |
 | `doco`    | `http://purl.org/spar/doco/`                   | Document components               |

@@ -26,7 +26,7 @@
 #        R2; not exhaustive — only paragraphs in which the person co-occurs
 #        with someone — but it is the closure justified by current evidence.)
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX oa:       <http://www.w3.org/ns/oa#>

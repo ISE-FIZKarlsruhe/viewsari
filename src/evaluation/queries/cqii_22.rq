@@ -3,7 +3,7 @@
 #            translation, the 1568 Italian edition, or another version?
 # Bindings:  E = vkb:Q1069665
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>

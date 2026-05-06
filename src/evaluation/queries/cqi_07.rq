@@ -6,7 +6,7 @@
 #             result therefore signals a *data gap* (not a modelling gap):
 #             scores can be added without changing the ontology.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 
 SELECT ?cooc ?pmi WHERE {

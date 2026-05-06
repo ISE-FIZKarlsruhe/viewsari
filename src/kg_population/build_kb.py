@@ -25,7 +25,7 @@ ANNOTATION_CLASS = URIRef(OA + "Annotation")
 KG_PATH = Path("data/kg/viewsari_kg.ttl")
 OUT_PATH = Path("data/kb/kb.json")
 
-VIEWSARI = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#")
+VIEWSARI = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/")
 VKB = Namespace("https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#")
 PERSON_CLASS = URIRef(VIEWSARI + "0001013")
 ARTWORK_CLASS = URIRef(VIEWSARI + "0001012")

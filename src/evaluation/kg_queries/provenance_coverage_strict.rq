@@ -2,7 +2,7 @@
 # + SoftwareAgent simultaneously). Computed with two independent subqueries
 # for the same reason as M06.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX oa:       <http://www.w3.org/ns/oa#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 

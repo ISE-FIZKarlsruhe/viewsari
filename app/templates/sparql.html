@@ -210,7 +210,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   </div>
 
   <div class="sparql-prefixes">
-PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/#&gt;
+PREFIX viewsari: &lt;https://viewsari.ise.fiz-karlsruhe.de/ontology/&gt;
 PREFIX vkb: &lt;https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#&gt;
 PREFIX fabio: &lt;http://purl.org/spar/fabio/&gt;
 PREFIX doco: &lt;http://purl.org/spar/doco/&gt;
@@ -261,7 +261,7 @@ ORDER BY ?label</textarea>
 
 {% block scripts %}
 <script>
-var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>\n' +
+var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>\n' +
   'PREFIX vkb: <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>\n' +
   'PREFIX fabio: <http://purl.org/spar/fabio/>\n' +
   'PREFIX doco: <http://purl.org/spar/doco/>\n' +
@@ -466,7 +466,7 @@ function formatCell(val) {
   if (!val) return '';
   if (val.startsWith('http://') || val.startsWith('https://')) {
     var short = val.replace('https://viewsari.ise.fiz-karlsruhe.de/kb/', 'vkb:')
-                   .replace('https://viewsari.ise.fiz-karlsruhe.de/ontology/#', 'viewsari:')
+                   .replace('https://viewsari.ise.fiz-karlsruhe.de/ontology/', 'viewsari:')
                    .replace('http://purl.org/spar/fabio/', 'fabio:')
                    .replace('http://purl.org/spar/doco/', 'doco:')
                    .replace('http://www.w3.org/ns/prov#', 'prov:')

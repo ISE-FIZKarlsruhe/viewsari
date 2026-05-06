@@ -2,7 +2,7 @@
 # Question:  Which locations are mentioned in co-occurrences involving artist X?
 # Bindings:  X = Michelangelo
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 

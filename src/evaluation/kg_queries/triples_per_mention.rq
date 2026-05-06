@@ -1,7 +1,7 @@
 # M05 — Average triples-per-mention. Counts triples whose subject OR object is
 # a mention (viewsari:0001026), divided by the number of distinct mentions.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 
 SELECT
   (COUNT(DISTINCT ?m) AS ?mentions)

@@ -3,7 +3,7 @@
 # Gutenberg web URL via frbr:hasEmbodiment + rdfs:seeAlso.
 # OPTIONAL subqueries preserve rows for empty groups.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 

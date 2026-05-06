@@ -2,7 +2,7 @@
 # Question:  Is person X linked to an external authority record (Wikidata)?
 # Bindings:  X = Michelangelo
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 

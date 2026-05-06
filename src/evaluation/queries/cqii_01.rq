@@ -5,7 +5,7 @@
 #             until ontology-level relations such as viewsari:hasPupil or
 #             viewsari:Collaboration are introduced.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 
 ASK {
   { ?cooc a viewsari:0001025 . }

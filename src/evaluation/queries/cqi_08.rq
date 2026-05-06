@@ -6,7 +6,7 @@
 #             the *degree*: the count of distinct partners with whom X
 #             co-occurs at least once. Useful as a partial answer.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 
 SELECT (COUNT(DISTINCT ?partner) AS ?degree) WHERE {

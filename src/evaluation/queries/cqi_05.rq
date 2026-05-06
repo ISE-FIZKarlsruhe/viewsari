@@ -2,7 +2,7 @@
 # Question:  How frequently do two given artists co-occur across the entire corpus?
 # Bindings:  X = Michelangelo, Y = Raphael
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 
 SELECT (COUNT(DISTINCT ?cooc) AS ?frequency) WHERE {

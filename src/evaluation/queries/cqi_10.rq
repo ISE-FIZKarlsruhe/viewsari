@@ -5,7 +5,7 @@
 #             persons that participate in at least one co-occurrence — the
 #             curated cooccurrence set is restricted to artists.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?person ?label WHERE {

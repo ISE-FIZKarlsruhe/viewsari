@@ -3,7 +3,7 @@
 #            paragraph P, and is it explicit, implicit, or coreferential?
 # Bindings:  A = vkb:Q1069665, P = whatever paragraph A is anchored in.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX oa:       <http://www.w3.org/ns/oa#>

@@ -1,6 +1,6 @@
 # M04 — Activity inventory by viewsari activity class.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 
 SELECT ?activityType ?label (COUNT(DISTINCT ?act) AS ?count) WHERE {

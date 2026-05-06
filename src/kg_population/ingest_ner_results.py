@@ -14,7 +14,7 @@ csv.field_size_limit(sys.maxsize)
 
 # ── Namespaces ────────────────────────────────────────────────────────────────
 
-VIEWSARI    = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/#")
+VIEWSARI    = Namespace("https://viewsari.ise.fiz-karlsruhe.de/ontology/")
 VIEWSARI_KB = Namespace("https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#")
 DOCO        = Namespace("http://purl.org/spar/doco/")
 PROV        = Namespace("http://www.w3.org/ns/prov#")

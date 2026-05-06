@@ -5,7 +5,7 @@
 #             entity. The query returns the Wikidata anchor and any local date
 #             property if one is added in the future.
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX owl:      <http://www.w3.org/2002/07/owl#>
 

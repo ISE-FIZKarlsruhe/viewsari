@@ -5,7 +5,7 @@
 #            without an LLM SoftwareAgent. Generative = NER activity whose
 #            agent is a prov:SoftwareAgent (an LLM).
 
-PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/#>
+PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 
 SELECT ?method (COUNT(DISTINCT ?entity) AS ?n) WHERE {
