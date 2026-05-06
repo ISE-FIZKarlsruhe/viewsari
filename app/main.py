@@ -41,7 +41,7 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.mount("/facsimile", StaticFiles(directory="data/facsimile_pages"), name="facsimile")
 app.mount(
     "/ontology/docs",
-    StaticFiles(directory="data/ontology/viewsari", html=True),
+    StaticFiles(directory="data/ontology/viewsari_ontology_docs/doc", html=True),
     name="ontology-docs",
 )
 
