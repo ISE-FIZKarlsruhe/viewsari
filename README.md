@@ -6,45 +6,140 @@ Viewsari combines a formal OWL ontology, an LLM-based entity extraction pipeline
 
 ## Architecture
 
+The repository is split into four top-level concerns:
+
+- **`app/`** — FastAPI web application (runtime). Reads prebuilt JSON, queries GraphDB over HTTP. No `rdflib` is loaded at request time.
+- **`src/`** — Offline pipelines. Build the KG, ingest annotations, populate GraphDB, run evaluations, compute statistics.
+- **`data/`** — Static data layer. Source corpora (PDFs, OCR, facsimile pages), the ontology, the KG (`.ttl`), the prebuilt knowledge base (`kb.json`), and CSV seed files.
+- **`obliquer/`** — Git submodule containing the ObliquER LLM extraction pipeline and the gold-standard ground truth.
+
 ```
 viewsari/
-├── app/                    # FastAPI web application
-│   ├── main.py             # Entry point
-│   ├── routers/            # Route handlers
-│   │   ├── index.py        # Homepage
-│   │   ├── biography.py    # Biography paragraph viewer
-│   │   ├── annotations.py  # Annotation corpus browser
-│   │   ├── kb.py           # Knowledge base browser
-│   │   ├── kb_resource.py  # Person / textchunk pages (queries GraphDB)
-│   │   ├── sparql.py       # SPARQL endpoint proxy (queries GraphDB)
-│   │   ├── obliquer.py     # ObliquER pages + explorer API
-│   │   ├── explore.py      # GT KG explorer
-│   │   ├── ontology.py     # Ontology overview
-│   │   ├── publications.py # Publications list
-│   │   ├── volume.py       # Volume pages
-│   │   └── about.py        # About page
-│   ├── templates/          # Jinja2 HTML templates
-│   ├── static/             # Static assets (JS, images)
-│   └── data/               # Data loading backend
-├── src/                    # Offline build, ingestion, and evaluation code
-│   ├── kg_population/          # KG build, ingestion, GraphDB setup
-│   ├── extract_content/        # Corpus parsing, OCR, explorer graph building
-│   ├── network/                # Co-occurrence statistics, Wikidata linking
-│   ├── data_statistics/        # Notebook-based stats
-│   └── evaluation/             # CQ + KG evaluation routines
-├── data/                   # KG foundation, ontology, facsimile pages
-│   ├── kg/                 # viewsari_kg.ttl (the KG) + explorer JSONs
-│   ├── kb/                 # kb.json (prebuilt knowledge base)
-│   ├── kg_foundation/      # CSV seed files (paragraphs, biographies, etc.)
-│   └── ontology/           # OWL ontology + WIDOCO docs
-├── obliquer/               # ObliquER submodule (extraction pipeline + GT)
-│   └── data/viewsari/
-│       ├── ground_truth/   # Gold-standard annotation JSONs
-│       └── prompting_results/  # LLM extraction runs
-├── nginx/                  # Reverse proxy config
-├── Dockerfile              # Python 3.12 container
-├── docker-compose.yml      # Web + GraphDB + Nginx
-└── requirements.txt        # Python dependencies
+├── app/                            # FastAPI web application (runtime)
+│   ├── main.py                         # Entry point: lifespan, static mounts, router includes
+│   ├── routers/                        # Route handlers (one per page/feature)
+│   │   ├── index.py                        # Homepage with KB stats
+│   │   ├── biography.py                    # Biography paragraph viewer + facsimile pages
+│   │   ├── annotations.py                  # Annotation corpus browser (per-bio stats)
+│   │   ├── kb.py                           # Knowledge base browser (persons / artworks / mentions)
+│   │   ├── kb_resource.py                  # Person + textchunk detail pages (queries GraphDB)
+│   │   ├── sparql.py                       # SPARQL proxy + query editor UI
+│   │   ├── obliquer.py                     # ObliquER about page + KG explorer API
+│   │   ├── explore.py                      # GT co-occurrence graph explorer
+│   │   ├── ontology.py                     # Ontology overview page
+│   │   ├── publications.py                 # Publications list
+│   │   ├── volume.py                       # Volume landing pages
+│   │   └── about.py                        # About page
+│   ├── data/                           # Runtime data-access layer
+│   │   ├── base.py                         # Shared loader interface
+│   │   └── json_backend.py                 # Loads kb.json + explorer graphs
+│   ├── templates/                      # Jinja2 templates (base.html, page templates, fragments)
+│   └── static/                         # Static assets (logo, viewer.js, splash images)
+│
+├── src/                            # Offline pipelines (not loaded at runtime)
+│   ├── kg_population/                  # KG build + GraphDB ingestion
+│   │   ├── rebuild_kg.py                   # End-to-end rebuild from backup
+│   │   ├── build_viewsari_kg.py            # Initial KG construction
+│   │   ├── build_kg_ttl.py                 # Foundation layer from CSV seeds
+│   │   ├── ingest_annotations.py           # GT mentions → KG
+│   │   ├── ingest_ner_results.py           # ObliquER NER runs → KG
+│   │   ├── build_kb.py                     # KG → kb.json (runtime KB)
+│   │   ├── build_reasoner_test.py          # Reasoner sanity checks
+│   │   ├── rebuild_pages_paragraphs.py     # Page/paragraph refresh
+│   │   ├── populate_biographies.ipynb      # Biography seeding notebook
+│   │   ├── setup_graphdb.sh                # Create repo + import KG
+│   │   └── graphdb-repo-config.ttl         # GraphDB repository config
+│   ├── extract_content/                # Corpus parsing + explorer building
+│   │   ├── extract_facsimile_pages.py      # Slice Gutenberg HTML into per-page facsimiles
+│   │   ├── extract_volume_content.ipynb    # Volume parsing notebook
+│   │   ├── ocr_facsimile.py                # OCR pipeline for facsimile pages
+│   │   ├── parse_names.py                  # Index-of-Names parser
+│   │   ├── scrape_indices.py               # Index scraper
+│   │   ├── scrape_bibliography_info.ipynb  # Bibliography enrichment
+│   │   ├── get_references.py               # Cross-reference extractor
+│   │   ├── fix_headless_corefs.py          # Coref cleanup
+│   │   ├── build_ner_explorer.py           # ObliquER → D3 explorer JSONs
+│   │   └── build_explorer_graphs.py        # GT co-occurrence explorer JSONs
+│   ├── network/                        # Network statistics + Wikidata linking
+│   │   ├── compute_pmi.py                  # PMI co-occurrence scores
+│   │   ├── compute_dice.py                 # Dice coefficient scores
+│   │   ├── biography_pmi-dice.ipynb        # Per-biography network analysis
+│   │   ├── calculate_closest_positions.ipynb
+│   │   ├── convert_kg_rdfstar.ipynb        # RDF-star export
+│   │   └── link_persons_wikidata.py        # Person → Wikidata QID linker
+│   ├── evaluation/                     # CQ + KG evaluation
+│   │   ├── run_cq_evaluation.py            # Competency-question coverage (§10.2.3)
+│   │   ├── run_kg_evaluation.py            # KG population metrics (§9.3)
+│   │   ├── materialise_inferences.py       # Apply closure rules
+│   │   ├── inferences.ru                   # SPARQL Update inference rules
+│   │   ├── cq_catalog.json                 # Competency-question catalog
+│   │   ├── kg_metrics.json                 # Latest metrics output
+│   │   ├── queries/ + kg_queries/          # CQ query files
+│   │   ├── reports/ + kg_reports/          # Evaluation reports
+│   │   └── README.md
+│   ├── data_statistics/                # Notebook-based corpus statistics
+│   │   ├── stats.ipynb                     # Top-level stats
+│   │   ├── index-stats.ipynb               # Index-of-Names stats
+│   │   └── new.csv
+│   ├── data/                           # Local symlinks/staging used by src scripts
+│   └── full_stats.py                   # Aggregated stats runner
+│
+├── data/                           # Static data layer
+│   ├── kg/                             # The knowledge graph
+│   │   ├── viewsari_kg.ttl                 # Full KG (~1.3M triples, 175 MB)
+│   │   ├── viewsari_kg.inferred.ttl        # Materialised closure
+│   │   └── explorer/                       # D3 explorer JSONs (NER + co-occurrence)
+│   ├── kb/
+│   │   └── kb.json                         # Prebuilt KB used by web app
+│   ├── kg_foundation/                  # CSV seed files for KG build
+│   │   ├── viewsari_volumes.csv
+│   │   ├── viewsari_biographies.csv
+│   │   ├── viewsari_pages.csv
+│   │   ├── viewsari_paragraphs.csv
+│   │   ├── viewsari_activities.csv
+│   │   ├── persons/                        # Person/annotation/textchunk seeds
+│   │   └── cooccurrences/                  # Co-occurrence seeds
+│   ├── ontology/                       # OWL ontology + documentation
+│   │   ├── viewsari_ontology.rdf           # Source OWL file
+│   │   ├── viewsari_ontology_docs/doc/     # WIDOCO HTML docs (served at /ontology/docs)
+│   │   ├── reasoning/                      # Small-KG examples for reasoner tests
+│   │   ├── CQ_CATALOG.md                   # Competency-question catalog
+│   │   ├── catalog-v001.xml                # Protégé catalog
+│   │   └── po-no-swrlb.rdf                 # Punning-free variant for tooling
+│   ├── facsimile_pages/                # Per-page HTML facsimiles, by volume
+│   ├── lives_pdfs/                     # Original Gutenberg PDFs (10 volumes)
+│   ├── ocr/                            # OCR'd text per volume
+│   ├── index_of_names/                 # Per-volume Index-of-Names CSVs
+│   ├── cooccurrences/                  # PMI/Dice tables
+│   ├── archive/                        # Archived intermediates (ER, centralities, KG snapshots)
+│   ├── img/                            # Site imagery
+│   ├── info/                           # PUBLICATIONS.md, README
+│   └── README.md
+│
+├── obliquer/                       # ObliquER pipeline (git submodule)
+│   ├── src/                            # Extraction pipeline source
+│   ├── data/viewsari/
+│   │   ├── ground_truth/                   # Gold-standard annotation JSONs
+│   │   ├── prompting_results/              # Per-strategy LLM run outputs
+│   │   ├── prompts/                        # Jinja prompt templates
+│   │   ├── volumes/ + volumes_original_split/  # Source paragraphs
+│   │   ├── inception_kb/ + UIMA_inception_dump/  # INCEpTION exports
+│   │   ├── archive/ + eval/                # Snapshots and evaluation
+│   │   └── sampled_paragraphs.csv
+│   ├── requirements.txt
+│   └── README.md
+│
+├── annotations/                    # Working annotation tables (mirrors of index_of_names)
+├── docs/                           # Thesis-side docs (e.g., evaluation_outline.tex)
+├── nginx/                          # Reverse proxy
+│   ├── nginx.conf                      # Production config
+│   └── nginx-init.conf                 # First-boot config
+├── Dockerfile                      # Python 3.12 container for the web app
+├── docker-compose.yml              # Web + GraphDB + Nginx stack
+├── requirements.txt                # Python dependencies
+├── RUNBOOK.md                      # Operational runbook
+├── SRO.bib                         # BibTeX references
+└── README.md                       # This file
 ```
 
 ## Quick start
