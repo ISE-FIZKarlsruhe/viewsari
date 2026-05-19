@@ -6,7 +6,7 @@ Steps:
      cot_v2_, ner_run_few_shot_v2, ner_run_ontology_guided_v2, ner_run_cot_v2,
      el_run_*, llm_agent_openai_gpt_oss_120b).
   3. Strip TextChunk rdfs:label triples.
-  4. Swap rdfs:label → oa:hasBodyValue on oa:Annotation instances.
+  4. Swap rdfs:label → oa:hasBody → oa:TextualBody (rdf:value) on oa:Annotation instances.
   5. Re-ingest ObliquER NER runs (per-extraction NER + EL activities).
   6. Re-ingest GT (per-cluster EL via prov:wasDerivedFrom).
   7. Serialize once at the end.
@@ -19,8 +19,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from rdflib import Graph, Namespace, URIRef
-from rdflib.namespace import RDF, RDFS
+from rdflib import Graph, Literal, Namespace, URIRef
+from rdflib.namespace import RDF, RDFS, DC
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
@@ -95,14 +95,27 @@ def main():
     g.bind("foaf", NS("http://xmlns.com/foaf/0.1/"))
     print(f"  migrated → {len(g):,} triples")
 
-    print("Swapping annotation rdfs:label → oa:hasBodyValue …")
+    print("Swapping annotation rdfs:label → oa:hasBody → oa:TextualBody …")
     n = 0
     for ann in list(g.subjects(RDF.type, OA.Annotation)):
-        existing = list(g.objects(ann, OA.hasBodyValue))
+        existing_bodies = list(g.objects(ann, OA.hasBody))
         for lab in list(g.objects(ann, RDFS.label)):
             g.remove((ann, RDFS.label, lab))
-            if not existing:
-                g.add((ann, OA.hasBodyValue, lab))
+            if not existing_bodies:
+                ann_local = str(ann).split("#", 1)[-1]
+                if ann_local.startswith("annotation_"):
+                    body_local = "body_" + ann_local[len("annotation_"):]
+                elif "_m_" in ann_local:
+                    body_local = ann_local.replace("_m_", "_b_", 1)
+                else:
+                    body_local = ann_local + "_body"
+                body_uri = URIRef(NEW_VKB + body_local)
+                g.add((ann, OA.hasBody, body_uri))
+                g.add((body_uri, RDF.type, OA.TextualBody))
+                g.add((body_uri, RDF.value, lab))
+                g.add((body_uri, DC.format, Literal("text/plain")))
+                g.add((body_uri, DC.language, Literal("en")))
+                existing_bodies = [body_uri]
             n += 1
     print(f"  swapped {n} annotation labels → {len(g):,}")
 
@@ -165,6 +178,7 @@ def main():
                     mention_uri = VIEWSARI_KB[prefix]
                     chunk_uri = VIEWSARI_KB[f"{prefix}_chunk"]
                     sel_uri = VIEWSARI_KB[f"{prefix}_selector"]
+                    body_uri = VIEWSARI_KB[prefix.replace("_m_", "_b_", 1)]
                     mention_uris[mid] = mention_uri
                     g.add((sel_uri, RDF.type, OA.TextPositionSelector))
                     g.add((sel_uri, OA.start, Literal(start, datatype=XSD.nonNegativeInteger)))
@@ -175,7 +189,11 @@ def main():
                     for cls in TYPE_TO_CLASSES.get(mtype, []):
                         g.add((mention_uri, RDF.type, cls))
                     g.add((mention_uri, OA.hasTarget, chunk_uri))
-                    g.add((mention_uri, OA.hasBodyValue, Literal(surface)))
+                    g.add((mention_uri, OA.hasBody, body_uri))
+                    g.add((body_uri, RDF.type, OA.TextualBody))
+                    g.add((body_uri, RDF.value, Literal(surface)))
+                    g.add((body_uri, DC.format, Literal("text/plain")))
+                    g.add((body_uri, DC.language, Literal("en")))
                     g.add((mention_uri, PROV.wasGeneratedBy, ann_activity))
                     g.add((mention_uri, PROP_IN_PARAGRAPH, para_uri))
                     ment_count += 1

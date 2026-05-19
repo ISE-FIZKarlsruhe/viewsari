@@ -8,6 +8,7 @@ PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX oa:       <http://www.w3.org/ns/oa#>
 PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?paragraph ?surfaceForm ?mentionType ?mentionTypeLabel WHERE {
   vkb:Q1069665 prov:wasDerivedFrom ?mention .
@@ -18,6 +19,10 @@ SELECT ?paragraph ?surfaceForm ?mentionType ?mentionTypeLabel WHERE {
     viewsari:0001016, viewsari:0001021,
     viewsari:0001018, viewsari:0001019
   ))
-  OPTIONAL { ?mention oa:hasBodyValue ?surfaceForm }
+  OPTIONAL {
+    ?mention oa:hasBody ?body .
+    ?body a oa:TextualBody ;
+          rdf:value ?surfaceForm .
+  }
   OPTIONAL { ?mentionType rdfs:label ?mentionTypeLabel }
 }

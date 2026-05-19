@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from rdflib import Graph, Namespace, Literal, URIRef
-from rdflib.namespace import RDF, RDFS, XSD
+from rdflib.namespace import RDF, RDFS, XSD, DC
 
 csv.field_size_limit(sys.maxsize)
 
@@ -331,6 +331,7 @@ def ingest_strategy(g: Graph, run_dir: Path, strategy: str,
                 mention_uri  = VIEWSARI_KB[prefix]
                 chunk_uri    = VIEWSARI_KB[f"{prefix}_chunk"]
                 sel_uri      = VIEWSARI_KB[f"{prefix}_selector"]
+                body_uri     = VIEWSARI_KB[prefix.replace("_m_", "_b_", 1)]
                 mention_uris[mid] = mention_uri
 
                 span = resolve_span(in_text, para_text, surface) if (para_text and in_text) else None
@@ -349,7 +350,11 @@ def ingest_strategy(g: Graph, run_dir: Path, strategy: str,
                 for cls in TYPE_TO_CLASSES.get(mtype, [CLS_MENTION, OA.Annotation, PROV.Entity]):
                     g.add((mention_uri, RDF.type, cls))
                 g.add((mention_uri, OA.hasTarget,         chunk_uri))
-                g.add((mention_uri, OA.hasBodyValue,      Literal(surface)))
+                g.add((mention_uri, OA.hasBody,           body_uri))
+                g.add((body_uri,    RDF.type,             OA.TextualBody))
+                g.add((body_uri,    RDF.value,            Literal(surface)))
+                g.add((body_uri,    DC.format,            Literal("text/plain")))
+                g.add((body_uri,    DC.language,          Literal("en")))
                 g.add((mention_uri, PROV.wasGeneratedBy,  ner_sub))
                 g.add((mention_uri, PROP_IN_PARAGRAPH,    target_para_uri))
                 mention_count += 1

@@ -21,6 +21,18 @@ from rdflib import Graph, Namespace, RDF, RDFS, OWL, URIRef
 from rdflib.namespace import SKOS, PROV
 OA = Namespace("http://www.w3.org/ns/oa#")
 ANNOTATION_CLASS = URIRef(OA + "Annotation")
+TEXTUAL_BODY_CLASS = URIRef(OA + "TextualBody")
+OA_HAS_BODY = URIRef(OA + "hasBody")
+RDF_VALUE = URIRef(str(RDF) + "value")
+
+
+def textual_body_value(g: Graph, ann: URIRef) -> str:
+    """Return the rdf:value of the first oa:TextualBody attached to `ann` via oa:hasBody."""
+    for body in g.objects(ann, OA_HAS_BODY):
+        if (body, RDF.type, TEXTUAL_BODY_CLASS) in g:
+            for val in g.objects(body, RDF_VALUE):
+                return str(val)
+    return ""
 
 KG_PATH = Path("data/kg/viewsari_kg.ttl")
 OUT_PATH = Path("data/kb/kb.json")
@@ -133,7 +145,7 @@ def main() -> None:
 
     def _record_occurrence(entity_slug: str, ann: URIRef) -> None:
         ann_slug = slug_of(ann)
-        surface = next((str(o) for o in g.objects(ann, URIRef(OA + "hasBodyValue"))), "")
+        surface = textual_body_value(g, ann)
         bio_slug = ""
         vol = ""
         para = ""
@@ -162,9 +174,11 @@ def main() -> None:
         for mention in g.objects(ent_uri, PROV_DERIVED):
             _record_occurrence(slug_of(ent_uri), mention)
 
-    # ObliquER (legacy): mention oa:hasBody entity
+    # ObliquER (legacy): mention oa:hasBody entity (skip oa:TextualBody surface-form bodies)
     for ann in g.subjects(OA_HAS_BODY, None):
         for body in g.objects(ann, OA_HAS_BODY):
+            if (body, RDF.type, TEXTUAL_BODY_CLASS) in g:
+                continue
             body_slug = slug_of(body)
             if body_slug in artworks:
                 _record_occurrence(body_slug, ann)
@@ -193,7 +207,6 @@ def main() -> None:
 
     # ObliquER explicit & implicit mentions (viewsari:0001020 / 0001021)
     OBQ_MENTION_RE2 = re.compile(r"^(few_shot_v2|ontology_guided_v2)_vol(\d+)_p(\d+)_")
-    OA_BODY_VALUE = URIRef(OA + "hasBodyValue")
 
     def _build_obq_mentions(cls_uri: URIRef, kind_label: str) -> list[dict]:
         items = []
@@ -204,7 +217,7 @@ def main() -> None:
                 continue
             strategy = m.group(1)
             vol, para = m.group(2), m.group(3)
-            surface = next((str(o) for o in g.objects(s, OA_BODY_VALUE)), "")
+            surface = textual_body_value(g, s)
             gen = next((slug_of(o) for o in g.objects(s, PROV.wasGeneratedBy)), "")
             items.append({
                 "kind": kind_label,

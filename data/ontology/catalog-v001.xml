@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="po-no-swrlb-redirect" name="http://purl.org/spar/po" uri="po-no-swrlb.rdf"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1778108590504" name="https://viewsari.ise.fiz-karlsruhe.de/ontology/" uri="viewsari_ontology.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1778108590504" name="shadowed:https://viewsari.ise.fiz-karlsruhe.de/ontology/" uri="reasoning/viewsari_small-kg.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1778108590504" name="shadowed:https://viewsari.ise.fiz-karlsruhe.de/ontology/" uri="viewsari/ontology.owl"/>
+    </group>
+</catalog>

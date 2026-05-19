@@ -658,7 +658,7 @@ owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
         in the Vasari corpus, extracted by the ObliquER pipeline or by
         the NER and coreference resolution step over the Index of Names.
         Every mention is typed simultaneously as oa:Annotation (carrying
-        oa:hasTarget, oa:hasBodyValue, oa:hasSource) and as prov:Entity
+        oa:hasTarget, oa:hasBody → oa:TextualBody, oa:hasSource) and as prov:Entity
         (carrying prov:wasGeneratedBy, prov:wasDerivedFrom), reflecting
         its dual role as a scholarly annotation anchored in the source
         text and as the output of a documented computational process.

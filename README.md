@@ -224,12 +224,12 @@ The Viewsari KG is serialized as Turtle at `data/kg/viewsari_kg.ttl` (~1.3M trip
 ### Annotation model (OA)
 
 Mentions are `oa:Annotation` + `prov:Entity` instances:
-- `oa:hasBodyValue` — surface form (literal text span)
+- `oa:hasBody` → `oa:TextualBody` resource carrying the surface form via `rdf:value` (`dc:format "text/plain"`, `dc:language "en"`)
 - `oa:hasTarget` — `doco:TextChunk` with `oa:hasSource` (paragraph) + `oa:hasSelector` (`oa:TextPositionSelector` with start/end offsets)
 - `prov:wasGeneratedBy` — the NER activity that produced the mention
 - `viewsari:0001032` — paragraph anchor
 
-No `oa:hasBody` is used. The mention-to-entity link is modeled exclusively through PROV: `entity prov:wasDerivedFrom mention`.
+The mention-to-entity link is modeled exclusively through PROV: `entity prov:wasDerivedFrom mention`.
 
 ## Offline build scripts
 

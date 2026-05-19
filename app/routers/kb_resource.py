@@ -101,6 +101,7 @@ async def _load_textchunk(resource_id: str) -> dict | None:
         PREFIX oa: <http://www.w3.org/ns/oa#>
         PREFIX prov: <http://www.w3.org/ns/prov#>
         PREFIX doco: <http://purl.org/spar/doco/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         SELECT ?source ?start ?end ?body ?provenance WHERE {{
             <{uri}> a doco:TextChunk ;
                      oa:hasSource ?source .
@@ -110,7 +111,9 @@ async def _load_textchunk(resource_id: str) -> dict | None:
             }}
             OPTIONAL {{
                 ?annot oa:hasTarget <{uri}> ;
-                       oa:hasBodyValue ?body .
+                       oa:hasBody ?bodyNode .
+                ?bodyNode a oa:TextualBody ;
+                          rdf:value ?body .
                 OPTIONAL {{ ?annot prov:wasGeneratedBy ?provenance . }}
             }}
         }} LIMIT 1

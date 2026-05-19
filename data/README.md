@@ -213,7 +213,7 @@ One `oa:Annotation, prov:Entity` per mention, tying together:
 | Property                | Points to                                      |
 |-------------------------|------------------------------------------------|
 | `oa:hasTarget`          | `doco:TextChunk`                               |
-| `oa:hasBodyValue`       | Surface string (pronoun, name variant, phrase) |
+| `oa:hasBody`            | `oa:TextualBody` whose `rdf:value` is the surface string (pronoun, name variant, phrase) |
 | `prov:wasGeneratedBy`   | NER activity                                   |
 | `prov:used`             | Paragraph expression                           |
 | `oa:hasSource`          | Paragraph expression                           |

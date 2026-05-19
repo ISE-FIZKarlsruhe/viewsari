@@ -8,6 +8,7 @@ PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 PREFIX prov:     <http://www.w3.org/ns/prov#>
 PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
 PREFIX oa:       <http://www.w3.org/ns/oa#>
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?artwork ?mentionType ?surfaceForm WHERE {
   ?paragraph frbr:isPartOf vkb:the_lives_1568_volume-9_michelangelo-bio .
@@ -16,6 +17,10 @@ SELECT ?artwork ?mentionType ?surfaceForm WHERE {
   ?mention a ?mentionType ;
            viewsari:0001032 ?paragraph .
   FILTER (?mentionType IN (viewsari:0001020, viewsari:0001021))
-  OPTIONAL { ?mention oa:hasBodyValue ?surfaceForm }
+  OPTIONAL {
+    ?mention oa:hasBody ?body .
+    ?body a oa:TextualBody ;
+          rdf:value ?surfaceForm .
+  }
 }
 LIMIT 200

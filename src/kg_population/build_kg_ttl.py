@@ -19,7 +19,7 @@ from pathlib import Path
 csv.field_size_limit(sys.maxsize)
 
 from rdflib import Graph, Namespace, Literal, URIRef, BNode
-from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS
+from rdflib.namespace import RDF, RDFS, OWL, XSD, DCTERMS, SKOS, DC
 
 # ── Namespaces ──────────────────────────────────────────────────────────────
 
@@ -90,6 +90,23 @@ def uri(prefix_id: str) -> URIRef:
 def read_csv(path: Path) -> list[dict]:
     with open(path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def add_textual_body(g: Graph, annotation_subj: URIRef, surface: str) -> None:
+    """Attach a TextualBody resource to `annotation_subj` carrying `surface` as rdf:value."""
+    base = str(annotation_subj)
+    if "annotation_" in base:
+        body_str = base.replace("annotation_", "body_", 1)
+    elif "_m_" in base:
+        body_str = base.replace("_m_", "_b_", 1)
+    else:
+        body_str = base + "_body"
+    body = URIRef(body_str)
+    g.add((annotation_subj, OA.hasBody, body))
+    g.add((body, RDF.type, OA.TextualBody))
+    g.add((body, RDF.value, Literal(surface)))
+    g.add((body, DC.format, Literal("text/plain")))
+    g.add((body, DC.language, Literal("en")))
 
 
 def add_volumes(g: Graph):
@@ -224,7 +241,7 @@ def add_persons(g: Graph):
         if row.get("oa:hasTarget"):
             g.add((subj, OA.hasTarget, uri(row["oa:hasTarget"])))
         if row.get("oa:hasBodyValue"):
-            g.add((subj, OA.hasBodyValue, Literal(row["oa:hasBodyValue"])))
+            add_textual_body(g, subj, row["oa:hasBodyValue"])
         if row.get("prov:wasGeneratedBy"):
             g.add((subj, PROV.wasGeneratedBy, uri(row["prov:wasGeneratedBy"])))
         if row.get("oa:hasSource"):
@@ -293,7 +310,7 @@ def add_cooccurrences(g: Graph):
         if row.get("oa:hasTarget"):
             g.add((subj, OA.hasTarget, uri(row["oa:hasTarget"])))
         if row.get("oa:hasBodyValue"):
-            g.add((subj, OA.hasBodyValue, Literal(row["oa:hasBodyValue"])))
+            add_textual_body(g, subj, row["oa:hasBodyValue"])
         if row.get("prov:wasGeneratedBy"):
             g.add((subj, PROV.wasGeneratedBy, uri(row["prov:wasGeneratedBy"])))
 

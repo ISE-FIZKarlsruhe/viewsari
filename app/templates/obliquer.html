@@ -398,6 +398,8 @@ function buildTurtle(passage) {
     "@prefix dct:  <http://purl.org/dc/terms/> .",
     "@prefix owl:  <http://www.w3.org/2002/07/owl#> .",
     "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .",
+    "@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    "@prefix dc:   <http://purl.org/dc/elements/1.1/> .",
     "@prefix viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/> .",
     ""
   ];
@@ -411,6 +413,7 @@ function buildTurtle(passage) {
     var tcUri = "vkb:textchunk_" + slug;
     var selUri = "vkb:selector_" + slug;
     var annUri = "vkb:annotation_" + slug;
+    var bodyUri = "vkb:body_" + slug;
 
     // TextChunk
     lines.push(tcUri + " a doco:TextChunk ;");
@@ -432,9 +435,14 @@ function buildTurtle(passage) {
         : "viewsari:generic_mention";
     lines.push(annUri + " a oa:Annotation , prov:Entity , " + typeClass + " ;");
     lines.push("    oa:hasTarget " + tcUri + " ;");
-    lines.push('    oa:hasBodyValue "' + m.surface.replace(/"/g, '\\"') + '" ;');
+    lines.push("    oa:hasBody " + bodyUri + " ;");
     lines.push("    oa:hasSource " + paraUri + " ;");
     lines.push("    prov:wasGeneratedBy vkb:named_entity_recognition_run_1 .");
+    lines.push("");
+    lines.push(bodyUri + " a oa:TextualBody ;");
+    lines.push('    rdf:value "' + m.surface.replace(/"/g, '\\"') + '" ;');
+    lines.push('    dc:format "text/plain" ;');
+    lines.push('    dc:language "en" .');
     if (m.wd) {
       lines.push("");
       lines.push("vkb:" + m.entity + " owl:sameAs <http://www.wikidata.org/entity/" + m.wd + "> .");
