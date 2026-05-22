@@ -1,6 +1,6 @@
 # Viewsari
 
-A provenance-aware knowledge graph and web platform built from Giorgio Vasari's *Le Vite de' piu eccellenti pittori, scultori, e architettori* (1568), via the Du Vere 1912 English translation digitised by Project Gutenberg.
+A provenance-aware knowledge graph and web platform built from Giorgio Vasari's *Le Vite de' piu eccellenti pittori, scultori, e architettori* (1568), via the Du Vere 1912 English translation digitized by Project Gutenberg.
 
 Viewsari combines a formal OWL ontology, an LLM-based entity-recognition-and-linking pipeline (ObliquER), a manually annotated gold-standard corpus, and a populated RDF knowledge graph, all designed to keep the *interpretive activity* that produced every extracted statement visible at the level of the graph.
 
@@ -25,10 +25,10 @@ The repository is the artifact side of the dissertation. Each conceptual contrib
 
 | | Contribution | Where it is operationalized in the repo |
 |---|---|---|
-| **C1** | **The pre-interpretive entity assumption (PIEA)** — articulates the assumption that mention-to-referent resolution can be treated as completed prior to representation; rejects it via a three-layer ontology (bibliographic / structural / content) maintaining the distinction between mention, referent, and bibliographic source. | The three-layer split is the structure of the ontology in [`data/ontology/`](data/ontology/) and the class layout summarised in [Ontology](#ontology) below. The mention typology lives under `viewsari:mention` (explicit / implicit / coreferent / generic). |
+| **C1** | **The pre-interpretive entity assumption (PIEA)** — articulates the assumption that mention-to-referent resolution can be treated as completed prior to representation; rejects it via a three-layer ontology (bibliographic / structural / content) maintaining the distinction between mention, referent, and bibliographic source. | The three-layer split is the structure of the ontology in [`data/ontology/`](data/ontology/) and the class layout summarized in [Ontology](#ontology) below. The mention typology lives under `viewsari:mention` (explicit / implicit / coreferent / generic). |
 | **C2** | **The provenance gap in generative information extraction** — provenance must be a first-class part of the schema, not a post-hoc transparency layer. | Every ObliquER extraction is reified as a PROV-O activity in [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl). Ingestion code: [`src/kg_population/ingest_ner_results.py`](src/kg_population/ingest_ner_results.py). Prompt text is stored as `prov:Entity` with full `.j2` text in `rdfs:comment`. |
 | **C3** | **Hermeneutic provenance is categorically distinct from explainable AI** — the provenance humanities scholarship requires is hermeneutic (on what textual basis, under which convention, by which agent), not mechanistic (which input tokens drove this output). | Made inspectable by the web KG explorer: per-extraction activity nodes, prompt-text panels, clickable mention spans, source paragraph anchors. Routers: [`app/routers/biography.py`](app/routers/biography.py), [`app/routers/obliquer.py`](app/routers/obliquer.py), [`app/routers/kb_resource.py`](app/routers/kb_resource.py). |
-| **C4** | **Computational Provenance (COMP-PROV) as an ontology design pattern** — reifies extraction agent, prompt, model version, and run as first-class entities linked to every assertion. | Pattern realised in the content layer of [`data/ontology/`](data/ontology/) (extraction activities, prompt entities, agents). Same pattern instantiated in the transferability pilot (E4). |
+| **C4** | **Computational Provenance (COMP-PROV) as an ontology design pattern** — reifies extraction agent, prompt, model version, and run as first-class entities linked to every assertion. | Pattern realized in the content layer of [`data/ontology/`](data/ontology/) (extraction activities, prompt entities, agents). Same pattern instantiated in the transferability pilot (E4). |
 
 ### Research questions
 
@@ -49,6 +49,67 @@ The repository is the artifact side of the dissertation. Each conceptual contrib
 | **Corpus statistics** (case study chapter) — mention-type distribution, per-biography counts, Wikidata / OOKB percentages, top entities. | [`src/data_statistics/stats.ipynb`](src/data_statistics/stats.ipynb), [`src/data_statistics/index-stats.ipynb`](src/data_statistics/index-stats.ipynb), [`src/full_stats.py`](src/full_stats.py). |
 | **Co-occurrence / network analysis** (motivating prior work referenced in the case study). | [`src/network/compute_pmi.py`](src/network/compute_pmi.py), [`src/network/compute_dice.py`](src/network/compute_dice.py), [`src/network/biography_pmi-dice.ipynb`](src/network/biography_pmi-dice.ipynb), pre-computed tables under [`data/cooccurrences/`](data/cooccurrences/). |
 | **Wikidata linking** of person entities. | [`src/network/link_persons_wikidata.py`](src/network/link_persons_wikidata.py). |
+
+### Evaluation results (headline numbers)
+
+#### Ontology — competency-question coverage (RQ1 / E1)
+
+Over the 70 CQs in [`data/ontology/CQ_CATALOG.md`](data/ontology/CQ_CATALOG.md); latest run [`src/evaluation/reports/cq_evaluation_20260428_083554.md`](src/evaluation/reports/cq_evaluation_20260428_083554.md):
+
+| Status | Count | % of all 70 | % of SPARQL-only (52) |
+|---|---|---|---|
+| Fully answerable | 52 | 74.3% | 100.0% |
+| Partially answerable | 0 | 0.0% | 0.0% |
+| Unanswerable | 0 | 0.0% | 0.0% |
+| Non-SPARQL (descriptive) | 18 | 25.7% | n/a |
+
+All 13 thematic clusters reach 100% coverage on the SPARQL-answerable subset. Complexity mix: 28 multi-hop, 15 simple, 9 aggregation.
+
+#### Knowledge graph — population metrics (E3)
+
+From [`src/evaluation/kg_reports/kg_evaluation_20260428_060320.md`](src/evaluation/kg_reports/kg_evaluation_20260428_060320.md) (closure-materialized KG):
+
+| Metric | Value |
+|---|---|
+| Total triples | 1,340,791 |
+| `oa:Annotation` mentions | 83,154 |
+| `viewsari:mention` instances | 57,685 |
+| Triples per mention | 9.12 |
+| Provenance coverage (annotation → SoftwareAgent) | **100%** (83,154 / 83,154) |
+| Provenance coverage — strict (paragraph + activity + agent) | 66.4% (55,246 / 83,154) |
+| NER activities · entity-linking activities | 6,961 · 1 |
+| Pages with Project Gutenberg web manifestation | 92.3% (volumes + biographies: 100%) |
+
+Mention typology: explicit 9,588 · implicit 27,098 · coreferent 14,445 · generic 6,554. External linking: persons 320/443 (72.2%) to Wikidata, artworks 272/813 (33.5%); 541 artworks remain OOKB.
+
+#### ObliquER — entity recognition and linking (RQ2 / E2)
+
+From the ObliquER CIKM '26 paper. Primary model: `openai/gpt-oss-120b`.
+
+**Entity recognition on Viewsari** (span-level, SemEval-2013 task 9.1 matching):
+
+| Eval mode | P | R | F1 |
+|---|---|---|---|
+| Strict | 0.27 | 0.37 | 0.31 |
+| Exact | 0.29 | 0.41 | 0.34 |
+| Type | 0.54 | 0.75 | 0.63 |
+| Partial | 0.45 | 0.62 | 0.52 |
+
+95% bootstrap CIs (n = 1000): Strict F1 [0.28, 0.34], Type F1 [0.59, 0.66]. Against zero-shot baselines on Viewsari (Strict F1, all mentions): ObliquER **0.32**, GLiNER2 0.09, UniNER 0.02 — 95% CIs do not overlap. Prior explicit-only UniNER baseline on Vasari (Santini et al. 2022): F1 = 0.556. On ArtPedia (transferability): Strict F1 0.22 · Partial F1 0.38 · Type F1 0.47.
+
+**Entity linking on Viewsari** (gold mentions, P / R / F1):
+
+| Subset | KB-linked | OOKB | Cand. recall |
+|---|---|---|---|
+| All | 0.38 / 0.47 / **0.42** | 0.73 / 0.60 / **0.66** | 0.68 |
+| Explicit | 0.63 / 0.45 / 0.53 | 0.64 / 0.36 / 0.46 | 0.69 |
+| Implicit | 0.29 / 0.48 / 0.36 | 0.83 / 0.60 / 0.70 | 0.67 |
+
+End-to-end (NER → EL, no gold mentions): KB-linked F1 0.33 (All) / 0.41 (Expl.) / 0.30 (Impl.); OOKB F1 0.75 (All). On ArtPedia EL with gold mentions: KB-linked F1 = **0.75** vs. ReFinED 0.04 / BLINK 0.16 / GENRE 0.16.
+
+**Annotation reliability** (25-paragraph double-annotated sample): span F1 0.83 partial / 0.43 exact; token-level κ = 0.70 ("substantial"); type κ on matched spans 0.89 partial / 0.70 exact; Wikidata-QID agreement F1 = 0.84; OOKB-classification agreement F1 = 0.90.
+
+**Ground-truth corpus** — Viewsari: 232 paragraphs, 961 entities (398 Wikidata-linked, 545 OOKB), 1,010 mentions, 56.7% OOKB entities. ArtPedia synthetic implicit split: 7,618 paragraphs, 2,679 entities, 21,774 mentions, 0.26% OOKB entities.
 
 ---
 
@@ -135,7 +196,7 @@ viewsari/
 ├── data/                           # Static data layer — E1 ontology, E3 KG, source corpus
 │   ├── kg/                             # The knowledge graph (E3)
 │   │   ├── viewsari_kg.ttl                 # Full KG (~1.3M triples, 175 MB)
-│   │   ├── viewsari_kg.inferred.ttl        # Materialised closure
+│   │   ├── viewsari_kg.inferred.ttl        # Materialized closure
 │   │   └── explorer/                       # D3 explorer JSONs (NER + co-occurrence)
 │   ├── kb/
 │   │   └── kb.json                         # Prebuilt KB used by web app
@@ -235,7 +296,7 @@ The website is served at `http://localhost:9000`, GraphDB Workbench at `http://l
 
 ## Knowledge graph (E3)
 
-The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~1.3M triples, 175 MB), with a materialised closure at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl).
+The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~1.3M triples, 175 MB), with a materialized closure at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl).
 
 **Namespace:** `vkb:` = `https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#`
 
@@ -328,7 +389,7 @@ No `rdflib` is loaded at request time. The web application queries GraphDB via H
 
 Each surface makes a different layer of the provenance chain inspectable; this is the C3 "hermeneutic provenance is inspectable, not just present" commitment in practice:
 
-- **Biography viewer** — facsimile pages, annotated paragraph text with colour-coded mention spans, provenance graphs, Wikidata image integration
+- **Biography viewer** — facsimile pages, annotated paragraph text with color-coded mention spans, provenance graphs, Wikidata image integration
 - **Knowledge base** — browsable persons, artworks (GT), ObliquER explicit/implicit mentions, co-occurrences with search and source filters
 - **KG explorer** — D3 force-directed graph of ObliquER extraction results per biography, with per-extraction activity nodes, prompt-text viewing, pinnable nodes, clickable info panels
 - **SPARQL endpoint** — browser-based query editor proxying GraphDB, with pre-built example queries

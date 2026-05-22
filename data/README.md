@@ -5,7 +5,7 @@ This directory is the **static data layer** of the Viewsari repository. It holds
 - the populated knowledge graph (**E3**),
 - the OWL ontology that gives the graph its schema (**E1**),
 - the CSV seed files used by the offline build pipeline,
-- the source corpus (PDFs, OCR'd text, facsimile pages, Index of Names) from the 1912 Du Vere translation of Giorgio Vasari's *Le Vite* as digitised by Project Gutenberg,
+- the source corpus (PDFs, OCR'd text, facsimile pages, Index of Names) from the 1912 Du Vere translation of Giorgio Vasari's *Le Vite* as digitized by Project Gutenberg,
 - pre-computed co-occurrence tables and explorer JSONs used by the website,
 - the project description and publications list under [`info/`](info/).
 
@@ -19,7 +19,7 @@ For the full repo-wide mapping of contributions (C1–C4, E1–E4) and research 
 data/
 ├── kg/                    # The knowledge graph (E3)
 │   ├── viewsari_kg.ttl              # Full KG (~1.3M triples, 175 MB)
-│   ├── viewsari_kg.inferred.ttl     # Materialised closure (R1/R2/R3 applied)
+│   ├── viewsari_kg.inferred.ttl     # Materialized closure (R1/R2/R3 applied)
 │   └── explorer/                    # D3 explorer JSONs (per biography / artwork / person)
 │       └── ner/                         # ObliquER per-strategy NER explorer graphs
 │

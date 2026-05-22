@@ -58,7 +58,7 @@ An LLM-based entity recognition and linking pipeline for implicit and long-tail 
 - **Dynamic chunking** for paragraph-level processing
 - **Entity linking** with candidate generation, global cluster aggregation, and OOKB tagging
 - **Post-processing** pipeline: UIMA CAS export → mention ID assignment → union-find coreference clustering → OOKB classification
-- **PROV-O activities** generated for every extraction run, harmonised with the KG schema
+- **PROV-O activities** generated for every extraction run, harmonized with the KG schema
 
 Evaluated on a gold-standard corpus of 221 annotated paragraphs across 16 biographies, manually annotated in INCEpTION (stratified sampling, random seed 42, capped at 10–25 paragraphs per biography).
 
@@ -104,7 +104,7 @@ CQ coverage against the populated KG is evaluated by [`src/evaluation/run_cq_eva
 
 ## Research questions
 
-The project is structured around three research questions, summarised here. The full repository mapping (which Cs and Es answer which RQ) is in the [top-level README](../../README.md#research-questions).
+The project is structured around three research questions, summarized here. The full repository mapping (which Cs and Es answer which RQ) is in the [top-level README](../../README.md#research-questions).
 
 - **RQ1** — What representational commitments must a knowledge graph make to remain accountable to the interpretive act that produced it, and how can these be operationalized in a provenance-aware ontology?
 - **RQ2** — Under what conditions can LLMs, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond span-level supervised baselines?

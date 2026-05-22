@@ -4,7 +4,7 @@ This directory describes the **gold-standard annotation JSON** format that the r
 
 - as the **GT input** to ObliquER evaluation (**E2**),
 - as the **mention seed** ingested into the KG by [`src/kg_population/ingest_annotations.py`](../src/kg_population/ingest_annotations.py) (**E3**),
-- as the **paragraph-level source** read by the website's biography viewer ([`app/routers/biography.py`](../app/routers/biography.py)) to render colour-coded mention spans (**C3** — provenance made inspectable at the point of use).
+- as the **paragraph-level source** read by the website's biography viewer ([`app/routers/biography.py`](../app/routers/biography.py)) to render color-coded mention spans (**C3** — provenance made inspectable at the point of use).
 
 Place one JSON annotation file per biography here. Files should be named `{slug}_enriched.json` and grouped under a volume directory (e.g. `3/botticelli_enriched.json`). The loader strips the `_enriched` suffix to derive the slug and uses the parent directory name as the volume number.
 

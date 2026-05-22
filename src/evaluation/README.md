@@ -41,7 +41,7 @@ src/evaluation/
 
 ## Closure (run once before evaluating)
 
-Five Phase-I CQs (CQI.3, CQI.12, CQI.19, CQI.21, CQI.22) need a direct `viewsari:0001032` edge on cooccurrence and person nodes. The pipeline does not write that edge, but it can be derived; `inferences.ru` materialises it in three rules:
+Five Phase-I CQs (CQI.3, CQI.12, CQI.19, CQI.21, CQI.22) need a direct `viewsari:0001032` edge on cooccurrence and person nodes. The pipeline does not write that edge, but it can be derived; `inferences.ru` materializes it in three rules:
 
 | Rule | What it adds | Triples on the current KG |
 |---|---|---|
@@ -108,11 +108,11 @@ python src/evaluation/run_kg_evaluation.py \
 | Backend exception | unanswerable | runtime-error |
 | `type: descriptive` | non-sparql | — |
 
-`expected_gap` lets the catalog flag CQs whose query is correctly modelled but whose answer needs data that has not yet been ingested (e.g. PMI scores, historical events). These count as *partial* coverage rather than failures, matching the dissertation's distinction between data gaps and modelling gaps.
+`expected_gap` lets the catalog flag CQs whose query is correctly modeled but whose answer needs data that has not yet been ingested (e.g. PMI scores, historical events). These count as *partial* coverage rather than failures, matching the dissertation's distinction between data gaps and modeling gaps.
 
 ## Concrete bindings used in queries
 
-To make every query immediately runnable, parameterised CQs (e.g. *"the biography of artist X"*) are pre-bound to representative individuals:
+To make every query immediately runnable, parameterized CQs (e.g. *"the biography of artist X"*) are pre-bound to representative individuals:
 
 | Slot | Default binding |
 |---|---|

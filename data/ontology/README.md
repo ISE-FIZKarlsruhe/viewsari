@@ -22,7 +22,7 @@ The Viewsari ontology provides the formal vocabulary for the
 a provenance-aware knowledge graph built from Giorgio Vasari's
 *Le Vite de' più eccellenti pittori, scultori, e architettori* (1568),
 specifically the 1912 English translation by Gaston C. du Vere, as
-digitised by [Project Gutenberg](https://www.gutenberg.org/ebooks/25326).
+digitized by [Project Gutenberg](https://www.gutenberg.org/ebooks/25326).
 
 The ontology's central design claim is that knowledge extracted from
 interpretive historical texts is not merely *discovered* but
@@ -33,7 +33,7 @@ to the paragraph it came from, the software that produced it, and the
 prompt template or index resource that guided extraction.
 
 The ontology is developed within the eXtreme Design (XD) methodology and
-has been validated iteratively against the competency questions catalogued
+has been validated iteratively against the competency questions cataloged
 in [`CQ_CATALOG.md`](./CQ_CATALOG.md), derived from user stories across
 four personas (curator, senior art historian, graduate student, software
 engineer).
@@ -229,7 +229,7 @@ A representative selection:
 
 ## Design decisions
 
-**Co-occurrence as a first-class entity.** Co-occurrences are modelled
+**Co-occurrence as a first-class entity.** Co-occurrences are modeled
 as `viewsari:cooccurrence` instances rather than annotated edges,
 following the Participation Ontology Design Pattern. This allows
 provenance metadata, paragraph anchoring, and statistical scores
@@ -244,7 +244,7 @@ source text and as the output of a documented computational process.
 records two plausible identities for the same set of surface forms
 using a pipe separator, both identities are instantiated as separate
 entities. This makes interpretive ambiguity a structural feature of
-the graph rather than a preprocessing artefact.
+the graph rather than a preprocessing artifact.
 
 **Biography-bounded coreference.** Coreference arcs are never drawn
 across biography boundaries. Cross-biography identity is established
