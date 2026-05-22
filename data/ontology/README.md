@@ -6,6 +6,13 @@
 **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
 **Author:** Sarah Rebecca Ondraszek — FIZ Karlsruhe, Information Service Engineering
 
+This directory is the **E1** artifact of the project. It operationalizes:
+
+- **C1** — the rejection of the pre-interpretive entity assumption (PIEA), through the three-layer architecture (bibliographic / structural / content) that keeps mention, referent, and bibliographic source distinct,
+- **C4** — the Computational Provenance (COMP-PROV) ontology design pattern, by reifying extraction agent, prompt, model version, and run as first-class entities linked to every extracted assertion.
+
+It is the schema the populated KG ([`data/kg/viewsari_kg.ttl`](../kg/viewsari_kg.ttl)) instantiates and the schema that [`src/evaluation/run_cq_evaluation.py`](../../src/evaluation/run_cq_evaluation.py) evaluates competency-question coverage against. See [`CQ_CATALOG.md`](./CQ_CATALOG.md) for the full catalog of CQs and the [top-level README](../../README.md#dissertation-contributions--repository-map) for the repository-wide contribution map.
+
 ---
 
 ## Overview
@@ -26,9 +33,10 @@ to the paragraph it came from, the software that produced it, and the
 prompt template or index resource that guided extraction.
 
 The ontology is developed within the eXtreme Design (XD) methodology and
-has been validated iteratively against a set of 39 competency questions
-derived from domain expert interviews with art historians, digital
-humanities researchers, and data engineers.
+has been validated iteratively against the competency questions catalogued
+in [`CQ_CATALOG.md`](./CQ_CATALOG.md), derived from user stories across
+four personas (curator, senior art historian, graduate student, software
+engineer).
 
 ![Example of the ontology in use](./ontology-example.png)
 
@@ -188,8 +196,14 @@ paragraph in a specific volume of the Du Vere edition.
 
 ## Competency questions (selection)
 
-The ontology was validated against 39 competency questions. A
-representative selection:
+The ontology is validated against the competency questions in
+[`CQ_CATALOG.md`](./CQ_CATALOG.md). Each question is translated into a
+SPARQL query under [`src/evaluation/queries/`](../../src/evaluation/queries/)
+and classified by [`src/evaluation/run_cq_evaluation.py`](../../src/evaluation/run_cq_evaluation.py)
+as fully / partially / un- / non-SPARQL-answerable. Latest reports live
+in [`src/evaluation/reports/`](../../src/evaluation/reports/).
+
+A representative selection:
 
 - *Which persons are mentioned in paragraph N of Volume 1?*  
   → Query `viewsari:mention` instances whose `oa:hasSource` is the
@@ -239,22 +253,13 @@ coreferential annotation.
 
 ---
 
-## Citation
-
-If you use the Viewsari ontology or knowledge graph in your research,
-please cite:
-
-> Ondraszek, S. R. (2026). *Modeling Interpretation in the Age of
-> Generative AI: Semantic Technologies for Digital Humanities Research
-> Based on Giorgio Vasari's* The Lives. Doctoral dissertation,
-> Karlsruhe Institute of Technology / FIZ Karlsruhe.
-
----
-
 ## Related resources
 
-- [Viewsari repository](https://github.com/ISE-FIZKarlsruhe/viewsari)
+- [Top-level Viewsari README](../../README.md) — contribution-to-file map
+- [Project description](../info/README.md)
+- [Populated KG](../kg/viewsari_kg.ttl)
 - [KG foundation CSVs](../kg_foundation/)
-- [KG population pipeline](../build_viewsari_kg.py)
+- [KG population pipeline](../../src/kg_population/)
+- [CQ catalog](./CQ_CATALOG.md) and [CQ evaluation runner](../../src/evaluation/run_cq_evaluation.py)
 - [Project Gutenberg edition](https://www.gutenberg.org/ebooks/25326)
 - [Wikidata entry for Le Vite](https://www.wikidata.org/wiki/Q1645493)

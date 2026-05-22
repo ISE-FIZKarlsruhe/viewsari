@@ -1,239 +1,134 @@
-# Viewsari knowledge graph
+# Viewsari — `data/` layer
 
-> *Modeling Interpretation in the Age of Generative AI:*
-> *Semantic Technologies for Digital Humanities Research Based on Giorgio Vasari's* The Lives
+This directory is the **static data layer** of the Viewsari repository. It holds:
 
-This repository contains the data transformation pipeline that produces the CSV seed files
-for the **Viewsari Knowledge Graph** — a provenance-aware, FRBR-structured knowledge graph
-built from Giorgio Vasari's *Le Vite de' più eccellenti pittori, scultori e architettori*
-(1568 edition), specifically the Gaston du C. de Vere English translation (1912),
-as digitized by Project Gutenberg.
+- the populated knowledge graph (**E3**),
+- the OWL ontology that gives the graph its schema (**E1**),
+- the CSV seed files used by the offline build pipeline,
+- the source corpus (PDFs, OCR'd text, facsimile pages, Index of Names) from the 1912 Du Vere translation of Giorgio Vasari's *Le Vite* as digitised by Project Gutenberg,
+- pre-computed co-occurrence tables and explorer JSONs used by the website,
+- the project description and publications list under [`info/`](info/).
+
+For the full repo-wide mapping of contributions (C1–C4, E1–E4) and research questions (RQ1–RQ3) to files, see the [top-level README](../README.md#dissertation-contributions--repository-map). For details on the offline build that produces the contents of [`kg_foundation/`](kg_foundation/), see [`src/kg_population/`](../src/kg_population/).
 
 ---
 
-## Repository layout
+## Layout
 
 ```
-viewsari/
-├── build_viewsari_kg.py            ← the transformation pipeline (this script)
-├── README.md                       ← you are here
-├── prefixes.json
+data/
+├── kg/                    # The knowledge graph (E3)
+│   ├── viewsari_kg.ttl              # Full KG (~1.3M triples, 175 MB)
+│   ├── viewsari_kg.inferred.ttl     # Materialised closure (R1/R2/R3 applied)
+│   └── explorer/                    # D3 explorer JSONs (per biography / artwork / person)
+│       └── ner/                         # ObliquER per-strategy NER explorer graphs
 │
-├── data/
-│   ├── archive/
-│   │   ├── biographies/
-│   │   ├── centralities/
-│   │   ├── ER/
-│   │   ├── knowledge-graph/
-│   │   ├── metadata/
-│   │   ├── person_references/
-│   │   ├── test/
-│   │   └── volumes/            ← paragraph text CSVs (0.csv–9.csv)
-│   │       ├── 0.csv           ← Volume 1 paragraph texts
-│   │       └── …               ← … through 9.csv (Volume 10)
-│   │
-│   ├── cooccurrences/
-│   └── index_of_names/         ← NER + coreference index CSVs (0.csv–9.csv)
-│       ├── 0.csv               ← Volume 1 index
-│       └── …                   ← … through 9.csv (Volume 10)
+├── ontology/              # OWL ontology + WIDOCO docs (E1, C1, C4)
+│   ├── viewsari_ontology.rdf        # Source OWL/RDF-XML
+│   ├── viewsari_ontology_docs/      # WIDOCO HTML docs (served at /ontology/docs)
+│   ├── reasoning/                   # Small-KG examples for reasoner tests
+│   ├── CQ_CATALOG.md                # Competency-question catalog (input to RQ1 evaluation)
+│   ├── po-no-swrlb.rdf              # Punning-free variant for tooling
+│   ├── catalog-v001.xml             # Protégé catalog
+│   └── README.md
 │
-├── kg_foundation/              ← generated KG seed CSVs (output of this script)
-│   ├── persons/                ← annotation-layer files (person entities + evidence)
-│   │   ├── viewsari_persons.csv
-│   │   ├── viewsari_annotations.csv
-│   │   ├── viewsari_textchunks.csv
-│   │   ├── viewsari_selectors.csv
-│   │   └── viewsari_activities.csv
-│   │
-│   ├── viewsari_volumes.csv
-│   ├── viewsari_biographies.csv
-│   ├── viewsari_pages.csv
-│   └── viewsari_paragraphs.csv
+├── kg_foundation/         # CSV seeds for the KG build (bibliographic + structural layer)
+│   ├── viewsari_volumes.csv         # 20 rows  (10 volumes × expression + manifestation)
+│   ├── viewsari_biographies.csv     # 288 rows (144 biographies × expr + man)
+│   ├── viewsari_pages.csv           # 6,258 rows (3,129 pages × expr + man)
+│   ├── viewsari_paragraphs.csv      # 3,479 rows (one per merged paragraph)
+│   ├── viewsari_activities.csv      # Activity seeds (NER, coref, EL, ObliquER)
+│   ├── persons/                     # Person + annotation + textchunk + selector seeds
+│   │   ├── viewsari_persons.csv         # 443 person entities
+│   │   ├── viewsari_annotations.csv     # 24,827 oa:Annotation rows
+│   │   ├── viewsari_textchunks.csv      # 24,827 doco:TextChunk rows
+│   │   └── viewsari_selectors.csv       # 24,827 oa:TextPositionSelector rows
+│   └── cooccurrences/               # Co-occurrence annotation seeds (analogous structure)
 │
-└── ontology/
-    └── viewsari_ontology.rdf
+├── kb/
+│   └── kb.json                      # Prebuilt KB used by the web app at runtime
+│
+├── lives_pdfs/            # Source corpus — original Gutenberg PDFs (10 volumes)
+├── ocr/                   # OCR'd text per volume
+├── facsimile_pages/       # Per-page HTML facsimiles, by volume (numbered 1–10)
+├── index_of_names/        # Per-volume Index-of-Names CSVs (NER + coref index)
+├── cooccurrences/         # Per-volume co-occurrence tables + results/
+├── archive/               # Archived intermediates (ER snapshots, centralities, KG backups)
+├── img/                   # Site imagery (logos, splash images)
+└── info/
+    ├── README.md                    # Project description
+    └── PUBLICATIONS.md              # Associated peer-reviewed publications
 ```
 
 ---
 
-## Input file formats
+## What lives where, by contribution
 
-### `data/paragraph_texts/{0–9}.csv`
-
-One row per paragraph fragment. Paragraphs that span a page break appear as
-multiple consecutive rows sharing the same `paragraph_id`.
-
-| Column         | Type    | Description                                              |
-|----------------|---------|----------------------------------------------------------|
-| `page`         | integer | Printed page number (matches Gutenberg `#Page_N` anchor) |
-| `paragraph_id` | integer | Volume-global sequential paragraph identifier            |
-| `text`         | string  | Text fragment for this page slice of the paragraph       |
-
-### `data/index_names/{0–9}.csv`
-
-One row per named-entity mention, produced by running NER and coreference
-resolution against the paragraph texts using the volume's Index of Names as
-a controlled vocabulary. File `0.csv` = Volume 1, `1.csv` = Volume 2, etc.
-
-| Column       | Type    | Description                                                           |
-|--------------|---------|-----------------------------------------------------------------------|
-| `page`       | integer | Page on which this mention occurs                                     |
-| `index_name` | string  | Canonical name from the index; pipe-separated (`\|`) for ambiguous corefs |
-| `position`   | string  | Character offsets within the paragraph, formatted as `(start, end)`   |
-| `reference`  | string  | The actual surface string (name, pronoun, or coreferent phrase)        |
-| `paragraph`  | float   | Volume-global paragraph ID (matches `paragraph_id` in text files)     |
+| Contribution | Files / dirs |
+|---|---|
+| **E1** — Viewsari ontology | [`ontology/`](ontology/), see [`ontology/README.md`](ontology/README.md) |
+| **E3** — Viewsari KG | [`kg/viewsari_kg.ttl`](kg/viewsari_kg.ttl), [`kg/viewsari_kg.inferred.ttl`](kg/viewsari_kg.inferred.ttl), [`kg/explorer/`](kg/explorer/), [`kb/kb.json`](kb/kb.json) |
+| Foundation (used to build E3) | [`kg_foundation/`](kg_foundation/) — CSV seeds; built by [`src/kg_population/build_kg_ttl.py`](../src/kg_population/build_kg_ttl.py) |
+| Source corpus (case-study chapter) | [`lives_pdfs/`](lives_pdfs/), [`ocr/`](ocr/), [`facsimile_pages/`](facsimile_pages/), [`index_of_names/`](index_of_names/) |
+| Co-occurrence inputs (referenced in case-study chapter, used by the GT co-occurrence explorer) | [`cooccurrences/`](cooccurrences/) |
+| RQ1 / E1 evaluation inputs | [`ontology/CQ_CATALOG.md`](ontology/CQ_CATALOG.md), evaluated by [`src/evaluation/run_cq_evaluation.py`](../src/evaluation/run_cq_evaluation.py) |
 
 ---
 
-## Pipeline stages
+## Knowledge graph (`kg/`)
 
-The script runs five sequential stages. All outputs are written as UTF-8 CSV
-files with full quoting. Each file maps directly to one or more classes in the
-Viewsari ontology.
+| File | Description |
+|---|---|
+| `viewsari_kg.ttl` | Full populated KG, Turtle. Three-layer ontology (bibliographic / structural / content) instantiated over Vasari's *The Lives*. ~1.3M triples, ~175 MB. |
+| `viewsari_kg.inferred.ttl` | Materialised closure produced by [`src/evaluation/materialise_inferences.py`](../src/evaluation/materialise_inferences.py); adds the artwork / co-occurrence / person → paragraph edges required by five Phase-I CQs. |
+| `explorer/*.json` | D3-ready explorer graphs consumed by the website's GT co-occurrence explorer ([`app/routers/explore.py`](../app/routers/explore.py)). |
+| `explorer/ner/*/bio_*.json` | Per-strategy ObliquER explorer graphs (one folder per prompting strategy, one JSON per biography), consumed by the ObliquER KG explorer ([`app/routers/obliquer.py`](../app/routers/obliquer.py)). |
 
-### Stage 1 — Volumes (`viewsari_volumes.csv`)
+**Namespace:** `vkb:` = `https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#`.
 
-Produces **20 rows** (10 volumes × expression + manifestation).
+### Headline counts in the populated KG
 
-Every volume is modelled at two FRBR levels:
+| Class | Ontology ID | Count |
+|---|---|---|
+| Person | `viewsari:0001013` | 443 |
+| Artwork | `viewsari:0001012` | 852 |
+| Co-occurrence | `viewsari:0001025` | 541 |
+| Mention (`oa:Annotation`) | — | 57,685 (GT 2,439 + ObliquER 55,246) |
 
-- **Expression** (`viewsari:volume`, `fabio:BookSeries`)
-  — represents the intellectual content of a volume in the 1568 edition.
-  `frbr:is part of` points upward to the edition expression node
-  (`viewsari:#0001029`).
-
-- **Manifestation** (`viewsari:volume web representation`, `fabio:WebSite`)
-  — represents the Gutenberg HTML file for that volume.
-  `rdfs:seeAlso` carries the full Gutenberg URL.
-  `frbr:is part of` points to the manifestation-collection node
-  (`viewsari:#0001031`).
-
-The two levels are linked by `frbr:has embodiment` on the expression row.
+Provenance coverage of the populated KG is reported by [`src/evaluation/run_kg_evaluation.py`](../src/evaluation/run_kg_evaluation.py); latest output: [`src/evaluation/kg_metrics.json`](../src/evaluation/kg_metrics.json).
 
 ---
 
-### Stage 2 — Biographies (`viewsari_biographies.csv`)
+## Foundation CSVs (`kg_foundation/`)
 
-Produces **288 rows** (144 biographies × expression + manifestation).
+CSV seeds consumed by [`src/kg_population/build_kg_ttl.py`](../src/kg_population/build_kg_ttl.py) to instantiate the bibliographic and structural layers of the ontology. Every row maps to one or more classes; see the table inside the script for the column-to-property mapping.
 
-The 144 biographies are drawn from the printed tables of contents of all
-10 volumes. Start pages are the Du Vere printed page numbers embedded in
-the Gutenberg HTML as `#Page_N` anchors.
+**Bibliographic / structural rows:**
 
-- **Expression** (`viewsari:biography`, `fabio:Expression`)
-  — `frbr:is part of` → volume expression.
+| File | Rows | Primary class |
+|---|---:|---|
+| `viewsari_volumes.csv` | 20 | `viewsari:volume` / `viewsari:volume_web_representation` |
+| `viewsari_biographies.csv` | 288 | `viewsari:biography` / `viewsari:biography_web_representation` |
+| `viewsari_pages.csv` | 6,258 | `viewsari:page` / `viewsari:page_web_representation` |
+| `viewsari_paragraphs.csv` | 3,479 | `doco:Paragraph` |
 
-- **Manifestation** (`viewsari:biography web representation`, `fabio:WebPage`)
-  — `rdfs:seeAlso` → `{volume_url}#Page_{start_page}` (Gutenberg anchor).
-  — `frbr:is part of` → volume web representation.
+**Person / annotation rows (under `kg_foundation/persons/`):**
 
----
+| File | Rows | Primary class |
+|---|---:|---|
+| `viewsari_persons.csv` | 443 | `viewsari:person` |
+| `viewsari_textchunks.csv` | 24,827 | `doco:TextChunk` |
+| `viewsari_selectors.csv` | 24,827 | `oa:TextPositionSelector` |
+| `viewsari_annotations.csv` | 24,827 | `oa:Annotation`, `prov:Entity` |
+| `viewsari_activities.csv` | — | `prov:Activity` (NER, coref, EL, ObliquER) |
 
-### Stage 3 — Pages (`viewsari_pages.csv`)
+**Co-occurrence rows (under `kg_foundation/cooccurrences/`):** analogous shape to `persons/`, with `viewsari:cooccurrence` as the head class.
 
-Produces **6,258 rows** (3,129 pages × expression + manifestation),
-covering **every printed page** within every biography across all 10 volumes.
+### Conventions for multi-valued columns
 
-Page ranges are derived from biography start pages: each biography ends on
-the page before the next biography begins. The last biography in each volume
-extends to the maximum page number attested in the paragraph text data.
+Several columns hold space-separated lists of URIs (`prov:used` in `viewsari_activities.csv`; `rdf:type` cells containing comma-separated values such as `oa:Annotation, prov:Entity`). When loading into a triple store these must be split into individual triples.
 
-- **Expression** (`viewsari:page`, `fabio:Expression`)
-  — `frbr:is part of` → biography expression.
-
-- **Manifestation** (`viewsari:page web representation`, `fabio:WebPage`)
-  — `rdfs:seeAlso` → `{volume_url}#Page_{N}`.
-  — `frbr:is part of` → biography web representation.
-
----
-
-### Stage 4 — Paragraphs (`viewsari_paragraphs.csv`)
-
-Produces **3,479 rows** (one per merged paragraph across all 10 volumes).
-
-**Key transformation — merging page-split fragments:**
-Paragraphs that span a page break are stored as multiple rows in the source
-files. This stage groups all fragments by `paragraph_id`, sorts them by page,
-and concatenates the text (continuation fragments retain their leading
-whitespace as the natural join point). The result is a single row per
-paragraph with a `start_page` and `end_page`.
-
-| Output column                     | Derivation                                                  |
-|-----------------------------------|-------------------------------------------------------------|
-| `dct:isPartOf`                    | Page expression for the start page                          |
-| `viewsari:has start page`         | Page *web representation* URI for start page                |
-| `viewsari:has end page`           | Page *web representation* URI for end page                  |
-| `viewsari:has length in characters` | `len()` of merged text                                    |
-| `viewsari:has text`               | Full concatenated paragraph text                            |
-| `frbr:is part of`                 | Biography expression containing this paragraph              |
-
-For single-page paragraphs `viewsari:has start page` and `viewsari:has end page`
-are identical, which is the correct representation.
-
----
-
-### Stage 5 — Annotation layer
-
-This stage processes the NER + coreference index files and produces five
-interlinked tables modelling named-entity extraction as a provenance-aware
-Web Annotation structure.
-
-#### `viewsari_persons.csv` — 443 rows
-
-One `viewsari:person` entity per unique resolved name across all volumes.
-
-**Pipe-separated ambiguity:** Some index entries record two equally possible
-identities for a set of mentions (e.g. `Lippi, Fra Filippo|Lippi, Filippo (Filippino)`).
-These are **split** into two separate person entities, each receiving all
-the mentions from that ambiguous entry. This preserves the unresolved coref
-rather than silently collapsing it.
-
-**Cross-volume identity:** A person mentioned across multiple volumes (e.g.
-Giotto appears in Vols 1, 2, 9, 10) maps to a single URI determined by the
-slug of their canonical index name.
-
-`prov:wasGeneratedBy` → `viewsari:coreference_reconciliation_run_1`
-
-#### `viewsari_textchunks.csv` — 24,827 rows
-
-One `doco:TextChunk` per individual mention (each row in the index files,
-after pipe-expansion). Links back to its paragraph via `dct:isPartOf` and
-to its position selector via `oa:hasSelector`.
-
-#### `viewsari_selectors.csv` — 24,827 rows
-
-One `oa:TextPositionSelector` per mention, carrying `oa:start` and `oa:end`
-as character offsets within the containing paragraph text. Linked to its
-TextChunk via `dct:isPartOf`.
-
-#### `viewsari_annotations.csv` — 24,827 rows
-
-One `oa:Annotation, prov:Entity` per mention, tying together:
-
-| Property                | Points to                                      |
-|-------------------------|------------------------------------------------|
-| `oa:hasTarget`          | `doco:TextChunk`                               |
-| `oa:hasBody`            | `oa:TextualBody` whose `rdf:value` is the surface string (pronoun, name variant, phrase) |
-| `prov:wasGeneratedBy`   | NER activity                                   |
-| `prov:used`             | Paragraph expression                           |
-| `oa:hasSource`          | Paragraph expression                           |
-
-#### `viewsari_activities.csv` — 2 rows
-
-Two `prov:Activity` instances modelling the two-stage extraction process:
-
-**`viewsari:named_entity_recognition_run_1`**
-— Generated all 24,827 annotations.
-— `prov:used`: all 10 index-of-names entities + 2,001 unique paragraphs
-  that contributed at least one mention.
-— `prov:wasAssociatedWith`: `viewsari:python_script_for_ner_1`
-
-**`viewsari:coreference_reconciliation_run_1`**
-— Generated all 443 person entities by resolving the NER annotations.
-— `prov:used`: all 24,827 annotation URIs (consuming the NER output as input).
-— `prov:wasAssociatedWith`: `viewsari:python_script_for_ner_2`
-
-The full provenance chain reads:
+### Provenance chain in the seeds
 
 ```
 paragraphs + index_of_names
@@ -245,74 +140,49 @@ paragraphs + index_of_names
 
 ---
 
-## Running the script
+## Source corpus
 
-```bash
-pip install pandas
+| Dir | Contents |
+|---|---|
+| [`lives_pdfs/`](lives_pdfs/) | Original Project Gutenberg PDFs, one per volume (10 volumes total). |
+| [`ocr/`](ocr/) | OCR'd text per volume, produced by [`src/extract_content/ocr_facsimile.py`](../src/extract_content/ocr_facsimile.py). |
+| [`facsimile_pages/`](facsimile_pages/) | Per-page HTML facsimiles by volume, sliced from the Gutenberg HTML by [`src/extract_content/extract_facsimile_pages.py`](../src/extract_content/extract_facsimile_pages.py). |
+| [`index_of_names/`](index_of_names/) | Per-volume Index-of-Names CSVs (NER + coref index over the printed back-of-book indices). Used as the controlled vocabulary for person extraction and as input to [`src/kg_population/build_kg_ttl.py`](../src/kg_population/build_kg_ttl.py). |
 
-# From the repo root:
-python build_viewsari_kg.py
+### `index_of_names/{0–9}.csv`
 
-# Or with explicit paths (defaults match the repo structure):
-python build_viewsari_kg.py \
-    --para-dir  data/archive/volumes \
-    --index-dir data/index_of_names \
-    --output    kg_foundation/
-```
+One row per named-entity mention. File `0.csv` = Volume 1, …, `9.csv` = Volume 10.
 
-All nine CSV files will be written to `output/`.
-
----
-
-## Output summary
-
-| File                          | Rows   | Primary class                          |
-|-------------------------------|--------|----------------------------------------|
-| `viewsari_volumes.csv`        | 20     | `viewsari:volume` / `viewsari:volume web representation` |
-| `viewsari_biographies.csv`    | 288    | `viewsari:biography` / `viewsari:biography web representation` |
-| `viewsari_pages.csv`          | 6,258  | `viewsari:page` / `viewsari:page web representation` |
-| `viewsari_paragraphs.csv`     | 3,479  | `doco:Paragraph`                       |
-| `viewsari_persons.csv`        | 443    | `viewsari:person`                      |
-| `viewsari_textchunks.csv`     | 24,827 | `doco:TextChunk`                       |
-| `viewsari_selectors.csv`      | 24,827 | `oa:TextPositionSelector`            |
-| `viewsari_annotations.csv`    | 24,827 | `oa:Annotation`, `prov:Entity`         |
-| `viewsari_activities.csv`     | 2      | `prov:Activity`                        |
-| **Total**                     | **59,971** |                                    |
+| Column | Type | Description |
+|---|---|---|
+| `page` | integer | Page on which this mention occurs |
+| `index_name` | string | Canonical name from the index; pipe-separated (`|`) for ambiguous corefs |
+| `position` | string | Character offsets within the paragraph, formatted as `(start, end)` |
+| `reference` | string | Surface string (name, pronoun, or coreferent phrase) |
+| `paragraph` | float | Volume-global paragraph ID |
 
 ---
 
-## Ontology and vocabulary dependencies
+## Co-occurrence tables (`cooccurrences/`)
 
-| Prefix    | Namespace                                      | Used for                          |
-|-----------|------------------------------------------------|-----------------------------------|
+Per-volume co-occurrence CSVs plus a `results/` subdir holding aggregated PMI / Dice tables. Computed by [`src/network/compute_pmi.py`](../src/network/compute_pmi.py) and [`src/network/compute_dice.py`](../src/network/compute_dice.py); the underlying per-biography analysis lives in [`src/network/biography_pmi-dice.ipynb`](../src/network/biography_pmi-dice.ipynb).
+
+The KG-side co-occurrence layer (`viewsari:cooccurrence` instances with `viewsari:involves` to participating persons and `viewsari:inParagraph` to the source paragraph) is built from [`kg_foundation/cooccurrences/`](kg_foundation/cooccurrences/).
+
+---
+
+## Ontology vocabulary dependencies
+
+See [`ontology/README.md`](ontology/README.md) for the full vocabulary table. At a glance:
+
+| Prefix | Namespace | Used for |
+|---|---|---|
 | `viewsari` | `https://viewsari.ise.fiz-karlsruhe.de/ontology/` | Domain classes and properties |
-| `fabio`   | `http://purl.org/spar/fabio/`                  | FRBR-aligned bibliographic types  |
-| `frbr`    | `http://purl.org/vocab/frbr/core#`             | Work / Expression / Manifestation |
-| `doco`    | `http://purl.org/spar/doco/`                   | Document components               |
-| `dct`     | `http://purl.org/dc/terms/`                    | `isPartOf`, `hasPart`             |
-| `oa`      | `http://www.w3.org/ns/oa#`                     | Web Annotation                    |
-| `prov`    | `http://www.w3.org/ns/prov#`                   | Provenance                        |
-| `rdfs`    | `http://www.w3.org/2000/01/rdf-schema#`        | Labels, class hierarchy           |
-| `owl`     | `http://www.w3.org/2002/07/owl#`               | `sameAs`, ontology imports        |
-
----
-
-## Notes on multi-valued columns
-
-Several columns contain space-separated lists of URIs
-(e.g. `prov:used` in `viewsari_activities.csv`,
-`prov:wasGeneratedBy` referenced across tables).
-When loading into a triple store these must be split into
-individual triples. The same applies to `rdf:type` cells
-containing comma-separated values such as `oa:Annotation, prov:Entity`.
-
----
-
-## Citation
-
-If you use this pipeline or the resulting data, please cite:
-
-> Ondraszek, S. R. (2026). *Modeling Interpretation in the Age of Generative AI:
-> Semantic Technologies for Digital Humanities Research Based on Giorgio Vasari's*
-> The Lives. Doctoral dissertation, Karlsruhe Institute of Technology /
-> FIZ Karlsruhe.
+| `fabio` | `http://purl.org/spar/fabio/` | FRBR-aligned bibliographic types |
+| `frbr` | `http://purl.org/vocab/frbr/core#` | Work / Expression / Manifestation |
+| `doco` | `http://purl.org/spar/doco/` | Document components |
+| `dct` | `http://purl.org/dc/terms/` | `isPartOf`, `hasPart` |
+| `oa` | `http://www.w3.org/ns/oa#` | Web Annotation |
+| `prov` | `http://www.w3.org/ns/prov#` | Provenance |
+| `rdfs` | `http://www.w3.org/2000/01/rdf-schema#` | Labels, class hierarchy |
+| `owl` | `http://www.w3.org/2002/07/owl#` | `sameAs`, ontology imports |
