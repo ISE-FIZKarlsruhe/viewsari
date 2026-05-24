@@ -312,7 +312,7 @@ The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/v
 ### Provenance model (PROV-O) — operationalizes C2
 
 **Ground truth** (two activities):
-- `vkb:ground_truth_annotation_run_2` (`viewsari:0001022` NER activity) — produces mentions, `prov:used` 270 paragraphs
+- `vkb:ground_truth_annotation_run_2` (`viewsari:0001022` NER activity) — produces mentions, `prov:used` 232 paragraphs
 - `vkb:ground_truth_entity_linking_run_1` (`viewsari:0001023` EL activity) — produces artwork entities via `prov:wasDerivedFrom` mentions
 - Agent: `vkb:sarah_ondraszek` (`prov:Person`), date: March 2026
 
