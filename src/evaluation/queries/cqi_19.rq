@@ -10,5 +10,5 @@ SELECT ?paragraph ?startPage ?endPage ?paragraphText WHERE {
   vkb:cooccurrence_agn-agn_1 viewsari:0001032 ?paragraph .
   OPTIONAL { ?paragraph viewsari:hasStartPage ?startPage }
   OPTIONAL { ?paragraph viewsari:hasEndPage   ?endPage  }
-  OPTIONAL { ?paragraph viewsari:hasText      ?paragraphText }
+  OPTIONAL { ?paragraph viewsari:0001002      ?paragraphText }
 }

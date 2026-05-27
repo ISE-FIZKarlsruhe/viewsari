@@ -1,49 +1,49 @@
 {
-  "_about": "KG evaluation metrics catalog. Each metric is a SPARQL query under kg_queries/ that produces either a scalar (single row, single binding) or a small table. Mirrors dissertation §9.3 — instance counts (§9.3.1), provenance coverage (§9.3.2), external linking coverage (§9.3.3) — plus a few derived metrics that the dissertation references in passing (triples-per-mention verbosity, activity inventory, web-manifestation depth).",
+  "_about": "KG evaluation metrics catalog. Each metric is a SPARQL query under kg_queries/ that produces either a scalar (single row, single binding) or a small table. The twelve metrics are split into two categories: descriptive metrics (category=\"descriptive\") inventory what was populated and are reported in dissertation §11.3 (Results, 'Knowledge graph population results'); evaluative metrics (category=\"evaluative\") test a specific quantitative claim under a stated pass criterion and are reported in §12.4 (Evaluation, 'Provenance transparency'). See src/evaluation/README.md for the full catalog table and rationale.",
   "metrics": [
-    {"id": "M01", "section": "9.3.1", "title": "Total triples", "kind": "scalar", "query": "kg_queries/triple_count.rq",
+    {"id": "M01", "category": "descriptive", "section": "11.3.2", "title": "Total triples", "kind": "scalar", "query": "kg_queries/triple_count.rq",
      "description": "Total number of triples in the KG (after closure if loaded from viewsari_kg.inferred.ttl)."},
 
-    {"id": "M02", "section": "9.3.1", "title": "Instance counts by ontology class", "kind": "table", "query": "kg_queries/instance_counts.rq",
-     "description": "Populates Table 9.11 — one row per ontology class with the materialised individual count.",
+    {"id": "M02", "category": "descriptive", "section": "11.3.2", "title": "Instance counts by ontology class", "kind": "table", "query": "kg_queries/instance_counts.rq",
+     "description": "Populates the instance-counts table in §11.3.2 — one row per ontology class with the materialised individual count.",
      "columns": ["class", "label", "count"]},
 
-    {"id": "M03", "section": "9.3.1", "title": "Mention taxonomy breakdown", "kind": "table", "query": "kg_queries/mention_types.rq",
+    {"id": "M03", "category": "descriptive", "section": "11.3.2", "title": "Mention taxonomy breakdown", "kind": "table", "query": "kg_queries/mention_types.rq",
      "description": "Counts per concrete mention subclass — the four leaf classes plus the artwork-specific specialisations.",
      "columns": ["mentionType", "label", "count"]},
 
-    {"id": "M04", "section": "9.3.1", "title": "Activity inventory", "kind": "table", "query": "kg_queries/activities.rq",
+    {"id": "M04", "category": "descriptive", "section": "11.3.3", "title": "Activity inventory", "kind": "table", "query": "kg_queries/activities.rq",
      "description": "Number of prov:Activity instances grouped by their viewsari activity class (NER, entity linking, cooccurrence analysis).",
      "columns": ["activityType", "label", "count"]},
 
-    {"id": "M05", "section": "9.3.1", "title": "Average triples per mention (verbosity proxy)", "kind": "scalar", "query": "kg_queries/triples_per_mention.rq",
-     "description": "Triples / mentions ratio — a coarse proxy for the dissertation's claim that each mention generates 12–18 triples."},
+    {"id": "M05", "category": "evaluative", "section": "12.4.2", "title": "Triples-per-mention (verbosity proxy)", "kind": "scalar", "query": "kg_queries/triples_per_mention.rq",
+     "description": "Triples / mentions ratio. Tests the CIDOC-comparison claim that the Viewsari provenance template generates 12–18 triples per mention. Pass criterion: closed-graph ratio at or below the upper bound."},
 
-    {"id": "M06", "section": "9.3.2", "title": "Provenance coverage — Listing 9.6", "kind": "scalar-table", "query": "kg_queries/provenance_coverage.rq",
-     "description": "Reproduces Listing 9.6 verbatim: total annotations vs annotations with prov:wasGeneratedBy → SoftwareAgent. The withProv/total ratio should equal 1.0.",
+    {"id": "M06", "category": "evaluative", "section": "12.4.3", "title": "Provenance coverage — loose", "kind": "scalar-table", "query": "kg_queries/provenance_coverage.rq",
+     "description": "Total annotations vs annotations with prov:wasGeneratedBy → SoftwareAgent. Tests contribution C2's full-provenance claim. Pass criterion: ratio = 1.0.",
      "columns": ["total", "withProv", "ratio"]},
 
-    {"id": "M07", "section": "9.3.2", "title": "Provenance coverage — strict (paragraph + activity + agent)", "kind": "scalar-table", "query": "kg_queries/provenance_coverage_strict.rq",
-     "description": "Stricter variant: annotations whose provenance chain reaches a paragraph AND an activity AND a software agent simultaneously.",
+    {"id": "M07", "category": "evaluative", "section": "12.4.3", "title": "Provenance coverage — strict (paragraph + activity + agent)", "kind": "scalar-table", "query": "kg_queries/provenance_coverage_strict.rq",
+     "description": "Stricter variant of M06: annotations whose provenance chain reaches a paragraph AND an activity AND a software agent simultaneously. Pass criterion: ratio → 1.0 after post-processing, with a structural account of the residual.",
      "columns": ["total", "fullChain", "ratio"]},
 
-    {"id": "M08", "section": "9.3.2", "title": "Activity → SoftwareAgent inventory", "kind": "table", "query": "kg_queries/activity_agents.rq",
+    {"id": "M08", "category": "descriptive", "section": "11.3.3", "title": "Activity → SoftwareAgent inventory", "kind": "table", "query": "kg_queries/activity_agents.rq",
      "description": "Each prov:Activity instance with its associated prov:SoftwareAgent (or prov:Person fallback). Confirms which model produced which run.",
      "columns": ["activity", "activityLabel", "agent", "agentLabel"]},
 
-    {"id": "M09", "section": "9.3.3", "title": "External linking coverage by entity type — Table 9.12", "kind": "table", "query": "kg_queries/external_linking.rq",
-     "description": "Per-class total vs Wikidata-linked count and percentage.",
+    {"id": "M09", "category": "evaluative", "section": "12.4.4", "title": "External linking coverage by entity type", "kind": "table", "query": "kg_queries/external_linking.rq",
+     "description": "Per-class total vs Wikidata-linked count and percentage. Tests whether person and artwork classes are reconciled to Wikidata at rates consistent with the long-tail discovery argument. Pass criterion: person rate substantially exceeds artwork rate, artwork gap explained by long tail.",
      "columns": ["entityType", "label", "total", "linked", "percent"]},
 
-    {"id": "M10", "section": "9.3.3", "title": "OOKB artworks", "kind": "scalar", "query": "kg_queries/ookb_artworks.rq",
-     "description": "Number of artworks WITHOUT a wikidata.org owl:sameAs link (the OOKB long-tail discussed in §9.3.3)."},
+    {"id": "M10", "category": "descriptive", "section": "11.3.4", "title": "OOKB artworks", "kind": "scalar", "query": "kg_queries/ookb_artworks.rq",
+     "description": "Number of artworks WITHOUT a wikidata.org owl:sameAs link — the OOKB long-tail retained under stable Viewsari-internal IRIs."},
 
-    {"id": "M11", "section": "9.3.3", "title": "Authority namespaces in use", "kind": "table", "query": "kg_queries/authority_namespaces.rq",
+    {"id": "M11", "category": "descriptive", "section": "11.3.4", "title": "Authority namespaces in use", "kind": "table", "query": "kg_queries/authority_namespaces.rq",
      "description": "Distinct external authorities reached through owl:sameAs (Wikidata, GeoNames, Iconclass, …).",
      "columns": ["authority", "links"]},
 
-    {"id": "M12", "section": "9.3.1", "title": "Bibliographic depth — web manifestations per expression", "kind": "scalar-table", "query": "kg_queries/web_manifestation_depth.rq",
-     "description": "How many expression-level nodes (volume, biography, page) are reachable to a Project Gutenberg web manifestation via frbr:hasEmbodiment + rdfs:seeAlso.",
+    {"id": "M12", "category": "evaluative", "section": "12.4.5", "title": "Web-manifestation reachability", "kind": "scalar-table", "query": "kg_queries/web_manifestation_depth.rq",
+     "description": "How many expression-level nodes (volume, biography, page) are reachable to a Project Gutenberg web manifestation via frbr:hasEmbodiment + rdfs:seeAlso. Tests whether every expression-level bibliographic node resolves to a Project Gutenberg URL. Pass criterion: volume and biography at 100%; page-level reachability bounded by the upstream HTML's anchor coverage.",
      "columns": ["expressionType", "withWebURL", "total", "percent"]}
   ]
 }

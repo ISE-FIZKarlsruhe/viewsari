@@ -11,7 +11,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?cooc ?paragraph ?biography ?volume ?coocLabel WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves vkb:buonarroti-michelagnolo ,
+        viewsari:0001034 vkb:buonarroti-michelagnolo ,
                           vkb:sanzio-raffaello-raffaello-da-urbino ;
         rdfs:label ?coocLabel .
   OPTIONAL { ?cooc viewsari:0001032 ?paragraph .

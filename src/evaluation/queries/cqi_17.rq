@@ -9,7 +9,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?artist ?partner ?location WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves ?artist , ?partner .
+        viewsari:0001034 ?artist , ?partner .
   FILTER (str(?artist) < str(?partner))
   ?artist  a viewsari:0001013 .
   ?partner a viewsari:0001013 .

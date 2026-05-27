@@ -11,7 +11,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?location ?locationLabel WHERE {
   {
     ?cooc a viewsari:0001025 ;
-          viewsari:involves vkb:buonarroti-michelagnolo , ?location .
+          viewsari:0001034 vkb:buonarroti-michelagnolo , ?location .
     ?location a viewsari:0001015 .
   } UNION {
     ?mentionA prov:wasDerivedFrom/^prov:wasGeneratedBy vkb:buonarroti-michelagnolo ;

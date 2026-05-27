@@ -10,7 +10,7 @@ SELECT DISTINCT ?person ?label WHERE {
   ?person a viewsari:0001013 .
   FILTER NOT EXISTS {
     ?cooc a viewsari:0001025 ;
-          viewsari:involves ?person .
+          viewsari:0001034 ?person .
   }
   OPTIONAL { ?person rdfs:label ?label }
 }

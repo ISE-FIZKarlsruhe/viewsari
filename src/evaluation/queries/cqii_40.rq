@@ -34,7 +34,7 @@ SELECT ?evidenceType (COUNT(DISTINCT ?node) AS ?n) WHERE {
   } UNION {
     # statistical: a materialised cooccurrence node
     ?cooc a viewsari:0001025 ;
-          viewsari:involves vkb:buonarroti-michelagnolo ,
+          viewsari:0001034 vkb:buonarroti-michelagnolo ,
                             vkb:sanzio-raffaello-raffaello-da-urbino .
     BIND (?cooc AS ?node)
     BIND ("statistical-cooccurrence" AS ?evidenceType)

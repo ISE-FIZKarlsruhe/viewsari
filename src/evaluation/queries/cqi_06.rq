@@ -8,7 +8,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?partner ?partnerLabel (COUNT(DISTINCT ?cooc) AS ?frequency) WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves vkb:buonarroti-michelagnolo , ?partner .
+        viewsari:0001034 vkb:buonarroti-michelagnolo , ?partner .
   FILTER (?partner != vkb:buonarroti-michelagnolo)
   OPTIONAL { ?partner rdfs:label ?partnerLabel }
 }

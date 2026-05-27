@@ -488,15 +488,15 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     </div>
     {% if kb_counts %}
     <div class="hero-stats-group">
-      <div class="hero-stats-caption">ObliquER</div>
+      <div class="hero-stats-caption">Knowledge graph</div>
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-num">{{ "{:,}".format(kb_counts.artworks) }}</div>
-          <div class="hero-stat-label">Mentions</div>
+          <div class="hero-stat-label">Artworks</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-num">{{ kb_counts.persons }}</div>
-          <div class="hero-stat-label">Entities</div>
+          <div class="hero-stat-label">Persons</div>
         </div>
       </div>
     </div>
@@ -639,14 +639,16 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
         Interactive graph visualization of the Viewsari Knowledge Graph.
         Explore persons, co-occurrences, and biographies as a force-directed network.
       </div>
-      <div class="home-card-badge">378K+ triples &rarr;</div>
+      <div class="home-card-badge">1.7M triples &rarr;</div>
     </a>
     <a class="home-card" href="/annotations">
       <div class="home-card-icon">&#9776;</div>
       <div class="home-card-title">Annotations</div>
       <div class="home-card-desc">
-        Gold-standard annotation corpus: 16 biographies, 2,438 artwork mentions
-        with explicit, implicit, coreferent, and generic types.
+        Gold-standard annotation corpus: 16 biographies, with explicit, implicit,
+        coreferent, and generic mention types. The deployed graph carries
+        2,439 mention annotations (2,422 in the corrected corpus; 17 pre-correction
+        annotations remain pending re-deployment).
       </div>
       <div class="home-card-badge">ObliquER corpus &rarr;</div>
     </a>

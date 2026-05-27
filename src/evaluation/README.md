@@ -1,11 +1,41 @@
 # Viewsari evaluation suite
 
-This directory holds the two evaluation pipelines that produce the numbers reported in the dissertation's **Evaluation chapter**:
+This directory holds the two evaluation pipelines that produce the numbers reported in the dissertation. The CQ pipeline lands entirely in the **Evaluation chapter**; the KG-metrics pipeline produces a catalog of twelve metrics (M01–M12) that is **split across two chapters**: the **descriptive** ones (what was populated) are reported in the Results chapter, and the **evaluative** ones (do the populated counts support the methodology's claims?) are reported in the Evaluation chapter.
 
 | Pipeline | What it measures | Maps to |
 |---|---|---|
 | **CQ coverage** ([`run_cq_evaluation.py`](run_cq_evaluation.py)) | Every competency question from [`data/ontology/CQ_CATALOG.md`](../../data/ontology/CQ_CATALOG.md) (mirrored as Appendix B) is translated into a SPARQL query and executed against the populated KG. Each CQ is classified as **fully answerable**, **partially answerable**, **unanswerable**, or **non-SPARQL**. | **RQ1** / **E1** — validates that the three-layer ontology actually answers the questions it was designed for. |
-| **KG metrics** ([`run_kg_evaluation.py`](run_kg_evaluation.py)) | Population metrics on `viewsari_kg.ttl`: instance counts per class, triples-per-mention, provenance coverage (strict + loose), authority namespaces, external linking ratios, ObliquER activity coverage. Output: [`kg_metrics.json`](kg_metrics.json) + Markdown reports. | **E3** — quantitative summary of the populated knowledge graph. |
+| **KG metrics** ([`run_kg_evaluation.py`](run_kg_evaluation.py)) | Twelve SPARQL metrics (M01–M12) over `viewsari_kg.ttl`. Each metric is either **descriptive** (counts / inventories / *what is in the graph*) or **evaluative** (a quantitative claim of the methodology, with a pass criterion). Output: [`kg_metrics.json`](kg_metrics.json) + Markdown reports under [`kg_reports/`](kg_reports/). | **E3** — populated-graph contribution. Descriptive rows → dissertation §11.3 (Results); evaluative rows → §12.4 (Evaluation, *Provenance transparency*). |
+
+## KG metrics catalog
+
+The twelve metrics are catalogued in [`kg_metrics.json`](kg_metrics.json). Each entry carries an explicit `category` flag (`descriptive` | `evaluative`) so that the runner output, the dissertation prose, and the JSON catalog stay in sync. Categories are stable across runs; only the values change.
+
+### Descriptive (reported in dissertation §11.3, *Knowledge graph population results*)
+
+These metrics inventory what was populated. They do not encode a pass criterion — they answer *"what is in the graph"*, not *"is the graph good enough"*.
+
+| ID  | Title                                    | Query                                                                 | What it surfaces |
+|-----|------------------------------------------|-----------------------------------------------------------------------|------------------|
+| M01 | Total triples                            | [`kg_queries/triple_count.rq`](kg_queries/triple_count.rq)             | Triple count after closure. |
+| M02 | Instance counts by ontology class        | [`kg_queries/instance_counts.rq`](kg_queries/instance_counts.rq)       | Materialized individuals per Viewsari class. |
+| M03 | Mention taxonomy breakdown               | [`kg_queries/mention_types.rq`](kg_queries/mention_types.rq)           | Counts per concrete mention subclass. |
+| M04 | Activity inventory                       | [`kg_queries/activities.rq`](kg_queries/activities.rq)                 | `prov:Activity` instances grouped by Viewsari activity class. |
+| M08 | Activity → SoftwareAgent inventory       | [`kg_queries/activity_agents.rq`](kg_queries/activity_agents.rq)       | Pairing of each activity with its associated agent. |
+| M10 | OOKB artworks                            | [`kg_queries/ookb_artworks.rq`](kg_queries/ookb_artworks.rq)           | Count of artworks without a Wikidata `owl:sameAs`. |
+| M11 | Authority namespaces in use              | [`kg_queries/authority_namespaces.rq`](kg_queries/authority_namespaces.rq) | Distinct external authorities reached via `owl:sameAs`. |
+
+### Evaluative (reported in dissertation §12.4, *Provenance transparency*)
+
+These metrics test a specific methodological claim. Each one comes with a pass criterion that is *not* a single threshold: M05 is judged against an upper bound, M06 against an exact equality, M07 against a converging trajectory with a structural account of the residual, M09 against a within-class comparison, and M12 against an external upper bound (Project Gutenberg's anchor coverage).
+
+| ID  | Title                                 | Query                                                                                   | Claim under test                                                                       | Pass criterion |
+|-----|---------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|----------------|
+| M05 | Triples-per-mention (verbosity proxy) | [`kg_queries/triples_per_mention.rq`](kg_queries/triples_per_mention.rq)                 | The Viewsari provenance model produces 12–18 triples per mention (CIDOC comparison).    | Closed-graph ratio at or below the upper bound. |
+| M06 | Provenance coverage — loose           | [`kg_queries/provenance_coverage.rq`](kg_queries/provenance_coverage.rq)                 | 100 % of annotations reach a typed activity and a documented software agent.            | Ratio = 1.0. |
+| M07 | Provenance coverage — strict          | [`kg_queries/provenance_coverage_strict.rq`](kg_queries/provenance_coverage_strict.rq)   | Annotations simultaneously reach paragraph, activity, and agent.                        | Ratio → 1.0 after post-processing; residual is explainable. |
+| M09 | External linking coverage             | [`kg_queries/external_linking.rq`](kg_queries/external_linking.rq)                       | Person and artwork classes reconcile to Wikidata at rates consistent with the long-tail discovery argument. | Person ≫ artwork; gap explained by long tail. |
+| M12 | Web-manifestation depth               | [`kg_queries/web_manifestation_depth.rq`](kg_queries/web_manifestation_depth.rq)         | Every expression-level bibliographic node resolves to a Project Gutenberg URL.          | Volume and biography at 100 %; page bounded by upstream HTML. |
 
 See the [top-level README](../../README.md#evaluation-map-where-the-numbers-come-from) for how this directory relates to the rest of the contribution map.
 
@@ -47,7 +77,7 @@ Five Phase-I CQs (CQI.3, CQI.12, CQI.19, CQI.21, CQI.22) need a direct `viewsari
 |---|---|---|
 | R1 — artwork closure (entity ← `prov:wasDerivedFrom` ← annotation → 0001032) | defensive — most artworks already carry the edge | 0 |
 | R2 — cooccurrence closure (parse "Vol. N, Para. M" out of `rdfs:label`) | cooccurrence → paragraph | 617 |
-| R3 — person closure (chains off R2 through `viewsari:involves`) | person → paragraph | 1,282 |
+| R3 — person closure (chains off R2 through `viewsari:0001034` / `involves`) | person → paragraph | 1,282 |
 
 ```bash
 # One-shot: write data/kg/viewsari_kg.inferred.ttl
@@ -128,7 +158,7 @@ The full mapping lives in `cq_catalog.json` under `_concrete_bindings`. Edit the
 
 ## Property naming convention
 
-The KG mixes ontology-canonical numeric IRIs (`viewsari:0001012` = `artwork`) with friendly aliases (`viewsari:hasText`, `viewsari:involves`, `viewsari:hasStartPage`). Each query uses whichever form is actually populated for that property in the current KG; if both forms appear, the query takes a `UNION`. Run `python src/evaluation/run_cq_evaluation.py --parse-only` after any KG-shape change to catch property drift early.
+The ontology declares both numeric IRIs (`viewsari:0001012`, `viewsari:0001034`, `viewsari:0001002`, …) and human-readable labels (`artwork`, `involves`, `has text`, …); the deployed KG (`data/kg/viewsari_kg.ttl`) materialises only the numeric form. All queries under `queries/` therefore use the numeric IRIs directly. The friendly aliases (`viewsari:involves`, `viewsari:hasText`, `viewsari:hasStartPage`, etc.) are reserved for prose, listings, and the SKOS examples inside the ontology — they have zero instances in the live graph, and any query that uses them will silently return 0 rows. If a future KG iteration materialises both forms, queries should be rewritten as a `UNION` over both. Run `python src/evaluation/run_cq_evaluation.py --parse-only` after any KG-shape change to catch property drift early; a non-parse-only run is required to detect alias-vs-numeric mismatches, since `--parse-only` only checks SPARQL syntax.
 
 ## Output
 

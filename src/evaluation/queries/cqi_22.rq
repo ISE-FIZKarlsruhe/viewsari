@@ -8,5 +8,5 @@ PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 
 SELECT ?paragraph ?text WHERE {
   vkb:cooccurrence_agn-agn_1 viewsari:0001032 ?paragraph .
-  ?paragraph viewsari:hasText ?text .
+  ?paragraph viewsari:0001002 ?text .
 }

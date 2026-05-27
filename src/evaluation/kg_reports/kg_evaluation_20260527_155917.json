@@ -1,0 +1,864 @@
+{
+  "generated": "2026-05-27T15:59:17.629298+00:00",
+  "metrics": [
+    {
+      "id": "M01",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Total triples",
+      "kind": "scalar",
+      "query": "kg_queries/triple_count.rq",
+      "description": "Total number of triples in the KG (after closure if loaded from viewsari_kg.inferred.ttl).",
+      "status": "ok",
+      "elapsed_ms": 6618,
+      "headers": [
+        "triples"
+      ],
+      "rows": [
+        [
+          "1673859"
+        ]
+      ],
+      "summary": "1673859",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M02",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Instance counts by ontology class",
+      "kind": "table",
+      "query": "kg_queries/instance_counts.rq",
+      "description": "Populates the instance-counts table in \u00a711.3.2 \u2014 one row per ontology class with the materialised individual count.",
+      "columns": [
+        "class",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 3974,
+      "headers": [
+        "class",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "http://purl.org/spar/doco/TextChunk",
+          "doco:TextChunk",
+          "83154"
+        ],
+        [
+          "http://www.w3.org/ns/oa#Annotation",
+          "oa:Annotation",
+          "83154"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026",
+          "mention (any)",
+          "57685"
+        ],
+        [
+          "http://www.w3.org/ns/prov#Activity",
+          "prov:Activity",
+          "6965"
+        ],
+        [
+          "http://purl.org/spar/doco/Paragraph",
+          "doco:Paragraph",
+          "3479"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009",
+          "page",
+          "3026"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011",
+          "page_web_representation",
+          "3026"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012",
+          "artwork",
+          "852"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033",
+          "extracted_content (parent)",
+          "852"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001025",
+          "cooccurrence",
+          "541"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013",
+          "person",
+          "443"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008",
+          "biography",
+          "165"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001010",
+          "biography_web_representation",
+          "165"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006",
+          "volume",
+          "10"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001007",
+          "volume_web_representation",
+          "10"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000",
+          "edition",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001",
+          "translation",
+          "1"
+        ],
+        [
+          "http://www.w3.org/ns/prov#SoftwareAgent",
+          "prov:SoftwareAgent",
+          "1"
+        ]
+      ],
+      "summary": "18 row(s)",
+      "error": null,
+      "row_count": 18
+    },
+    {
+      "id": "M03",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Mention taxonomy breakdown",
+      "kind": "table",
+      "query": "kg_queries/mention_types.rq",
+      "description": "Counts per concrete mention subclass \u2014 the four leaf classes plus the artwork-specific specialisations.",
+      "columns": [
+        "mentionType",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 1550,
+      "headers": [
+        "mentionType",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016",
+          "implicit_mention",
+          "27099"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001021",
+          "implicit_artwork_mention",
+          "27099"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018",
+          "coreferent",
+          "14443"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017",
+          "explicit_mention",
+          "9588"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001020",
+          "explicit_artwork_mention",
+          "9588"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001019",
+          "generic_mention",
+          "6555"
+        ]
+      ],
+      "summary": "6 row(s)",
+      "error": null,
+      "row_count": 6
+    },
+    {
+      "id": "M04",
+      "category": "descriptive",
+      "section": "11.3.3",
+      "title": "Activity inventory",
+      "kind": "table",
+      "query": "kg_queries/activities.rq",
+      "description": "Number of prov:Activity instances grouped by their viewsari activity class (NER, entity linking, cooccurrence analysis).",
+      "columns": [
+        "activityType",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 188,
+      "headers": [
+        "activityType",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001022",
+          "named_entity_recognition",
+          "6961"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001023",
+          "entity_linking",
+          "1"
+        ]
+      ],
+      "summary": "2 row(s)",
+      "error": null,
+      "row_count": 2
+    },
+    {
+      "id": "M05",
+      "category": "evaluative",
+      "section": "12.4.2",
+      "title": "Triples-per-mention (verbosity proxy)",
+      "kind": "scalar",
+      "query": "kg_queries/triples_per_mention.rq",
+      "description": "Triples / mentions ratio. Tests the CIDOC-comparison claim that the Viewsari provenance template generates 12\u201318 triples per mention. Pass criterion: closed-graph ratio at or below the upper bound.",
+      "status": "ok",
+      "elapsed_ms": 25195,
+      "headers": [
+        "mentions",
+        "ratio",
+        "totalTriplesAboutMentions"
+      ],
+      "rows": [
+        [
+          "57685",
+          "9.118817716910808702435641848",
+          "526019"
+        ]
+      ],
+      "summary": "57685 \u00b7 9.118817716910808702435641848 \u00b7 526019",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M06",
+      "category": "evaluative",
+      "section": "12.4.3",
+      "title": "Provenance coverage \u2014 loose",
+      "kind": "scalar-table",
+      "query": "kg_queries/provenance_coverage.rq",
+      "description": "Total annotations vs annotations with prov:wasGeneratedBy \u2192 SoftwareAgent. Tests contribution C2's full-provenance claim. Pass criterion: ratio = 1.0.",
+      "columns": [
+        "total",
+        "withProv",
+        "ratio"
+      ],
+      "status": "ok",
+      "elapsed_ms": 1533,
+      "headers": [
+        "total",
+        "withProv",
+        "ratio"
+      ],
+      "rows": [
+        [
+          "83154",
+          "83154",
+          "1"
+        ]
+      ],
+      "summary": "total=83154 \u00b7 withProv=83154 \u00b7 ratio=1",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M07",
+      "category": "evaluative",
+      "section": "12.4.3",
+      "title": "Provenance coverage \u2014 strict (paragraph + activity + agent)",
+      "kind": "scalar-table",
+      "query": "kg_queries/provenance_coverage_strict.rq",
+      "description": "Stricter variant of M06: annotations whose provenance chain reaches a paragraph AND an activity AND a software agent simultaneously. Pass criterion: ratio \u2192 1.0 after post-processing, with a structural account of the residual.",
+      "columns": [
+        "total",
+        "fullChain",
+        "ratio"
+      ],
+      "status": "ok",
+      "elapsed_ms": 1905,
+      "headers": [
+        "total",
+        "fullChain",
+        "ratio"
+      ],
+      "rows": [
+        [
+          "83154",
+          "55246",
+          "0.6644"
+        ]
+      ],
+      "summary": "total=83154 \u00b7 fullChain=55246 \u00b7 ratio=0.6644",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M08",
+      "category": "descriptive",
+      "section": "11.3.3",
+      "title": "Activity \u2192 SoftwareAgent inventory",
+      "kind": "table",
+      "query": "kg_queries/activity_agents.rq",
+      "description": "Each prov:Activity instance with its associated prov:SoftwareAgent (or prov:Person fallback). Confirms which model produced which run.",
+      "columns": [
+        "activity",
+        "activityLabel",
+        "agent",
+        "agentLabel"
+      ],
+      "status": "ok",
+      "elapsed_ms": 742,
+      "headers": [
+        "activity",
+        "activityLabel",
+        "agent",
+        "agentLabel",
+        "runs"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p000_p001",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 000-001",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p014_p015",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 014-015",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p024_p025",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 024-025",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p029_p030",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 029-030",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p045_p046",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 045-046",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p047_p048",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 047-048",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p051_p052",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 051-052",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p053_p054",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 053-054",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p055_p056",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 055-056",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p058_p059",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 058-059",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p062_p063",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 062-063",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p064_p065",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 064-065",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p066_p067",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 066-067",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p072_p073",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 072-073",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p074_p075",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 074-075",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p075_p076",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 075-076",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p076_p077",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 076-077",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p078_p079",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 078-079",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p079_p080",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 079-080",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p080_p081",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 080-081",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p081_p082",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 081-082",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p082_p083",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 082-083",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p083_p084",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 083-084",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p084_p085",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 084-085",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p085_p086",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 085-086",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p087_p088",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 087-088",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p090_p091",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 090-091",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p098_p099",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 098-099",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p100_p101",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 100-101",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p104_p105",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 104-105",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p118_p119",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 118-119",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p125_p126",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 125-126",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p127_p128",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 127-128",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p134_p135",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 134-135",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p137_p138",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 137-138",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p147_p148",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 147-148",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p153_p154",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 153-154",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p155_p156",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 155-156",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p157_p158",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 157-158",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p159_p160",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 159-160",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p161_p162",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 161-162",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p163_p164",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 163-164",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p166_p167",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 166-167",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p174_p175",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 174-175",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p180_p181",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 180-181",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p181_p182",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 181-182",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p182_p183",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 182-183",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p183_p184",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 183-184",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p184_p185",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 184-185",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p185_p186",
+          "NER extraction \u2014 few_shot_v2, vol 10, paragraphs 185-186",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ]
+      ],
+      "summary": "50 row(s)",
+      "error": null,
+      "row_count": 50
+    },
+    {
+      "id": "M09",
+      "category": "evaluative",
+      "section": "12.4.4",
+      "title": "External linking coverage by entity type",
+      "kind": "table",
+      "query": "kg_queries/external_linking.rq",
+      "description": "Per-class total vs Wikidata-linked count and percentage. Tests whether person and artwork classes are reconciled to Wikidata at rates consistent with the long-tail discovery argument. Pass criterion: person rate substantially exceeds artwork rate, artwork gap explained by long tail.",
+      "columns": [
+        "entityType",
+        "label",
+        "total",
+        "linked",
+        "percent"
+      ],
+      "status": "ok",
+      "elapsed_ms": 42,
+      "headers": [
+        "entityType",
+        "label",
+        "total",
+        "linked",
+        "percent"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012",
+          "artwork",
+          "852",
+          "311",
+          "36.5"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013",
+          "person",
+          "443",
+          "320",
+          "72.2"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001015",
+          "location",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001014",
+          "organization",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "summary": "4 row(s)",
+      "error": null,
+      "row_count": 4
+    },
+    {
+      "id": "M10",
+      "category": "descriptive",
+      "section": "11.3.4",
+      "title": "OOKB artworks",
+      "kind": "scalar",
+      "query": "kg_queries/ookb_artworks.rq",
+      "description": "Number of artworks WITHOUT a wikidata.org owl:sameAs link \u2014 the OOKB long-tail retained under stable Viewsari-internal IRIs.",
+      "status": "ok",
+      "elapsed_ms": 24,
+      "headers": [
+        "ookb"
+      ],
+      "rows": [
+        [
+          "541"
+        ]
+      ],
+      "summary": "541",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M11",
+      "category": "descriptive",
+      "section": "11.3.4",
+      "title": "Authority namespaces in use",
+      "kind": "table",
+      "query": "kg_queries/authority_namespaces.rq",
+      "description": "Distinct external authorities reached through owl:sameAs (Wikidata, GeoNames, Iconclass, \u2026).",
+      "columns": [
+        "authority",
+        "links"
+      ],
+      "status": "ok",
+      "elapsed_ms": 19,
+      "headers": [
+        "authority",
+        "links"
+      ],
+      "rows": [
+        [
+          "http://www.wikidata.org",
+          "431"
+        ],
+        [
+          "https://www.wikidata.org",
+          "200"
+        ]
+      ],
+      "summary": "2 row(s)",
+      "error": null,
+      "row_count": 2
+    },
+    {
+      "id": "M12",
+      "category": "evaluative",
+      "section": "12.4.5",
+      "title": "Web-manifestation reachability",
+      "kind": "scalar-table",
+      "query": "kg_queries/web_manifestation_depth.rq",
+      "description": "How many expression-level nodes (volume, biography, page) are reachable to a Project Gutenberg web manifestation via frbr:hasEmbodiment + rdfs:seeAlso. Tests whether every expression-level bibliographic node resolves to a Project Gutenberg URL. Pass criterion: volume and biography at 100%; page-level reachability bounded by the upstream HTML's anchor coverage.",
+      "columns": [
+        "expressionType",
+        "withWebURL",
+        "total",
+        "percent"
+      ],
+      "status": "ok",
+      "elapsed_ms": 87,
+      "headers": [
+        "expressionType",
+        "label",
+        "total",
+        "withWebURL",
+        "percent"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009",
+          "page",
+          "3026",
+          "2794",
+          "92.3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008",
+          "biography",
+          "165",
+          "165",
+          "100"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006",
+          "volume",
+          "10",
+          "10",
+          "100"
+        ]
+      ],
+      "summary": "expressionType=https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009 \u00b7 label=page \u00b7 total=3026 \u00b7 withWebURL=2794 \u00b7 percent=92.3",
+      "error": null,
+      "row_count": 3
+    }
+  ]
+}

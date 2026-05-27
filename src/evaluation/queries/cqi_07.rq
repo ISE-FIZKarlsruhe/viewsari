@@ -11,7 +11,7 @@ PREFIX vkb:      <https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#>
 
 SELECT ?cooc ?pmi WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves vkb:buonarroti-michelagnolo ,
+        viewsari:0001034 vkb:buonarroti-michelagnolo ,
                           vkb:sanzio-raffaello-raffaello-da-urbino .
   { ?cooc viewsari:hasPMI       ?pmi }
   UNION

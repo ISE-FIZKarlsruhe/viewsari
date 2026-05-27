@@ -12,7 +12,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?event ?eventLabel WHERE {
   ?event a ?eventClass ;
-         viewsari:involves vkb:buonarroti-michelagnolo .
+         viewsari:0001034 vkb:buonarroti-michelagnolo .
   {
     ?eventClass rdfs:label ?clsLabel .
     FILTER (CONTAINS(LCASE(STR(?clsLabel)), "historical event"))

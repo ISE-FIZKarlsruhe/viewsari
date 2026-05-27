@@ -11,7 +11,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?person ?label WHERE {
   ?person a viewsari:0001013 .
   ?cooc   a viewsari:0001025 ;
-          viewsari:involves ?person .
+          viewsari:0001034 ?person .
   OPTIONAL { ?person rdfs:label ?label }
 }
 ORDER BY ?label

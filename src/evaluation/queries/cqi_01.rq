@@ -10,7 +10,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?a ?aLabel ?b ?bLabel WHERE {
   ?cooc a viewsari:0001025 ;
-        viewsari:involves ?a, ?b .
+        viewsari:0001034 ?a, ?b .
   FILTER (str(?a) < str(?b))
   OPTIONAL { ?a rdfs:label ?aLabel }
   OPTIONAL { ?b rdfs:label ?bLabel }
