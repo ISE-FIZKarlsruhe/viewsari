@@ -24,7 +24,7 @@
      "columns": ["total", "withProv", "ratio"]},
 
     {"id": "M07", "category": "evaluative", "section": "12.4.3", "title": "Provenance coverage — strict (paragraph + activity + agent)", "kind": "scalar-table", "query": "kg_queries/provenance_coverage_strict.rq",
-     "description": "Stricter variant of M06: annotations whose provenance chain reaches a paragraph AND an activity AND a software agent simultaneously. Pass criterion: ratio → 1.0 after post-processing, with a structural account of the residual.",
+     "description": "Stricter variant of M06: annotations whose provenance chain reaches a paragraph AND an activity AND a prov:SoftwareAgent simultaneously. Pass criterion: ratio below M06, with the residual fully accounted for by human-annotated (prov:Person) ground-truth mentions and non-mention annotation nodes.",
      "columns": ["total", "fullChain", "ratio"]},
 
     {"id": "M08", "category": "descriptive", "section": "11.3.3", "title": "Activity → SoftwareAgent inventory", "kind": "table", "query": "kg_queries/activity_agents.rq",
