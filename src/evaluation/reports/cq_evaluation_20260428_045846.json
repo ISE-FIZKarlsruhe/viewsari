@@ -1,0 +1,1765 @@
+{
+  "generated": "2026-04-28T04:58:46.381598+00:00",
+  "summary": {
+    "fully-answerable": 33,
+    "unanswerable": 7,
+    "partially-answerable": 12,
+    "non-sparql": 18
+  },
+  "rows": [
+    {
+      "id": "CQI.1",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "Who co-occurred with whom in The Lives?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "200 row(s)",
+      "row_count": 200,
+      "elapsed_ms": 232,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-baccio-d-baccio-baglioni",
+          "Agnolo, Baccio d' (Baccio Baglioni)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-giuliano-di-baccio-d",
+          "Agnolo, Giuliano di Baccio d'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-of-siena",
+          "Agnolo (of Siena)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agostino-of-siena",
+          "Agostino (of Siena)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-giuliano-di-baccio-d",
+          "Agnolo, Giuliano di Baccio d'",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#bandinelli-baccio-baccio-de-brandini",
+          "Bandinelli, Baccio (Baccio de' Brandini)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-baccio-d-baccio-baglioni",
+          "Agnolo, Baccio d' (Baccio Baglioni)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#brunelleschi-filippo-filippo-di-ser-brunellesco",
+          "Brunelleschi, Filippo (Filippo di Ser Brunellesco)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-baccio-d-baccio-baglioni",
+          "Agnolo, Baccio d' (Baccio Baglioni)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#buonarroti-michelagnolo",
+          "Buonarroti, Michelagnolo"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-of-siena",
+          "Agnolo (of Siena)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#giotto",
+          "Giotto"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-of-siena",
+          "Agnolo (of Siena)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#pisano-giovanni",
+          "Pisano, Giovanni"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agostino-of-siena",
+          "Agostino (of Siena)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#giotto",
+          "Giotto"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agostino-of-siena",
+          "Agostino (of Siena)",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#pisano-giovanni",
+          "Pisano, Giovanni"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#albertinelli-mariotto",
+          "Albertinelli, Mariotto",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#bugiardini-giuliano",
+          "Bugiardini, Giuliano"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.2",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "Did artist X co-occur with artist Y?",
+      "type": "ask",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "ASK -> true",
+      "row_count": 1,
+      "elapsed_ms": 3,
+      "sample": []
+    },
+    {
+      "id": "CQI.3",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "Which artists are mentioned together in the same passage?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 2479,
+      "sample": []
+    },
+    {
+      "id": "CQI.4",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "Where in the text did artists X and Y co-occur (paragraph, biography, volume)?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "10 row(s)",
+      "row_count": 10,
+      "elapsed_ms": 10,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Antonio da (the younger), Vol. 6, Para. 228"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Aristotile (Bastiano) da, Vol. 8, Para. 1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Giuliano da, Vol. 4, Para. 271"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and Sansovino, Jacopo (Jacopo Tatti), Vol. 9, Para. 323"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and Sanzio, Raffaello (Raffaello da Urbino), Vol. 4, Para. 304"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_2",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Antonio da (the younger), Vol. 8, Para. 130"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_2",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Giuliano da, Vol. 9, Para. 30"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_2",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and Sanzio, Raffaello (Raffaello da Urbino), Vol. 6, Para. 355"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_3",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and San Gallo, Antonio da (the younger), Vol. 9, Para. 74"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_3",
+          "None",
+          "None",
+          "None",
+          "Co-occurrence of Buonarroti, Michelagnolo and Sanzio, Raffaello (Raffaello da Urbino), Vol. 9, Para. 28"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.5",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "How frequently do two given artists co-occur across the entire corpus?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 7,
+      "sample": [
+        [
+          "3"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.6",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Elena Rossi",
+      "question": "Which artists have the highest co-occurrence frequency with artist X?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "20 row(s)",
+      "row_count": 20,
+      "elapsed_ms": 28,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#bandinelli-baccio-baccio-de-brandini",
+          "Bandinelli, Baccio (Baccio de' Brandini)",
+          "5"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#bugiardini-giuliano",
+          "Bugiardini, Giuliano",
+          "4"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#san-gallo-antonio-da-the-younger",
+          "San Gallo, Antonio da (the younger)",
+          "3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#sanzio-raffaello-raffaello-da-urbino",
+          "Sanzio, Raffaello (Raffaello da Urbino)",
+          "3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#tribolo-niccol",
+          "Tribolo (Niccol\u00f2)",
+          "3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#vinci-leonardo-da",
+          "Vinci, Leonardo da",
+          "3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#brunelleschi-filippo-filippo-di-ser-brunellesco",
+          "Brunelleschi, Filippo (Filippo di Ser Brunellesco)",
+          "2"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#donato-donatello",
+          "Donato (Donatello)",
+          "2"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ghiberti-lorenzo-lorenzo-di-bartoluccio-ghiberti-or-lorenzo-di-cione-ghi...",
+          "Ghiberti, Lorenzo (Lorenzo di Bartoluccio Ghiberti, or Lorenzo di Cione Ghiberti)",
+          "2"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ghirlandajo-domenico",
+          "Ghirlandajo, Domenico",
+          "2"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.7",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Aaron Warner",
+      "question": "What is the PMI score for the co-occurrence of artists X and Y?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 8,
+      "sample": []
+    },
+    {
+      "id": "CQI.8",
+      "phase": "I",
+      "cluster": "Artists and Co-occurrences",
+      "persona": "Aaron Warner",
+      "question": "What is the network centrality of artist X in the co-occurrence network?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 13,
+      "sample": [
+        [
+          "59"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.9",
+      "phase": "I",
+      "cluster": "Persons and Attributes",
+      "persona": "Elena Rossi",
+      "question": "What are the birth and death dates of person X?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 4,
+      "sample": [
+        [
+          "http://www.wikidata.org/entity/Q5592",
+          "None",
+          "None"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.10",
+      "phase": "I",
+      "cluster": "Persons and Attributes",
+      "persona": "Elena Rossi",
+      "question": "Which persons mentioned in The Lives are identified as artists?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "326 row(s)",
+      "row_count": 326,
+      "elapsed_ms": 1862,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-of-siena",
+          "Agnolo (of Siena)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-baccio-d-baccio-baglioni",
+          "Agnolo, Baccio d' (Baccio Baglioni)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-giuliano-di-baccio-d",
+          "Agnolo, Giuliano di Baccio d'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agostino-of-siena",
+          "Agostino (of Siena)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#albertinelli-mariotto",
+          "Albertinelli, Mariotto"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#allori-alessandro-alessandro-del-bronzino",
+          "Allori, Alessandro (Alessandro del Bronzino)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ammanati-bartolommeo",
+          "Ammanati, Bartolommeo"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#angelico-fra-fra-giovanni-da-fiesole",
+          "Angelico, Fra (Fra Giovanni da Fiesole)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#angelo-lorentino-d",
+          "Angelo, Lorentino d'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#apollonio",
+          "Apollonio"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.11",
+      "phase": "I",
+      "cluster": "Persons and Attributes",
+      "persona": "Elena Rossi",
+      "question": "Which persons mentioned in The Lives are not artists (e.g., patrons, clergy, scholars)?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "117 row(s)",
+      "row_count": 117,
+      "elapsed_ms": 1882,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#abacco-antonio-l",
+          "Abacco, Antonio L'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agnolo-nephew-of-montorsoli",
+          "Agnolo (nephew of Montorsoli)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#agobbio-oderigi-d",
+          "Agobbio, Oderigi d'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#altissimo-cristofano-dell",
+          "Altissimo, Cristofano dell'"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#amalteo-pomponio",
+          "Amalteo, Pomponio"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#angelo-battista-d-battista-d-agnolo-or-del-moro",
+          "Angelo, Battista d' (Battista d' Agnolo, or del Moro)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#anguisciuola-sofonisba",
+          "Anguisciuola, Sofonisba"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#antwerp-willem-van",
+          "Antwerp, Willem van"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#aretino-leone-leone-lioni",
+          "Aretino, Leone (Leone Lioni)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#aretino-marchionne",
+          "Aretino, Marchionne"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.12",
+      "phase": "I",
+      "cluster": "Persons and Attributes",
+      "persona": "John Saffron",
+      "question": "In which biography (biographies) does person X appear?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 10,
+      "sample": []
+    },
+    {
+      "id": "CQI.13",
+      "phase": "I",
+      "cluster": "Persons and Attributes",
+      "persona": "Aaron Warner",
+      "question": "Is person X linked to an external authority record (e.g., Wikidata)?",
+      "type": "ask",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "ASK -> true",
+      "row_count": 1,
+      "elapsed_ms": 2,
+      "sample": []
+    },
+    {
+      "id": "CQI.14",
+      "phase": "I",
+      "cluster": "Artworks, Locations, Entities",
+      "persona": "Elena Rossi",
+      "question": "Which artworks are mentioned in the biography of artist X?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "48 row(s)",
+      "row_count": 48,
+      "elapsed_ms": 2152,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_10",
+          "The Genealogy of Christ (lunettes in the Sistine Chapel ceiling)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_102",
+          "River Nile (Capitoline River God statue)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_13",
+          "The Blessing of the Earth (Sistine Chapel ceiling)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_14",
+          "The Creation of the Animals (Sistine Chapel ceiling)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_15",
+          "The Separation of the Land and Water (Sistine Chapel ceiling)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_19",
+          "The Sacrifice of Cain and Abel (Sistine Chapel ceiling)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_20",
+          "Four corner spandrels (David, Judith, Esther, Brazen Serpent) on the Sistine Chapel ceiling"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_26",
+          "Variant contract phase of the Tomb of Julius II (Santiquattro and Aginense)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_27",
+          "Marble columns quarried for the fa\u00e7ade of San Lorenzo (Florence)"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_28",
+          "Model for knee-shaped windows of the Medici Palace (Palazzo Medici Riccardi, Florence)"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.15",
+      "phase": "I",
+      "cluster": "Artworks, Locations, Entities",
+      "persona": "Elena Rossi",
+      "question": "Which locations are associated with artist X?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 10,
+      "sample": []
+    },
+    {
+      "id": "CQI.16",
+      "phase": "I",
+      "cluster": "Artworks, Locations, Entities",
+      "persona": "Elena Rossi",
+      "question": "Which artworks were created in location L?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 11,
+      "sample": []
+    },
+    {
+      "id": "CQI.17",
+      "phase": "I",
+      "cluster": "Artworks, Locations, Entities",
+      "persona": "Nazeera Marfi",
+      "question": "Can students explore artist collaborations on a geographical map?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 1655,
+      "sample": []
+    },
+    {
+      "id": "CQI.18",
+      "phase": "I",
+      "cluster": "Artworks, Locations, Entities",
+      "persona": "John Saffron",
+      "question": "Where is location X located on a map?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 5,
+      "sample": []
+    },
+    {
+      "id": "CQI.19",
+      "phase": "I",
+      "cluster": "Bibliographic and Provenance",
+      "persona": "Elena Rossi",
+      "question": "Which paragraph and page in The Lives is the source of co-occurrence C?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 4,
+      "sample": []
+    },
+    {
+      "id": "CQI.20",
+      "phase": "I",
+      "cluster": "Bibliographic and Provenance",
+      "persona": "John Saffron",
+      "question": "Which volume of The Lives contains the biography of artist X?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 40,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-9_michelangelo-bio",
+          "Life of Michelagnolo Buonarroti",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-9",
+          "The Lives, 1568 Edition, Volume 9: Michelagnolo Buonarroti"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.21",
+      "phase": "I",
+      "cluster": "Bibliographic and Provenance",
+      "persona": "Elena Rossi",
+      "question": "What edition or translation of The Lives was used for extracting a given co-occurrence?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 3,
+      "sample": []
+    },
+    {
+      "id": "CQI.22",
+      "phase": "I",
+      "cluster": "Bibliographic and Provenance",
+      "persona": "Elena Rossi",
+      "question": "What is the original text snippet associated with co-occurrence C?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 2,
+      "sample": []
+    },
+    {
+      "id": "CQI.23",
+      "phase": "I",
+      "cluster": "Bibliographic and Provenance",
+      "persona": "Aaron Warner",
+      "question": "What licence is provided by the Viewsari dataset and where can the original source text be found?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 3,
+      "sample": [
+        [
+          "https://creativecommons.org/licenses/by/4.0/",
+          "https://onlinebooks.library.upenn.edu/webbin/metabook?id=livespainters"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.24",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Aaron Warner",
+      "question": "How can I execute semantic searches over the knowledge graph?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Process question \u2014 answered by tooling/documentation (SPARQL endpoint at GraphDB, examples in docs/sparql_examples). Not a graph-pattern query.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQI.25",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Nazeera Marfi",
+      "question": "How can I reuse the Viewsari data in my own project, and in what form can it be shared?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "FAIR/reuse policy question \u2014 answered by README, license metadata, and dataset distribution formats (TTL, JSON-LD, OWL).",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQI.26",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Aaron Warner",
+      "question": "Is there a SPARQL endpoint or an RDF dump available?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Infrastructure availability \u2014 answered by deployment docs (GraphDB endpoint at /repositories/viewsari, RDF dump at data/kg/viewsari_kg.ttl).",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQI.27",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Aaron Warner",
+      "question": "Which external resources (ontologies, authority data) were used in constructing the knowledge graph?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "4 row(s)",
+      "row_count": 4,
+      "elapsed_ms": 1,
+      "sample": [
+        [
+          "http://purl.org/spar/doco/2015-07-03"
+        ],
+        [
+          "http://purl.org/spar/fabio/2019-02-19"
+        ],
+        [
+          "http://www.w3.org/ns/prov-o-20130430"
+        ],
+        [
+          "http://www.w3.org/ns/oa#"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.28",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Elena Rossi",
+      "question": "Which authority data (e.g., Wikidata, Iconclass) is connected to the resources?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 36,
+      "sample": [
+        [
+          "http://www.wikidata.org",
+          "392"
+        ],
+        [
+          "https://www.wikidata.org",
+          "200"
+        ]
+      ]
+    },
+    {
+      "id": "CQI.29",
+      "phase": "I",
+      "cluster": "Search and Data Reuse",
+      "persona": "Nazeera Marfi",
+      "question": "How can my students reuse data in the project course, and can the visualizations be modified and customized?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Pedagogical/UX question \u2014 answered by the open-source repository (CC BY 4.0) and documentation, not by graph patterns.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.1",
+      "phase": "II",
+      "cluster": "Artists, Collaborations, Relationships",
+      "persona": "Aaron Warner",
+      "question": "What is the difference between a statistical co-occurrence and an explicitly typed relationship between two artists in the knowledge graph?",
+      "type": "ask",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "ASK -> true",
+      "row_count": 1,
+      "elapsed_ms": 5,
+      "sample": []
+    },
+    {
+      "id": "CQII.2",
+      "phase": "II",
+      "cluster": "Artists, Collaborations, Relationships",
+      "persona": "Aaron Warner",
+      "question": "How can I distinguish statistical co-occurrences from explicit relationships in computational models?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 18,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001025",
+          "541"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.3",
+      "phase": "II",
+      "cluster": "Artists, Collaborations, Relationships",
+      "persona": "Elena Rossi",
+      "question": "Which artists have both a statistical co-occurrence and an explicit typed relationship with artist X?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 663,
+      "sample": []
+    },
+    {
+      "id": "CQII.4",
+      "phase": "II",
+      "cluster": "Artists, Collaborations, Relationships",
+      "persona": "Aaron Warner",
+      "question": "What is the Dice coefficient for the co-occurrence of artists X and Y, and how does it compare to the PMI score?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "3 row(s)",
+      "row_count": 3,
+      "elapsed_ms": 9,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_1",
+          "None",
+          "None"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_2",
+          "None",
+          "None"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#cooccurrence_buo-san_3",
+          "None",
+          "None"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.5",
+      "phase": "II",
+      "cluster": "Artists, Collaborations, Relationships",
+      "persona": "Nazeera Marfi",
+      "question": "How do I explore relationships between Renaissance artists, artworks, historical events, or locations to identify patterns and trends?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "UX/exploration question \u2014 answered by visual frontends and SPARQL examples; not a single graph pattern.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.6",
+      "phase": "II",
+      "cluster": "Artworks",
+      "persona": "Elena Rossi",
+      "question": "Which artworks are explicitly named in the biography of artist X, and which are described only implicitly?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "57 row(s)",
+      "row_count": 57,
+      "elapsed_ms": 5008,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_10",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020",
+          "the Genealogy of Christ"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_102",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "the Nile"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_13",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020",
+          "the Blessing of the Earth"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_14",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020",
+          "the Creation of the Animals"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_15",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "the next scene, where He is dividing the Water from the Earth"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_19",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "the story of the sacrifice of Cain and Abel"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_20",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "the four scenes at the corners, on the spandrels of that vaulting"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_26",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "the tomb to Santiquattro and Aginense"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_27",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "five columns of the proper size were excavated, one of which is on the Piazza di S. Lorenzo in Florence"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#artwork_28",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "for the Palace of the Medici a model for the knee-shaped windows of those rooms that are at the corner"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.7",
+      "phase": "II",
+      "cluster": "Artworks",
+      "persona": "Elena Rossi",
+      "question": "What is the surface form by which artwork A is referred to in paragraph P, and is it explicit, implicit, or coreferential?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 11,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_paragraph-225",
+          "S. Felicita",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017",
+          "explicit mention"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_paragraph-225",
+          "S. Felicita",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020",
+          "explicit artwork mention"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.8",
+      "phase": "II",
+      "cluster": "Artworks",
+      "persona": "Aaron Warner",
+      "question": "Which artworks are classified as out-of-knowledge-base (OOKB) \u2014 no match in Wikidata?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "500 row(s)",
+      "row_count": 500,
+      "elapsed_ms": 81,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#108f2dd24ce043e898f5aae5de8181791060",
+          "the whole arch of that chapel with angels"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#108f2dd24ce043e898f5aae5de8181791270",
+          "painting the folding doors that close the organ, and beginning to overlay the ceiling with gold"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#108f2dd24ce043e898f5aae5de818179222",
+          "they painted in company the Chapel of S. Fina"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a07701010",
+          "a very beautiful Marsyas of white marble"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a07701063",
+          "the torso and head of another Marsyas, made of red stone, very ancient, and much more beautiful than the first"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a0770110",
+          "the Porta della Catena"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a07701156",
+          "the model of the horse"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a07701369",
+          "a wooden Crucifix"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a07701382",
+          "a tomb of marble"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#701a1834ce0b4d938dc6d0c98c6a0770143",
+          "that Madonna of marble"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.9",
+      "phase": "II",
+      "cluster": "Artworks",
+      "persona": "Elena Rossi",
+      "question": "Which artworks co-occur with a specific artist in a particular volume, and what are the source paragraphs?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 96,
+      "sample": []
+    },
+    {
+      "id": "CQII.10",
+      "phase": "II",
+      "cluster": "Artworks",
+      "persona": "Nazeera Marfi",
+      "question": "Can I explore how artworks reflect collaborative effects, such as shared locations or artistic styles?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Exploratory/visualisation question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.11",
+      "phase": "II",
+      "cluster": "Locations",
+      "persona": "Elena Rossi",
+      "question": "Which locations are mentioned in co-occurrences involving artist X?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 7,
+      "sample": []
+    },
+    {
+      "id": "CQII.12",
+      "phase": "II",
+      "cluster": "Locations",
+      "persona": "Elena Rossi",
+      "question": "Which artists were active in location L according to The Lives?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 4,
+      "sample": []
+    },
+    {
+      "id": "CQII.13",
+      "phase": "II",
+      "cluster": "Locations",
+      "persona": "Aaron Warner",
+      "question": "Is location L linked to an external authority record (e.g., Wikidata, GeoNames)?",
+      "type": "ask",
+      "complexity": "simple",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "ASK -> false",
+      "row_count": 0,
+      "elapsed_ms": 2,
+      "sample": []
+    },
+    {
+      "id": "CQII.14",
+      "phase": "II",
+      "cluster": "Locations",
+      "persona": "Nazeera Marfi",
+      "question": "Can students explore artist collaborations on a geographical map, filtered by location?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "UX / map view, depends on CQI.17 substrate.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.15",
+      "phase": "II",
+      "cluster": "Historical Events",
+      "persona": "Elena Rossi",
+      "question": "Which historical events are associated with artist X in the knowledge graph?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 16,
+      "sample": []
+    },
+    {
+      "id": "CQII.16",
+      "phase": "II",
+      "cluster": "Historical Events",
+      "persona": "Elena Rossi",
+      "question": "Which artworks were commissioned or destroyed as part of a specific historical event E?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 12,
+      "sample": []
+    },
+    {
+      "id": "CQII.17",
+      "phase": "II",
+      "cluster": "Historical Events",
+      "persona": "Nazeera Marfi",
+      "question": "How can I identify cross-disciplinary connections between Renaissance art and other historical or cultural phenomena?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Research/exploration question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.18",
+      "phase": "II",
+      "cluster": "Historical Events",
+      "persona": "Aaron Warner",
+      "question": "Can information about historical events be enriched from external sources (Wikidata)?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Enrichment process question \u2014 to be answered by federated query design once events are populated.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.19",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "How can I distinguish work-, expression-, and manifestation-level bibliographic metadata?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "50 row(s)",
+      "row_count": 50,
+      "elapsed_ms": 84,
+      "sample": [
+        [
+          "Work",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027",
+          "Le vite de' piu eccellenti pittori, scultori, e architettori"
+        ],
+        [
+          "Work",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001027",
+          "le_vite"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_103",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 103"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_104",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 104"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_106",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 106"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_107",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 107"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_118",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 118"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_120",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 120"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_129",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 129"
+        ],
+        [
+          "Expression",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-10_academicians-design-bio_page_130",
+          "The Lives, 1568, Vol. 10, Life of Academicians of Design, Page 130"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.20",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "Which edition and translation of The Lives is the source of a given extracted entity or co-occurrence?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "5 row(s)",
+      "row_count": 5,
+      "elapsed_ms": 6,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001004",
+          "has start page"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001005",
+          "has end page"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001030",
+          "is based on"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001032",
+          "in paragraph"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001034",
+          "involves"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.21",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "What is the direct web URL to the paragraph in the Project Gutenberg edition?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 53,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_paragraph-225",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_gutenberg_web_version_of_volume-7_jacopo-da-pontormo-bio_...",
+          "https://www.gutenberg.org/files/31845/31845-h/31845-h.htm#Page_167"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_paragraph-225",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_gutenberg_web_version_of_volume-7_jacopo-da-pontormo-bio_...",
+          "https://www.gutenberg.org/files/31845/31845-h/31845-h.htm#Page_167"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.22",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "Is the extracted information derived from Du Vere's 1912 English translation, the 1568 Italian edition, or another version?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 3,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "The Lives of the Most Eminent Painters Sculptors and Architects"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "the_lives_1568"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.23",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "How does the choice of translation affect the entities and co-occurrences in the KG?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Comparative analysis question \u2014 requires parallel KGs from each translation, which is outside the current data.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.24",
+      "phase": "II",
+      "cluster": "Evidence and Bibliographic Information",
+      "persona": "Elena Rossi",
+      "question": "For co-occurrences involving artist X, can I compare the English and Italian web manifestations?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "partially-answerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows (expected data/modelling gap)",
+      "row_count": 0,
+      "elapsed_ms": 14,
+      "sample": []
+    },
+    {
+      "id": "CQII.25",
+      "phase": "II",
+      "cluster": "Linked Data Enrichment",
+      "persona": "Aaron Warner",
+      "question": "Which entities in the KG are linked to Wikidata, and what properties are mapped?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 3944,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013",
+          "320"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012",
+          "272"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.26",
+      "phase": "II",
+      "cluster": "Linked Data Enrichment",
+      "persona": "Aaron Warner",
+      "question": "Which entities are classified as OOKB (no matching Wikidata entry)?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 32272,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001012",
+          "541"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001013",
+          "123"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.27",
+      "phase": "II",
+      "cluster": "Linked Data Enrichment",
+      "persona": "Aaron Warner",
+      "question": "Can I perform a federated SPARQL query combining Viewsari data with an external endpoint (e.g., Wikidata)?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Capability question \u2014 demonstrated by the federated query template at scripts/evaluation/queries/federated_example.rq (illustrative only, requires SERVICE).",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.28",
+      "phase": "II",
+      "cluster": "Linked Data Enrichment",
+      "persona": "Nazeera Marfi",
+      "question": "How can I use Viewsari as a research tool for cross-disciplinary research?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Strategic/research-design question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.29",
+      "phase": "II",
+      "cluster": "User Interaction and Exploration",
+      "persona": "Nazeera Marfi",
+      "question": "How can I apply FAIR principles to bring Viewsari into my project and share with students?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "FAIR / data-management question; documented in README + license metadata.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.30",
+      "phase": "II",
+      "cluster": "User Interaction and Exploration",
+      "persona": "Nazeera Marfi",
+      "question": "How can I use Viewsari as an interactive visualization platform in lectures?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "UX/teaching question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.31",
+      "phase": "II",
+      "cluster": "User Interaction and Exploration",
+      "persona": "Nazeera Marfi",
+      "question": "Can I conduct a proof-of-concept project reusing Viewsari?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Reuse / methodology question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.32",
+      "phase": "II",
+      "cluster": "User Interaction and Exploration",
+      "persona": "Nazeera Marfi",
+      "question": "How can I integrate Viewsari into my teaching curriculum?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Pedagogical question.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.33",
+      "phase": "II",
+      "cluster": "User Interaction and Exploration",
+      "persona": "John Saffron",
+      "question": "How can I explore relationships between artists, artworks, or locations to identify trends and accumulations of collaborations in a city?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Exploration question; underlying substrate is CQI.4 + CQI.15.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    },
+    {
+      "id": "CQII.34",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "Which extraction activity (NER run, LLM prompt run) generated entity E, and what software agent was used?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 10,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ground_truth_entity_linking_run_1",
+          "Ground Truth Entity Linking Run 1",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001023",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#sarah_ondraszek",
+          "Sarah Rebecca Ondraszek"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.35",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "What was the prompt template used in the extraction run that produced entity E?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "unanswerable",
+      "root_cause": "data-gap",
+      "summary": "0 rows",
+      "row_count": 0,
+      "elapsed_ms": 66,
+      "sample": []
+    },
+    {
+      "id": "CQII.36",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "Which entities were extracted by a statistical method (co-occurrence/NER) versus a generative LLM method?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "2 row(s)",
+      "row_count": 2,
+      "elapsed_ms": 19104,
+      "sample": [
+        [
+          "generative-LLM",
+          "55246"
+        ],
+        [
+          "statistical-NER",
+          "3252"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.37",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "What model version and timestamp are associated with extraction run R?",
+      "type": "select",
+      "complexity": "simple",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "5 row(s)",
+      "row_count": 5,
+      "elapsed_ms": 6,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p000_p001",
+          "2026-04-10T11:02:12.512422+00:00",
+          "2026-04-10T11:02:15.633328+00:00",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "https://huggingface.co/openai/gpt-oss-120b"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p014_p015",
+          "2026-04-10T11:20:32.171870+00:00",
+          "2026-04-10T11:20:38.481996+00:00",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "https://huggingface.co/openai/gpt-oss-120b"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p024_p025",
+          "2026-04-10T11:29:33.710563+00:00",
+          "2026-04-10T11:29:37.791521+00:00",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "https://huggingface.co/openai/gpt-oss-120b"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p029_p030",
+          "2026-04-10T11:34:12.294278+00:00",
+          "2026-04-10T11:34:19.138495+00:00",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "https://huggingface.co/openai/gpt-oss-120b"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#ner_run_few_shot_v2_vol10_p045_p046",
+          "2026-04-10T11:50:33.616359+00:00",
+          "2026-04-10T11:50:38.850726+00:00",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "https://huggingface.co/openai/gpt-oss-120b"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.38",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "How are implicit entity mentions distinguished from explicit ones, and can I query them separately?",
+      "type": "select",
+      "complexity": "aggregation",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "6 row(s)",
+      "row_count": 6,
+      "elapsed_ms": 4644,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001016",
+          "implicit mention",
+          "27098"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001021",
+          "implicit artwork mention",
+          "27098"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001018",
+          "coreferent",
+          "14445"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001017",
+          "explicit mention",
+          "9588"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001020",
+          "explicit artwork mention",
+          "9588"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001019",
+          "generic mention",
+          "6554"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.39",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Elena Rossi",
+      "question": "For a given extraction result, can I trace the provenance chain entity \u2192 annotation \u2192 paragraph \u2192 page \u2192 volume \u2192 translation \u2192 original work?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 5,
+      "sample": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#gt_pontormo_m_0097",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_paragraph-225",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7_jacopo-da-pontormo-bio",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#the_lives_1568_volume-7",
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/#0001029",
+          "None",
+          "None"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.40",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Elena Rossi",
+      "question": "Does the KG allow me to assess whether a claimed relationship between two artists is supported by explicit textual evidence, an implicit inference, or purely statistical co-occurrence?",
+      "type": "select",
+      "complexity": "multi-hop",
+      "status": "fully-answerable",
+      "root_cause": "",
+      "summary": "1 row(s)",
+      "row_count": 1,
+      "elapsed_ms": 25,
+      "sample": [
+        [
+          "statistical-cooccurrence",
+          "3"
+        ]
+      ]
+    },
+    {
+      "id": "CQII.41",
+      "phase": "II",
+      "cluster": "Extraction Provenance and Epistemic Modeling",
+      "persona": "Aaron Warner",
+      "question": "How does the ontology represent the epistemic weight of a co-occurrence (PMI) compared to an implicit mention (LLM)?",
+      "type": "descriptive",
+      "complexity": null,
+      "status": "non-sparql",
+      "root_cause": "",
+      "summary": "Modelling-philosophy question \u2014 answered by the ontology's class hierarchy and provenance pattern (cooccurrence vs implicit_mention each carry distinct prov:Activity types), surfaced by CQII.36 and CQII.38 result counts.",
+      "row_count": null,
+      "elapsed_ms": null,
+      "sample": []
+    }
+  ]
+}
