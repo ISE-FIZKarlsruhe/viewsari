@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Viewsari · Competency questions{% endblock %}
+
+{% block extra_styles %}
+/* base.html disables body scroll globally — re-enable it for this content page */
+html { overflow: hidden !important; height: 100% !important; }
+body { overflow-y: auto !important; height: 100% !important; }
+.cq-page { max-width: 980px; margin: 0 auto; padding: calc(56px + 38px) 22px 80px; }
+.cq-head-kicker {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--or); margin-bottom: 8px;
+}
+.cq-title { font-size: 30px; font-weight: 800; color: var(--tp); margin: 0 0 12px; letter-spacing: -.01em; }
+.cq-lead { font-size: 15px; line-height: 1.6; color: var(--ts); max-width: 760px; margin: 0 0 22px; }
+.cq-lead em { font-style: italic; }
+/* Summary stats */
+.cq-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+.cq-stat {
+  border: 1px solid var(--seam); border-radius: 12px; padding: 12px 18px; background: var(--bg2);
+  min-width: 120px;
+}
+.cq-stat-num { font-size: 24px; font-weight: 800; color: var(--tp); line-height: 1; }
+.cq-stat-lbl { font-size: 11px; color: var(--tt); margin-top: 5px; font-weight: 600; }
+/* Personas */
+.cq-personas { border: 1px solid var(--seam); border-radius: 12px; padding: 14px 18px; margin-bottom: 30px; background: var(--bg); }
+.cq-personas-title { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tt); margin-bottom: 10px; }
+.cq-persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 8px 18px; }
+.cq-persona-row { font-size: 13px; color: var(--ts); }
+.cq-persona-name { font-weight: 700; color: var(--tp); }
+/* Phases */
+.cq-phase { margin-bottom: 34px; }
+.cq-phase-head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px; padding-bottom: 8px; border-bottom: 2px solid var(--seam); }
+.cq-phase-title { font-size: 19px; font-weight: 800; color: var(--tp); }
+.cq-phase-count { font-size: 12px; font-weight: 600; color: var(--tt); }
+.cq-cluster { margin-top: 20px; }
+.cq-cluster-name {
+  font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--or); margin-bottom: 8px;
+}
+/* Question rows */
+.cq-row {
+  display: grid; grid-template-columns: 64px 1fr auto; align-items: start; gap: 12px;
+  padding: 10px 12px; border-radius: 9px; border: 1px solid transparent;
+}
+.cq-row:hover { background: var(--bg2); border-color: var(--seam); }
+.cq-id { font-size: 11px; font-weight: 700; font-family: ui-monospace,SFMono-Regular,Menlo,monospace; color: var(--or); padding-top: 2px; }
+.cq-q { font-size: 14px; line-height: 1.45; color: var(--tp); }
+.cq-q em { font-style: italic; }
+.cq-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.cq-persona-tag { font-size: 10px; font-weight: 600; color: var(--ts); white-space: nowrap; }
+.cq-badge { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; white-space: nowrap; }
+.cq-badge.sparql { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.cq-badge.descriptive { background: #F3F4F6; color: #4B5563; border: 1px solid #E5E7EB; }
+.cq-query { font-size: 9px; color: var(--tt); font-family: ui-monospace,SFMono-Regular,Menlo,monospace; }
+@media (max-width: 640px) {
+  .cq-row { grid-template-columns: 52px 1fr; }
+  .cq-meta { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; }
+}
+{% endblock %}
+
+{% block topbar_chips %}
+<div class="bio-chip">Competency questions</div>
+{% endblock %}
+
+{% block content %}
+<div class="cq-page">
+  <div class="cq-head-kicker">Ontology · Requirements</div>
+  <h1 class="cq-title">Competency Questions</h1>
+  <p class="cq-lead">
+    Competency questions are the real-world questions the Viewsari ontology and knowledge
+    graph were built to answer. They were collected from interviews with four kinds of users
+    &mdash; from art historians to software engineers &mdash; and turned into a checklist that
+    both <em>guides</em> the ontology's design and <em>tests</em> how well it covers the material
+    in Vasari's <em>Lives</em>. Many can be answered directly as a SPARQL query against the graph.
+  </p>
+
+  <div class="cq-stats">
+    <div class="cq-stat"><div class="cq-stat-num">{{ total }}</div><div class="cq-stat-lbl">Competency questions</div></div>
+    {% for ph in phases %}
+    <div class="cq-stat"><div class="cq-stat-num">{{ ph.count }}</div><div class="cq-stat-lbl">{{ ph.title.split('—')[0].strip() }}</div></div>
+    {% endfor %}
+    <div class="cq-stat"><div class="cq-stat-num">{{ n_sparql }}</div><div class="cq-stat-lbl">SPARQL-answerable</div></div>
+  </div>
+
+  <div class="cq-personas">
+    <div class="cq-personas-title">Who the questions came from</div>
+    <div class="cq-persona-grid">
+      {% for name, role in personas.items() %}
+      <div class="cq-persona-row"><span class="cq-persona-name">{{ name }}</span> &mdash; {{ role }}</div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% for ph in phases %}
+  <div class="cq-phase">
+    <div class="cq-phase-head">
+      <span class="cq-phase-title">{{ ph.title }}</span>
+      <span class="cq-phase-count">{{ ph.count }} questions</span>
+    </div>
+    {% for cl in ph.clusters %}
+    <div class="cq-cluster">
+      <div class="cq-cluster-name">{{ cl.name }}</div>
+      {% for q in cl.questions %}
+      <div class="cq-row">
+        <div class="cq-id">{{ q.id }}</div>
+        <div class="cq-q">{{ q.question }}</div>
+        <div class="cq-meta">
+          <span class="cq-persona-tag">{{ q.persona }}</span>
+          {% if q.query %}
+          <span class="cq-badge sparql" title="Answerable as a SPARQL query">SPARQL</span>
+          <span class="cq-query">{{ q.query.split('/')[-1] }}</span>
+          {% else %}
+          <span class="cq-badge descriptive" title="Answered by tooling, documentation, or design rationale">descriptive</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+{% block footer %}{% include "_footer.html" %}{% endblock %}

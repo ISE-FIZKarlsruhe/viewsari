@@ -1,0 +1,212 @@
+[
+  {
+    "file": "person_giotto.json",
+    "label": "Giotto",
+    "mode": "person",
+    "nodes": 78,
+    "edges": 120
+  },
+  {
+    "file": "person_cimabue.json",
+    "label": "Cimabue",
+    "mode": "person",
+    "nodes": 69,
+    "edges": 120
+  },
+  {
+    "file": "person_michelagnolo.json",
+    "label": "Michelagnolo",
+    "mode": "person",
+    "nodes": 71,
+    "edges": 120
+  },
+  {
+    "file": "person_brunelleschi.json",
+    "label": "Brunelleschi",
+    "mode": "person",
+    "nodes": 75,
+    "edges": 120
+  },
+  {
+    "file": "person_donatello.json",
+    "label": "Donatello",
+    "mode": "person",
+    "nodes": 69,
+    "edges": 120
+  },
+  {
+    "file": "person_ghirlandajo.json",
+    "label": "Ghirlandajo",
+    "mode": "person",
+    "nodes": 72,
+    "edges": 120
+  },
+  {
+    "file": "person_perugino.json",
+    "label": "Perugino",
+    "mode": "person",
+    "nodes": 75,
+    "edges": 120
+  },
+  {
+    "file": "person_mantegna.json",
+    "label": "Mantegna",
+    "mode": "person",
+    "nodes": 72,
+    "edges": 120
+  },
+  {
+    "file": "person_pontormo.json",
+    "label": "Pontormo",
+    "mode": "person",
+    "nodes": 93,
+    "edges": 120
+  },
+  {
+    "file": "person_bandinelli.json",
+    "label": "Bandinelli",
+    "mode": "person",
+    "nodes": 71,
+    "edges": 120
+  },
+  {
+    "file": "person_giulio_romano.json",
+    "label": "Giulio Romano",
+    "mode": "person",
+    "nodes": 82,
+    "edges": 120
+  },
+  {
+    "file": "person_sansovino.json",
+    "label": "Sansovino",
+    "mode": "person",
+    "nodes": 72,
+    "edges": 120
+  },
+  {
+    "file": "person_signorelli.json",
+    "label": "Signorelli",
+    "mode": "person",
+    "nodes": 69,
+    "edges": 120
+  },
+  {
+    "file": "artwork_s_croce.json",
+    "label": "S. Croce",
+    "mode": "artwork",
+    "nodes": 75,
+    "edges": 60
+  },
+  {
+    "file": "artwork_sistine.json",
+    "label": "Sistine",
+    "mode": "artwork",
+    "nodes": 50,
+    "edges": 60
+  },
+  {
+    "file": "artwork_s_maria_novella.json",
+    "label": "S. Maria Novella",
+    "mode": "artwork",
+    "nodes": 63,
+    "edges": 50
+  },
+  {
+    "file": "artwork_madonna.json",
+    "label": "Madonna",
+    "mode": "artwork",
+    "nodes": 74,
+    "edges": 60
+  },
+  {
+    "file": "artwork_crucifix.json",
+    "label": "Crucifix",
+    "mode": "artwork",
+    "nodes": 72,
+    "edges": 60
+  },
+  {
+    "file": "artwork_chapel.json",
+    "label": "Chapel",
+    "mode": "artwork",
+    "nodes": 71,
+    "edges": 60
+  },
+  {
+    "file": "artwork_last_supper.json",
+    "label": "Last Supper",
+    "mode": "artwork",
+    "nodes": 70,
+    "edges": 60
+  },
+  {
+    "file": "artwork_annunciation.json",
+    "label": "Annunciation",
+    "mode": "artwork",
+    "nodes": 77,
+    "edges": 60
+  },
+  {
+    "file": "artwork_tomb.json",
+    "label": "tomb",
+    "mode": "artwork",
+    "nodes": 60,
+    "edges": 60
+  },
+  {
+    "file": "artwork_fresco.json",
+    "label": "fresco",
+    "mode": "artwork",
+    "nodes": 65,
+    "edges": 60
+  },
+  {
+    "file": "artwork_baptistery.json",
+    "label": "Baptistery",
+    "mode": "artwork",
+    "nodes": 45,
+    "edges": 60
+  },
+  {
+    "file": "artwork_s_pietro.json",
+    "label": "S. Pietro",
+    "mode": "artwork",
+    "nodes": 67,
+    "edges": 60
+  },
+  {
+    "file": "bio_giotto.json",
+    "label": "Bio: Giotto",
+    "mode": "biography",
+    "nodes": 78,
+    "edges": 120
+  },
+  {
+    "file": "bio_botticelli.json",
+    "label": "Bio: Botticelli",
+    "mode": "biography",
+    "nodes": 66,
+    "edges": 120
+  },
+  {
+    "file": "bio_ghirlandajo.json",
+    "label": "Bio: Ghirlandajo",
+    "mode": "biography",
+    "nodes": 72,
+    "edges": 120
+  },
+  {
+    "file": "bio_brunelleschi.json",
+    "label": "Bio: Brunelleschi",
+    "mode": "biography",
+    "nodes": 75,
+    "edges": 120
+  },
+  {
+    "file": "bio_michelagnolo.json",
+    "label": "Bio: Michelagnolo",
+    "mode": "biography",
+    "nodes": 71,
+    "edges": 120
+  }
+]
