@@ -4,6 +4,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./obliquer/data/viewsari/ground_truth:/app/annotations
+      - ./src/evaluation/cq_catalog.json:/app/src/evaluation/cq_catalog.json:ro
     environment:
       - DATA_DIR=/app/data/kg_foundation
       - ANNOTATIONS_DIR=/app/annotations

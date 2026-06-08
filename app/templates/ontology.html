@@ -33,26 +33,22 @@ body { overflow-y: auto !important; height: 100% !important; }
   gap: 8px;
   margin-top: 12px;
 }
-.onto-tag {
-  font-size: 11px;
+.onto-doc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 3px 10px;
+  padding: 7px 16px;
   border-radius: 100px;
-  background: var(--pill-or);
-  color: var(--or);
-  border: 1px solid rgba(240,90,26,.2);
-  white-space: nowrap;
+  background: var(--or);
+  color: #fff;
+  border: 1px solid var(--or);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .14s;
 }
-.onto-tag.blue {
-  background: var(--pill-bl);
-  color: var(--bl);
-  border-color: rgba(27,110,243,.2);
-}
-.onto-tag.purple {
-  background: var(--pill-pu);
-  color: var(--pu);
-  border-color: rgba(124,58,237,.2);
-}
+.onto-doc-btn:hover { filter: brightness(.93); }
 .onto-section { margin-bottom: 36px; }
 .onto-section-title {
   font-size: 9px;
@@ -531,10 +527,7 @@ a.onto-ref code { color: inherit; }
       built from Giorgio Vasari's <em>Le Vite de' piu eccellenti pittori, scultori, e architettori</em> (1568).
     </div>
     <div class="onto-meta">
-      <span class="onto-tag">OWL / RDF-XML</span>
-      <span class="onto-tag blue">CC BY 4.0</span>
-      <span class="onto-tag purple">viewsari namespace</span>
-      <a href="/ontology/docs" class="onto-tag" style="text-decoration:none;cursor:pointer;background:var(--pill-bl);color:var(--bl);border-color:rgba(27,110,243,.2)">Ontology Documentation &rarr;</a>
+      <a href="/ontology/docs" class="onto-doc-btn">Ontology Documentation &rarr;</a>
     </div>
   </div>
 
