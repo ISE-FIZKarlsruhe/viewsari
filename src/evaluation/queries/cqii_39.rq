@@ -1,7 +1,7 @@
 # CQ:        CQII.39
-# Question:  For a given extraction result, can I trace the provenance chain
-#            from the entity through the annotation, the paragraph, the page,
-#            the volume, and the translation back to the original work?
+# Question:  For a given extraction result, can the provenance chain be traced
+#            back from the entity through the annotation, the paragraph, the
+#            page, the volume, and the translation to the original work?
 # Bindings:  E = vkb:Q1069665
 
 PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>

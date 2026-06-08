@@ -12,6 +12,17 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 FAC_DIR = ROOT / "data" / "facsimile_pages"
 KB_PATH = ROOT / "data" / "kb" / "kb.json"
 
+# Authoritative knowledge-graph totals — mirror docs/population_stats.md.
+# Regenerate the source with: python3 src/kg_population/population_stats.py
+# and update these when the KG is re-populated.
+KG_STATS = {
+    "triples": 2_445_055,
+    "mentions": 112_123,
+    "artworks": 15_804,
+    "linked_qids": 3_070,
+    "ookb": 12_529,
+}
+
 
 def _kb_counts() -> dict:
     if not KB_PATH.exists():
@@ -43,5 +54,5 @@ async def index(request: Request):
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"biographies": biographies, "kb_counts": _kb_counts()},
+        {"biographies": biographies, "kb_counts": _kb_counts(), "kg_stats": KG_STATS},
     )

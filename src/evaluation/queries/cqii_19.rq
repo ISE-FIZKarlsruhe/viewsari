@@ -1,6 +1,7 @@
 # CQ:        CQII.19
-# Question:  How can I distinguish work-, expression-, and manifestation-level
-#            bibliographic metadata?
+# Question:  At which bibliographic level (work, expression, or manifestation)
+#            is each entity of a given source recorded, for citation and
+#            attribution across editions and translations?
 # Notes:     Returns one bibliographic node per FRBR layer with its asserted
 #            FaBiO and Viewsari types.
 

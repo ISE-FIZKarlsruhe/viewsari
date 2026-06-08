@@ -1,7 +1,7 @@
 # CQ:         CQII.24
-# Question:   For co-occurrences involving artist X, can I compare the English
-#             translation's web manifestation with the Italian edition's web
-#             manifestation?
+# Question:   For co-occurrences involving artist X, can the English
+#             translation's web manifestation be compared with the Italian
+#             edition's web manifestation?
 # Bindings:   X = Michelangelo
 # Modelling:  Italian web manifestation is not in the current KG; query returns
 #             the English manifestation only.

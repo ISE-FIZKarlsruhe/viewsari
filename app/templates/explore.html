@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Viewsari · Knowledge graph explorer{% endblock %}
+{% block title %}{{ cfg.title | default("Viewsari · Artwork explorer") }}{% endblock %}
 
 {% block extra_styles %}
 html, body { overflow: hidden !important; height: 100% !important; }
@@ -170,10 +170,64 @@ html, body { overflow: hidden !important; height: 100% !important; }
   color: var(--tt);
   font-weight: 600;
 }
+/* Layperson help banner */
+.explore-help {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 20px;
+  background: var(--pill-or, #FFF5EF);
+  border-bottom: 1px solid var(--seam);
+  font-size: 12px;
+  color: var(--ts);
+  flex-shrink: 0;
+}
+.explore-help-text { line-height: 1.45; }
+.explore-help-text em { font-style: italic; }
+.explore-help-eg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tt);
+}
+.explore-help-chip {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1.5px solid var(--or);
+  background: #fff;
+  color: var(--or);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .14s;
+}
+.explore-help-chip:hover { background: var(--or); color: #fff; }
+.explore-help-x {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--tt);
+  cursor: pointer;
+  padding: 0 4px;
+}
+.explore-help-x:hover { color: var(--tp); }
+/* Legend tooltips */
+.explore-legend .el-item { pointer-events: auto; cursor: help; }
 {% endblock %}
 
 {% block topbar_chips %}
-<div class="bio-chip">KG Explorer</div>
+<div class="bio-chip">{{ cfg.chip | default("Artwork explorer") }}</div>
 {% endblock %}
 
 {% block content %}
@@ -181,26 +235,30 @@ html, body { overflow: hidden !important; height: 100% !important; }
   <div class="explore-toolbar">
     <span class="explore-toolbar-label">Search</span>
     <div class="explore-input-wrap">
-      <input class="explore-input" id="eg-search" type="text" placeholder="Person or artwork (e.g. Giotto, S. Croce)" autocomplete="off" />
+      <input class="explore-input" id="eg-search" type="text" placeholder="{{ cfg.placeholder | default('Person or artwork (e.g. Giotto, S. Croce)') }}" autocomplete="off" />
       <div class="explore-suggest" id="eg-suggest"></div>
     </div>
     <button class="explore-btn primary" id="eg-search-btn" onclick="searchPerson()">Search</button>
     <button class="explore-btn" onclick="loadRandom()">Random</button>
     <span class="explore-stats" id="eg-stats"></span>
     <div class="explore-presets">
-      <button class="explore-btn" onclick="loadFile('person','Giotto')">Giotto</button>
-      <button class="explore-btn" onclick="loadFile('person','Michelagnolo')">Michelangelo</button>
-      <button class="explore-btn" onclick="loadFile('person','Brunelleschi')">Brunelleschi</button>
-      <button class="explore-btn" onclick="loadFile('person','Donatello')">Donatello</button>
-      <span class="explore-toolbar-label" style="margin:0 2px">|</span>
-      <button class="explore-btn" onclick="loadFile('artwork','S. Croce')">S. Croce</button>
-      <button class="explore-btn" onclick="loadFile('artwork','Sistine')">Sistine</button>
-      <button class="explore-btn" onclick="loadFile('artwork','Madonna')">Madonna</button>
-      <span class="explore-toolbar-label" style="margin:0 2px">|</span>
-      <button class="explore-btn" onclick="loadFile('biography','Botticelli')">Bio: Botticelli</button>
-      <button class="explore-btn" onclick="loadFile('biography','Giotto')">Bio: Giotto</button>
+      {% for p in cfg.presets %}
+      {% if p.sep %}<span class="explore-toolbar-label" style="margin:0 2px">|</span>
+      {% else %}<button class="explore-btn" onclick="loadFile('{{ p.mode }}','{{ p.seed }}')">{{ p.label }}</button>{% endif %}
+      {% endfor %}
     </div>
   </div>
+  {% if cfg.intro %}
+  <div class="explore-help" id="eg-help">
+    <span class="explore-help-text">{{ cfg.intro | safe }}</span>
+    {% if cfg.examples %}
+    <span class="explore-help-eg">Try:
+      {% for ex in cfg.examples %}<button class="explore-help-chip" onclick="loadFile('{{ ex.mode }}','{{ ex.seed }}')">{{ ex.label }}</button>{% endfor %}
+    </span>
+    {% endif %}
+    <button class="explore-help-x" title="Hide help" onclick="document.getElementById('eg-help').style.display='none'">&times;</button>
+  </div>
+  {% endif %}
   <div class="explore-graph" id="eg-container">
     <svg id="eg-svg">
       <defs>
@@ -211,11 +269,9 @@ html, body { overflow: hidden !important; height: 100% !important; }
       </defs>
     </svg>
     <div class="explore-legend">
-      <div class="el-item"><div class="el-dot" style="background:#BE185D"></div>Person</div>
-      <div class="el-item"><div class="el-dot" style="background:#B45309"></div>Artwork</div>
-      <div class="el-item"><div class="el-dot" style="background:#0F766E"></div>Co-occurrence / Mention</div>
-      <div class="el-item"><div class="el-dot" style="background:#7C3AED"></div>Biography</div>
-      <div class="el-item"><div class="el-dot" style="background:#6B7280"></div>Paragraph</div>
+      {% for l in cfg.legend %}
+      <div class="el-item"{% if l.tip %} title="{{ l.tip }}"{% endif %}><div class="el-dot" style="background:{{ l.color }}"></div>{{ l.label }}</div>
+      {% endfor %}
     </div>
     <div class="explore-info" id="eg-info"></div>
     <div class="eg-loading hidden" id="eg-loading">
@@ -232,6 +288,20 @@ html, body { overflow: hidden !important; height: 100% !important; }
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 (function(){
+  var API = "{{ cfg.api_base | default('/explore') }}";
+  // Plain-language names shown to users in place of technical type/edge labels.
+  var TYPE_NAMES = {
+    person:"Person", artwork:"Artwork", cooccurrence:"Appears together",
+    biography:"Biography", paragraph:"Passage", mention:"Mention",
+    entity:"Linked to Wikidata", ookb:"New artwork (not in Wikidata)"
+  };
+  var FRIENDLY_EDGE = {
+    "involves":"appears with", "inParagraph":"in passage",
+    "frbr:isPartOf":"part of", "mentioned in":"mentioned in",
+    "refers to":"appears in", "refers to (NIL)":"appears in"
+  };
+  function typeName(t){ return TYPE_NAMES[t] || t; }
+  function edgeLabel(l){ return FRIENDLY_EDGE[l] || l || ""; }
   var NC = {
     person:       {s:"#BE185D",f:"#FDF2F8",t:"#9D174D",icon:"\u263A"},
     artwork:      {s:"#B45309",f:"#FFFBEB",t:"#92400E",icon:"\u2606"},
@@ -239,6 +309,8 @@ html, body { overflow: hidden !important; height: 100% !important; }
     biography:    {s:"#7C3AED",f:"#F5F3FF",t:"#6D28D9",icon:"\u25C6"},
     paragraph:    {s:"#6B7280",f:"#F3F4F6",t:"#374151",icon:"\u00B6"},
     mention:      {s:"#0F766E",f:"#F0FDF9",t:"#115E59",icon:"\u270E"},
+    entity:       {s:"#1B6EF3",f:"#EFF6FF",t:"#1E40AF",icon:"\u25C6"},
+    ookb:         {s:"#9CA3AF",f:"#F9FAFB",t:"#6B7280",icon:"\u2205"},
   };
 
   var svg = d3.select("#eg-svg");
@@ -326,7 +398,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
       .attr("class", function(d){return "eg-edge"+(d.dashed?" dashed":"");})
       .attr("marker-end","url(#eg-arrow)");
     var linkLabel = linkSel.append("text").attr("class","eg-edge-label")
-      .text(function(d){return d.label||"";});
+      .text(function(d){return edgeLabel(d.label);});
 
     // Nodes
     var nodeSel = nodeG.selectAll("g").data(nodes).enter().append("g")
@@ -348,7 +420,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
           .attr("font-size","9px").attr("font-weight","700").attr("fill",col.t)
           .attr("class","eg-label").text("\u2194");
       } else {
-        var hasImg = d.wikidata && (d.type==="artwork" || d.type==="person");
+        var hasImg = d.wikidata && (d.type==="artwork" || d.type==="person" || d.type==="entity");
         var imgR = 36;
         var rw = Math.max(d.label.length * 6 + 20, 80);
         // If image, shift label rect down to make room for circle above
@@ -382,7 +454,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
 
         // Wikidata image circle — large, centered above label
         if(hasImg){
-          var strokeCol = d.type==="person" ? col.s : "#B45309";
+          var strokeCol = d.type==="person" ? col.s : (d.type==="entity" ? col.s : "#B45309");
           s.append("circle")
             .attr("cx",0).attr("cy",0).attr("r",imgR)
             .attr("fill","#E5E7EB").attr("stroke",strokeCol).attr("stroke-width",2);
@@ -422,7 +494,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
         return sid===d.id||tid===d.id;
       });
       var info = document.getElementById("eg-info");
-      var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+d.type.toUpperCase()+"</div>";
+      var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+esc(typeName(d.type))+"</div>";
       h += "<div style='font-size:13px;font-weight:700;color:var(--tp);margin-bottom:8px;word-break:break-word'>"+esc(displayName(d.label,d.type))+"</div>";
       h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Connections ("+connected.length+")</div>";
       connected.forEach(function(e){
@@ -610,15 +682,15 @@ html, body { overflow: hidden !important; height: 100% !important; }
     var q = this.value.trim();
     if(q.length < 2){ closeSuggest(); return; }
     suggestTimer = setTimeout(function(){
-      fetch("/explore/suggest?q="+encodeURIComponent(q))
+      fetch(API+"/suggest?q="+encodeURIComponent(q))
         .then(function(r){return r.json();})
         .then(function(items){
           if(!items.length){ closeSuggest(); return; }
           suggestIdx = -1;
           var h = "";
           items.forEach(function(item, i){
-            var typeColor = item.type==="artwork"?"#B45309":"#BE185D";
-            var typeLabel = item.type==="artwork"?"artwork":"person";
+            var typeColor = (NC[item.type]||NC.person).s;
+            var typeLabel = typeName(item.type);
             h += "<div class='suggest-item' data-idx='"+i+"' data-type='"+item.type+"' data-label='"+esc(item.label)+"'>";
             h += "<span style='display:inline-block;font-size:8px;font-weight:700;padding:1px 5px;border-radius:100px;background:"+typeColor+"15;color:"+typeColor+";margin-right:6px;vertical-align:middle'>"+typeLabel+"</span>";
             h += esc(item.label);
@@ -670,25 +742,25 @@ html, body { overflow: hidden !important; height: 100% !important; }
     if(!q) return;
     var type = searchInput.dataset.searchType || "person";
     searchInput.dataset.searchType = "";
-    fetchGraph("/explore/subgraph?mode="+type+"&seed="+encodeURIComponent(q));
+    fetchGraph(API+"/subgraph?mode="+type+"&seed="+encodeURIComponent(q));
   }
 
   window.searchPerson = doSearch;
 
   window.loadRandom = function(){
-    fetchGraph("/explore/subgraph?mode=random&seed="+Math.random());
+    fetchGraph(API+"/subgraph?mode=random&seed="+Math.random());
   };
 
   window.loadFile = function(mode, label){
     searchInput.value = label;
     closeSuggest();
-    fetchGraph("/explore/subgraph?mode="+mode+"&seed="+encodeURIComponent(label));
+    fetchGraph(API+"/subgraph?mode="+mode+"&seed="+encodeURIComponent(label));
   };
 
   window.loadPreset = window.loadFile.bind(null, "person");
 
-  // Load Giotto on page load
-  loadFile("person", "Giotto");
+  // Initial graph on page load
+  loadFile("{{ cfg.initial.mode | default('person') }}", "{{ cfg.initial.seed | default('Giotto') }}");
 }());
 </script>
 {% endblock %}

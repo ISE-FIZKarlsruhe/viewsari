@@ -11,6 +11,50 @@ templates = Jinja2Templates(directory="app/templates")
 
 EXPLORER_DIR = Path("data/kg/explorer")
 
+# Config consumed by the shared explore.html template. Reproduces the
+# ground-truth explorer's original hard-coded presets/legend/labels. The
+# ontology-guided layer (app/routers/explore_og.py) passes its own CFG.
+CFG = {
+    "api_base": "/explore",
+    "title": "Viewsari · Artwork explorer",
+    "chip": "Artwork explorer",
+    "placeholder": "Search a person or artwork (e.g. Giotto, S. Croce)",
+    "intro": ("Each dot is a person, artwork, or biography from Vasari's "
+              "<em>Lives</em>. Lines link people and works that appear together "
+              "in the same passage. Search a name above, or try an example:"),
+    "examples": [
+        {"mode": "person", "seed": "Giotto", "label": "Who appears with Giotto?"},
+        {"mode": "artwork", "seed": "S. Croce", "label": "Artworks in S. Croce"},
+        {"mode": "biography", "seed": "Botticelli", "label": "Botticelli's biography"},
+    ],
+    "initial": {"mode": "person", "seed": "Giotto"},
+    "presets": [
+        {"mode": "person", "seed": "Giotto", "label": "Giotto"},
+        {"mode": "person", "seed": "Michelagnolo", "label": "Michelangelo"},
+        {"mode": "person", "seed": "Brunelleschi", "label": "Brunelleschi"},
+        {"mode": "person", "seed": "Donatello", "label": "Donatello"},
+        {"sep": True},
+        {"mode": "artwork", "seed": "S. Croce", "label": "S. Croce"},
+        {"mode": "artwork", "seed": "Sistine", "label": "Sistine"},
+        {"mode": "artwork", "seed": "Madonna", "label": "Madonna"},
+        {"sep": True},
+        {"mode": "biography", "seed": "Botticelli", "label": "Bio: Botticelli"},
+        {"mode": "biography", "seed": "Giotto", "label": "Bio: Giotto"},
+    ],
+    "legend": [
+        {"color": "#BE185D", "label": "Person",
+         "tip": "A person named in the text — usually an artist."},
+        {"color": "#B45309", "label": "Artwork",
+         "tip": "A work of art (painting, sculpture, building) mentioned in the text."},
+        {"color": "#0F766E", "label": "Appears together",
+         "tip": "Two people named together in the same passage."},
+        {"color": "#7C3AED", "label": "Biography",
+         "tip": "One of Vasari's artist biographies."},
+        {"color": "#6B7280", "label": "Passage",
+         "tip": "A single paragraph of the text."},
+    ],
+}
+
 # Caches
 _index: list[dict] | None = None
 _graph_cache: dict[str, dict] = {}
@@ -61,7 +105,7 @@ def _build_suggest_labels() -> list[dict]:
 
 @router.get("/explore", response_class=HTMLResponse)
 async def explore_page(request: Request):
-    return templates.TemplateResponse(request, "explore.html", {})
+    return templates.TemplateResponse(request, "explore.html", {"cfg": CFG})
 
 
 @router.get("/explore/suggest")

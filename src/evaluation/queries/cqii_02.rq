@@ -1,6 +1,7 @@
 # CQ:         CQII.2
-# Question:   How can I distinguish statistical co-occurrences from explicit
-#             relationships in computational models?
+# Question:   Which association types between artists (statistical co-occurrence
+#             vs. explicitly typed relationship) are represented in the knowledge
+#             graph, and how many instances does each carry?
 # Modelling:  Returns one row per association type with a count. Rows for
 #             typed relationships are 0 until those classes are populated.
 

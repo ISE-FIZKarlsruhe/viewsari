@@ -108,6 +108,12 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   text-transform: uppercase;
   color: var(--tt);
 }
+.hero-stats-note {
+  font-size: 10.5px;
+  color: var(--tt);
+  margin-top: 12px;
+  font-style: italic;
+}
 
 /* ── Section cards ── */
 .home-sections {
@@ -167,95 +173,87 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 
 /* ── Biographies section ── */
 .bio-section {
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 12px 40px 60px;
+  padding: 12px 40px 70px;
 }
-.volume-section { margin-bottom: 28px; }
-.volume-heading {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--tt);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.shelf-head { font-size: 16px; font-weight: 700; color: var(--tp); margin-bottom: 4px; }
+.shelf-sub { font-size: 13px; color: var(--ts); margin-bottom: 10px; }
+/* ── Bookshelf (single continuous shelf, divider per volume) ── */
+.shelf {
+  display: flex; align-items: flex-end; gap: 6px; flex-wrap: wrap; row-gap: 28px;
+  margin-top: 18px; padding: 0 8px;
+  border-bottom: 7px solid #8a6a4a;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 7px 0 0 #6f5238, 0 16px 20px -8px rgba(0,0,0,.30);
 }
-.volume-heading::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--seam);
+/* Volume divider — a labelled bookend between volume groups */
+.shelf-divider {
+  flex: 0 0 auto; align-self: flex-end;
+  width: 15px; height: 150px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 4px;
+  background: linear-gradient(90deg, #e0c690, #c2a063 60%, #ad8a4c);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.14), 0 1px 2px rgba(0,0,0,.2);
 }
-.bio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 12px;
+.shelf-divider-label {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: #5b4423;
 }
-.bio-card {
-  background: var(--bg);
-  border: 1px solid var(--seam);
-  border-radius: 10px;
+.book {
+  position: relative;
+  flex: 0 0 auto;
+  width: 38px; height: var(--bh, 190px);
   text-decoration: none;
-  color: var(--tp);
-  transition: box-shadow .15s, border-color .15s, transform .15s;
-  display: flex;
-  flex-direction: column;
+  border-radius: 2px 4px 4px 2px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.22), rgba(255,255,255,0) 16%, rgba(0,0,0,.06) 78%, rgba(0,0,0,.22) 100%),
+    var(--spine, #5a3a3a);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.16), 0 1px 2px rgba(0,0,0,.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .18s ease, box-shadow .18s ease;
   overflow: hidden;
 }
-.bio-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,.08);
-  border-color: var(--or);
-  transform: translateY(-1px);
+.book-spine {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  display: flex; align-items: center; gap: 9px;
+  padding: 13px 0; max-height: 100%;
 }
-.bio-card-preview {
-  height: 120px;
-  background: var(--bg3);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid var(--seam);
+.book-spine-title {
+  font-size: 11px; font-weight: 600; color: #F2E6CB;
+  text-transform: uppercase; letter-spacing: .06em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-height: calc(var(--bh, 190px) - 26px);
 }
-.bio-card-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  filter: sepia(.08) contrast(1.02);
-  transition: transform .3s;
+.book:hover { transform: translateY(-16px); z-index: 5;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.16), 0 16px 24px rgba(0,0,0,.32); }
+/* hover preview — the book "pulls out" and shows its facsimile cover */
+.book-pop {
+  position: absolute; left: 50%; bottom: calc(100% + 12px);
+  transform: translateX(-50%) translateY(6px);
+  width: 170px; background: #fff; border: 1px solid var(--seam); border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.20); padding: 8px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease; z-index: 10;
 }
-.bio-card:hover .bio-card-preview img { transform: scale(1.04); }
-.bio-card-preview-empty {
-  font-size: 11px;
-  color: var(--tt);
-  font-style: italic;
+.book:hover .book-pop { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.book-pop::after {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 7px solid transparent; border-top-color: #fff;
 }
-.bio-card-body {
-  padding: 14px 18px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.book-pop-img {
+  width: 100%; height: 108px; object-fit: cover; object-position: center 18%;
+  border-radius: 6px; display: block; filter: sepia(.08) contrast(1.02);
 }
-.bio-card-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--tp);
-  line-height: 1.3;
+.book-pop-noimg {
+  display: flex; align-items: center; justify-content: center; height: 108px;
+  background: var(--bg3); border-radius: 6px; font-size: 10px; color: var(--tt); font-style: italic;
 }
-.bio-card-meta {
-  font-size: 11px;
-  color: var(--tt);
-  display: flex;
-  gap: 10px;
-}
-.bio-card-count {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--or);
-}
+.book-pop-name { display: block; font-size: 13px; font-weight: 700; color: var(--tp); margin-top: 7px; line-height: 1.25; }
+.book-pop-meta { display: block; font-size: 10.5px; color: var(--tt); margin-top: 2px; }
+.book-pop-cta { display: block; font-size: 11px; font-weight: 600; color: var(--or); margin-top: 6px; }
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -464,13 +462,14 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
       developed at KIT / FIZ Karlsruhe (ISE group) as part of a doctoral dissertation.
     </div>
     <div class="hero-actions">
-      <a class="hero-btn primary" href="#biographies">Browse annotations</a>
-      <a class="hero-btn secondary" href="/ontology">Ontology introduction</a>
+      <a class="hero-btn primary" href="/explore">Explore the artworks</a>
+      <a class="hero-btn secondary" href="#biographies">Browse the biographies</a>
+      <a class="hero-btn secondary" href="/ontology">What's behind it?</a>
     </div>
     {% if biographies %}
     {% set total_paras = biographies | map(attribute='paragraph_count') | sum %}
     <div class="hero-stats-group">
-      <div class="hero-stats-caption">Ground truth</div>
+      <div class="hero-stats-caption">Annotated corpus (ground truth)</div>
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-num">{{ biographies | length }}</div>
@@ -486,20 +485,25 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
         </div>
       </div>
     </div>
-    {% if kb_counts %}
+    {% if kg_stats %}
     <div class="hero-stats-group">
       <div class="hero-stats-caption">Knowledge graph</div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-num">{{ "{:,}".format(kb_counts.artworks) }}</div>
-          <div class="hero-stat-label">Artworks</div>
+          <div class="hero-stat-num">{{ "%.1fM"|format(kg_stats.triples / 1000000) }}</div>
+          <div class="hero-stat-label">Facts (triples)</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num">{{ kb_counts.persons }}</div>
-          <div class="hero-stat-label">Persons</div>
+          <div class="hero-stat-num">{{ "{:,}".format(kg_stats.artworks) }}</div>
+          <div class="hero-stat-label">Artworks found</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ "{:,}".format(kg_stats.linked_qids) }}</div>
+          <div class="hero-stat-label">Wikidata links</div>
         </div>
       </div>
     </div>
+    <div class="hero-stats-note">Knowledge-graph figures reflect the state after Population Run 2.</div>
     {% endif %}
     {% endif %}
   </div>
@@ -525,10 +529,14 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     </p>
 
     <div class="home-overview-heading">Research Questions</div>
+    <p class="home-overview-text" style="margin-top:-6px">
+      The three questions this dissertation set out to answer. Click each one to see the short answer
+      and where to explore it on this site.
+    </p>
     <details class="home-rq">
       <summary>
         <span class="home-rq-id">RQ1</span>
-        <span class="home-rq-text">What representational commitments must a knowledge graph make to remain accountable to the interpretive act that produced it, and how can these commitments be operationalized in a provenance-aware ontology?</span>
+        <span class="home-rq-text">What representational commitments must a knowledge graph make to remain accountable to the interpretive act that produced it?</span>
       </summary>
       <div class="home-rq-answer">
         The Viewsari ontology formalizes a three-layer model covering bibliographic structure,
@@ -546,7 +554,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     <details class="home-rq">
       <summary>
         <span class="home-rq-id">RQ2</span>
-        <span class="home-rq-text">Under what conditions can large language models, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond span-level supervised baselines?</span>
+        <span class="home-rq-text">Under what conditions can large language models recognize and link the implicit and out-of-knowledge-base (OOKB) mentions that span-level baselines miss?</span>
       </summary>
       <div class="home-rq-answer">
         The ObliquER pipeline uses LLM-based named entity recognition with few-shot and
@@ -555,7 +563,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
         from the ground truth maps mentions to Wikidata or OOKB identifiers.
         <div class="home-rq-links">
           <a class="home-rq-link" href="/obliquer">ObliquER pipeline</a>
-          <a class="home-rq-link" href="/obliquer/explore">Knowledge graph explorer</a>
+          <a class="home-rq-link" href="/obliquer/explore">Artwork explorer</a>
           <a class="home-rq-link" href="/obliquer/demo">Interactive demo</a>
           <a class="home-rq-link" href="/annotations">Annotation corpus</a>
         </div>
@@ -564,17 +572,18 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     <details class="home-rq">
       <summary>
         <span class="home-rq-id">RQ3</span>
-        <span class="home-rq-text">Which design patterns recur across provenance-aware knowledge graphs in the digital humanities, and to what extent does the Viewsari methodology transfer to structurally distinct interpretive corpora?</span>
+        <span class="home-rq-text">What reusable ontology design pattern emerges from modeling extraction as a documented, provenance-aware interpretive process, and how does that foundation transfer to structurally distinct interpretive corpora?</span>
       </summary>
       <div class="home-rq-answer">
-        Vasari's text features implicit references, long-tail entities absent from standard
-        knowledge bases, and attributions presented as facts. The Viewsari approach addresses
-        these through OOKB entity handling, coreference resolution across biographies,
-        and a provenance-first KG design that separates extraction from interpretation &mdash;
-        principles applicable to other cultural heritage corpora.
+        A comparative analysis across digital-humanities knowledge graphs isolates a reusable
+        pattern specific to generative extraction &mdash; <strong>Computational Provenance
+        (COMP-PROV)</strong>. A transferability pilot then reconfigures the same ontology and
+        ObliquER pipeline for a 19th-century German documentary corpus (on the Illuminati order,
+        linked to the FactGrid Wikibase) by changing <em>only</em> the prompt content &mdash;
+        templates, post-processing, and ontology core stay fixed.
         <div class="home-rq-links">
           <a class="home-rq-link" href="/kb">Knowledge base (OOKB entities)</a>
-          <a class="home-rq-link" href="/explore">Ground truth KG explorer</a>
+          <a class="home-rq-link" href="/explore">Artwork explorer (from the original text)</a>
           <a class="home-rq-link" href="/publications">Publications</a>
         </div>
       </div>
@@ -634,21 +643,20 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     </a>
     <a class="home-card" href="/explore">
       <div class="home-card-icon">&#9673;</div>
-      <div class="home-card-title">KG Explorer</div>
+      <div class="home-card-title">Artwork Explorer</div>
       <div class="home-card-desc">
-        Interactive graph visualization of the Viewsari Knowledge Graph.
-        Explore persons, co-occurrences, and biographies as a force-directed network.
+        Interactive map of the artworks, artists, and biographies in Vasari's
+        <em>Lives</em> &mdash; explore who and what appears together as a connected network.
       </div>
-      <div class="home-card-badge">1.7M triples &rarr;</div>
+      <div class="home-card-badge">2.4M triples &rarr;</div>
     </a>
     <a class="home-card" href="/annotations">
       <div class="home-card-icon">&#9776;</div>
       <div class="home-card-title">Annotations</div>
       <div class="home-card-desc">
-        Gold-standard annotation corpus: 16 biographies, with explicit, implicit,
-        coreferent, and generic mention types. The deployed graph carries
-        2,439 mention annotations (2,422 in the corrected corpus; 17 pre-correction
-        annotations remain pending re-deployment).
+        Gold-standard annotation corpus: 16 biographies with explicit, implicit,
+        coreferent, and generic mention types &mdash; 2,439 hand-verified mentions.
+        The full knowledge graph adds 112,123 machine-extracted mentions on top.
       </div>
       <div class="home-card-badge">ObliquER corpus &rarr;</div>
     </a>
@@ -665,33 +673,40 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 
   <div class="bio-section" id="biographies">
     {% if biographies %}
+      <div class="shelf-head">The Lives &mdash; on the shelf</div>
+      <div class="shelf-sub">Each book is one of Vasari's biographies, grouped by volume. Hover to pull it from the shelf and see its facsimile; click to read it.</div>
+      {% set spines = ['#7C2D2D','#2D4739','#28415C','#6B4423','#8A6D1F','#4A2C4D'] %}
+      {% set heights = [188, 200, 182, 196, 184, 192] %}
+      {% set ns = namespace(i=0) %}
       {% set volumes = biographies | map(attribute='volume') | unique | list | sort %}
-      {% for vol in volumes %}
-        {% set vol_bios = biographies | selectattr('volume', 'equalto', vol) | list %}
-        <div class="volume-section">
-          <div class="volume-heading">Volume {{ vol if vol else "Unknown" }}</div>
-          <div class="bio-grid">
-            {% for bio in vol_bios %}
-            <a class="bio-card" href="/biography/{{ bio.slug }}">
-              <div class="bio-card-preview">
-                {% if bio.preview %}
-                <img src="{{ bio.preview }}" alt="{{ bio.name }} facsimile" loading="lazy">
-                {% else %}
-                <span class="bio-card-preview-empty">No preview</span>
-                {% endif %}
-              </div>
-              <div class="bio-card-body">
-                <div class="bio-card-name">{{ bio.name }}</div>
-                <div class="bio-card-meta">
-                  <span>Vol. {{ bio.volume if bio.volume else "–" }}</span>
-                  <span class="bio-card-count">{{ bio.paragraph_count }} §</span>
-                </div>
-              </div>
-            </a>
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
+      <div class="shelf">
+        {% for vol in volumes %}
+          {% set vol_bios = biographies | selectattr('volume', 'equalto', vol) | list %}
+          <span class="shelf-divider" title="Volume {{ vol if vol else 'Unknown' }}">
+            <span class="shelf-divider-label">Vol. {{ vol if vol else "?" }}</span>
+          </span>
+          {% for bio in vol_bios %}
+          <a class="book" href="/biography/{{ bio.slug }}"
+             style="--spine:{{ spines[ns.i % 6] }};--bh:{{ heights[ns.i % 6] }}px"
+             title="{{ bio.name }}">
+            <span class="book-spine">
+              <span class="book-spine-title">{{ bio.name }}</span>
+            </span>
+            <span class="book-pop">
+              {% if bio.preview %}
+              <img class="book-pop-img" src="{{ bio.preview }}" alt="{{ bio.name }} facsimile" loading="lazy">
+              {% else %}
+              <span class="book-pop-noimg">No preview</span>
+              {% endif %}
+              <span class="book-pop-name">{{ bio.name }}</span>
+              <span class="book-pop-meta">Vol. {{ bio.volume if bio.volume else "–" }} &middot; {{ bio.paragraph_count }} paragraphs</span>
+              <span class="book-pop-cta">Open biography &rarr;</span>
+            </span>
+          </a>
+          {% set ns.i = ns.i + 1 %}
+          {% endfor %}
+        {% endfor %}
+      </div>
     {% else %}
       <div class="empty-state">
         <div class="empty-state-title">No biographies loaded</div>

@@ -1,6 +1,6 @@
 # CQ:        CQII.38
-# Question:  How are implicit entity mentions distinguished from explicit ones,
-#            and can I query them separately?
+# Question:  Which entity mentions are typed as explicit and which as implicit,
+#            and can the two be retrieved separately?
 # Notes:     Returns counts per mention type so the distinction is visible.
 
 PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology/>

@@ -14,6 +14,7 @@ from app.routers import publications as publications_router
 from app.routers import annotations as annotations_router
 from app.routers import sparql as sparql_router
 from app.routers import explore as explore_router
+from app.routers import explore_og as explore_og_router
 from app.routers import obliquer as obliquer_router
 from app.routers import kb as kb_router
 from app.routers import kb_resource as kb_resource_router
@@ -52,6 +53,7 @@ app.include_router(publications_router.router)
 app.include_router(annotations_router.router)
 app.include_router(sparql_router.router)
 app.include_router(explore_router.router)
+app.include_router(explore_og_router.router)
 app.include_router(obliquer_router.router)
 app.include_router(kb_router.router)
 app.include_router(kb_resource_router.router)

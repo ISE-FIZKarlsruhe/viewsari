@@ -83,7 +83,7 @@ Phase II CQs address extended requirements that emerged as the scope expanded to
 | ID | Competency Question | Persona |
 |---|---|---|
 | CQII.1 | What is the difference between a statistical co-occurrence and an explicitly typed relationship between two artists in the knowledge graph? | Aaron Warner |
-| CQII.2 | How can I distinguish between different types of artist associations (statistical co-occurrence vs. explicit relationships) in order to build accurate computational models? | Aaron Warner |
+| CQII.2 | Which association types between artists (statistical co-occurrence vs. explicitly typed relationship) are represented in the knowledge graph, and how many instances does each carry? | Aaron Warner |
 | CQII.3 | Which artists have both a statistical co-occurrence and an explicit typed relationship with artist X? | Elena Rossi |
 | CQII.4 | What is the Dice coefficient for the co-occurrence of artists X and Y, and how does it compare to the PMI score? | Aaron Warner |
 | CQII.5 | How do I explore relationships between Renaissance artists, artworks, historical events, or locations so that I can identify patterns and trends for research or in a course? | Nazeera Marfi |
@@ -120,12 +120,12 @@ Phase II CQs address extended requirements that emerged as the scope expanded to
 
 | ID | Competency Question | Persona |
 |---|---|---|
-| CQII.19 | How can I distinguish between work-level, expression-level, and manifestation-level bibliographic metadata in order to properly cite and attribute sources across different editions and translations? | Elena Rossi |
+| CQII.19 | At which bibliographic level (work, expression, or manifestation) is each entity of a given source recorded, for citation and attribution across editions and translations? | Elena Rossi |
 | CQII.20 | Which edition and translation of *The Lives* is the source of a given extracted entity or co-occurrence? | Elena Rossi |
 | CQII.21 | What is the direct web URL to the paragraph in the Project Gutenberg edition from which entity E or co-occurrence C was extracted? | Elena Rossi |
 | CQII.22 | Is the extracted information derived from Du Vere's 1912 English translation, the 1568 Italian edition, or another version? | Elena Rossi |
 | CQII.23 | How does the choice of translation (Du Vere's English vs. the original Italian) affect the entities and co-occurrences that appear in the knowledge graph? | Elena Rossi |
-| CQII.24 | For co-occurrences involving artist X, can I compare the English translation's web manifestation with the Italian edition's web manifestation? | Elena Rossi |
+| CQII.24 | For co-occurrences involving artist X, can the English translation's web manifestation be compared with the Italian edition's web manifestation? | Elena Rossi |
 
 ### Cluster 6 — Linked Data Enrichment
 
@@ -154,9 +154,9 @@ Phase II CQs address extended requirements that emerged as the scope expanded to
 | CQII.35 | What was the prompt template used in the extraction run that produced entity E? | Aaron Warner |
 | CQII.36 | Which entities were extracted by a statistical method (co-occurrence / NER) versus a generative LLM-based method? | Aaron Warner |
 | CQII.37 | What model version and timestamp are associated with extraction run R? | Aaron Warner |
-| CQII.38 | How are implicit entity mentions distinguished from explicit ones in the ontology, and can I query them separately? | Aaron Warner |
-| CQII.39 | For a given extraction result, can I trace back the provenance chain from the entity through the annotation, the paragraph, the page, the volume, and the translation to the original work? | Elena Rossi |
-| CQII.40 | Does the knowledge graph allow me to assess whether a claimed relationship between two artists is supported by explicit textual evidence, an implicit inference, or purely statistical co-occurrence? | Elena Rossi |
+| CQII.38 | Which entity mentions are typed as explicit and which as implicit, and can the two be retrieved separately? | Aaron Warner |
+| CQII.39 | For a given extraction result, can the provenance chain be traced back from the entity through the annotation, the paragraph, the page, the volume, and the translation to the original work? | Elena Rossi |
+| CQII.40 | Does the knowledge graph allow one to assess whether a claimed relationship between two artists is supported by explicit textual evidence, an implicit inference, or purely statistical co-occurrence? | Elena Rossi |
 | CQII.41 | How does the ontology represent the epistemic weight of a co-occurrence derived from PMI compared to an implicit mention inferred by an LLM? | Aaron Warner |
 
 ---

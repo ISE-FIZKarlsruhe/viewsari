@@ -238,16 +238,18 @@ body.force-burger .nav-links{display:none}
       <span class="chip-sub">
         <span class="chip-sub-inner">
           <a class="chip-sub-item" href="/ontology">Ontology overview</a>
+          <a class="chip-sub-item" href="/ontology/cqs">Competency questions</a>
           <a class="chip-sub-item" href="/ontology/docs">WIDOCO documentation</a>
         </span>
       </span>
     </span>
     <span class="chip-group">
-      <a class="chip" href="/explore" title="Knowledge graph explorer">Knowledge graph explorer</a>
+      <a class="chip" href="/explore" title="Artwork explorer">Artwork explorer</a>
       <span class="chip-sub">
         <span class="chip-sub-inner">
-          <a class="chip-sub-item" href="/explore">Ground truth-based KG</a>
-          <a class="chip-sub-item" href="/obliquer/explore">ObliquER-based KG</a>
+          <a class="chip-sub-item" href="/explore" title="Ground-truth knowledge graph">From the original text</a>
+          <a class="chip-sub-item" href="/obliquer/explore" title="ObliquER-based knowledge graph">AI-extracted</a>
+          <a class="chip-sub-item" href="/explore/og" title="Ontology-guided run with entity linking">AI-extracted + linked</a>
         </span>
       </span>
     </span>
@@ -272,9 +274,11 @@ body.force-burger .nav-links{display:none}
 <div class="nav-dropdown" id="nav-dropdown">
   <a class="chip" href="/annotations" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Annotations</a>
   <a class="chip" href="/ontology" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Ontology — Overview</a>
+  <a class="chip" href="/ontology/cqs" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Ontology — Competency questions</a>
   <a class="chip" href="/ontology/docs" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Ontology — WIDOCO documentation</a>
-  <a class="chip" href="/explore" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Knowledge graph explorer — Ground truth-based KG</a>
-  <a class="chip" href="/obliquer/explore" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Knowledge graph explorer — ObliquER-based KG</a>
+  <a class="chip" href="/explore" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Artwork explorer — From the original text</a>
+  <a class="chip" href="/obliquer/explore" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Artwork explorer — AI-extracted</a>
+  <a class="chip" href="/explore/og" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Artwork explorer — AI-extracted + linked</a>
   <a class="chip" href="/obliquer" onclick="document.getElementById('nav-dropdown').classList.remove('open')">ObliquER — About</a>
   <a class="chip" href="/obliquer/demo" onclick="document.getElementById('nav-dropdown').classList.remove('open')">ObliquER — Demo</a>
   <a class="chip" href="/kb" onclick="document.getElementById('nav-dropdown').classList.remove('open')">Knowledge Base</a>
@@ -313,23 +317,23 @@ document.addEventListener("click",function(ev){
   var QUOTES = {
     "/": [
       "Ah, you have found my digital Lives! I spent 18 years writing the originals. This took somewhat less.",
-      "Welcome, friend. I catalogued 178 artists in my day. Now a machine attempts the same. Let us see.",
+      "Welcome, friend. I wrote biographies for ever so many artists in my day. Now a machine attempts the same. Let us see.",
       "In my time we had patrons. Now we have knowledge graphs. Progress, I suppose."
     ],
     "/kb": [
       "A knowledge base! In my day we simply remembered who painted what. Or we asked around.",
-      "852 artwork entities, you say? I described rather more, but who is counting. Well, you are.",
+      "15,804 artwork entities, you say? I described rather more, but who is counting. Well, you are.",
       "OOKB \u2014 Out of Knowledge Base. I knew every artist in Florence. Nothing was out of MY knowledge base."
     ],
     "/annotations": [
       "Annotations! I annotated with words. You annotate with JSON. We are not so different.",
       "Explicit mentions, implicit mentions\u2026 in my prose, EVERYTHING was implicit. That was the style.",
-      "2,439 mentions across 16 biographies&mdash;or 2,422 after the corrections. Seventeen of yours did not survive review, it seems. I wrote 178 biographies, you know. Just saying."
+      "112,123 mentions now, after your machines had their turn&mdash;though only 2,439 were checked by human hands. I wrote biographies for diverse artists myself, you know. Just saying."
     ],
     "/sparql": [
       "SPARQL? In my day, if you wanted to query something, you wrote a letter and waited three months.",
       "SELECT ?masterpiece WHERE { ?masterpiece wasCreatedBy vasari:genius }. Try that one.",
-      "1.7 million triples! I produced rather fewer, but each was a sentence of pure Tuscan elegance."
+      "2.4 million triples! I produced rather fewer, but each was a sentence of pure Tuscan elegance."
     ],
     "/ontology": [
       "An ontology of MY work! Classes, properties, axioms\u2026 Brunelleschi would have approved of such structure.",
