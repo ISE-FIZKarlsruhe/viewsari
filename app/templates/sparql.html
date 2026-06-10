@@ -750,17 +750,24 @@ LIMIT 5`,
 
   // Federated query — reach out to Wikidata over its SPARQL endpoint
   wd_federated:
-`# Federated query — enrich Wikidata-linked Viewsari artworks with creator, location & date
+`# Federated query — enrich ONE Wikidata-linked Viewsari artwork with creator, location & date
 # Joins the local graph to Wikidata live via SERVICE. Needs federation/network access.
+# Note: the local part is limited to a single artwork FIRST, so only one remote
+# lookup is sent to Wikidata — federating over every artwork at once stalls.
 SELECT ?label ?creatorLabel ?locationLabel ?collectionLabel ?inception ?wd
 WHERE {
-  # 1) Local: artworks that carry a Wikidata link
-  ?artwork a viewsari:0001012 ;
-           rdfs:label ?label ;
-           owl:sameAs ?wd .
-  FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+  # 1) Local: pick a single artwork that carries a Wikidata link
+  {
+    SELECT ?label ?wd WHERE {
+      ?artwork a viewsari:0001012 ;
+               rdfs:label ?label ;
+               owl:sameAs ?wd .
+      FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+    }
+    LIMIT 1
+  }
 
-  # 2) Remote: ask Wikidata about each linked entity
+  # 2) Remote: ask Wikidata about that one entity
   SERVICE <https://query.wikidata.org/sparql> {
     OPTIONAL { ?wd wdt:P170 ?creator .
                ?creator rdfs:label ?creatorLabel .
@@ -778,17 +785,24 @@ LIMIT 20`,
 
   // Federated query — enrich Wikidata-linked people/artists from Wikidata
   wd_people_federated:
-`# Federated query — enrich Wikidata-linked Viewsari people with biographical facts
+`# Federated query — enrich ONE Wikidata-linked Viewsari person with biographical facts
 # Birth/death dates, birthplace, occupation and where they were active — live from Wikidata.
+# Note: the local part is limited to a single person FIRST, so only one remote
+# lookup is sent to Wikidata — federating over every person at once stalls.
 SELECT ?label ?birth ?death ?birthPlaceLabel ?occupationLabel ?workLocLabel ?wd
 WHERE {
-  # 1) Local: people that carry a Wikidata link
-  ?person a viewsari:0001013 ;
-          rdfs:label ?label ;
-          owl:sameAs ?wd .
-  FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+  # 1) Local: pick a single person that carries a Wikidata link
+  {
+    SELECT ?label ?wd WHERE {
+      ?person a viewsari:0001013 ;
+              rdfs:label ?label ;
+              owl:sameAs ?wd .
+      FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+    }
+    LIMIT 1
+  }
 
-  # 2) Remote: ask Wikidata about each linked person
+  # 2) Remote: ask Wikidata about that one person
   SERVICE <https://query.wikidata.org/sparql> {
     OPTIONAL { ?wd wdt:P569 ?birth }
     OPTIONAL { ?wd wdt:P570 ?death }
