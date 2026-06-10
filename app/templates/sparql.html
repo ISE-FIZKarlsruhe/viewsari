@@ -194,11 +194,11 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 .sparql-palette {
   background: var(--bg); border: 1px solid var(--seam); border-radius: 10px;
   padding: 14px; position: sticky; top: 72px;
-  max-height: calc(100vh - 96px); overflow-y: auto;
+  max-height: 430px; overflow-y: auto;
 }
 .palette-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tt); margin-bottom: 6px; }
 .palette-hint { font-size: 10.5px; color: var(--ts); line-height: 1.45; margin-bottom: 12px; }
-.palette-filter { width: 100%; padding: 8px 11px; border: 1.5px solid var(--seam); border-radius: 8px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 14px; }
+.palette-filter { width: 100%; padding: 8px 11px; border: 1.5px solid var(--seam); border-radius: 8px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 14px; position: sticky; top: 0; z-index: 1; background: var(--bg); }
 .palette-filter:focus { border-color: var(--or); }
 .palette-group { margin-bottom: 16px; }
 .palette-group-title { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ts); margin-bottom: 7px; }
@@ -848,6 +848,10 @@ function runQuery() {
   status.textContent = 'Running...';
   status.className = 'sparql-status';
   btn.disabled = true;
+
+  // Jump to the results panel so output isn't stranded at the bottom of the page.
+  var resultsWrap = document.querySelector('.sparql-results-wrap');
+  if (resultsWrap) resultsWrap.scrollIntoView({behavior: 'smooth', block: 'start'});
 
   var t0 = performance.now();
   fetch('/sparql/query', {
