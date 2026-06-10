@@ -92,7 +92,11 @@ async def sparql_query(request: Request):
         return JSONResponse({"error": "Empty query"}, status_code=400)
 
     try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        # Federated SERVICE calls to Wikidata can run up to WDQS's ~60s query
+        # deadline, so allow a generous read timeout while still failing fast on
+        # a dead connection. A flat 30s killed legitimately-slow federation.
+        timeout = httpx.Timeout(connect=10.0, read=90.0, write=10.0, pool=10.0)
+        async with httpx.AsyncClient(timeout=timeout) as client:
             resp = await client.post(
                 SPARQL_ENDPOINT,
                 data={"query": query},

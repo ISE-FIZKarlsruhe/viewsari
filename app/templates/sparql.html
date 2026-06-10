@@ -854,13 +854,20 @@ function runQuery() {
   if (resultsWrap) resultsWrap.scrollIntoView({behavior: 'smooth', block: 'start'});
 
   var t0 = performance.now();
+  // Federated queries can hang if the remote endpoint stalls; without a client
+  // timeout the UI would sit on "Running..." forever. Abort just past the
+  // backend's 90s read timeout so a real hang surfaces as a clear message.
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, 100000);
   fetch('/sparql/query', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({query: fullQuery})
+    body: JSON.stringify({query: fullQuery}),
+    signal: controller.signal
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
+    clearTimeout(timeoutId);
     btn.disabled = false;
     var elapsed = ((performance.now() - t0) / 1000).toFixed(2);
 
@@ -912,9 +919,14 @@ function runQuery() {
     }
   })
   .catch(function(err) {
+    clearTimeout(timeoutId);
     btn.disabled = false;
-    status.textContent = 'Network error: ' + err;
+    var msg = (err && err.name === 'AbortError')
+      ? 'Query timed out (>100s). A federated SERVICE call to Wikidata likely stalled or the remote endpoint is unavailable.'
+      : 'Network error: ' + err;
+    status.textContent = msg;
     status.className = 'sparql-status error';
+    document.getElementById('results-body').innerHTML = '<div class="sparql-empty" style="color:#B91C1C">' + esc(msg) + '</div>';
   });
 }
 
