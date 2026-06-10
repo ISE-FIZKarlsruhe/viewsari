@@ -26,7 +26,9 @@ services:
       # Wikidata's WDQS rejects requests with a generic/default User-Agent
       # (phabricator T400119). Federated SERVICE calls are issued by GraphDB's
       # RDF4J HTTP client, which honours the JVM-standard http.agent property.
-      - "GDB_JAVA_OPTS=-Dhttp.agent=Viewsari/1.0 (https://viewsari.ise.fiz-karlsruhe.de; sondraszek@gmail.com) GraphDB/10.8.4"
+      # NOTE: GraphDB's entrypoint passes $GDB_JAVA_OPTS unquoted to the JVM, so
+      # the value must contain no spaces or it gets word-split and breaks startup.
+      - "GDB_JAVA_OPTS=-Dhttp.agent=Viewsari/1.0_(+https://viewsari.ise.fiz-karlsruhe.de;_sondraszek@gmail.com)"
     restart: unless-stopped
 
   nginx:
