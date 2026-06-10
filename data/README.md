@@ -9,7 +9,6 @@ This directory is the **static data layer** of the Viewsari repository. It holds
 - pre-computed co-occurrence tables and explorer JSONs used by the website,
 - the project description and publications list under [`info/`](info/).
 
-
 For the full repo-wide mapping of contributions (C1–C4, E1–E4) and research questions (RQ1–RQ3) to files, see the [top-level README](../README.md#dissertation-contributions--repository-map). For details on the offline build that produces the contents of [`kg_foundation/`](kg_foundation/), see [`src/kg_population/`](../src/kg_population/).
 
 ---
