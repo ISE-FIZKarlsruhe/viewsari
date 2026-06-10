@@ -24,7 +24,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
   flex-wrap: wrap;
 }
 .explore-toolbar-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -481,7 +481,7 @@ function renderGraph(data){
       return sid === d.id || tid === d.id;
     });
     if(connected.length){
-      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin:8px 0 4px'>Connections ("+connected.length+")</div>";
+      h += "<div style='font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin:8px 0 4px'>Connections ("+connected.length+")</div>";
       var shown = 0;
       connected.forEach(function(e){
         if(shown >= 8) return;

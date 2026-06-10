@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Viewsari · Knowledge base{% endblock %}
+{% block title %}Viewsari · Browse & Search{% endblock %}
 
 {% block extra_styles %}
 html { overflow: hidden !important; height: 100% !important; } body { overflow-y: auto !important; height: 100% !important; }
@@ -9,13 +9,13 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   padding: 40px 40px 80px;
   min-height: calc(100vh - 56px);
   background: var(--bg2);
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 .kb-header { margin-bottom: 32px; }
 .kb-title { font-size: 26px; font-weight: 700; letter-spacing: -.03em; color: var(--or); margin-bottom: 6px; }
-.kb-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; max-width: 700px; }
-.kb-section { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
+.kb-subtitle { font-size: 13px; color: var(--ts); line-height: 1.6; max-width: 720px; }
+.kb-section { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tt); margin: 32px 0 14px; display: flex; align-items: center; gap: 8px; }
 .kb-section::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
 
 .kb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
@@ -27,46 +27,68 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 .kb-stat.pu .kb-stat-value { color: var(--pu); }
 .kb-stat.rd .kb-stat-value { color: #B91C1C; }
 
-.kb-ent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.kb-ent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
 .kb-ent-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 14px 16px; transition: all .14s; text-decoration: none; display: block; }
 .kb-ent-card:hover { border-color: var(--or); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
 .kb-ent-label { font-size: 13px; font-weight: 600; color: var(--tp); margin-bottom: 4px; line-height: 1.3; }
 .kb-ent-id { font-size: 10px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 6px; word-break: break-all; }
 .kb-ent-surfaces { font-size: 11px; color: var(--ts); line-height: 1.6; }
-.kb-ent-surfaces em { font-style: normal; background: var(--pill-bl); padding: 1px 5px; border-radius: 3px; font-size: 10px; }
+.kb-ent-surfaces em { font-style: normal; background: var(--pill-bl); padding: 1px 5px; border-radius: 4px; font-size: 10px; }
 .kb-ent-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; align-items:center; }
-.kb-ent-tag { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+/* rounded boxes instead of pills for content tags */
+.kb-ent-tag { font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
 .kb-ent-tag.ookb { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
 .kb-ent-tag.wd { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.2); }
 .kb-ent-tag.loc { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); font-family: 'Menlo', monospace; font-size: 9px; }
+.kb-ent-tag.type { text-transform: uppercase; letter-spacing: .04em; }
+.kb-ent-tag.type.person { background: var(--pill-or); color: var(--or); border: 1px solid rgba(240,90,26,.25); }
+.kb-ent-tag.type.artwork { background: var(--pill-bl); color: var(--bl); border: 1px solid rgba(27,110,243,.25); }
+.kb-ent-tag.type.explicit, .kb-ent-tag.type.implicit { background: var(--pill-pu); color: var(--pu); border: 1px solid rgba(124,58,237,.2); }
+.kb-ent-tag.type.cooccurrence { background: var(--bg3); color: var(--ts); border: 1px solid var(--seam); }
 
-.kb-tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
-.kb-tab { font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 100px; border: 1.5px solid var(--seam); background: transparent; color: var(--ts); cursor: pointer; font-family: inherit; transition: all .14s; }
-.kb-tab:hover { border-color: var(--or); color: var(--or); }
-.kb-tab.active { background: var(--or); color: #fff; border-color: var(--or); }
-.kb-tab-panel { display: none; }
-.kb-tab-panel.active { display: block; }
+.kb-cooc-involves { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.kb-cooc-involves a { font-size: 10px; padding: 3px 8px; background: var(--pill-pu); color: var(--pu); border-radius: 6px; text-decoration: none; border: 1px solid rgba(124,58,237,.2); }
+.kb-cooc-involves a:hover { background: var(--pu); color: #fff; }
 
-.kb-search { width: 100%; max-width: 400px; padding: 8px 14px; border: 1.5px solid var(--seam); border-radius: 100px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 16px; }
-.kb-search:focus { border-color: var(--or); }
+/* ── FACET SEARCH ─────────────────────────────────────────────────────── */
+.kbf-searchbar { position: relative; margin-bottom: 20px; }
+.kbf-searchbar input {
+  width: 100%; padding: 13px 16px 13px 44px; border: 1.5px solid var(--seam);
+  border-radius: 12px; font-size: 15px; font-family: inherit; outline: none;
+  background: var(--bg); transition: border-color .14s, box-shadow .14s;
+}
+.kbf-searchbar input:focus { border-color: var(--or); box-shadow: 0 2px 14px rgba(240,90,26,.08); }
+.kbf-searchbar svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--tt); fill: none; pointer-events: none; }
 
-.kb-prov { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
-.kb-prov-chip { font-size: 10px; font-family: 'Menlo', monospace; padding: 3px 10px; border-radius: 100px; background: var(--bg); border: 1px solid var(--seam); color: var(--ts); }
+.kbf-wrap { display: grid; grid-template-columns: 232px 1fr; gap: 28px; align-items: start; }
+.kbf-side { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 22px; }
+.kbf-group-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tt); margin-bottom: 8px; }
+.kbf-opt { display: flex; align-items: center; gap: 9px; padding: 6px 10px; border-radius: 8px; font-size: 12.5px; color: var(--ts); cursor: pointer; transition: background .12s; user-select: none; }
+.kbf-opt:hover { background: var(--bg3); color: var(--tp); }
+.kbf-opt input { accent-color: var(--or); cursor: pointer; margin: 0; flex-shrink: 0; }
+.kbf-name { flex: 1; }
+.kbf-count { font-size: 10px; color: var(--tt); font-variant-numeric: tabular-nums; }
+.kbf-reset { font-size: 11px; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--seam); background: var(--bg); color: var(--ts); cursor: pointer; font-family: inherit; transition: all .14s; align-self: flex-start; }
+.kbf-reset:hover { border-color: var(--or); color: var(--or); }
 
-.kb-pager { display: flex; gap: 8px; align-items: center; margin-top: 20px; font-size: 12px; color: var(--ts); }
-.kb-pager button { font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 100px; border: 1.5px solid var(--seam); background: var(--bg); color: var(--ts); cursor: pointer; font-family: inherit; }
+.kbf-main { min-width: 0; }
+.kbf-resultmeta { font-size: 12px; color: var(--ts); margin-bottom: 14px; font-weight: 500; }
+.kbf-empty { grid-column: 1/-1; padding: 48px 0; text-align: center; color: var(--tt); font-size: 13px; }
+
+.kb-pager { display: flex; gap: 8px; align-items: center; margin-top: 24px; font-size: 12px; color: var(--ts); }
+.kb-pager button { font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1.5px solid var(--seam); background: var(--bg); color: var(--ts); cursor: pointer; font-family: inherit; }
 .kb-pager button:hover:not(:disabled) { border-color: var(--or); color: var(--or); }
 .kb-pager button:disabled { opacity: .4; cursor: default; }
 
-.kb-cooc-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 12px 16px; }
-.kb-cooc-label { font-size: 12px; color: var(--tp); line-height: 1.5; margin-bottom: 6px; }
-.kb-cooc-involves { display: flex; flex-wrap: wrap; gap: 4px; }
-.kb-cooc-involves a { font-size: 10px; padding: 2px 8px; background: var(--pill-pu); color: var(--pu); border-radius: 100px; text-decoration: none; border: 1px solid rgba(124,58,237,.2); }
-.kb-cooc-involves a:hover { background: var(--pu); color: #fff; }
+@media (max-width: 760px) {
+  .kb-layout { padding: 32px 20px 64px; }
+  .kbf-wrap { grid-template-columns: 1fr; gap: 18px; }
+  .kbf-side { position: static; }
+}
 {% endblock %}
 
 {% block topbar_chips %}
-<span class="bio-chip">Knowledge base</span>
+<span class="bio-chip">Browse &amp; Search</span>
 {% endblock %}
 
 {% block status %}{{ kb.counts.total }} entities{% endblock %}
@@ -74,12 +96,13 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 {% block content %}
 <div class="kb-layout">
   <div class="kb-header">
-    <div class="kb-title">Viewsari knowledge base</div>
+    <div class="kb-title">Browse &amp; search the knowledge base</div>
     <div class="kb-subtitle">
-      Entities from the Viewsari knowledge graph: consolidated <strong>persons</strong>
-      (reconciled across biographies and linked to Wikidata where possible),
-      per-paragraph <strong>artworks</strong> extracted by the ObliquER pipeline, and
-      <strong>co-occurrences</strong> between persons within a single paragraph.
+      Search across every entity in the Viewsari knowledge graph &mdash;
+      <strong>people</strong> (reconciled across biographies and linked to Wikidata where possible),
+      <strong>artworks</strong> extracted per paragraph, the underlying
+      <strong>mentions</strong>, and <strong>co-occurrences</strong> between people.
+      Use the filters on the left to narrow by type, source, or whether an entity is linked to Wikidata.
     </div>
   </div>
 
@@ -128,94 +151,56 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     </div>
   </div>
 
+  <div class="kb-section">Search &amp; filter</div>
 
-  <div class="kb-section">Entity browser</div>
-  <div class="kb-tabs">
-    <button class="kb-tab active" onclick="showTab('persons',this)">Persons ({{ kb.counts.persons }})</button>
-    <button class="kb-tab" onclick="showTab('artworks',this)">Artworks ({{ "{:,}".format(kb.counts.artworks) }})</button>
-    <button class="kb-tab" onclick="showTab('obq_explicit',this)">ObliquER explicit mentions ({{ "{:,}".format(kb.obq_explicit | length) }})</button>
-    <button class="kb-tab" onclick="showTab('obq_implicit',this)">ObliquER implicit mentions ({{ "{:,}".format(kb.obq_implicit | length) }})</button>
-    <button class="kb-tab" onclick="showTab('cooccurrences',this)">Co-occurrences ({{ kb.counts.cooccurrences }})</button>
+  <div class="kbf-searchbar">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="kbf-q" type="text" placeholder="Search people, artworks, mentions, co-occurrences…" autocomplete="off">
   </div>
 
-  <!-- PERSONS -->
-  <div class="kb-tab-panel active" id="panel-persons">
-    <input class="kb-search" type="text" placeholder="Search persons by label or alt label..." oninput="filterStatic('panel-persons', this.value)">
-    <div class="kb-ent-grid">
-      {% for eid, ent in kb.persons.items() | sort(attribute='1.label') %}
-      <a class="kb-ent-card" href="/kb/1.0#{{ eid }}"
-         data-search="{{ ent.label | lower }} {{ ent.alt_labels | join(' ') | lower }}">
-        <div class="kb-ent-label">{{ ent.label }}</div>
-        <div class="kb-ent-id">{{ eid }}</div>
-        {% if ent.alt_labels %}
-        <div class="kb-ent-surfaces">
-          {% for s in ent.alt_labels[:4] %}<em>{{ s[:50] }}</em> {% endfor %}
-          {% if ent.alt_labels | length > 4 %}<span style="color:var(--tt)">+{{ ent.alt_labels | length - 4 }} more</span>{% endif %}
-        </div>
-        {% endif %}
-        <div class="kb-ent-meta">
-          {% if ent.ookb %}<span class="kb-ent-tag ookb">OOKB</span>{% endif %}
-          {% if ent.wikidata %}<span class="kb-ent-tag wd">{{ ent.wikidata }}</span>{% endif %}
-          <span style="font-size:10px;color:var(--tt)">{{ ent.alt_labels | length }} alt label{{ 's' if ent.alt_labels | length != 1 }}</span>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- ARTWORKS (paginated, JS-driven) -->
-  <div class="kb-tab-panel" id="panel-artworks">
-    <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
-      <span style="font-size:10px;font-weight:600;color:var(--tt);text-transform:uppercase;letter-spacing:.06em;margin-right:4px">Source:</span>
-      <button class="kb-tab active" style="font-size:10px;padding:4px 12px" data-source="all" onclick="setArtworkSource('all', this)">All</button>
-      <button class="kb-tab" style="font-size:10px;padding:4px 12px" data-source="gt" onclick="setArtworkSource('gt', this)">Ground truth ({{ "{:,}".format(gt.artworks) }})</button>
-      <button class="kb-tab" style="font-size:10px;padding:4px 12px" data-source="obliquer" onclick="setArtworkSource('obliquer', this)">ObliquER ({{ "{:,}".format(oq.artworks) }})</button>
-    </div>
-    <input class="kb-search" id="artwork-search" type="text" placeholder="Search artworks by label...">
-    <div class="kb-ent-grid" id="artworks-grid"></div>
-    <div class="kb-pager">
-      <button id="artworks-prev" onclick="artworksPage(-1)">← Prev</button>
-      <button id="artworks-next" onclick="artworksPage(1)">Next →</button>
-      <span id="artworks-status"></span>
-    </div>
-  </div>
-
-  <!-- COOCCURRENCES -->
-  <!-- ObliquER EXPLICIT MENTIONS (paginated) -->
-  <div class="kb-tab-panel" id="panel-obq_explicit">
-    <input class="kb-search" id="obq-explicit-search" type="text" placeholder="Search explicit mentions by surface form...">
-    <div class="kb-ent-grid" id="obq-explicit-grid"></div>
-    <div class="kb-pager">
-      <button id="obq-explicit-prev" onclick="obqPage('explicit',-1)">← Prev</button>
-      <button id="obq-explicit-next" onclick="obqPage('explicit',1)">Next →</button>
-      <span id="obq-explicit-status"></span>
-    </div>
-  </div>
-
-  <!-- ObliquER IMPLICIT MENTIONS (paginated) -->
-  <div class="kb-tab-panel" id="panel-obq_implicit">
-    <input class="kb-search" id="obq-implicit-search" type="text" placeholder="Search implicit mentions by surface form...">
-    <div class="kb-ent-grid" id="obq-implicit-grid"></div>
-    <div class="kb-pager">
-      <button id="obq-implicit-prev" onclick="obqPage('implicit',-1)">← Prev</button>
-      <button id="obq-implicit-next" onclick="obqPage('implicit',1)">Next →</button>
-      <span id="obq-implicit-status"></span>
-    </div>
-  </div>
-
-  <div class="kb-tab-panel" id="panel-cooccurrences">
-    <input class="kb-search" type="text" placeholder="Search co-occurrences..." oninput="filterStatic('panel-cooccurrences', this.value)">
-    <div style="display:flex;flex-direction:column;gap:8px">
-      {% for eid, cc in kb.cooccurrences.items() | sort(attribute='1.label') %}
-      <div class="kb-cooc-card" data-search="{{ cc.label | lower }}">
-        <div class="kb-cooc-label">{{ cc.label }}</div>
-        <div class="kb-cooc-involves">
-          {% for p in cc.involves %}
-          <a href="/kb/1.0#{{ p }}">{{ p }}</a>
-          {% endfor %}
-        </div>
+  <div class="kbf-wrap">
+    <aside class="kbf-side">
+      <div class="kbf-group">
+        <div class="kbf-group-title">Type</div>
+        <label class="kbf-opt"><input type="checkbox" class="kbf-type" value="person"><span class="kbf-name">People</span><span class="kbf-count" data-type="person"></span></label>
+        <label class="kbf-opt"><input type="checkbox" class="kbf-type" value="artwork"><span class="kbf-name">Artworks</span><span class="kbf-count" data-type="artwork"></span></label>
+        <label class="kbf-opt"><input type="checkbox" class="kbf-type" value="explicit"><span class="kbf-name">Explicit mentions</span><span class="kbf-count" data-type="explicit"></span></label>
+        <label class="kbf-opt"><input type="checkbox" class="kbf-type" value="implicit"><span class="kbf-name">Implicit mentions</span><span class="kbf-count" data-type="implicit"></span></label>
+        <label class="kbf-opt"><input type="checkbox" class="kbf-type" value="cooccurrence"><span class="kbf-name">Co-occurrences</span><span class="kbf-count" data-type="cooccurrence"></span></label>
       </div>
-      {% endfor %}
+
+      <div class="kbf-group">
+        <div class="kbf-group-title">Source</div>
+        <label class="kbf-opt"><input type="radio" name="kbf-source" class="kbf-source" value="all" checked><span class="kbf-name">All sources</span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-source" class="kbf-source" value="gt"><span class="kbf-name">Ground truth</span><span class="kbf-count" data-source="gt"></span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-source" class="kbf-source" value="obliquer"><span class="kbf-name">ObliquER (AI)</span><span class="kbf-count" data-source="obliquer"></span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-source" class="kbf-source" value="other"><span class="kbf-name">Other runs</span><span class="kbf-count" data-source="other"></span></label>
+      </div>
+
+      <div class="kbf-group">
+        <div class="kbf-group-title">Wikidata link</div>
+        <label class="kbf-opt"><input type="radio" name="kbf-wd" class="kbf-wd" value="all" checked><span class="kbf-name">Any</span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-wd" class="kbf-wd" value="yes"><span class="kbf-name">Linked to Wikidata</span><span class="kbf-count" data-wikidata="yes"></span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-wd" class="kbf-wd" value="no"><span class="kbf-name">Not linked (OOKB)</span><span class="kbf-count" data-wikidata="no"></span></label>
+      </div>
+
+      <div class="kbf-group">
+        <div class="kbf-group-title">Extraction strategy</div>
+        <label class="kbf-opt"><input type="radio" name="kbf-strat" class="kbf-strat" value="all" checked><span class="kbf-name">Any</span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-strat" class="kbf-strat" value="ontology guided"><span class="kbf-name">Ontology-guided</span><span class="kbf-count" data-strategy="ontology guided"></span></label>
+        <label class="kbf-opt"><input type="radio" name="kbf-strat" class="kbf-strat" value="few shot"><span class="kbf-name">Few-shot</span><span class="kbf-count" data-strategy="few shot"></span></label>
+      </div>
+
+      <button class="kbf-reset" onclick="resetFacets()">Reset filters</button>
+    </aside>
+
+    <div class="kbf-main">
+      <div class="kbf-resultmeta" id="kbf-meta">Loading…</div>
+      <div class="kb-ent-grid" id="kbf-results"></div>
+      <div class="kb-pager">
+        <button id="kbf-prev" onclick="kbfPage(-1)">&larr; Prev</button>
+        <button id="kbf-next" onclick="kbfPage(1)">Next &rarr;</button>
+      </div>
     </div>
   </div>
 </div>
@@ -223,166 +208,158 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 
 {% block scripts %}
 <script>
-function showTab(name, btn) {
-  document.querySelectorAll(".kb-tabs .kb-tab").forEach(function(b){ b.classList.remove("active"); });
-  document.querySelectorAll(".kb-tab-panel").forEach(function(p){ p.classList.remove("active"); });
-  if(btn) btn.classList.add("active");
-  document.getElementById("panel-"+name).classList.add("active");
-  if(name === "artworks" && !artworksInitialized){
-    artworksInitialized = true;
-    fetchArtworks();
-  }
-  if(name === "obq_explicit" && !obqState.explicit.initialized){
-    obqState.explicit.initialized = true;
-    fetchObq("explicit");
-  }
-  if(name === "obq_implicit" && !obqState.implicit.initialized){
-    obqState.implicit.initialized = true;
-    fetchObq("implicit");
-  }
-}
-
-function filterStatic(panelId, q) {
-  q = q.toLowerCase();
-  document.querySelectorAll("#"+panelId+" [data-search]").forEach(function(el){
-    var text = el.getAttribute("data-search") || "";
-    el.style.display = (!q || text.indexOf(q) >= 0) ? "" : "none";
-  });
-}
-
-// ── Artworks pagination ─────────────────────────────────────────────────
-var artworksInitialized = false;
-var artworksOffset = 0;
-var artworksLimit = 60;
-var artworksQuery = "";
-var artworksSource = "all";
-var artworksTotal = 0;
-
-function setArtworkSource(src, btn){
-  artworksSource = src;
-  document.querySelectorAll("[data-source]").forEach(function(b){ b.classList.remove("active"); });
-  btn.classList.add("active");
-  artworksOffset = 0;
-  fetchArtworks();
-}
-
-function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
-
-function fetchArtworks(){
-  var url = "/kb/artworks.json?offset=" + artworksOffset + "&limit=" + artworksLimit
-    + "&source=" + artworksSource + "&q=" + encodeURIComponent(artworksQuery);
-  document.getElementById("artworks-status").textContent = "Loading…";
-  fetch(url).then(function(r){ return r.json(); }).then(function(data){
-    artworksTotal = data.total;
-    renderArtworks(data.items);
-    var shown = artworksOffset + data.items.length;
-    document.getElementById("artworks-status").textContent =
-      (artworksOffset+1) + "–" + shown + " of " + data.total.toLocaleString();
-    document.getElementById("artworks-prev").disabled = artworksOffset === 0;
-    document.getElementById("artworks-next").disabled = shown >= data.total;
-  });
-}
-
-function renderArtworks(items){
-  var grid = document.getElementById("artworks-grid");
-  grid.innerHTML = "";
-  items.forEach(function(e){
-    var a = document.createElement("a");
-    a.className = "kb-ent-card";
-    a.href = "/kb/1.0#" + e.entity_id;
-    var h = '<div class="kb-ent-label">'+esc(e.label)+'</div>';
-    h += '<div class="kb-ent-id">'+esc(e.entity_id)+'</div>';
-    h += '<div class="kb-ent-meta">';
-    if(e.source === "gt")        h += '<span class="kb-ent-tag" style="background:var(--pill-or);color:var(--or);border:1px solid rgba(240,90,26,.25)">GT</span>';
-    else if(e.source === "obliquer") h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">ObliquER</span>';
-    if(e.vol && e.para){
-      h += '<span class="kb-ent-tag loc">vol. '+esc(e.vol)+' · §'+esc(e.para)+'</span>';
-    }
-    if(e.wikidata) h += '<span class="kb-ent-tag wd">'+esc(e.wikidata)+'</span>';
-    if(e.ookb)     h += '<span class="kb-ent-tag ookb">OOKB</span>';
-    h += '</div>';
-    a.innerHTML = h;
-    grid.appendChild(a);
-  });
-}
-
-function artworksPage(delta){
-  var newOffset = artworksOffset + delta * artworksLimit;
-  if(newOffset < 0) newOffset = 0;
-  if(newOffset >= artworksTotal) return;
-  artworksOffset = newOffset;
-  fetchArtworks();
-  window.scrollTo({top: document.getElementById("panel-artworks").offsetTop - 80, behavior:"smooth"});
-}
-
-var artworksSearchTimer;
-document.getElementById("artwork-search").addEventListener("input", function(ev){
-  clearTimeout(artworksSearchTimer);
-  artworksSearchTimer = setTimeout(function(){
-    artworksQuery = ev.target.value;
-    artworksOffset = 0;
-    fetchArtworks();
-  }, 250);
-});
-
-// ── ObliquER mention tabs ───────────────────────────────────────────────
-var obqState = {
-  explicit: {initialized:false, offset:0, limit:60, query:"", total:0},
-  implicit: {initialized:false, offset:0, limit:60, query:"", total:0}
+var TYPE_LABEL = {
+  person: "Person", artwork: "Artwork",
+  explicit: "Explicit mention", implicit: "Implicit mention",
+  cooccurrence: "Co-occurrence"
 };
 
-function fetchObq(kind){
-  var st = obqState[kind];
-  var url = "/kb/obq_"+kind+".json?offset="+st.offset+"&limit="+st.limit+"&q="+encodeURIComponent(st.query);
-  document.getElementById("obq-"+kind+"-status").textContent = "Loading…";
-  fetch(url).then(function(r){return r.json();}).then(function(data){
-    st.total = data.total;
-    renderObq(kind, data.items);
-    var shown = st.offset + data.items.length;
-    document.getElementById("obq-"+kind+"-status").textContent =
-      (st.offset+1)+"–"+shown+" of "+data.total.toLocaleString();
-    document.getElementById("obq-"+kind+"-prev").disabled = st.offset===0;
-    document.getElementById("obq-"+kind+"-next").disabled = shown>=data.total;
+var kbf = { q: "", types: new Set(), source: "all", wikidata: "all", strategy: "all", offset: 0, limit: 60, total: 0 };
+
+function esc(s){ var d=document.createElement("div"); d.textContent = s==null?"":s; return d.innerHTML; }
+
+function buildURL(){
+  var p = new URLSearchParams();
+  if(kbf.q) p.set("q", kbf.q);
+  if(kbf.types.size) p.set("types", Array.from(kbf.types).join(","));
+  if(kbf.source !== "all") p.set("source", kbf.source);
+  if(kbf.wikidata !== "all") p.set("wikidata", kbf.wikidata);
+  if(kbf.strategy !== "all") p.set("strategy", kbf.strategy);
+  p.set("offset", kbf.offset);
+  p.set("limit", kbf.limit);
+  return "/kb/search.json?" + p.toString();
+}
+
+function fetchSearch(){
+  document.getElementById("kbf-meta").textContent = "Loading…";
+  fetch(buildURL()).then(function(r){ return r.json(); }).then(function(data){
+    kbf.total = data.total;
+    renderResults(data.items);
+    updateFacets(data.facets);
+    var shown = data.items.length ? kbf.offset + data.items.length : 0;
+    document.getElementById("kbf-meta").textContent = data.total
+      ? "Showing " + (kbf.offset + 1) + "–" + shown + " of " + data.total.toLocaleString() + " results"
+      : "No results";
+    document.getElementById("kbf-prev").disabled = kbf.offset === 0;
+    document.getElementById("kbf-next").disabled = shown >= data.total;
   });
 }
 
-function renderObq(kind, items){
-  var grid = document.getElementById("obq-"+kind+"-grid");
+function renderResults(items){
+  var grid = document.getElementById("kbf-results");
   grid.innerHTML = "";
+  if(!items.length){
+    grid.innerHTML = '<div class="kbf-empty">No entities match your search and filters.</div>';
+    return;
+  }
   items.forEach(function(e){
-    var div = document.createElement("div");
-    div.className = "kb-ent-card";
-    var h = '<div class="kb-ent-label">&ldquo;'+esc(e.surface)+'&rdquo;</div>';
-    h += '<div class="kb-ent-id">'+esc(e.mention_id)+'</div>';
+    var linkable = e.type === "person" || e.type === "artwork";
+    var el = document.createElement(linkable ? "a" : "div");
+    el.className = "kb-ent-card";
+    if(linkable) el.href = "/kb/1.0#" + encodeURIComponent(e.id);
+
+    var isMention = e.type === "explicit" || e.type === "implicit";
+    var h = '<div class="kb-ent-label">' + (isMention ? "&ldquo;"+esc(e.label)+"&rdquo;" : esc(e.label)) + '</div>';
+    h += '<div class="kb-ent-id">' + esc(e.id) + '</div>';
+
+    if(e.type === "person" && e.alt && e.alt.length){
+      h += '<div class="kb-ent-surfaces">';
+      e.alt.slice(0,4).forEach(function(s){ h += '<em>' + esc(s.slice(0,50)) + '</em> '; });
+      if(e.alt.length > 4) h += '<span style="color:var(--tt)">+' + (e.alt.length - 4) + ' more</span>';
+      h += '</div>';
+    }
+
+    if(e.type === "cooccurrence" && e.involves && e.involves.length){
+      h += '<div class="kb-cooc-involves">';
+      e.involves.forEach(function(p){ h += '<a href="/kb/1.0#' + encodeURIComponent(p) + '">' + esc(p) + '</a>'; });
+      h += '</div>';
+    }
+
     h += '<div class="kb-ent-meta">';
-    h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">'+esc(e.strategy)+'</span>';
-    if(e.vol && e.para) h += '<span class="kb-ent-tag loc">vol. '+esc(e.vol)+' · §'+esc(e.para)+'</span>';
+    h += '<span class="kb-ent-tag type ' + e.type + '">' + TYPE_LABEL[e.type] + '</span>';
+    if(e.type === "artwork"){
+      if(e.source === "gt") h += '<span class="kb-ent-tag" style="background:var(--pill-or);color:var(--or);border:1px solid rgba(240,90,26,.25)">Ground truth</span>';
+      else if(e.source === "obliquer") h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">ObliquER</span>';
+    }
+    if(isMention && e.strategy){
+      h += '<span class="kb-ent-tag" style="background:var(--pill-bl);color:var(--bl);border:1px solid rgba(27,110,243,.25)">' + esc(e.strategy) + '</span>';
+    }
+    if(e.vol && e.para) h += '<span class="kb-ent-tag loc">vol. ' + esc(e.vol) + ' · §' + esc(e.para) + '</span>';
+    if(e.wikidata) h += '<span class="kb-ent-tag wd">' + esc(e.wikidata) + '</span>';
+    if(e.ookb) h += '<span class="kb-ent-tag ookb">OOKB</span>';
     h += '</div>';
-    div.innerHTML = h;
-    grid.appendChild(div);
+
+    el.innerHTML = h;
+    grid.appendChild(el);
   });
 }
 
-function obqPage(kind, delta){
-  var st = obqState[kind];
-  var n = st.offset + delta * st.limit;
-  if(n<0) n=0;
-  if(n>=st.total) return;
-  st.offset = n;
-  fetchObq(kind);
-  window.scrollTo({top:document.getElementById("panel-obq_"+kind).offsetTop-80, behavior:"smooth"});
+function setCount(sel, n){ var el = document.querySelector(sel); if(el) el.textContent = (n || 0).toLocaleString(); }
+
+function updateFacets(f){
+  ["person","artwork","explicit","implicit","cooccurrence"].forEach(function(t){
+    setCount('.kbf-count[data-type="' + t + '"]', f.type[t]);
+  });
+  ["gt","obliquer","other"].forEach(function(s){
+    setCount('.kbf-count[data-source="' + s + '"]', f.source[s]);
+  });
+  ["yes","no"].forEach(function(w){
+    setCount('.kbf-count[data-wikidata="' + w + '"]', f.wikidata[w]);
+  });
+  ["ontology guided","few shot"].forEach(function(s){
+    setCount('.kbf-count[data-strategy="' + s + '"]', f.strategy[s]);
+  });
 }
 
-["explicit","implicit"].forEach(function(kind){
-  var timer;
-  document.getElementById("obq-"+kind+"-search").addEventListener("input", function(ev){
-    clearTimeout(timer);
-    timer = setTimeout(function(){
-      obqState[kind].query = ev.target.value;
-      obqState[kind].offset = 0;
-      fetchObq(kind);
-    }, 250);
+function kbfPage(delta){
+  var n = kbf.offset + delta * kbf.limit;
+  if(n < 0) n = 0;
+  if(n >= kbf.total) return;
+  kbf.offset = n;
+  fetchSearch();
+  window.scrollTo({ top: document.querySelector(".kbf-searchbar").offsetTop - 70, behavior: "smooth" });
+}
+
+function resetFacets(){
+  kbf.q = ""; kbf.types.clear();
+  kbf.source = "all"; kbf.wikidata = "all"; kbf.strategy = "all"; kbf.offset = 0;
+  document.getElementById("kbf-q").value = "";
+  document.querySelectorAll(".kbf-type").forEach(function(c){ c.checked = false; });
+  document.querySelector('.kbf-source[value="all"]').checked = true;
+  document.querySelector('.kbf-wd[value="all"]').checked = true;
+  document.querySelector('.kbf-strat[value="all"]').checked = true;
+  fetchSearch();
+}
+
+// ── wiring ──────────────────────────────────────────────────────────────
+var kbfTimer;
+document.getElementById("kbf-q").addEventListener("input", function(ev){
+  clearTimeout(kbfTimer);
+  kbfTimer = setTimeout(function(){
+    kbf.q = ev.target.value;
+    kbf.offset = 0;
+    fetchSearch();
+  }, 220);
+});
+
+document.querySelectorAll(".kbf-type").forEach(function(c){
+  c.addEventListener("change", function(){
+    kbf.types.clear();
+    document.querySelectorAll(".kbf-type:checked").forEach(function(x){ kbf.types.add(x.value); });
+    kbf.offset = 0;
+    fetchSearch();
   });
 });
+document.querySelectorAll(".kbf-source").forEach(function(r){
+  r.addEventListener("change", function(){ kbf.source = r.value; kbf.offset = 0; fetchSearch(); });
+});
+document.querySelectorAll(".kbf-wd").forEach(function(r){
+  r.addEventListener("change", function(){ kbf.wikidata = r.value; kbf.offset = 0; fetchSearch(); });
+});
+document.querySelectorAll(".kbf-strat").forEach(function(r){
+  r.addEventListener("change", function(){ kbf.strategy = r.value; kbf.offset = 0; fetchSearch(); });
+});
+
+fetchSearch();
 </script>
 {% endblock %}

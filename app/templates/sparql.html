@@ -42,7 +42,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   background: var(--bg2);
 }
 .sparql-toolbar-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -91,25 +91,21 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   background: var(--bg2);
 }
 .sparql-status.error { color: #B91C1C; background: #FEF2F2; }
-.sparql-examples {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+.sparql-ex-section { margin-bottom: 18px; }
+.sparql-ex-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tt); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.sparql-ex-head::after { content: ''; flex: 1; height: 1px; background: var(--seam); }
+.sparql-ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 10px; }
+.sparql-ex-card {
+  text-align: left; background: var(--bg); border: 1px solid var(--seam);
+  border-radius: 10px; padding: 12px 14px; cursor: pointer; font-family: inherit;
+  transition: border-color .14s, box-shadow .14s, transform .14s;
+  display: flex; flex-direction: column; gap: 4px;
 }
-.sparql-example-btn {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 100px;
-  border: 1.5px solid var(--seam);
-  background: var(--bg);
-  color: var(--ts);
-  cursor: pointer;
-  font-family: inherit;
-  transition: all .14s;
-}
-.sparql-example-btn:hover { border-color: var(--or); color: var(--or); background: var(--pill-or); }
+.sparql-ex-card:hover { border-color: var(--or); box-shadow: 0 3px 14px rgba(0,0,0,.07); transform: translateY(-1px); }
+.sparql-ex-title { font-size: 13px; font-weight: 700; color: var(--tp); display: flex; align-items: center; gap: 6px; line-height: 1.25; }
+.sparql-ex-card:hover .sparql-ex-title { color: var(--or); }
+.sparql-ex-desc { font-size: 11px; color: var(--ts); line-height: 1.45; }
+.sparql-ex-tag { font-size: 8px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--pu); background: var(--pill-pu); border: 1px solid rgba(124,58,237,.2); border-radius: 5px; padding: 1px 5px; margin-left: auto; flex-shrink: 0; }
 .sparql-results-wrap {
   background: var(--bg);
   border: 1px solid var(--seam);
@@ -117,7 +113,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
   overflow: hidden;
 }
 .sparql-results-header {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -192,6 +188,56 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 .sparql-turtle .ttl-iri { color: var(--bl); }
 .sparql-turtle .ttl-literal { color: #047857; }
 .sparql-turtle .ttl-comment { color: var(--tt); font-style: italic; }
+
+/* ── QUERY BUILDING-BLOCKS PALETTE ──────────────────────────────────── */
+.sparql-workbench { display: grid; grid-template-columns: 252px 1fr; gap: 16px; align-items: start; margin-bottom: 16px; }
+.sparql-palette {
+  background: var(--bg); border: 1px solid var(--seam); border-radius: 10px;
+  padding: 14px; position: sticky; top: 72px;
+  max-height: calc(100vh - 96px); overflow-y: auto;
+}
+.palette-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tt); margin-bottom: 6px; }
+.palette-hint { font-size: 10.5px; color: var(--ts); line-height: 1.45; margin-bottom: 12px; }
+.palette-filter { width: 100%; padding: 8px 11px; border: 1.5px solid var(--seam); border-radius: 8px; font-size: 12px; font-family: inherit; outline: none; margin-bottom: 14px; }
+.palette-filter:focus { border-color: var(--or); }
+.palette-group { margin-bottom: 16px; }
+.palette-group-title { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ts); margin-bottom: 7px; }
+.palette-term {
+  display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+  padding: 6px 9px; border: 1px solid var(--seam); border-radius: 7px;
+  background: var(--bg2); cursor: pointer; font-family: inherit;
+  margin-bottom: 4px; transition: border-color .12s, background .12s;
+}
+.palette-term:hover { border-color: var(--or); background: var(--pill-or); }
+.palette-term:active { cursor: grabbing; }
+.pt-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+.palette-term.cls .pt-dot { background: var(--bl); }
+.palette-term.prop .pt-dot { background: var(--pu); }
+.palette-term.pat .pt-dot { background: var(--or); }
+.pt-label { flex: 1; font-size: 12px; font-weight: 600; color: var(--tp); }
+.pt-id { font-size: 9px; font-family: 'SF Mono', 'Fira Code', monospace; color: var(--tt); flex-shrink: 0; }
+.palette-empty { font-size: 11px; color: var(--tt); font-style: italic; padding: 4px 0; }
+
+/* ── IN-EDITOR AUTOCOMPLETE ─────────────────────────────────────────── */
+.ac-pop {
+  position: fixed; z-index: 500; background: var(--bg); border: 1px solid var(--seam);
+  border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.14); padding: 4px;
+  min-width: 220px; max-width: 360px; max-height: 246px; overflow-y: auto; display: none;
+}
+.ac-pop.open { display: block; }
+.ac-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.ac-item.active, .ac-item:hover { background: var(--pill-or); }
+.ac-name { font-size: 12px; font-weight: 600; color: var(--tp); }
+.ac-id { font-size: 10px; font-family: 'SF Mono', 'Fira Code', monospace; color: var(--tt); }
+.ac-kind { font-size: 8px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; margin-left: auto; padding: 1px 5px; border-radius: 4px; }
+.ac-kind.cls { color: var(--bl); background: var(--pill-bl); }
+.ac-kind.prop { color: var(--pu); background: var(--pill-pu); }
+.ac-kind.kw { color: var(--or); background: var(--pill-or); }
+
+@media (max-width: 900px) {
+  .sparql-workbench { grid-template-columns: 1fr; }
+  .sparql-palette { position: static; max-height: 320px; }
+}
 {% endblock %}
 
 {% block topbar_chips %}
@@ -218,36 +264,163 @@ PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
 PREFIX prov: &lt;http://www.w3.org/ns/prov#&gt;
 PREFIX oa: &lt;http://www.w3.org/ns/oa#&gt;
 PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX wd: &lt;http://www.wikidata.org/entity/&gt;
+PREFIX wdt: &lt;http://www.wikidata.org/prop/direct/&gt;
   </div>
 
-  <div class="sparql-examples">
-    <button class="sparql-example-btn" onclick="loadExample('runs')">Extraction runs</button>
-    <button class="sparql-example-btn" onclick="loadExample('explicit')">Explicit artwork mentions</button>
-    <button class="sparql-example-btn" onclick="loadExample('implicit')">Implicit artwork mentions</button>
-    <button class="sparql-example-btn" onclick="loadExample('gt_vs_obq')">GT vs. ObliquER coverage</button>
-    <button class="sparql-example-btn" onclick="loadExample('shared')">Entities shared across biographies</button>
-    <button class="sparql-example-btn" onclick="loadExample('sarah')">Mentions by Sarah</button>
-    <button class="sparql-example-btn" onclick="loadExample('ookb')">OOKB discoveries</button>
-    <button class="sparql-example-btn" onclick="loadExample('coref')">Coreferent chains</button>
-    <button class="sparql-example-btn" onclick="loadExample('coocs')">Giotto co-occurrences</button>
-    <button class="sparql-example-btn" onclick="loadExample('describe_giotto')">Describe Giotto (Turtle)</button>
-    <button class="sparql-example-btn" onclick="loadExample('wd_heroes')">Wikidata-linked hits</button>
-    <button class="sparql-example-btn" onclick="loadExample('stats')">KG statistics</button>
-  </div>
-
-  <div class="sparql-editor-wrap">
-    <div class="sparql-toolbar">
-      <span class="sparql-toolbar-label">Query Editor</span>
-      <button class="sparql-btn secondary" onclick="clearQuery()">Clear</button>
-      <button class="sparql-btn primary" onclick="runQuery()" id="run-btn">Run Query</button>
+  <div class="sparql-ex-section">
+    <div class="sparql-ex-head">Example queries — click to load</div>
+    <div class="sparql-ex-grid">
+      <button class="sparql-ex-card" onclick="loadExample('runs')">
+        <span class="sparql-ex-title">Extraction runs</span>
+        <span class="sparql-ex-desc">All extraction &amp; annotation runs with their agent and mention counts.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('explicit')">
+        <span class="sparql-ex-title">Explicit artwork mentions</span>
+        <span class="sparql-ex-desc">Passages where Vasari named an artwork directly.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('implicit')">
+        <span class="sparql-ex-title">Implicit artwork mentions</span>
+        <span class="sparql-ex-desc">Descriptions that imply an artwork without naming it.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('gt_vs_obq')">
+        <span class="sparql-ex-title">GT vs. ObliquER coverage</span>
+        <span class="sparql-ex-desc">Ground-truth vs. AI mention counts per paragraph.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('shared')">
+        <span class="sparql-ex-title">Entities shared across biographies</span>
+        <span class="sparql-ex-desc">Artwork entities referenced from many paragraphs.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('sarah')">
+        <span class="sparql-ex-title">Mentions by Sarah</span>
+        <span class="sparql-ex-desc">Annotations from the human ground-truth run.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('ookb')">
+        <span class="sparql-ex-title">OOKB discoveries</span>
+        <span class="sparql-ex-desc">Artworks with no matching Wikidata entry (out-of-KB).</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('coref')">
+        <span class="sparql-ex-title">Coreferent chains</span>
+        <span class="sparql-ex-desc">Coreferent mentions and the antecedent they point back to.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('coocs')">
+        <span class="sparql-ex-title">Giotto co-occurrences</span>
+        <span class="sparql-ex-desc">Who co-occurred with Giotto, and where.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('describe_giotto')">
+        <span class="sparql-ex-title">Describe Giotto (Turtle)</span>
+        <span class="sparql-ex-desc">A co-occurrence subgraph around Giotto, returned as Turtle.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('wd_heroes')">
+        <span class="sparql-ex-title">Wikidata-linked hits</span>
+        <span class="sparql-ex-desc">Artwork entities successfully linked to Wikidata.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('stats')">
+        <span class="sparql-ex-title">KG statistics</span>
+        <span class="sparql-ex-desc">Counts of the main classes in the knowledge graph.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('wd_federated')">
+        <span class="sparql-ex-title">Artworks enriched from Wikidata<span class="sparql-ex-tag" style="color:var(--bl);background:var(--pill-bl);border-color:rgba(27,110,243,.2)">Federated</span></span>
+        <span class="sparql-ex-desc">Live <code>SERVICE</code> join to Wikidata — pulls each linked artwork's creator, location, collection &amp; date.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('wd_people_federated')">
+        <span class="sparql-ex-title">People enriched from Wikidata<span class="sparql-ex-tag" style="color:var(--bl);background:var(--pill-bl);border-color:rgba(27,110,243,.2)">Federated</span></span>
+        <span class="sparql-ex-desc">Live <code>SERVICE</code> join to Wikidata — birth &amp; death dates, birthplace, occupation &amp; where each artist was active.</span>
+      </button>
     </div>
-    <textarea id="sparql-input" spellcheck="false">SELECT ?vol ?label
+  </div>
+
+  <div class="sparql-ex-section">
+    <div class="sparql-ex-head">Competency-question queries</div>
+    <div class="sparql-ex-grid">
+      <button class="sparql-ex-card" onclick="loadExample('cooc_partners')">
+        <span class="sparql-ex-title">Top co-occurrence partners<span class="sparql-ex-tag">CQI.6</span></span>
+        <span class="sparql-ex-desc">Artists ranked by how often they co-occur with Michelangelo.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('in_biographies')">
+        <span class="sparql-ex-title">In which biographies?<span class="sparql-ex-tag">CQI.12</span></span>
+        <span class="sparql-ex-desc">Which biographies a given person appears in.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('volume_of')">
+        <span class="sparql-ex-title">Which volume holds a biography<span class="sparql-ex-tag">CQI.20</span></span>
+        <span class="sparql-ex-desc">The volume of The Lives containing an artist's biography.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('surface_types')">
+        <span class="sparql-ex-title">Surface forms &amp; mention type<span class="sparql-ex-tag">CQII.7</span></span>
+        <span class="sparql-ex-desc">How an artwork is referred to, and each mention's type.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('frbr_levels')">
+        <span class="sparql-ex-title">FRBR bibliographic levels<span class="sparql-ex-tag">CQII.19</span></span>
+        <span class="sparql-ex-desc">Entities grouped by work, expression, and manifestation.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('wd_by_type')">
+        <span class="sparql-ex-title">Wikidata links per type<span class="sparql-ex-tag">CQII.25</span></span>
+        <span class="sparql-ex-desc">Count of Wikidata-linked entities per entity type.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('prov_chain')">
+        <span class="sparql-ex-title">Provenance: run &amp; agent<span class="sparql-ex-tag">CQII.34</span></span>
+        <span class="sparql-ex-desc">Which run and software agent generated an entity.</span>
+      </button>
+      <button class="sparql-ex-card" onclick="loadExample('run_meta')">
+        <span class="sparql-ex-title">Run metadata<span class="sparql-ex-tag">CQII.37</span></span>
+        <span class="sparql-ex-desc">Model version and timestamps for extraction runs.</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sparql-workbench">
+    <aside class="sparql-palette">
+      <div class="palette-head">Building blocks</div>
+      <div class="palette-hint">Click or drag a term into the editor. The readable name is shown; the graph's identifier is what gets inserted.</div>
+      <input class="palette-filter" id="palette-filter" type="text" placeholder="Filter terms…" autocomplete="off">
+
+      <div class="palette-group" data-group="classes">
+        <div class="palette-group-title">Classes</div>
+        {% for t in terms.classes %}
+        <button class="palette-term cls" draggable="true" data-insert="{{ t.curie }}" data-search="{{ t.label|lower }} {{ t.id }}" title="{{ t.label }} ({{ t.curie }}){% if t.comment %} — {{ t.comment }}{% endif %}">
+          <span class="pt-dot"></span><span class="pt-label">{{ t.label }}</span><span class="pt-id">{{ t.id }}</span>
+        </button>
+        {% endfor %}
+      </div>
+
+      <div class="palette-group" data-group="properties">
+        <div class="palette-group-title">Properties</div>
+        {% for t in terms.properties %}
+        <button class="palette-term prop" draggable="true" data-insert="{{ t.curie }}" data-search="{{ t.label|lower }} {{ t.id }}" title="{{ t.label }} ({{ t.curie }}){% if t.comment %} — {{ t.comment }}{% endif %}">
+          <span class="pt-dot"></span><span class="pt-label">{{ t.label }}</span><span class="pt-id">{{ t.id }}</span>
+        </button>
+        {% endfor %}
+      </div>
+
+      <div class="palette-group" data-group="patterns">
+        <div class="palette-group-title">Patterns</div>
+        <button class="palette-term pat" draggable="true" data-search="type a class instance" data-insert="?s a viewsari:0001012 ." title="Type triple — bind ?s to instances of a class"><span class="pt-dot"></span><span class="pt-label">Type triple (?s a …)</span></button>
+        <button class="palette-term pat" draggable="true" data-search="label rdfs" data-insert="?s rdfs:label ?label ." title="Attach a human-readable label"><span class="pt-dot"></span><span class="pt-label">Label (rdfs:label)</span></button>
+        <button class="palette-term pat" draggable="true" data-search="in paragraph location" data-insert="?x viewsari:0001032 ?paragraph ." title="Locate content in its paragraph"><span class="pt-dot"></span><span class="pt-label">In paragraph</span></button>
+        <button class="palette-term pat" draggable="true" data-search="provenance run agent prov" data-insert="?x prov:wasGeneratedBy ?run .&#10;?run prov:wasAssociatedWith ?agent ." title="Provenance: which run and agent produced ?x"><span class="pt-dot"></span><span class="pt-label">Provenance chain</span></button>
+        <button class="palette-term pat" draggable="true" data-search="filter contains text search" data-insert="FILTER(CONTAINS(LCASE(STR(?label)), &quot;michelangelo&quot;))" title="Case-insensitive substring filter"><span class="pt-dot"></span><span class="pt-label">Filter contains…</span></button>
+        <button class="palette-term pat" draggable="true" data-search="count aggregate group" data-insert="(COUNT(DISTINCT ?x) AS ?n)" title="Count aggregate (use with GROUP BY)"><span class="pt-dot"></span><span class="pt-label">Count aggregate</span></button>
+        <button class="palette-term pat" draggable="true" data-search="optional wikidata sameas link" data-insert="OPTIONAL { ?x owl:sameAs ?wikidata . }" title="Optionally fetch a Wikidata link"><span class="pt-dot"></span><span class="pt-label">Optional Wikidata link</span></button>
+        <button class="palette-term pat" draggable="true" data-search="order limit sort" data-insert="ORDER BY DESC(?n)&#10;LIMIT 20" title="Sort and cap the result set"><span class="pt-dot"></span><span class="pt-label">Order &amp; limit</span></button>
+      </div>
+    </aside>
+
+    <div class="sparql-editor-col">
+      <div class="sparql-editor-wrap">
+        <div class="sparql-toolbar">
+          <span class="sparql-toolbar-label">Query Editor</span>
+          <button class="sparql-btn secondary" onclick="clearQuery()">Clear</button>
+          <button class="sparql-btn primary" onclick="runQuery()" id="run-btn">Run Query</button>
+        </div>
+        <textarea id="sparql-input" spellcheck="false">SELECT ?vol ?label
 WHERE {
   ?vol a viewsari:0001006 .
   ?vol rdfs:label ?label .
 }
 ORDER BY ?label</textarea>
-    <div class="sparql-status" id="sparql-status">Ready</div>
+        <div class="sparql-status" id="sparql-status">Ready</div>
+      </div>
+    </div>
   </div>
 
   <div class="sparql-results-wrap">
@@ -272,7 +445,9 @@ var PREFIXES = 'PREFIX viewsari: <https://viewsari.ise.fiz-karlsruhe.de/ontology
   'PREFIX owl: <http://www.w3.org/2002/07/owl#>\n' +
   'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n' +
   'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
-  'PREFIX dct: <http://purl.org/dc/terms/>\n';
+  'PREFIX dct: <http://purl.org/dc/terms/>\n' +
+  'PREFIX wd: <http://www.wikidata.org/entity/>\n' +
+  'PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n';
 
 var EXAMPLES = {
   // All extraction runs with their agents and mention counts
@@ -457,7 +632,178 @@ var EXAMPLES = {
     '}\n' +
     'GROUP BY ?type\n' +
     'ORDER BY DESC(?count)\n' +
-    'LIMIT 10'
+    'LIMIT 10',
+
+  // ── Competency-question queries ──────────────────────────────────────
+  cooc_partners:
+`# CQI.6 — Artists with the highest co-occurrence frequency with Michelangelo
+SELECT ?partner ?partnerLabel (COUNT(DISTINCT ?cooc) AS ?frequency)
+WHERE {
+  ?cooc a viewsari:0001025 ;
+        viewsari:0001034 vkb:buonarroti-michelagnolo , ?partner .
+  FILTER (?partner != vkb:buonarroti-michelagnolo)
+  OPTIONAL { ?partner rdfs:label ?partnerLabel }
+}
+GROUP BY ?partner ?partnerLabel
+ORDER BY DESC(?frequency)
+LIMIT 20`,
+
+  in_biographies:
+`# CQI.12 — In which biographies does a person (here Michelangelo) appear?
+SELECT DISTINCT ?biography ?biographyLabel
+WHERE {
+  vkb:buonarroti-michelagnolo viewsari:0001032 ?paragraph .
+  ?paragraph frbr:isPartOf ?biography .
+  ?biography a viewsari:0001008 .
+  OPTIONAL { ?biography rdfs:label ?biographyLabel }
+}`,
+
+  volume_of:
+`# CQI.20 — Which volume of The Lives contains an artist's biography?
+SELECT ?biography ?biographyLabel ?volume ?volumeLabel
+WHERE {
+  ?biography a viewsari:0001008 ;
+             frbr:isPartOf ?volume .
+  ?volume a viewsari:0001006 .
+  FILTER (CONTAINS(LCASE(STR(?biography)), "michelangelo"))
+  OPTIONAL { ?biography rdfs:label ?biographyLabel }
+  OPTIONAL { ?volume rdfs:label ?volumeLabel }
+}`,
+
+  surface_types:
+`# CQII.7 — Surface forms of an artwork and the type of each mention
+SELECT ?paragraph ?surfaceForm ?mentionType ?mentionTypeLabel
+WHERE {
+  vkb:Q1069665 prov:wasDerivedFrom ?mention .
+  ?mention viewsari:0001032 ?paragraph ;
+           a ?mentionType .
+  FILTER (?mentionType IN (
+    viewsari:0001017, viewsari:0001020,
+    viewsari:0001016, viewsari:0001021,
+    viewsari:0001018, viewsari:0001019
+  ))
+  OPTIONAL {
+    ?mention oa:hasBody ?body .
+    ?body a oa:TextualBody ;
+          rdf:value ?surfaceForm .
+  }
+  OPTIONAL { ?mentionType rdfs:label ?mentionTypeLabel }
+}`,
+
+  frbr_levels:
+`# CQII.19 — FRBR bibliographic levels (work / expression / manifestation)
+SELECT ?layer ?node ?nodeLabel
+WHERE {
+  { ?node a fabio:Work . BIND ("Work" AS ?layer) }
+  UNION { ?node a fabio:Expression . BIND ("Expression" AS ?layer) }
+  UNION { ?node a fabio:WebSite , viewsari:0001007 . BIND ("Manifestation (volume)" AS ?layer) }
+  UNION { ?node a fabio:WebPage . BIND ("Manifestation (page/biography)" AS ?layer) }
+  OPTIONAL { ?node rdfs:label ?nodeLabel }
+}
+LIMIT 50`,
+
+  wd_by_type:
+`# CQII.25 — Distinct Wikidata-linked entities per Viewsari entity type
+SELECT ?entityType (COUNT(DISTINCT ?entity) AS ?linked)
+WHERE {
+  ?entity a ?entityType ;
+          owl:sameAs ?wd .
+  FILTER (CONTAINS(STR(?wd), "wikidata.org"))
+  FILTER (?entityType IN (
+    viewsari:0001012, viewsari:0001013,
+    viewsari:0001014, viewsari:0001015
+  ))
+}
+GROUP BY ?entityType
+ORDER BY DESC(?linked)`,
+
+  prov_chain:
+`# CQII.34 — Which extraction activity and software agent generated an entity?
+SELECT ?activity ?activityLabel ?activityType ?agent ?agentLabel
+WHERE {
+  vkb:Q1069665 prov:wasGeneratedBy ?activity .
+  OPTIONAL {
+    ?activity a ?activityType .
+    FILTER (?activityType IN (
+      viewsari:0001022, viewsari:0001023, viewsari:0001024
+    ))
+  }
+  OPTIONAL { ?activity rdfs:label ?activityLabel }
+  OPTIONAL {
+    ?activity prov:wasAssociatedWith ?agent .
+    OPTIONAL { ?agent rdfs:label ?agentLabel }
+  }
+}`,
+
+  run_meta:
+`# CQII.37 — Model version and timestamps for named-entity-recognition runs
+SELECT ?run ?startedAt ?endedAt ?agent ?agentLabel ?modelURL
+WHERE {
+  ?run a viewsari:0001022 ;
+       prov:wasAssociatedWith ?agent .
+  OPTIONAL { ?run prov:startedAtTime ?startedAt }
+  OPTIONAL { ?run prov:endedAtTime   ?endedAt   }
+  OPTIONAL { ?agent rdfs:label ?agentLabel }
+  OPTIONAL { ?agent rdfs:seeAlso ?modelURL }
+}
+LIMIT 5`,
+
+  // Federated query — reach out to Wikidata over its SPARQL endpoint
+  wd_federated:
+`# Federated query — enrich Wikidata-linked Viewsari artworks with creator, location & date
+# Joins the local graph to Wikidata live via SERVICE. Needs federation/network access.
+SELECT ?label ?creatorLabel ?locationLabel ?collectionLabel ?inception ?wd
+WHERE {
+  # 1) Local: artworks that carry a Wikidata link
+  ?artwork a viewsari:0001012 ;
+           rdfs:label ?label ;
+           owl:sameAs ?wd .
+  FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+
+  # 2) Remote: ask Wikidata about each linked entity
+  SERVICE <https://query.wikidata.org/sparql> {
+    OPTIONAL { ?wd wdt:P170 ?creator .
+               ?creator rdfs:label ?creatorLabel .
+               FILTER(LANG(?creatorLabel) = "en") }
+    OPTIONAL { ?wd wdt:P276 ?location .
+               ?location rdfs:label ?locationLabel .
+               FILTER(LANG(?locationLabel) = "en") }
+    OPTIONAL { ?wd wdt:P195 ?collection .
+               ?collection rdfs:label ?collectionLabel .
+               FILTER(LANG(?collectionLabel) = "en") }
+    OPTIONAL { ?wd wdt:P571 ?inception }
+  }
+}
+LIMIT 20`,
+
+  // Federated query — enrich Wikidata-linked people/artists from Wikidata
+  wd_people_federated:
+`# Federated query — enrich Wikidata-linked Viewsari people with biographical facts
+# Birth/death dates, birthplace, occupation and where they were active — live from Wikidata.
+SELECT ?label ?birth ?death ?birthPlaceLabel ?occupationLabel ?workLocLabel ?wd
+WHERE {
+  # 1) Local: people that carry a Wikidata link
+  ?person a viewsari:0001013 ;
+          rdfs:label ?label ;
+          owl:sameAs ?wd .
+  FILTER(CONTAINS(STR(?wd), "wikidata.org"))
+
+  # 2) Remote: ask Wikidata about each linked person
+  SERVICE <https://query.wikidata.org/sparql> {
+    OPTIONAL { ?wd wdt:P569 ?birth }
+    OPTIONAL { ?wd wdt:P570 ?death }
+    OPTIONAL { ?wd wdt:P19 ?birthPlace .
+               ?birthPlace rdfs:label ?birthPlaceLabel .
+               FILTER(LANG(?birthPlaceLabel) = "en") }
+    OPTIONAL { ?wd wdt:P106 ?occupation .
+               ?occupation rdfs:label ?occupationLabel .
+               FILTER(LANG(?occupationLabel) = "en") }
+    OPTIONAL { ?wd wdt:P937 ?workLoc .
+               ?workLoc rdfs:label ?workLocLabel .
+               FILTER(LANG(?workLocLabel) = "en") }
+  }
+}
+LIMIT 20`
 };
 
 function loadExample(key) {
@@ -604,5 +950,159 @@ function downloadTurtle() {
 document.getElementById('sparql-input').addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runQuery(); }
 });
+
+// ── Building-blocks palette: click-to-insert + drag-and-drop ───────────
+var ta = document.getElementById('sparql-input');
+
+function insertAtCursor(text) {
+  ta.focus();
+  var start = ta.selectionStart, end = ta.selectionEnd;
+  var before = ta.value.substring(0, start), after = ta.value.substring(end);
+  var pad = (before && !/\s$/.test(before) && !/^\s/.test(text)) ? ' ' : '';
+  ta.value = before + pad + text + after;
+  var pos = start + pad.length + text.length;
+  ta.selectionStart = ta.selectionEnd = pos;
+}
+
+document.querySelectorAll('.palette-term').forEach(function(btn) {
+  btn.addEventListener('click', function() { insertAtCursor(btn.getAttribute('data-insert')); });
+  btn.addEventListener('dragstart', function(ev) {
+    ev.dataTransfer.setData('text/plain', btn.getAttribute('data-insert'));
+    ev.dataTransfer.effectAllowed = 'copy';
+  });
+});
+
+document.getElementById('palette-filter').addEventListener('input', function(ev) {
+  var q = ev.target.value.toLowerCase();
+  document.querySelectorAll('.sparql-palette .palette-group').forEach(function(grp) {
+    var any = false;
+    grp.querySelectorAll('.palette-term').forEach(function(t) {
+      var hit = !q || (t.getAttribute('data-search') || '').indexOf(q) >= 0;
+      t.style.display = hit ? '' : 'none';
+      if (hit) any = true;
+    });
+    grp.style.display = any ? '' : 'none';
+  });
+});
+
+// ── In-editor autocomplete over ontology terms ─────────────────────────
+var AC_TERMS = [];
+document.querySelectorAll('.palette-term.cls, .palette-term.prop').forEach(function(b) {
+  var idEl = b.querySelector('.pt-id');
+  AC_TERMS.push({
+    insert: b.getAttribute('data-insert'),
+    label: b.querySelector('.pt-label').textContent,
+    id: idEl ? idEl.textContent : '',
+    kind: b.classList.contains('cls') ? 'cls' : 'prop'
+  });
+});
+
+// SPARQL query keywords & common functions — suggested + inserted verbatim.
+['SELECT','DISTINCT','REDUCED','WHERE','OPTIONAL','FILTER','UNION','MINUS','GRAPH',
+ 'GROUP BY','ORDER BY','HAVING','LIMIT','OFFSET','BIND','VALUES','SERVICE',
+ 'ASK','CONSTRUCT','DESCRIBE','PREFIX','BASE','AS','DESC','ASC',
+ 'COUNT','SUM','AVG','MIN','MAX','SAMPLE','GROUP_CONCAT',
+ 'STR','LCASE','UCASE','STRLEN','SUBSTR','CONTAINS','STRSTARTS','STRENDS','REGEX','REPLACE',
+ 'LANG','DATATYPE','BOUND','COALESCE','IF','EXISTS','NOT EXISTS','IN','YEAR'
+].forEach(function(kw) {
+  AC_TERMS.push({ insert: kw, label: kw, id: '', kind: 'kw' });
+});
+
+var AC_KIND_LABEL = { cls: 'class', prop: 'prop', kw: 'keyword' };
+
+var acPop = document.createElement('div');
+acPop.className = 'ac-pop';
+document.body.appendChild(acPop);
+var acItems = [], acActive = -1, acWordStart = 0;
+
+function currentWord() {
+  var pos = ta.selectionStart;
+  var m = ta.value.substring(0, pos).match(/[A-Za-z0-9_:?]+$/);
+  if (!m) return null;
+  return { word: m[0], start: pos - m[0].length };
+}
+
+function matchTerms(word) {
+  if (word.charAt(0) === '?') return [];
+  var w = word.toLowerCase().replace(/^viewsari:/, '');
+  if (w.length < 2) return [];
+  var res = [];
+  AC_TERMS.forEach(function(t) {
+    var lab = t.label.toLowerCase(), score = -1;
+    if (lab.indexOf(w) === 0) score = 0;
+    else if (lab.indexOf(w) > 0) score = 1;
+    else if (t.id.indexOf(w) >= 0) score = 2;
+    if (score >= 0) res.push({ t: t, score: score });
+  });
+  res.sort(function(a, b) { return a.score - b.score || a.t.label.localeCompare(b.t.label); });
+  return res.slice(0, 8).map(function(r) { return r.t; });
+}
+
+function caretXY() {
+  var pos = ta.selectionStart, s = getComputedStyle(ta);
+  var mir = document.getElementById('ac-mirror');
+  if (!mir) { mir = document.createElement('div'); mir.id = 'ac-mirror'; document.body.appendChild(mir); }
+  ['boxSizing','width','paddingTop','paddingRight','paddingBottom','paddingLeft','borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth','fontFamily','fontSize','fontWeight','fontStyle','letterSpacing','lineHeight','textTransform','wordSpacing','tabSize'].forEach(function(p) { mir.style[p] = s[p]; });
+  mir.style.position = 'absolute'; mir.style.visibility = 'hidden'; mir.style.whiteSpace = 'pre-wrap';
+  mir.style.wordWrap = 'break-word'; mir.style.overflow = 'hidden'; mir.style.top = '0'; mir.style.left = '0';
+  mir.textContent = ta.value.substring(0, pos);
+  var marker = document.createElement('span'); marker.textContent = '​'; mir.appendChild(marker);
+  var rect = ta.getBoundingClientRect();
+  return {
+    x: rect.left + marker.offsetLeft - ta.scrollLeft,
+    y: rect.top + marker.offsetTop - ta.scrollTop + parseFloat(s.lineHeight)
+  };
+}
+
+function showAC() {
+  var cw = currentWord();
+  if (!cw) { hideAC(); return; }
+  var terms = matchTerms(cw.word);
+  if (!terms.length) { hideAC(); return; }
+  acWordStart = cw.start; acItems = terms; acActive = 0;
+  var h = '';
+  terms.forEach(function(t, i) {
+    h += '<div class="ac-item' + (i === 0 ? ' active' : '') + '" data-i="' + i + '">' +
+         '<span class="ac-name">' + esc(t.label) + '</span>' +
+         '<span class="ac-id">' + esc(t.id) + '</span>' +
+         '<span class="ac-kind ' + t.kind + '">' + (AC_KIND_LABEL[t.kind] || t.kind) + '</span></div>';
+  });
+  acPop.innerHTML = h;
+  var xy = caretXY();
+  acPop.style.left = Math.max(8, Math.min(xy.x, window.innerWidth - 368)) + 'px';
+  acPop.style.top = xy.y + 'px';
+  acPop.classList.add('open');
+}
+
+function hideAC() { acPop.classList.remove('open'); acItems = []; acActive = -1; }
+
+function renderActive() {
+  acPop.querySelectorAll('.ac-item').forEach(function(el, i) { el.classList.toggle('active', i === acActive); });
+}
+
+function acceptAC(i) {
+  var t = acItems[i]; if (!t) return;
+  var pos = ta.selectionStart;
+  ta.value = ta.value.substring(0, acWordStart) + t.insert + ta.value.substring(pos);
+  ta.selectionStart = ta.selectionEnd = acWordStart + t.insert.length;
+  hideAC(); ta.focus();
+}
+
+acPop.addEventListener('mousedown', function(ev) {
+  var item = ev.target.closest('.ac-item');
+  if (item) { ev.preventDefault(); acceptAC(parseInt(item.getAttribute('data-i'), 10)); }
+});
+
+ta.addEventListener('input', showAC);
+ta.addEventListener('keydown', function(e) {
+  if (!acPop.classList.contains('open')) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); acActive = (acActive + 1) % acItems.length; renderActive(); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); acActive = (acActive - 1 + acItems.length) % acItems.length; renderActive(); }
+  else if (e.key === 'Enter' || e.key === 'Tab') {
+    if (!(e.ctrlKey || e.metaKey)) { e.preventDefault(); e.stopPropagation(); acceptAC(acActive); }
+  } else if (e.key === 'Escape') { e.preventDefault(); hideAC(); }
+});
+ta.addEventListener('scroll', function() { if (acPop.classList.contains('open')) showAC(); });
+ta.addEventListener('blur', function() { setTimeout(hideAC, 150); });
 </script>
 {% endblock %}

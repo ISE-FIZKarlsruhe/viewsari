@@ -23,7 +23,7 @@ html, body { overflow: hidden !important; height: 100% !important; }
   flex-shrink: 0;
 }
 .explore-toolbar-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -494,9 +494,9 @@ html, body { overflow: hidden !important; height: 100% !important; }
         return sid===d.id||tid===d.id;
       });
       var info = document.getElementById("eg-info");
-      var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+esc(typeName(d.type))+"</div>";
+      var h = "<div style='font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+esc(typeName(d.type))+"</div>";
       h += "<div style='font-size:13px;font-weight:700;color:var(--tp);margin-bottom:8px;word-break:break-word'>"+esc(displayName(d.label,d.type))+"</div>";
-      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Connections ("+connected.length+")</div>";
+      h += "<div style='font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Connections ("+connected.length+")</div>";
       connected.forEach(function(e){
         var other = (typeof e.source==="object"?e.source:nodeMap[e.source]);
         if(other && other.id===d.id) other = (typeof e.target==="object"?e.target:nodeMap[e.target]);

@@ -51,7 +51,7 @@ body { overflow-y: auto !important; height: 100% !important; }
 .onto-doc-btn:hover { filter: brightness(.93); }
 .onto-section { margin-bottom: 36px; }
 .onto-section-title {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -91,7 +91,7 @@ a.onto-ref code { color: inherit; }
 }
 .onto-table th {
   text-align: left;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -295,7 +295,7 @@ a.onto-ref code { color: inherit; }
 .cq-example.open .cq-example-head .cq-arrow { transform: rotate(90deg); }
 .cq-example-body { display: none; padding: 0 14px 12px; font-size: 12px; line-height: 1.7; color: var(--tp); }
 .cq-example.open .cq-example-body { display: block; }
-.cq-ex-label { font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); margin-bottom: 4px; margin-top: 10px; }
+.cq-ex-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); margin-bottom: 4px; margin-top: 10px; }
 .cq-ex-label:first-child { margin-top: 0; }
 .cq-ex-value { font-size: 12px; color: var(--tp); }
 .cq-ex-value code { font-size: 11px; background: var(--bg3); border: 1px solid var(--seam); padding: 1px 5px; border-radius: 4px; }
@@ -379,7 +379,7 @@ a.onto-ref code { color: inherit; }
 }
 .cq-sparql-result th {
   text-align: left;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -434,7 +434,7 @@ a.onto-ref code { color: inherit; }
   border: 1px solid var(--seam);
   border-radius: 8px;
 }
-.cq-summary-grid .sh { font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); padding-bottom: 4px; border-bottom: 1px solid var(--seam); }
+.cq-summary-grid .sh { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tt); padding-bottom: 4px; border-bottom: 1px solid var(--seam); }
 .cq-summary-grid .sc { padding: 3px 0; border-bottom: 1px solid var(--seam); color: var(--tp); }
 .cq-summary-grid .sc:last-child { border-bottom: none; }
 .cq-summary-grid .sn { color: var(--ts); text-align: right; }
@@ -1608,7 +1608,7 @@ ORDER BY DESC(?generated)</div>
     nodeSel.classed("selected", function(n){return n.id===d.id;});
     var col = LC[d.layer]||LC.imported;
     var info = document.getElementById("og-info");
-    var h = "<div style='font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+d.layer.toUpperCase()+"</div>";
+    var h = "<div style='font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:"+col.s+";margin-bottom:4px'>"+d.layer.toUpperCase()+"</div>";
     h += "<div style='font-size:12px;font-weight:600;color:var(--tp);margin-bottom:4px;word-break:break-all'>"+d.label+"</div>";
     if(d.sub) h += "<div style='font-size:11px;color:var(--ts);margin-bottom:8px'>"+d.sub+"</div>";
     // Show connections
@@ -1618,7 +1618,7 @@ ORDER BY DESC(?generated)</div>
       return sid===d.id||tid===d.id;
     });
     if(conns.length){
-      h += "<div style='font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Relations ("+conns.length+")</div>";
+      h += "<div style='font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tt);margin-bottom:4px'>Relations ("+conns.length+")</div>";
       conns.forEach(function(e){
         var src = typeof e.source==="object"?e.source.label:e.source;
         var tgt = typeof e.target==="object"?e.target.label:e.target;
