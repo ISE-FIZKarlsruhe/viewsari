@@ -31,6 +31,9 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 .kbe-occ { display:flex;align-items:baseline;gap:10px;font-size:12px;background:var(--bg);border:1px solid var(--seam);border-radius:8px;padding:10px 14px;text-decoration:none;transition:all .14s;margin-bottom:6px; }
 .kbe-occ:hover { border-color:var(--or);background:#FFFBF7; }
 .kbe-empty { font-size: 13px; color: var(--ts); text-align: center; padding: 40px; }
+.kbe-portrait { float: right; width: 130px; margin: 0 0 16px 20px; border: 1px solid var(--seam); border-radius: 10px; overflow: hidden; background: var(--bg); display: none; }
+.kbe-portrait img { width: 100%; height: 160px; object-fit: cover; display: block; background: var(--bg2); }
+.kbe-portrait figcaption { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--tt); text-align: center; padding: 4px; }
 {% endblock %}
 
 {% block topbar_chips %}
@@ -53,6 +56,9 @@ function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.
 function renderEntity(ent) {
   var el = document.getElementById("entity-content");
   var h = '';
+  if(ent.wikidata){
+    h += '<figure id="kbe-portrait" class="kbe-portrait"><img id="kbe-portrait-img" alt="'+esc(ent.label || '')+'"><figcaption>Wikidata</figcaption></figure>';
+  }
   h += '<div class="kbe-title">'+esc(ent.label || ent.entity_id)+'</div>';
   h += '<div class="kbe-id">'+esc(ent.entity_id)+'</div>';
   h += '<div class="kbe-tags">';
@@ -64,6 +70,7 @@ function renderEntity(ent) {
 
   if(ent.wikidata){
     h += '<a class="kbe-wd-link" href="https://www.wikidata.org/wiki/'+esc(ent.wikidata)+'" target="_blank">&nearr; View on Wikidata ('+esc(ent.wikidata)+')</a>';
+    h += '<div style="clear:both"></div>';
   }
 
   if(ent.alt_labels && ent.alt_labels.length){
@@ -99,6 +106,27 @@ function renderEntity(ent) {
 
   el.innerHTML = h;
   document.title = 'Viewsari · ' + (ent.label || ent.entity_id);
+  if(ent.wikidata) loadWikidataPortrait(ent.wikidata);
+}
+
+// Pull the entity's portrait (Wikidata image property P18) from the Wikidata
+// API and render it via Wikimedia Commons' Special:FilePath. The figure stays
+// hidden unless an image actually exists and loads, so unillustrated or
+// non-portrait entities (e.g. buildings) simply show no portrait.
+function loadWikidataPortrait(qid){
+  fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+encodeURIComponent(qid)+'&props=claims&format=json&origin=*')
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      var e = (j.entities||{})[qid]; if(!e) return;
+      var p18 = (e.claims||{}).P18; if(!p18 || !p18.length) return;
+      var fname = p18[0].mainsnak.datavalue.value;
+      var fig = document.getElementById('kbe-portrait');
+      var img = document.getElementById('kbe-portrait-img');
+      if(!fig || !img) return;
+      img.onload = function(){ fig.style.display = 'block'; };
+      img.src = 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(fname)+'?width=240';
+    })
+    .catch(function(){});
 }
 
 function loadFromHash() {
