@@ -107,7 +107,7 @@ CQ coverage against the populated KG is evaluated by [`src/evaluation/run_cq_eva
 The project is structured around three research questions, summarized here. The full repository mapping (which Cs and Es answer which RQ) is in the [top-level README](../../README.md#research-questions).
 
 - **RQ1** — What representational commitments must a knowledge graph make to remain accountable to the interpretive act that produced it, and how can these be operationalized in a provenance-aware ontology?
-- **RQ2** — Under what conditions can LLMs, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond span-level supervised baselines?
+- **RQ2** — Under what conditions can LLMs, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond surface form-baselines?
 - **RQ3** — Which design patterns recur across provenance-aware KGs in the digital humanities, and to what extent does the Viewsari methodology transfer to structurally distinct interpretive corpora?
 
 ---

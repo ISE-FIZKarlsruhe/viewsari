@@ -35,7 +35,7 @@ The repository is the artifact side of the dissertation. Each conceptual contrib
 | | Question | Answered by |
 |---|---|---|
 | **RQ1** | What representational commitments must a knowledge graph make to remain accountable to the interpretive act that produced it, and how can these commitments be operationalized in a provenance-aware ontology? | **C1** + **E1** → [`data/ontology/`](data/ontology/), [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) |
-| **RQ2** | Under what conditions can LLMs, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond span-level supervised baselines? | **C2** + **C3** + **E2** + **E3** → [`obliquer/`](obliquer/), [`src/extract_content/`](src/extract_content/), [`app/`](app/) |
+| **RQ2** | Under what conditions can LLMs, treated as interpretive agents, recognize and link implicit and out-of-knowledge-base entity mentions that lie beyond surface form-baselines? | **C2** + **C3** + **E2** + **E3** → [`obliquer/`](obliquer/), [`src/extract_content/`](src/extract_content/), [`app/`](app/) |
 | **RQ3** | Which design patterns recur across provenance-aware KGs in the digital humanities, and to what extent does the Viewsari methodology transfer to structurally distinct interpretive corpora? | **C4** + **E4** → comparative pattern analysis (documented in the dissertation Generalization chapter); reconfiguration documented in [`obliquer/`](obliquer/) for the 19th-century German pilot. |
 
 ### Evaluation map (where the numbers come from)

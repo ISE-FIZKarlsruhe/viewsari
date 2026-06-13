@@ -12,15 +12,21 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 FAC_DIR = ROOT / "data" / "facsimile_pages"
 KB_PATH = ROOT / "data" / "kb" / "kb.json"
 
-# Authoritative knowledge-graph totals — mirror docs/population_stats.md.
-# Regenerate the source with: python3 src/kg_population/population_stats.py
-# and update these when the KG is re-populated.
+# Authoritative knowledge-graph totals — mirror the latest KG evaluation report
+# under src/evaluation/kg_reports/ and docs/population_stats.md. `triples` is the
+# base graph (data/kg/viewsari_kg.ttl); the corpus totals (biographies,
+# paragraphs, volumes) are the full populated KG, not just the annotated GT
+# subset. Update these when the KG is re-populated; regenerate the source with:
+# python3 src/kg_population/population_stats.py
 KG_STATS = {
-    "triples": 2_445_055,
-    "mentions": 112_123,
+    "triples": 2_559_459,
+    "mentions": 112_113,
     "artworks": 15_804,
     "linked_qids": 3_070,
     "ookb": 12_529,
+    "biographies": 165,
+    "paragraphs": 3_479,
+    "volumes": 10,
 }
 
 

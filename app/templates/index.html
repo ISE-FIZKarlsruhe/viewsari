@@ -466,26 +466,24 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
       <a class="hero-btn secondary" href="#biographies">Browse the biographies</a>
       <a class="hero-btn secondary" href="/ontology">What's behind it?</a>
     </div>
-    {% if biographies %}
-    {% set total_paras = biographies | map(attribute='paragraph_count') | sum %}
+    {% if kg_stats %}
     <div class="hero-stats-group">
-      <div class="hero-stats-caption">Annotated corpus (ground truth)</div>
+      <div class="hero-stats-caption">Vasari's Lives (full corpus)</div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-num">{{ biographies | length }}</div>
+          <div class="hero-stat-num">{{ "{:,}".format(kg_stats.biographies) }}</div>
           <div class="hero-stat-label">Biographies</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num">{{ total_paras }}</div>
+          <div class="hero-stat-num">{{ "{:,}".format(kg_stats.paragraphs) }}</div>
           <div class="hero-stat-label">Paragraphs</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num">{{ biographies | map(attribute='volume') | unique | list | length }}</div>
+          <div class="hero-stat-num">{{ kg_stats.volumes }}</div>
           <div class="hero-stat-label">Volumes</div>
         </div>
       </div>
     </div>
-    {% if kg_stats %}
     <div class="hero-stats-group">
       <div class="hero-stats-caption">Knowledge graph</div>
       <div class="hero-stats">
@@ -503,8 +501,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
         </div>
       </div>
     </div>
-    <div class="hero-stats-note">Knowledge-graph figures reflect the state after Population Run 2.</div>
-    {% endif %}
+    <div class="hero-stats-note">Knowledge-graph figures reflect the current populated graph.</div>
     {% endif %}
   </div>
 
@@ -554,7 +551,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
     <details class="home-rq">
       <summary>
         <span class="home-rq-id">RQ2</span>
-        <span class="home-rq-text">Under what conditions can large language models recognize and link the implicit and out-of-knowledge-base (OOKB) mentions that span-level baselines miss?</span>
+        <span class="home-rq-text">Under what conditions can large language models recognize and link the implicit and out-of-knowledge-base (OOKB) mentions that surface form-baselines miss?</span>
       </summary>
       <div class="home-rq-answer">
         The ObliquER pipeline uses LLM-based named entity recognition with few-shot and
