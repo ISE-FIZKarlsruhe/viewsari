@@ -67,16 +67,16 @@ The 13 partially-answerable CQs are all **data gaps, not modeling gaps**: the qu
 
 #### Knowledge graph — population metrics (E3)
 
-From [`src/evaluation/kg_reports/kg_evaluation_20260609_171005.md`](src/evaluation/kg_reports/kg_evaluation_20260609_171005.md) (closure-materialized KG):
+From [`src/evaluation/kg_reports/kg_evaluation_20260613_130933.md`](src/evaluation/kg_reports/kg_evaluation_20260613_130933.md) (closure-materialized KG):
 
 | Metric | Value |
 |---|---|
-| Total triples | 2,563,973 |
-| `oa:Annotation` instances | 112,123 |
+| Total triples | 2,566,890 |
+| `oa:Annotation` instances | 112,113 |
 | `viewsari:mention` instances (`0001026`) | 86,654 |
 | Triples per mention | 9.69 |
-| Provenance coverage (annotation → SoftwareAgent) | **100%** (112,123 / 112,123) |
-| Provenance coverage — strict (paragraph + activity + agent) | 75.1% (84,215 / 112,123) |
+| Provenance coverage (annotation → SoftwareAgent) | **100%** (112,113 / 112,113) |
+| Provenance coverage — strict (paragraph + activity + agent) | 75.1% (84,215 / 112,113) |
 | NER activities · entity-linking activities | 10,060 · 3,100 |
 | Pages with Project Gutenberg web manifestation | 92.3% (2,794 / 3,026; volumes + biographies: 100%) |
 
@@ -296,7 +296,7 @@ The website is served at `http://localhost:9000`, GraphDB Workbench at `http://l
 
 ## Knowledge graph (E3)
 
-The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~818 MB), with a materialized closure of **2,563,973 triples** at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl) (~816 MB). The closure adds the `viewsari:0001032` paragraph edges (rules R2/R3) that five Phase-I CQs — including CQI.12 — depend on; see [Querying the KG](#querying-the-kg-base-vs-closure) below.
+The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~815 MB), with a materialized closure of **2,566,890 triples** at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl) (~816 MB). The closure adds the `viewsari:0001032` paragraph edges (rules R2/R3) that five Phase-I CQs — including CQI.12 — depend on; see [Querying the KG](#querying-the-kg-base-vs-closure) below.
 
 **Namespace:** `vkb:` = `https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#`
 
@@ -306,8 +306,8 @@ The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/v
 |---|---|---|---|
 | Person | `viewsari:0001013` | 443 | Consolidated across biographies via coreference resolution |
 | Artwork | `viewsari:0001012` | 15,804 | GT + ObliquER entity linking (3,275 Wikidata-linked, 12,529 OOKB) |
-| Co-occurrence | `viewsari:0001025` | 541 | Person pairs within a single paragraph |
-| Mention | `viewsari:0001026` | 86,654 | Across 112,123 `oa:Annotation` nodes (mentions + co-occurrence/coref anchors) |
+| Co-occurrence | `viewsari:0001025` | 632 | Person pairs within a single paragraph |
+| Mention | `viewsari:0001026` | 86,654 | Across 112,113 `oa:Annotation` nodes (mentions + co-occurrence/coref anchors) |
 
 ### Provenance model (PROV-O) — operationalizes C2
 

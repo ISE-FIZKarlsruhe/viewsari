@@ -279,6 +279,10 @@ def add_cooccurrences(g: Graph):
             g.add((subj, VIEWSARI["0001034"], uri(row["viewsari:involves_2"])))
         if row.get("prov:wasGeneratedBy"):
             g.add((subj, PROV.wasGeneratedBy, uri(row["prov:wasGeneratedBy"])))
+        # Anchor link: the co-occurrence is derived from its textual annotation
+        # (mirrors the ObliquER pattern entity prov:wasDerivedFrom mention).
+        if row.get("prov:wasDerivedFrom"):
+            g.add((subj, PROV.wasDerivedFrom, uri(row["prov:wasDerivedFrom"])))
 
     # Cooc TextChunks
     for row in read_csv(cooc_dir / "viewsari_cooc_textchunks.csv"):

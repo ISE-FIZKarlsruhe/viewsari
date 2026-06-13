@@ -3,7 +3,7 @@
     "file": "person_giotto.json",
     "label": "Giotto",
     "mode": "person",
-    "nodes": 41,
+    "nodes": 42,
     "edges": 42
   },
   {
@@ -17,35 +17,35 @@
     "file": "person_michelagnolo.json",
     "label": "Michelagnolo",
     "mode": "person",
-    "nodes": 135,
-    "edges": 172
+    "nodes": 145,
+    "edges": 170
   },
   {
     "file": "person_brunelleschi.json",
     "label": "Brunelleschi",
     "mode": "person",
-    "nodes": 27,
+    "nodes": 28,
     "edges": 30
   },
   {
     "file": "person_donatello.json",
     "label": "Donatello",
     "mode": "person",
-    "nodes": 46,
+    "nodes": 48,
     "edges": 50
   },
   {
     "file": "person_ghirlandajo.json",
     "label": "Ghirlandajo",
     "mode": "person",
-    "nodes": 4,
+    "nodes": 5,
     "edges": 4
   },
   {
     "file": "person_perugino.json",
     "label": "Perugino",
     "mode": "person",
-    "nodes": 20,
+    "nodes": 23,
     "edges": 24
   },
   {
@@ -66,14 +66,14 @@
     "file": "person_bandinelli.json",
     "label": "Bandinelli",
     "mode": "person",
-    "nodes": 52,
-    "edges": 64
+    "nodes": 54,
+    "edges": 62
   },
   {
     "file": "person_sansovino.json",
     "label": "Sansovino",
     "mode": "person",
-    "nodes": 21,
+    "nodes": 22,
     "edges": 22
   },
   {
@@ -88,7 +88,7 @@
     "label": "S. Croce",
     "mode": "artwork",
     "nodes": 98,
-    "edges": 95
+    "edges": 97
   },
   {
     "file": "artwork_sistine.json",
@@ -102,14 +102,14 @@
     "label": "S. Maria Novella",
     "mode": "artwork",
     "nodes": 83,
-    "edges": 79
+    "edges": 78
   },
   {
     "file": "artwork_madonna.json",
     "label": "Madonna",
     "mode": "artwork",
-    "nodes": 141,
-    "edges": 137
+    "nodes": 157,
+    "edges": 151
   },
   {
     "file": "artwork_crucifix.json",
@@ -122,8 +122,8 @@
     "file": "artwork_chapel.json",
     "label": "Chapel",
     "mode": "artwork",
-    "nodes": 115,
-    "edges": 119
+    "nodes": 92,
+    "edges": 97
   },
   {
     "file": "artwork_last_supper.json",
@@ -136,22 +136,22 @@
     "file": "artwork_annunciation.json",
     "label": "Annunciation",
     "mode": "artwork",
-    "nodes": 148,
-    "edges": 141
+    "nodes": 134,
+    "edges": 127
   },
   {
     "file": "artwork_tomb.json",
     "label": "tomb",
     "mode": "artwork",
-    "nodes": 96,
-    "edges": 92
+    "nodes": 88,
+    "edges": 87
   },
   {
     "file": "artwork_fresco.json",
     "label": "fresco",
     "mode": "artwork",
-    "nodes": 135,
-    "edges": 137
+    "nodes": 137,
+    "edges": 138
   },
   {
     "file": "artwork_baptistery.json",
@@ -164,8 +164,8 @@
     "file": "artwork_s_pietro.json",
     "label": "S. Pietro",
     "mode": "artwork",
-    "nodes": 85,
-    "edges": 84
+    "nodes": 82,
+    "edges": 81
   },
   {
     "file": "bio_giotto.json",

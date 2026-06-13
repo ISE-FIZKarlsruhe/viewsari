@@ -75,9 +75,9 @@ Five Phase-I CQs (CQI.3, CQI.12, CQI.19, CQI.21, CQI.22) need a direct `viewsari
 
 | Rule | What it adds | Triples on the current KG |
 |---|---|---|
-| R1 — artwork closure (entity ← `prov:wasDerivedFrom` ← annotation → 0001032) | defensive — most artworks already carry the edge | 0 |
-| R2 — cooccurrence closure (parse "Vol. N, Para. M" out of `rdfs:label`) | cooccurrence → paragraph | 617 |
-| R3 — person closure (chains off R2 through `viewsari:0001034` / `involves`) | person → paragraph | 1,282 |
+| R1 — artwork closure (entity ← `prov:wasDerivedFrom` ← annotation → 0001032) | entity → paragraph | 5,855 |
+| R2 — cooccurrence closure (parse "Vol. N, Para. M" out of `rdfs:label`) | cooccurrence → paragraph | 632 |
+| R3 — person closure (chains off R2 through `viewsari:0001034` / `involves`) | person → paragraph | 944 |
 
 ```bash
 # One-shot: write data/kg/viewsari_kg.inferred.ttl

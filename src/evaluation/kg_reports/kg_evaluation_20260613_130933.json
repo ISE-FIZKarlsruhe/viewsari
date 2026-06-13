@@ -1,0 +1,864 @@
+{
+  "generated": "2026-06-13T13:09:33.503365+00:00",
+  "metrics": [
+    {
+      "id": "M01",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Total triples",
+      "kind": "scalar",
+      "query": "kg_queries/triple_count.rq",
+      "description": "Total number of triples in the KG (after closure if loaded from viewsari_kg.inferred.ttl).",
+      "status": "ok",
+      "elapsed_ms": 9563,
+      "headers": [
+        "triples"
+      ],
+      "rows": [
+        [
+          "2567140"
+        ]
+      ],
+      "summary": "2567140",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M02",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Instance counts by ontology class",
+      "kind": "table",
+      "query": "kg_queries/instance_counts.rq",
+      "description": "Populates the instance-counts table in \u00a711.3.2 \u2014 one row per ontology class with the materialised individual count.",
+      "columns": [
+        "class",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 5713,
+      "headers": [
+        "class",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "http://purl.org/spar/doco/TextChunk",
+          "doco:TextChunk",
+          "112113"
+        ],
+        [
+          "http://www.w3.org/ns/oa#Annotation",
+          "oa:Annotation",
+          "112113"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001026",
+          "mention (any)",
+          "86654"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012",
+          "artwork",
+          "15804"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001033",
+          "extracted_content (parent)",
+          "15804"
+        ],
+        [
+          "http://www.w3.org/ns/prov#Activity",
+          "prov:Activity",
+          "13794"
+        ],
+        [
+          "http://purl.org/spar/doco/Paragraph",
+          "doco:Paragraph",
+          "3479"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009",
+          "page",
+          "3026"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001011",
+          "page_web_representation",
+          "3026"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001025",
+          "cooccurrence",
+          "632"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013",
+          "person",
+          "443"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008",
+          "biography",
+          "165"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001010",
+          "biography_web_representation",
+          "165"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006",
+          "volume",
+          "10"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001007",
+          "volume_web_representation",
+          "10"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001000",
+          "edition",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001001",
+          "translation",
+          "1"
+        ],
+        [
+          "http://www.w3.org/ns/prov#SoftwareAgent",
+          "prov:SoftwareAgent",
+          "1"
+        ]
+      ],
+      "summary": "18 row(s)",
+      "error": null,
+      "row_count": 18
+    },
+    {
+      "id": "M03",
+      "category": "descriptive",
+      "section": "11.3.2",
+      "title": "Mention taxonomy breakdown",
+      "kind": "table",
+      "query": "kg_queries/mention_types.rq",
+      "description": "Counts per concrete mention subclass \u2014 the four leaf classes plus the artwork-specific specialisations.",
+      "columns": [
+        "mentionType",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 2112,
+      "headers": [
+        "mentionType",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001016",
+          "implicit_mention",
+          "40667"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001021",
+          "implicit_artwork_mention",
+          "40667"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001018",
+          "coreferent",
+          "22283"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001017",
+          "explicit_mention",
+          "14517"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001020",
+          "explicit_artwork_mention",
+          "14517"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001019",
+          "generic_mention",
+          "9187"
+        ]
+      ],
+      "summary": "6 row(s)",
+      "error": null,
+      "row_count": 6
+    },
+    {
+      "id": "M04",
+      "category": "descriptive",
+      "section": "11.3.3",
+      "title": "Activity inventory",
+      "kind": "table",
+      "query": "kg_queries/activities.rq",
+      "description": "Number of prov:Activity instances grouped by their viewsari activity class (NER, entity linking, cooccurrence analysis).",
+      "columns": [
+        "activityType",
+        "label",
+        "count"
+      ],
+      "status": "ok",
+      "elapsed_ms": 494,
+      "headers": [
+        "activityType",
+        "label",
+        "count"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001022",
+          "named_entity_recognition",
+          "10060"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001023",
+          "entity_linking",
+          "3100"
+        ]
+      ],
+      "summary": "2 row(s)",
+      "error": null,
+      "row_count": 2
+    },
+    {
+      "id": "M05",
+      "category": "evaluative",
+      "section": "12.4.2",
+      "title": "Triples-per-mention (verbosity proxy)",
+      "kind": "scalar",
+      "query": "kg_queries/triples_per_mention.rq",
+      "description": "Triples / mentions ratio. Tests the CIDOC-comparison claim that the Viewsari provenance template generates 12\u201318 triples per mention. Pass criterion: closed-graph ratio at or below the upper bound.",
+      "status": "ok",
+      "elapsed_ms": 41810,
+      "headers": [
+        "mentions",
+        "ratio",
+        "totalTriplesAboutMentions"
+      ],
+      "rows": [
+        [
+          "86654",
+          "9.687769750963602372654464883",
+          "839484"
+        ]
+      ],
+      "summary": "86654 \u00b7 9.687769750963602372654464883 \u00b7 839484",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M06",
+      "category": "evaluative",
+      "section": "12.4.3",
+      "title": "Provenance coverage \u2014 loose",
+      "kind": "scalar-table",
+      "query": "kg_queries/provenance_coverage.rq",
+      "description": "Total annotations vs annotations with prov:wasGeneratedBy \u2192 SoftwareAgent. Tests contribution C2's full-provenance claim. Pass criterion: ratio = 1.0.",
+      "columns": [
+        "total",
+        "withProv",
+        "ratio"
+      ],
+      "status": "ok",
+      "elapsed_ms": 2130,
+      "headers": [
+        "total",
+        "withProv",
+        "ratio"
+      ],
+      "rows": [
+        [
+          "112113",
+          "112113",
+          "1"
+        ]
+      ],
+      "summary": "total=112113 \u00b7 withProv=112113 \u00b7 ratio=1",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M07",
+      "category": "evaluative",
+      "section": "12.4.3",
+      "title": "Provenance coverage \u2014 strict (paragraph + activity + agent)",
+      "kind": "scalar-table",
+      "query": "kg_queries/provenance_coverage_strict.rq",
+      "description": "Stricter variant of M06: annotations whose provenance chain reaches a paragraph AND an activity AND a prov:SoftwareAgent simultaneously. Pass criterion: ratio below M06, with the residual fully accounted for by human-annotated (prov:Person) ground-truth mentions and non-mention annotation nodes.",
+      "columns": [
+        "total",
+        "fullChain",
+        "ratio"
+      ],
+      "status": "ok",
+      "elapsed_ms": 2603,
+      "headers": [
+        "total",
+        "fullChain",
+        "ratio"
+      ],
+      "rows": [
+        [
+          "112113",
+          "84215",
+          "0.7512"
+        ]
+      ],
+      "summary": "total=112113 \u00b7 fullChain=84215 \u00b7 ratio=0.7512",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M08",
+      "category": "descriptive",
+      "section": "11.3.3",
+      "title": "Activity \u2192 SoftwareAgent inventory",
+      "kind": "table",
+      "query": "kg_queries/activity_agents.rq",
+      "description": "Each prov:Activity instance with its associated prov:SoftwareAgent (or prov:Person fallback). Confirms which model produced which run.",
+      "columns": [
+        "activity",
+        "activityLabel",
+        "agent",
+        "agentLabel"
+      ],
+      "status": "ok",
+      "elapsed_ms": 1477,
+      "headers": [
+        "activity",
+        "activityLabel",
+        "agent",
+        "agentLabel",
+        "runs"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p162",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 162",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p205",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 205",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p221",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 221",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p265",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 265",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p298",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 298",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p300",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 300",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p46",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 46",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p54",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 54",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p56",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 56",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p65",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 65",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p69",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 69",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p73",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 73",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol10_p78",
+          "Entity linking \u2014 final_ontology_linked_all, vol 10, paragraph 78",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p101",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 101",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p124",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 124",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p135",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 135",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p173",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 173",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p19",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 19",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p190",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 190",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p200",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 200",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p240",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 240",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p277",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 277",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p30",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 30",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p32",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 32",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p42",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 42",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p52",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 52",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p56",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 56",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol1_p87",
+          "Entity linking \u2014 final_ontology_linked_all, vol 1, paragraph 87",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p187",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 187",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p191",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 191",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p232",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 232",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p237",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 237",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p246",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 246",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p28",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 28",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p65",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 65",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol2_p74",
+          "Entity linking \u2014 final_ontology_linked_all, vol 2, paragraph 74",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p128",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 128",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p136",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 136",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p191",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 191",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p203",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 203",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p227",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 227",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p266",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 266",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p267",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 267",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p277",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 277",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p303",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 303",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p338",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 338",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p45",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 45",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol3_p99",
+          "Entity linking \u2014 final_ontology_linked_all, vol 3, paragraph 99",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol4_p109",
+          "Entity linking \u2014 final_ontology_linked_all, vol 4, paragraph 109",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#el_run_final_ontology_linked_all_vol4_p130",
+          "Entity linking \u2014 final_ontology_linked_all, vol 4, paragraph 130",
+          "https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#llm_agent_openai_gpt_oss_120b",
+          "openai/gpt-oss-120b",
+          "1"
+        ]
+      ],
+      "summary": "50 row(s)",
+      "error": null,
+      "row_count": 50
+    },
+    {
+      "id": "M09",
+      "category": "evaluative",
+      "section": "12.4.4",
+      "title": "External linking coverage by entity type",
+      "kind": "table",
+      "query": "kg_queries/external_linking.rq",
+      "description": "Per-class total vs Wikidata-linked count and percentage. Tests whether person and artwork classes are reconciled to Wikidata at rates consistent with the long-tail discovery argument. Pass criterion: person rate substantially exceeds artwork rate, artwork gap explained by long tail.",
+      "columns": [
+        "entityType",
+        "label",
+        "total",
+        "linked",
+        "percent"
+      ],
+      "status": "ok",
+      "elapsed_ms": 245,
+      "headers": [
+        "entityType",
+        "label",
+        "total",
+        "linked",
+        "percent"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001012",
+          "artwork",
+          "15804",
+          "3275",
+          "20.7"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001013",
+          "person",
+          "443",
+          "320",
+          "72.2"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001015",
+          "location",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001014",
+          "organization",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "summary": "4 row(s)",
+      "error": null,
+      "row_count": 4
+    },
+    {
+      "id": "M10",
+      "category": "descriptive",
+      "section": "11.3.4",
+      "title": "OOKB artworks",
+      "kind": "scalar",
+      "query": "kg_queries/ookb_artworks.rq",
+      "description": "Number of artworks WITHOUT a wikidata.org owl:sameAs link \u2014 the OOKB long-tail retained under stable Viewsari-internal IRIs.",
+      "status": "ok",
+      "elapsed_ms": 368,
+      "headers": [
+        "ookb"
+      ],
+      "rows": [
+        [
+          "12529"
+        ]
+      ],
+      "summary": "12529",
+      "error": null,
+      "row_count": 1
+    },
+    {
+      "id": "M11",
+      "category": "descriptive",
+      "section": "11.3.4",
+      "title": "Authority namespaces in use",
+      "kind": "table",
+      "query": "kg_queries/authority_namespaces.rq",
+      "description": "Distinct external authorities reached through owl:sameAs (Wikidata, GeoNames, Iconclass, \u2026).",
+      "columns": [
+        "authority",
+        "links"
+      ],
+      "status": "ok",
+      "elapsed_ms": 83,
+      "headers": [
+        "authority",
+        "links"
+      ],
+      "rows": [
+        [
+          "https://www.wikidata.org",
+          "3164"
+        ],
+        [
+          "http://www.wikidata.org",
+          "431"
+        ]
+      ],
+      "summary": "2 row(s)",
+      "error": null,
+      "row_count": 2
+    },
+    {
+      "id": "M12",
+      "category": "evaluative",
+      "section": "12.4.5",
+      "title": "Web-manifestation reachability",
+      "kind": "scalar-table",
+      "query": "kg_queries/web_manifestation_depth.rq",
+      "description": "How many expression-level nodes (volume, biography, page) are reachable to a Project Gutenberg web manifestation via frbr:hasEmbodiment + rdfs:seeAlso. Tests whether every expression-level bibliographic node resolves to a Project Gutenberg URL. Pass criterion: volume and biography at 100%; page-level reachability bounded by the upstream HTML's anchor coverage.",
+      "columns": [
+        "expressionType",
+        "withWebURL",
+        "total",
+        "percent"
+      ],
+      "status": "ok",
+      "elapsed_ms": 94,
+      "headers": [
+        "expressionType",
+        "label",
+        "total",
+        "withWebURL",
+        "percent"
+      ],
+      "rows": [
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009",
+          "page",
+          "3026",
+          "2794",
+          "92.3"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001008",
+          "biography",
+          "165",
+          "165",
+          "100"
+        ],
+        [
+          "https://viewsari.ise.fiz-karlsruhe.de/ontology/0001006",
+          "volume",
+          "10",
+          "10",
+          "100"
+        ]
+      ],
+      "summary": "expressionType=https://viewsari.ise.fiz-karlsruhe.de/ontology/0001009 \u00b7 label=page \u00b7 total=3026 \u00b7 withWebURL=2794 \u00b7 percent=92.3",
+      "error": null,
+      "row_count": 3
+    }
+  ]
+}

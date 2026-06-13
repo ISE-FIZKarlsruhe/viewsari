@@ -92,11 +92,11 @@ data/
 |---|---|---|
 | Person | `viewsari:0001013` | 443 |
 | Artwork | `viewsari:0001012` | 15,804 (3,275 Wikidata-linked · 12,529 OOKB) |
-| Co-occurrence | `viewsari:0001025` | 541 |
+| Co-occurrence | `viewsari:0001025` | 632 |
 | Mention | `viewsari:0001026` | 86,654 (explicit 14,517 · implicit 40,667 · coreferent 22,283 · generic 9,187) |
-| Annotation node | `oa:Annotation` | 112,123 |
+| Annotation node | `oa:Annotation` | 112,113 |
 
-Counts and provenance coverage of the populated KG are reported by [`src/evaluation/run_kg_evaluation.py`](../src/evaluation/run_kg_evaluation.py); latest output: [`src/evaluation/kg_metrics.json`](../src/evaluation/kg_metrics.json) and the timestamped report under [`kg_reports/`](../src/evaluation/kg_reports/) (current: `kg_evaluation_20260609_171005.md`).
+Counts and provenance coverage of the populated KG are reported by [`src/evaluation/run_kg_evaluation.py`](../src/evaluation/run_kg_evaluation.py); latest output: [`src/evaluation/kg_metrics.json`](../src/evaluation/kg_metrics.json) and the timestamped report under [`kg_reports/`](../src/evaluation/kg_reports/) (current: `kg_evaluation_20260613_130933.md`).
 
 ---
 
