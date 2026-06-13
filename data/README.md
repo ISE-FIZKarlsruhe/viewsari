@@ -18,8 +18,8 @@ For the full repo-wide mapping of contributions (C1–C4, E1–E4) and research 
 ```
 data/
 ├── kg/                    # The knowledge graph (E3)
-│   ├── viewsari_kg.ttl              # Full KG (~1.3M triples, 175 MB)
-│   ├── viewsari_kg.inferred.ttl     # Materialized closure (R1/R2/R3 applied)
+│   ├── viewsari_kg.ttl              # Full KG (Turtle, ~818 MB)
+│   ├── viewsari_kg.inferred.ttl     # Materialized closure (R1/R2/R3 applied, ~816 MB, 2.56M triples)
 │   └── explorer/                    # D3 explorer JSONs (per biography / artwork / person)
 │       └── ner/                         # ObliquER per-strategy NER explorer graphs
 │
@@ -79,7 +79,7 @@ data/
 
 | File | Description |
 |---|---|
-| `viewsari_kg.ttl` | Full populated KG, Turtle. Three-layer ontology (bibliographic / structural / content) instantiated over Vasari's *The Lives*. ~1.3M triples, ~175 MB. |
+| `viewsari_kg.ttl` | Full populated KG, Turtle. Three-layer ontology (bibliographic / structural / content) instantiated over Vasari's *The Lives*. ~818 MB. |
 | `viewsari_kg.inferred.ttl` | Materialised closure produced by [`src/evaluation/materialise_inferences.py`](../src/evaluation/materialise_inferences.py); adds the artwork / co-occurrence / person → paragraph edges required by five Phase-I CQs. |
 | `explorer/*.json` | D3-ready explorer graphs consumed by the website's GT co-occurrence explorer ([`app/routers/explore.py`](../app/routers/explore.py)). |
 | `explorer/ner/*/bio_*.json` | Per-strategy ObliquER explorer graphs (one folder per prompting strategy, one JSON per biography), consumed by the ObliquER KG explorer ([`app/routers/obliquer.py`](../app/routers/obliquer.py)). |
@@ -91,11 +91,12 @@ data/
 | Class | Ontology ID | Count |
 |---|---|---|
 | Person | `viewsari:0001013` | 443 |
-| Artwork | `viewsari:0001012` | 852 |
+| Artwork | `viewsari:0001012` | 15,804 (3,275 Wikidata-linked · 12,529 OOKB) |
 | Co-occurrence | `viewsari:0001025` | 541 |
-| Mention (`oa:Annotation`) | — | 57,685 (GT 2,439 + ObliquER 55,246) |
+| Mention | `viewsari:0001026` | 86,654 (explicit 14,517 · implicit 40,667 · coreferent 22,283 · generic 9,187) |
+| Annotation node | `oa:Annotation` | 112,123 |
 
-Provenance coverage of the populated KG is reported by [`src/evaluation/run_kg_evaluation.py`](../src/evaluation/run_kg_evaluation.py); latest output: [`src/evaluation/kg_metrics.json`](../src/evaluation/kg_metrics.json).
+Counts and provenance coverage of the populated KG are reported by [`src/evaluation/run_kg_evaluation.py`](../src/evaluation/run_kg_evaluation.py); latest output: [`src/evaluation/kg_metrics.json`](../src/evaluation/kg_metrics.json) and the timestamped report under [`kg_reports/`](../src/evaluation/kg_reports/) (current: `kg_evaluation_20260609_171005.md`).
 
 ---
 
@@ -167,7 +168,7 @@ One row per named-entity mention. File `0.csv` = Volume 1, …, `9.csv` = Volume
 
 Per-volume co-occurrence CSVs plus a `results/` subdir holding aggregated PMI / Dice tables. Computed by [`src/network/compute_pmi.py`](../src/network/compute_pmi.py) and [`src/network/compute_dice.py`](../src/network/compute_dice.py); the underlying per-biography analysis lives in [`src/network/biography_pmi-dice.ipynb`](../src/network/biography_pmi-dice.ipynb).
 
-The KG-side co-occurrence layer (`viewsari:cooccurrence` instances with `viewsari:involves` to participating persons and `viewsari:inParagraph` to the source paragraph) is built from [`kg_foundation/cooccurrences/`](kg_foundation/cooccurrences/).
+The KG-side co-occurrence layer (`viewsari:cooccurrence` / `viewsari:0001025` instances with `viewsari:0001034` *involves* to participating persons) is built from [`kg_foundation/cooccurrences/`](kg_foundation/cooccurrences/). In the base KG these nodes carry only their participants and a label; the link to the source paragraph (`viewsari:0001032`) is added by closure rule R2 and is present only in `viewsari_kg.inferred.ttl`.
 
 ---
 

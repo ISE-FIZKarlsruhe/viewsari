@@ -54,33 +54,33 @@ The repository is the artifact side of the dissertation. Each conceptual contrib
 
 #### Ontology — competency-question coverage (RQ1 / E1)
 
-Over the 70 CQs in [`data/ontology/CQ_CATALOG.md`](data/ontology/CQ_CATALOG.md); latest run [`src/evaluation/reports/cq_evaluation_20260428_083554.md`](src/evaluation/reports/cq_evaluation_20260428_083554.md):
+Over the 70 CQs in [`data/ontology/CQ_CATALOG.md`](data/ontology/CQ_CATALOG.md); latest run [`src/evaluation/reports/cq_evaluation_20260609_174946.md`](src/evaluation/reports/cq_evaluation_20260609_174946.md) (against the closure-materialized KG):
 
 | Status | Count | % of all 70 | % of SPARQL-only (52) |
 |---|---|---|---|
-| Fully answerable | 52 | 74.3% | 100.0% |
-| Partially answerable | 0 | 0.0% | 0.0% |
+| Fully answerable | 39 | 55.7% | 75.0% |
+| Partially answerable | 13 | 18.6% | 25.0% |
 | Unanswerable | 0 | 0.0% | 0.0% |
 | Non-SPARQL (descriptive) | 18 | 25.7% | n/a |
 
-All 13 thematic clusters reach 100% coverage on the SPARQL-answerable subset. Complexity mix: 28 multi-hop, 15 simple, 9 aggregation.
+The 13 partially-answerable CQs are all **data gaps, not modeling gaps**: the queries are correctly modeled (root cause `data-gap` for every one), but they target content not yet populated — chiefly the location and historical-event clusters (`viewsari:0001015` locations and event entities have zero instances). They resolve on data ingestion without ontology changes. Complexity mix: 28 multi-hop, 15 simple, 9 aggregation.
 
 #### Knowledge graph — population metrics (E3)
 
-From [`src/evaluation/kg_reports/kg_evaluation_20260428_060320.md`](src/evaluation/kg_reports/kg_evaluation_20260428_060320.md) (closure-materialized KG):
+From [`src/evaluation/kg_reports/kg_evaluation_20260609_171005.md`](src/evaluation/kg_reports/kg_evaluation_20260609_171005.md) (closure-materialized KG):
 
 | Metric | Value |
 |---|---|
-| Total triples | 1,340,791 |
-| `oa:Annotation` mentions | 83,154 |
-| `viewsari:mention` instances | 57,685 |
-| Triples per mention | 9.12 |
-| Provenance coverage (annotation → SoftwareAgent) | **100%** (83,154 / 83,154) |
-| Provenance coverage — strict (paragraph + activity + agent) | 66.4% (55,246 / 83,154) |
-| NER activities · entity-linking activities | 6,961 · 1 |
-| Pages with Project Gutenberg web manifestation | 92.3% (volumes + biographies: 100%) |
+| Total triples | 2,563,973 |
+| `oa:Annotation` instances | 112,123 |
+| `viewsari:mention` instances (`0001026`) | 86,654 |
+| Triples per mention | 9.69 |
+| Provenance coverage (annotation → SoftwareAgent) | **100%** (112,123 / 112,123) |
+| Provenance coverage — strict (paragraph + activity + agent) | 75.1% (84,215 / 112,123) |
+| NER activities · entity-linking activities | 10,060 · 3,100 |
+| Pages with Project Gutenberg web manifestation | 92.3% (2,794 / 3,026; volumes + biographies: 100%) |
 
-Mention typology: explicit 9,588 · implicit 27,098 · coreferent 14,445 · generic 6,554. External linking: persons 320/443 (72.2%) to Wikidata, artworks 272/813 (33.5%); 541 artworks remain OOKB.
+Mention typology: explicit 14,517 · implicit 40,667 · coreferent 22,283 · generic 9,187. External linking: persons 320/443 (72.2%) to Wikidata, artworks 3,275/15,804 (20.7%); 12,529 artworks remain OOKB.
 
 #### ObliquER — entity recognition and linking (RQ2 / E2)
 
@@ -195,8 +195,8 @@ viewsari/
 │
 ├── data/                           # Static data layer — E1 ontology, E3 KG, source corpus
 │   ├── kg/                             # The knowledge graph (E3)
-│   │   ├── viewsari_kg.ttl                 # Full KG (~1.3M triples, 175 MB)
-│   │   ├── viewsari_kg.inferred.ttl        # Materialized closure
+│   │   ├── viewsari_kg.ttl                 # Full KG (Turtle, ~818 MB)
+│   │   ├── viewsari_kg.inferred.ttl        # Materialized closure (~816 MB, 2.56M triples)
 │   │   └── explorer/                       # D3 explorer JSONs (NER + co-occurrence)
 │   ├── kb/
 │   │   └── kb.json                         # Prebuilt KB used by web app
@@ -296,7 +296,7 @@ The website is served at `http://localhost:9000`, GraphDB Workbench at `http://l
 
 ## Knowledge graph (E3)
 
-The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~1.3M triples, 175 MB), with a materialized closure at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl).
+The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/viewsari_kg.ttl) (~818 MB), with a materialized closure of **2,563,973 triples** at [`data/kg/viewsari_kg.inferred.ttl`](data/kg/viewsari_kg.inferred.ttl) (~816 MB). The closure adds the `viewsari:0001032` paragraph edges (rules R2/R3) that five Phase-I CQs — including CQI.12 — depend on; see [Querying the KG](#querying-the-kg-base-vs-closure) below.
 
 **Namespace:** `vkb:` = `https://viewsari.ise.fiz-karlsruhe.de/kb/1.0#`
 
@@ -305,9 +305,9 @@ The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/v
 | Class | Ontology ID | Count | Description |
 |---|---|---|---|
 | Person | `viewsari:0001013` | 443 | Consolidated across biographies via coreference resolution |
-| Artwork | `viewsari:0001012` | 852 | From GT entity linking (Wikidata or OOKB linked) |
+| Artwork | `viewsari:0001012` | 15,804 | GT + ObliquER entity linking (3,275 Wikidata-linked, 12,529 OOKB) |
 | Co-occurrence | `viewsari:0001025` | 541 | Person pairs within a single paragraph |
-| Mention | `oa:Annotation` | 57,685 | GT (2,439) + ObliquER (55,246) |
+| Mention | `viewsari:0001026` | 86,654 | Across 112,123 `oa:Annotation` nodes (mentions + co-occurrence/coref anchors) |
 
 ### Provenance model (PROV-O) — operationalizes C2
 
@@ -317,10 +317,9 @@ The Viewsari KG is serialized as Turtle at [`data/kg/viewsari_kg.ttl`](data/kg/v
 - Agent: `vkb:sarah_ondraszek` (`prov:Person`), date: March 2026
 
 **ObliquER** (per-extraction activities):
-- Parent runs: `vkb:ner_run_few_shot_v2`, `vkb:ner_run_ontology_guided_v2`
-- Per-extraction sub-activities: `vkb:ner_run_{strategy}_vol{V}_p{N}_p{M}` with `prov:used` paragraphs + prompt entity, `prov:wasAssociatedWith` LLM agent, timestamps from `provenance.jsonl`
+- Per-extraction sub-activities reified individually: 10,060 NER activities (`viewsari:0001022`) + 3,100 entity-linking activities (`viewsari:0001023`), each with `prov:used` paragraphs + prompt entity, `prov:wasAssociatedWith` the LLM agent (`vkb:llm_agent_openai_gpt_oss_120b`), timestamps from `provenance.jsonl`
 - Prompt text stored as `prov:Entity` with full `.j2` text in `rdfs:comment`
-- No artwork entities (entity linking not yet performed for ObliquER)
+- ObliquER entity linking populates artwork entities (Wikidata-linked + OOKB), reached via `prov:wasDerivedFrom` from their mentions
 
 ### Entity identity
 
@@ -338,6 +337,12 @@ Mentions are `oa:Annotation` + `prov:Entity` instances:
 - `viewsari:0001032` — paragraph anchor
 
 The mention-to-entity link is modeled exclusively through PROV: `entity prov:wasDerivedFrom mention`. The mention and the referent are kept separate as a structural commitment (C1, PIEA).
+
+### Querying the KG: base vs. closure
+
+Persons and co-occurrences have **no `viewsari:0001032` paragraph edge in the base `viewsari_kg.ttl`** — that edge is derived by closure rules R2/R3 and exists only in `viewsari_kg.inferred.ttl`. Five Phase-I competency questions (CQI.3, CQI.12, CQI.19, CQI.21, CQI.22) depend on it, so the canonical CQ queries under [`src/evaluation/queries/`](src/evaluation/queries/) are written against the **closure**, and the evaluation runner auto-loads the inferred file.
+
+A SPARQL endpoint serving only the base dump will return **0 rows** for these CQs — e.g. CQI.12 (`vkb:{person} viewsari:0001032 ?paragraph . ?paragraph frbr:isPartOf ?biography`). To answer them, import `viewsari_kg.inferred.ttl` into GraphDB (or enable RDFS+ materialization). The default [`setup_graphdb.sh`](src/kg_population/setup_graphdb.sh) imports the base dump; change `TTL_FILE` to the inferred file if the live endpoint should answer closure-dependent CQs.
 
 ## Offline build scripts
 

@@ -60,7 +60,7 @@ An LLM-based entity recognition and linking pipeline for implicit and long-tail 
 - **Post-processing** pipeline: UIMA CAS export → mention ID assignment → union-find coreference clustering → OOKB classification
 - **PROV-O activities** generated for every extraction run, harmonized with the KG schema
 
-Evaluated on a gold-standard corpus of 221 annotated paragraphs across 16 biographies, manually annotated in INCEpTION (stratified sampling, random seed 42, capped at 10–25 paragraphs per biography).
+Evaluated on a gold-standard corpus of 232 annotated paragraphs across 16 biographies, manually annotated in INCEpTION (stratified sampling, random seed 42, capped at 10–25 paragraphs per biography).
 
 → Lives in [`obliquer/`](../../obliquer/) (git submodule). Ingestion into the KG: [`src/kg_population/ingest_ner_results.py`](../../src/kg_population/ingest_ner_results.py).
 
