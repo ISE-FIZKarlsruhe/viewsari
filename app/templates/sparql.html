@@ -339,7 +339,7 @@ PREFIX wdt: &lt;http://www.wikidata.org/prop/direct/&gt;
       </button>
       <button class="sparql-ex-card" onclick="loadExample('in_biographies')">
         <span class="sparql-ex-title">In which biographies?<span class="sparql-ex-tag">CQI.12</span></span>
-        <span class="sparql-ex-desc">Which biographies a given person appears in.</span>
+        <span class="sparql-ex-desc">Which biographies a given person is mentioned in.</span>
       </button>
       <button class="sparql-ex-card" onclick="loadExample('volume_of')">
         <span class="sparql-ex-title">Which volume holds a biography<span class="sparql-ex-tag">CQI.20</span></span>
@@ -649,10 +649,19 @@ ORDER BY DESC(?frequency)
 LIMIT 20`,
 
   in_biographies:
-`# CQI.12 — In which biographies does a person (here Michelangelo) appear?
+`# CQI.12 — In which biographies is a person (here Michelangelo) mentioned?
+# A person has no direct edge to a paragraph: the bridge is the surface string.
+# Match the person's label/altLabels against the text of an annotation anchor,
+# then follow the anchor to its paragraph and that paragraph's biography.
 SELECT DISTINCT ?biography ?biographyLabel
 WHERE {
-  vkb:buonarroti-michelagnolo viewsari:0001032 ?paragraph .
+  vkb:buonarroti-michelagnolo rdfs:label|skos:altLabel ?name .
+  ?body a oa:TextualBody ;
+        rdf:value ?surface .
+  FILTER (LCASE(STR(?surface)) = LCASE(STR(?name)))
+  ?annotation oa:hasBody ?body ;
+              oa:hasTarget ?chunk .
+  ?chunk oa:hasSource ?paragraph .
   ?paragraph frbr:isPartOf ?biography .
   ?biography a viewsari:0001008 .
   OPTIONAL { ?biography rdfs:label ?biographyLabel }
