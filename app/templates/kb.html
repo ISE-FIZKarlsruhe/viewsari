@@ -30,6 +30,7 @@ html { overflow: hidden !important; height: 100% !important; } body { overflow-y
 .kb-ent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
 .kb-ent-card { background: var(--bg); border: 1px solid var(--seam); border-radius: 10px; padding: 14px 16px; transition: all .14s; text-decoration: none; display: block; }
 .kb-ent-card:hover { border-color: var(--or); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.kb-ent-thumb { display: none; width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: var(--bg2); border: 1px solid var(--seam); }
 .kb-ent-label { font-size: 13px; font-weight: 600; color: var(--tp); margin-bottom: 4px; line-height: 1.3; }
 .kb-ent-id { font-size: 10px; color: var(--tt); font-family: 'Menlo', monospace; margin-bottom: 6px; word-break: break-all; }
 .kb-ent-surfaces { font-size: 11px; color: var(--ts); line-height: 1.6; }
@@ -259,7 +260,11 @@ function renderResults(items){
     if(linkable) el.href = "/kb/1.0#" + encodeURIComponent(e.id);
 
     var isMention = e.type === "explicit" || e.type === "implicit";
-    var h = '<div class="kb-ent-label">' + (isMention ? "&ldquo;"+esc(e.label)+"&rdquo;" : esc(e.label)) + '</div>';
+    var h = "";
+    if(e.type === "artwork" && e.wikidata){
+      h += '<img class="kb-ent-thumb" data-qid="' + esc(e.wikidata) + '" alt="' + esc(e.label) + '" loading="lazy">';
+    }
+    h += '<div class="kb-ent-label">' + (isMention ? "&ldquo;"+esc(e.label)+"&rdquo;" : esc(e.label)) + '</div>';
     h += '<div class="kb-ent-id">' + esc(e.id) + '</div>';
 
     if(e.type === "person" && e.alt && e.alt.length){
@@ -292,6 +297,39 @@ function renderResults(items){
     el.innerHTML = h;
     grid.appendChild(el);
   });
+  loadThumbs(grid);
+}
+
+// Pull artwork thumbnails from Wikidata (image property P18) via Wikimedia
+// Commons, batched 50 QIDs per request. Each thumb stays hidden until it loads.
+function loadThumbs(grid){
+  var imgs = grid.querySelectorAll('img.kb-ent-thumb[data-qid]');
+  if(!imgs.length) return;
+  var qids = [];
+  imgs.forEach(function(im){ qids.push(im.getAttribute("data-qid")); });
+  var uniq = [...new Set(qids)];
+  for(var i = 0; i < uniq.length; i += 50){
+    (function(batch){
+      fetch("https://www.wikidata.org/w/api.php?action=wbgetentities&ids="
+        + batch.join("|") + "&props=claims&format=json&origin=*")
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          var ents = j.entities || {};
+          Object.keys(ents).forEach(function(qid){
+            var p18 = (ents[qid].claims || {}).P18;
+            if(!p18 || !p18.length) return;
+            var fname = p18[0].mainsnak.datavalue.value;
+            var url = "https://commons.wikimedia.org/wiki/Special:FilePath/"
+              + encodeURIComponent(fname) + "?width=300";
+            grid.querySelectorAll('img.kb-ent-thumb[data-qid="' + qid + '"]').forEach(function(im){
+              im.onload = function(){ im.style.display = "block"; };
+              im.src = url;
+            });
+          });
+        })
+        .catch(function(){});
+    })(uniq.slice(i, i + 50));
+  }
 }
 
 function setCount(sel, n){ var el = document.querySelector(sel); if(el) el.textContent = (n || 0).toLocaleString(); }
